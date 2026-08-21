@@ -21,7 +21,7 @@
   --sky:#D5DEEC;  --sky-2:#E7ECF5;
   --line:rgba(16,24,32,.11);
   --blob:44px; --blob-lg:96px;
-  --ease:cubic-bezier(.2,.7,.3,1);
+  --ease:cubic-bezier(.2,.7,.3,1); --slide:cubic-bezier(.66,0,.2,1);
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -53,33 +53,53 @@ img{max-width:100%;display:block}
 }
 
 /* nav */
-.nav{background:var(--white)}
-.nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:82px}
-.brand{display:inline-flex;align-items:center;gap:11px;font-family:Sora,sans-serif;font-weight:700;font-size:23px;letter-spacing:-.045em;min-height:44px}
-.brand .knob{width:40px;height:22px;border-radius:999px;background:var(--navy);position:relative;flex:0 0 auto}
-.brand .knob i{position:absolute;top:3px;right:3px;width:16px;height:16px;border-radius:50%;background:var(--white)}
+/* sticky header */
+.nav{position:sticky;top:0;z-index:80;background:var(--white);border-bottom:1px solid transparent;transition:border-color .24s var(--ease)}
+.nav.is-stuck{border-bottom-color:var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:82px;transition:min-height .24s var(--ease)}
+.nav.is-stuck .nav-in{min-height:64px}
+.brand{display:inline-flex;align-items:center;gap:11px;font-family:Sora,sans-serif;font-weight:700;font-size:23px;letter-spacing:-.045em;min-height:44px;white-space:nowrap;transition:font-size .24s var(--ease)}
+.nav.is-stuck .brand{font-size:20px}
+.brand .knob{width:40px;height:22px;border-radius:999px;background:var(--navy);position:relative;flex:0 0 auto;transition:background .26s var(--ease)}
+.brand .knob i{position:absolute;top:3px;right:3px;width:16px;height:16px;border-radius:50%;background:var(--white);transition:right .34s var(--slide)}
+.brand:hover .knob,.brand:focus-visible .knob{background:var(--teal)}
+.brand:hover .knob i,.brand:focus-visible .knob i{right:21px}
 .nav-links{display:flex;gap:30px}
-.nav-links a{font-size:16.5px;font-weight:500;min-height:44px;display:inline-flex;align-items:center}
-.nav-links a:hover{color:var(--teal-tx)}
+.nav-links a{font-size:16.5px;font-weight:500;min-height:44px;display:inline-flex;align-items:center;position:relative;transition:color .18s var(--ease)}
+.nav-links a::after{content:"";position:absolute;left:0;right:100%;bottom:11px;height:1.5px;background:var(--teal);transition:right .26s var(--ease)}
+.nav-links a:hover,.nav-links a:focus-visible{color:var(--teal-tx)}
+.nav-links a:hover::after,.nav-links a:focus-visible::after{right:0}
+.nav-right{display:flex;gap:10px;align-items:center}
 @media(max-width:1040px){.nav-links{display:none}}
-.btn{display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:0 26px;min-height:52px;font-size:16px;font-weight:600;transition:transform .18s var(--ease),background .18s var(--ease)}
+
+/* burger */
+.burger{display:none;width:50px;height:50px;border-radius:999px;border:1px solid var(--line);background:transparent;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;padding:0;transition:background .18s var(--ease)}
+.burger:hover{background:var(--paper)}
+.burger i{display:block;width:19px;height:1.8px;background:var(--ink);position:relative;transition:background .2s var(--ease)}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;width:19px;height:1.8px;background:var(--ink);transition:transform .26s var(--ease),top .26s var(--ease)}
+.burger i::before{top:-6px}
+.burger i::after{top:6px}
+.burger[aria-expanded="true"] i{background:transparent}
+.burger[aria-expanded="true"] i::before{top:0;transform:rotate(45deg)}
+.burger[aria-expanded="true"] i::after{top:0;transform:rotate(-45deg)}
+@media(max-width:1040px){.burger{display:flex}.nav-right .nav-cta{display:none}}
+
+/* drawer */
+.drawer{position:fixed;inset:0;z-index:75;background:rgba(16,24,32,.36);opacity:0;pointer-events:none;transition:opacity .26s var(--ease)}
+.drawer.is-open{opacity:1;pointer-events:auto}
+.drawer-panel{position:absolute;left:10px;right:10px;top:76px;background:var(--white);border-radius:30px;padding:14px;display:flex;flex-direction:column;gap:2px;transform:translateY(-12px);opacity:0;transition:transform .3s var(--slide),opacity .2s var(--ease);max-height:calc(100vh - 92px);overflow-y:auto}
+.drawer.is-open .drawer-panel{transform:none;opacity:1}
+.drawer-panel a{display:flex;align-items:center;min-height:58px;padding:0 18px;border-radius:20px;font-size:19px;font-weight:600;letter-spacing:-.025em;transition:background .18s var(--ease)}
+.drawer-panel a:hover,.drawer-panel a:focus-visible{background:var(--paper)}
+.drawer-panel .btn{margin-top:10px;justify-content:center;min-height:58px}
+body.nav-open{overflow:hidden}
+.btn{display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:0 26px;min-height:52px;font-size:16px;font-weight:600;transition:transform .18s var(--ease),background .18s var(--ease),box-shadow .18s var(--ease)}
 .btn-dark{background:var(--ink);color:var(--white)}
-.btn-dark:hover{transform:translateY(-1px)}
+.btn-dark:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(16,24,32,.22)}
 .btn-teal{background:var(--teal);color:var(--white)}
+.btn-teal:hover{transform:translateY(-2px)}
 .btn-ghost{border:1px solid var(--line);color:var(--ink)}
-.mmenu{display:none;position:relative}
-.mmenu>summary{list-style:none;width:50px;height:50px;border-radius:999px;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;cursor:pointer}
-.mmenu>summary::-webkit-details-marker{display:none}
-.mmenu>summary i{display:block;width:19px;height:1.8px;background:var(--ink);position:relative}
-.mmenu>summary i::before,.mmenu>summary i::after{content:"";position:absolute;left:0;width:19px;height:1.8px;background:var(--ink)}
-.mmenu>summary i::before{top:-6px}.mmenu>summary i::after{top:6px}
-.mmenu[open]>summary i{background:transparent}
-.mmenu[open]>summary i::before{top:0;transform:rotate(45deg)}
-.mmenu[open]>summary i::after{top:0;transform:rotate(-45deg)}
-.mpanel{position:absolute;right:0;top:60px;min-width:240px;background:var(--white);border:1px solid var(--line);border-radius:20px;padding:9px;z-index:70;display:flex;flex-direction:column;box-shadow:0 10px 30px rgba(16,24,32,.09)}
-.mpanel a{display:flex;align-items:center;min-height:50px;padding:0 16px;border-radius:14px;font-size:16.5px;font-weight:500}
-.mpanel a:active{background:var(--paper)}
-@media(max-width:1040px){.mmenu{display:block}}
+[id]{scroll-margin-top:96px}
 
 /* hero */
 .hero{padding:44px 0 76px}
@@ -204,24 +224,77 @@ img{max-width:100%;display:block}
 .foot-in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .foot a{display:inline-flex;align-items:center;min-height:44px}
 .foot a:hover{color:var(--teal-tx)}
+
+/* ---------- motion + interaction, kept last so nothing overrides it ---------- */
+/* Two curves only: --ease drives interface state, --slide drives the signature move. */
+
+/* hover / active states */
+.pack{transition:transform .22s var(--ease),box-shadow .22s var(--ease)}
+.pack:hover{transform:translateY(-4px);box-shadow:0 18px 42px rgba(16,24,32,.11)}
+.pack .go{transition:transform .24s var(--ease),background .2s var(--ease)}
+.pack:hover .go{transform:translate(3px,-3px)}
+.pack:active{transform:translateY(-1px)}
+.vcard{transition:transform .22s var(--ease),box-shadow .22s var(--ease)}
+.vcard:hover{transform:translateY(-3px);box-shadow:0 14px 34px rgba(16,24,32,.08)}
+.step{transition:border-color .2s var(--ease),transform .2s var(--ease)}
+.step:hover{border-color:rgba(16,24,32,.3);transform:translateY(-2px)}
+.step .n{transition:background .2s var(--ease)}
+.step:hover .n{background:var(--mint)}
+.tagrow span{transition:border-color .18s var(--ease),color .18s var(--ease),background .18s var(--ease)}
+.tagrow span:hover{border-color:var(--teal);color:var(--teal-tx)}
+.tagrow span.on:hover{background:var(--mint)}
+.hitem{transition:border-color .2s var(--ease)}
+.hitem:hover{border-top-color:rgba(16,24,32,.34)}
+.foot a{transition:color .18s var(--ease)}
+.scorecard{transition:transform .22s var(--ease)}
+.scorecard:hover{transform:translateY(-2px)}
+
+/* the verdict toggles are the signature: all three start at "nothing",
+   then settle into their real positions, one after another. */
+.vcard .sw i{transition:left .52s var(--slide)}
+html.js .vgrid .vcard:nth-child(2) .sw i{transition-delay:.14s}
+html.js .vgrid .vcard:nth-child(3) .sw i{transition-delay:.28s}
+html.js .vgrid.arm .vcard .sw i{left:4px}
+
+/* quiet reveal, card groups only, never headings or body copy */
+html.js [data-reveal]>*{opacity:0;transform:translateY(12px);transition:opacity .44s var(--ease),transform .44s var(--slide)}
+html.js [data-reveal].in>*{opacity:1;transform:none}
+html.js [data-reveal].in>*:nth-child(2){transition-delay:.08s}
+html.js [data-reveal].in>*:nth-child(3){transition-delay:.16s}
+html.js [data-reveal].in>*:nth-child(4){transition-delay:.24s}
+html.js [data-reveal].in>*:nth-child(5){transition-delay:.32s}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  html.js [data-reveal]>*{opacity:1!important;transform:none!important;transition:none!important}
+  html.js .vgrid.arm .vcard .sw i{left:auto}
+  .v1 .sw i{left:4px}.v2 .sw i{left:21px}.v3 .sw i{left:38px}
+  .drawer,.drawer-panel{transition:none}
+}
+@media (prefers-reduced-motion: no-preference){html{scroll-behavior:smooth}}
 </style>
 </head>
 <body>
 
-<header class="nav">
+<header class="nav" id="nav">
   <div class="wrap nav-in">
     <a class="brand" href="/"><span class="knob" aria-hidden="true"><i></i></span>off plate</a>
     <nav class="nav-links">
       <a href="#jak">Jak to funguje</a><a href="#verdikt">Verdikty</a><a href="#cenik">Ceník</a><a href="/novinky/">Novinky</a><a href="#kontakt">Kontakt</a>
     </nav>
-    <div style="display:flex;gap:10px;align-items:center">
-      <details class="mmenu"><summary aria-label="Menu"><i></i></summary><div class="mpanel">
-        <a href="#jak">Jak to funguje</a><a href="#verdikt">Verdikty</a><a href="#cenik">Ceník</a><a href="/novinky/">Novinky</a><a href="#kontakt">Kontakt</a>
-      </div></details>
-      <a class="btn btn-dark" href="#kontakt">Domluvit hovor</a>
+    <div class="nav-right">
+      <a class="btn btn-dark nav-cta" href="#kontakt">Domluvit hovor</a>
+      <button class="burger" id="burger" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="drawer"><i></i></button>
     </div>
   </div>
 </header>
+
+<div class="drawer" id="drawer">
+  <div class="drawer-panel">
+    <a href="#jak">Jak to funguje</a><a href="#verdikt">Verdikty</a><a href="#cenik">Ceník</a><a href="/novinky/">Novinky</a><a href="#kontakt">Kontakt</a>
+    <a class="btn btn-dark" href="#kontakt">Domluvit hovor</a>
+  </div>
+</div>
 
 <section class="hero">
   <div class="wrap hero-grid">
@@ -270,7 +343,7 @@ img{max-width:100%;display:block}
       </div>
     </div>
 
-    <div class="packs">
+    <div class="packs" data-reveal>
       <article class="pack p-sand has-shot">
         <span class="tier"><em aria-hidden="true"></em>Začátek</span>
         <h3>Starter</h3>
@@ -310,7 +383,7 @@ img{max-width:100%;display:block}
     <div class="verd">
       <div class="wrap">
         <div class="sec-head"><h2>Každá úloha dostane jeden ze tří verdiktů</h2></div>
-        <div class="vgrid">
+        <div class="vgrid" data-reveal>
           <div class="vcard v1"><span class="sw" aria-hidden="true"><i></i></span><h3>Nepotřebujete nic</h3><p>Funguje to, stojí to málo a systém by tomu jenom překážel. Nejčastější verdikt, který od nás uslyšíte.</p></div>
           <div class="vcard v2"><span class="sw" aria-hidden="true"><i></i></span><h3>Obyčejná automatizace</h3><p>Přeposlat, připomenout, vyplnit, poslat dál. AI tady nemá co dělat a jenom by prodražila provoz.</p></div>
           <div class="vcard v3"><span class="sw" aria-hidden="true"><i></i></span><h3>Potřebuje AI</h3><p>Někdo musí přečíst nepořádek, porozumět mu a rozhodnout se. Tam se to vrátí, a nikde jinde.</p></div>
@@ -323,7 +396,7 @@ img{max-width:100%;display:block}
 <section class="sec" id="jak" style="padding-top:0">
   <div class="wrap">
     <div class="sec-head"><h2>Jak spolupráce probíhá</h2></div>
-    <div class="steps">
+    <div class="steps" data-reveal>
       <div class="step"><span class="n mono">01</span><h3>Hovor</h3><p>Kde se práce hromadí, podle jakého čísla poznáte zlepšení, a o kolik. Bez čísla nestavíme.</p><span class="when">45 minut, zdarma</span></div>
       <div class="step"><span class="n mono">02</span><h3>Rozpis</h3><p>Agenda rozdělená na tři hromádky, písemně, včetně toho, co stavět nebudeme.</p><span class="when">do týdne</span></div>
       <div class="step"><span class="n mono">03</span><h3>Pilot</h3><p>Na vaší hotové zakázce, kde znáte správný výsledek. Uvidíte i to, kde se systém plete.</p><span class="when">10 až 14 dní</span></div>
@@ -365,5 +438,61 @@ img{max-width:100%;display:block}
   </div>
 </footer>
 
+
+<script>
+(function(){
+  var d=document, root=d.documentElement;
+  root.classList.add('js');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* sticky header state */
+  var nav=d.getElementById('nav'), stuck=false;
+  function onScroll(){
+    var s = window.scrollY > 12;
+    if(s!==stuck){ stuck=s; nav.classList.toggle('is-stuck', s); }
+  }
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* drawer */
+  var burger=d.getElementById('burger'), drawer=d.getElementById('drawer');
+  function setMenu(open){
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Zavřít menu' : 'Otevřít menu');
+    drawer.classList.toggle('is-open', open);
+    d.body.classList.toggle('nav-open', open);
+    if(open){ var f=drawer.querySelector('a'); if(f) f.focus({preventScroll:true}); }
+  }
+  burger.addEventListener('click', function(){
+    setMenu(burger.getAttribute('aria-expanded')!=='true');
+  });
+  drawer.addEventListener('click', function(e){
+    if(e.target===drawer) setMenu(false);            /* tap the dimmed backdrop */
+    if(e.target.closest('a')) setMenu(false);        /* tap a link */
+  });
+  d.addEventListener('keydown', function(e){
+    if(e.key==='Escape' && burger.getAttribute('aria-expanded')==='true'){ setMenu(false); burger.focus(); }
+  });
+  addEventListener('resize', function(){ if(innerWidth>1040) setMenu(false); });
+
+  if(reduce) return;
+
+  /* quiet reveal for card groups */
+  var groups=d.querySelectorAll('[data-reveal]');
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{rootMargin:'0px 0px -12% 0px',threshold:.15});
+  groups.forEach(function(g){ io.observe(g); });
+
+  /* signature: hold the verdict toggles at "nothing", release them on first view */
+  var vg=d.querySelector('.vgrid');
+  if(vg){
+    vg.classList.add('arm');
+    var vio=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.remove('arm'); vio.unobserve(e.target); } });
+    },{threshold:.4});
+    vio.observe(vg);
+  }
+})();
+</script>
 </body>
 </html>

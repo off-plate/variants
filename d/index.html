@@ -17,7 +17,7 @@
   --amber:#D08C2E; --amber-tx:#B0721E;
   --muted:#6B6B63;
   --line:rgba(14,14,12,.16); --line-dk:rgba(247,244,238,.2);
-  --ease:cubic-bezier(.2,.7,.3,1);
+  --ease:cubic-bezier(.2,.7,.3,1); --slide:cubic-bezier(.66,0,.2,1);
 }
 *{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%}
@@ -45,32 +45,54 @@ img{max-width:100%;display:block}
 
 /* top bar */
 .top{display:flex;align-items:center;justify-content:space-between;gap:20px;padding:22px 0}
-.top .mmenu{position:relative}
-.top .mmenu>summary{list-style:none;display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;cursor:pointer}
-.top .mmenu>summary::-webkit-details-marker{display:none}
-.top .mmenu>summary i{display:block;width:18px;height:1.6px;background:var(--black);position:relative}
-.top .mmenu>summary i::before,.top .mmenu>summary i::after{content:"";position:absolute;left:0;width:18px;height:1.6px;background:var(--black)}
-.top .mmenu>summary i::before{top:-5px}.top .mmenu>summary i::after{top:5px}
-.top .mmenu[open]>summary i{background:transparent}
-.top .mmenu[open]>summary i::before{top:0;transform:rotate(45deg)}
-.top .mmenu[open]>summary i::after{top:0;transform:rotate(-45deg)}
-.mpanel{position:absolute;left:0;top:52px;min-width:240px;background:var(--cream);border:1px solid var(--line);padding:6px;z-index:70;display:flex;flex-direction:column}
-.mpanel a{display:flex;align-items:center;min-height:48px;padding:0 14px;font-size:14px;letter-spacing:.1em;text-transform:uppercase;font-weight:600}
-.mpanel a:active{background:var(--cream-2)}
-.top .go{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
-.top .go span{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center}
-.top .go svg{width:13px;height:13px;stroke:var(--black)}
+.top .go{display:inline-flex;align-items:center;gap:10px;min-height:44px;font-size:12px;letter-spacing:.2em;text-transform:uppercase;font-weight:600;transition:color .18s var(--ease)}
+.top .go span{width:30px;height:30px;border-radius:50%;border:1px solid var(--line);display:flex;align-items:center;justify-content:center;transition:background .2s var(--ease),border-color .2s var(--ease),transform .22s var(--ease)}
+.top .go svg{width:13px;height:13px;stroke:var(--black);transition:stroke .2s var(--ease)}
+.top .go:hover{color:var(--teal-tx)}
+.top .go:hover span{background:var(--teal);border-color:var(--teal);transform:translate(2px,-2px)}
+.top .go:hover svg{stroke:var(--cream)}
 
 /* wordmark */
 .mark{text-align:center;padding:6px 0 26px}
 .mark h1{font-size:clamp(52px,15.5vw,215px);line-height:.82;letter-spacing:-.055em;display:flex;align-items:center;justify-content:center;gap:.02em;flex-wrap:nowrap}
 .mark .tog{display:inline-block;width:.86em;height:.5em;border-radius:999px;background:var(--teal);position:relative;flex:0 0 auto;margin:0 .04em}
 .mark .tog i{position:absolute;top:9%;right:4%;width:.4em;height:.4em;border-radius:50%;background:var(--cream)}
-.navrow{display:flex;justify-content:space-between;gap:14px;border-top:1px solid var(--line);border-bottom:1px solid var(--line);padding:0}
-.navrow a{flex:1;text-align:center;min-height:52px;display:inline-flex;align-items:center;justify-content:center;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;border-right:1px solid var(--line)}
-.navrow a:last-child{border-right:0}
-.navrow a:hover{background:var(--cream-2)}
-@media(max-width:720px){.navrow a{font-size:12px;letter-spacing:.08em}}
+
+/* sticky hairline bar, the editorial answer to a sticky header */
+.navbar{position:sticky;top:0;z-index:80;background:var(--cream);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+.navrow{display:flex;align-items:stretch;justify-content:space-between;gap:0;padding:0}
+.navmark{display:inline-flex;align-items:center;font-family:Sora,sans-serif;font-weight:700;font-size:17px;letter-spacing:-.05em;text-transform:uppercase;min-height:54px;padding-right:20px;white-space:nowrap;opacity:0;transform:translateX(-10px);pointer-events:none;transition:opacity .26s var(--ease),transform .26s var(--slide)}
+.navbar.is-stuck .navmark{opacity:1;transform:none;pointer-events:auto}
+.navmark .tog{display:inline-block;width:.86em;height:.5em;border-radius:999px;background:var(--teal);position:relative;margin:0 .08em}
+.navmark .tog i{position:absolute;top:14%;right:7%;width:.36em;height:.36em;border-radius:50%;background:var(--cream)}
+.navlinks{display:flex;flex:1;justify-content:flex-end}
+.navlinks a{flex:1;min-height:54px;display:inline-flex;align-items:center;justify-content:center;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;border-left:1px solid var(--line);position:relative;transition:color .18s var(--ease),background .18s var(--ease)}
+.navlinks a::after{content:"";position:absolute;left:0;right:100%;bottom:0;height:2px;background:var(--teal);transition:right .26s var(--ease)}
+.navlinks a:hover,.navlinks a:focus-visible{color:var(--teal-tx);background:var(--cream-2)}
+.navlinks a:hover::after,.navlinks a:focus-visible::after{right:0}
+
+/* burger, flat to match the hairlines */
+.burger{display:none;align-items:center;gap:11px;background:transparent;border:0;border-left:1px solid var(--line);padding:0 18px;min-height:54px;cursor:pointer;font:inherit;font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--black);transition:background .18s var(--ease)}
+.burger:hover{background:var(--cream-2)}
+.burger i{display:block;width:18px;height:1.6px;background:var(--black);position:relative;flex:0 0 auto}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;width:18px;height:1.6px;background:var(--black)}
+.burger i::before{top:-5px}.burger i::after{top:5px}
+@media(max-width:820px){.navlinks{display:none}.burger{display:inline-flex}.navmark{opacity:1;transform:none;pointer-events:auto}}
+
+/* full-screen editorial drawer */
+.drawer{position:fixed;inset:0;z-index:90;background:var(--cream);opacity:0;pointer-events:none;transition:opacity .24s var(--ease)}
+.drawer.is-open{opacity:1;pointer-events:auto}
+.drawer-panel{position:absolute;inset:0;display:flex;flex-direction:column;padding:18px 18px 30px;overflow-y:auto}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;min-height:54px;margin-bottom:18px}
+.drawer-x{width:52px;height:52px;background:transparent;border:1px solid var(--line);cursor:pointer;position:relative;padding:0}
+.drawer-x i{position:absolute;left:50%;top:50%;width:20px;height:1.6px;background:var(--black);transform:translate(-50%,-50%) rotate(45deg)}
+.drawer-x i::after{content:"";position:absolute;left:0;top:0;width:20px;height:1.6px;background:var(--black);transform:rotate(-90deg)}
+.drawer-x:hover{background:var(--cream-2)}
+.drawer-panel>a{display:flex;align-items:center;min-height:66px;font-family:Sora,sans-serif;font-weight:700;font-size:clamp(28px,8.4vw,44px);letter-spacing:-.05em;text-transform:uppercase;border-bottom:1px solid var(--line);transition:color .18s var(--ease),padding-left .24s var(--slide)}
+.drawer-panel>a:hover,.drawer-panel>a:focus-visible{color:var(--teal-tx);padding-left:10px}
+.drawer-panel>a.drawer-cta{font-family:Inter,sans-serif; /* slop-lint-ignore: brand body face, BRAND.md */font-size:16px;font-weight:600;letter-spacing:.02em;text-transform:none;border-bottom:0;margin-top:26px;min-height:52px}
+body.nav-open{overflow:hidden}
+[id]{scroll-margin-top:74px}
 
 /* gradient band */
 .band{height:clamp(220px,32vw,420px);margin:26px 0 0}
@@ -156,35 +178,113 @@ img{max-width:100%;display:block}
 .foot-cols{display:flex;justify-content:space-between;gap:26px;flex-wrap:wrap;padding:34px 0;font-size:14px;color:rgba(247,244,238,.55)}
 .foot-cols a{color:rgba(247,244,238,.8);display:inline-flex;align-items:center;min-height:44px}
 
+/* ---------- motion + interaction ---------- */
+/* Two curves only: --ease for interface state, --slide for the signature move. */
+
+/* signature: the wordmark toggle throws once, off to on, the first time you land */
+.mark .tog i{transition:right .62s var(--slide)}
+html.js .mark.arm .tog i{right:52%}
+
+/* case cards */
+.case .shot{overflow:hidden}
+.case .shot img{transition:transform .55s var(--slide)}
+.case:hover .shot img,.case:focus-visible .shot img{transform:scale(1.045)}
+.case h3{transition:color .18s var(--ease)}
+.case:hover h3{color:var(--teal-tx)}
+.case .go{transition:background .2s var(--ease),border-color .2s var(--ease),transform .22s var(--ease)}
+.case .go svg{transition:stroke .2s var(--ease)}
+.case:hover .go{background:var(--teal);border-color:var(--teal);transform:translate(2px,-2px)}
+.case:hover .go svg{stroke:var(--cream)}
+
+/* the ghost service list: the row you engage resolves, the rest stay ghosts */
+.srow h3{transition:color .22s var(--ease),transform .26s var(--slide)}
+.srow:hover h3,.srow:focus-visible h3{color:var(--black);transform:translateX(12px)}
+.serv:hover .srow.on h3{color:rgba(14,14,12,.22)}
+.serv .srow.on:hover h3{color:var(--black)}
+.srow .thumbs span{transition:transform .28s var(--slide)}
+.srow:hover .thumbs span:nth-child(2){transform:translateY(-4px)}
+.srow:hover .thumbs span:nth-child(3){transform:translateY(4px)}
+
+/* article rows */
+.art{transition:background .2s var(--ease),padding-left .24s var(--slide)}
+.art:hover,.art:focus-visible{background:var(--cream-2);padding-left:12px}
+.art .shot img{transition:transform .55s var(--slide)}
+.art:hover .shot img{transform:scale(1.045)}
+.art .go{transition:background .2s var(--ease),border-color .2s var(--ease)}
+.art .go svg{transition:stroke .2s var(--ease)}
+.art:hover .go{background:var(--teal);border-color:var(--teal)}
+.art:hover .go svg{stroke:var(--cream)}
+
+/* footer + misc */
+.foot-nav a,.foot-cols a{transition:color .18s var(--ease)}
+.adv .arrows span{transition:background .2s var(--ease),border-color .2s var(--ease)}
+.adv .arrows span:hover{background:var(--cream-2)}
+
+/* editorial reveal: a left-to-right wipe */
+html.js [data-wipe]>*{clip-path:inset(0 100% 0 0);transition:clip-path .62s var(--slide)}
+html.js [data-wipe].in>*{clip-path:inset(0 0 0 0)}
+html.js [data-wipe].in>*:nth-child(2){transition-delay:.09s}
+html.js [data-wipe].in>*:nth-child(3){transition-delay:.18s}
+html.js [data-wipe].in>*:nth-child(4){transition-delay:.27s}
+html.js [data-wipe].in>*:nth-child(5){transition-delay:.36s}
+
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  html.js [data-wipe]>*{clip-path:none!important;transition:none!important}
+  html.js .mark.arm .tog i{right:4%}
+  .drawer,.navmark{transition:none}
+}
+@media (prefers-reduced-motion: no-preference){html{scroll-behavior:smooth}}
+
+
 /* mobile overrides, kept last so they are not overridden by later base rules */
 @media(max-width:720px){
   .lbl,.case .k,.srow .n,.foot-nav a,.arts-head a.lbl{font-size:12.5px;letter-spacing:.1em}
   .navrow a{font-size:12px;letter-spacing:.08em}
-  .top .mmenu>summary,.top .go{font-size:12.5px;letter-spacing:.12em}
+  .top .go{font-size:12.5px;letter-spacing:.12em}
+  .srow{min-height:56px;padding:10px 0}
 }
 </style>
 </head>
-<body>
+<body id="top">
 
 <div class="wrap">
   <div class="top">
-    <details class="mmenu"><summary><i></i>Menu</summary><div class="mpanel">
-      <a href="#o-nas">O nás</a><a href="#obory">Obory</a><a href="#sluzby">Služby</a><a href="#novinky">Novinky</a><a href="#kontakt">Kontakt</a>
-    </div></details>
     <a class="go" href="#kontakt">Domluvit hovor <span aria-hidden="true"><svg viewBox="0 0 14 14" fill="none" stroke-width="1.6"><path d="M3 11L11 3M5 3h6v6" stroke-linecap="round" stroke-linejoin="round"/></svg></span></a>
+    <span class="lbl">Praha, Česko</span>
   </div>
 
   <div class="mark">
     <h1>OFF<span class="tog" aria-hidden="true"><i></i></span>PLATE</h1>
   </div>
+</div>
 
-  <nav class="navrow">
+<div class="navbar" id="navbar">
+  <div class="wrap navrow">
+    <a class="navmark" href="#top" aria-label="Nahoru">OFF<span class="tog" aria-hidden="true"><i></i></span>PLATE</a>
+    <div class="navlinks">
+      <a href="#o-nas">Co děláme</a>
+      <a href="#obory">Obory</a>
+      <a href="#sluzby">Služby</a>
+      <a href="#kontakt">Kontakt</a>
+    </div>
+    <button class="burger" id="burger" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="drawer"><i></i><span>Menu</span></button>
+  </div>
+</div>
+
+<div class="drawer" id="drawer">
+  <div class="drawer-panel">
+    <div class="drawer-top"><span class="lbl">Menu</span><button class="drawer-x" id="drawerX" type="button" aria-label="Zavřít menu"><i></i></button></div>
     <a href="#o-nas">Co děláme</a>
     <a href="#obory">Obory</a>
     <a href="#sluzby">Služby</a>
+    <a href="#novinky">Novinky</a>
     <a href="#kontakt">Kontakt</a>
-  </nav>
+    <a class="drawer-cta" href="mailto:michael@off-plate.com">michael@off-plate.com</a>
+  </div>
+</div>
 
+<div class="wrap">
   <div class="band mesh"></div>
 </div>
 
@@ -199,35 +299,35 @@ img{max-width:100%;display:block}
 <section class="cases" id="obory">
   <div class="wrap">
     <div class="cases-head"><span class="lbl">Obory</span><span class="lbl mono">01</span></div>
-    <div class="cgrid">
-      <article class="case">
+    <div class="cgrid" data-wipe>
+      <a class="case" href="#kontakt">
         <div class="shot"><img src="../img/stavba.jpg" alt="Stavba"></div>
         <div class="meta">
           <div><h3>Stavební firma</h3><span class="k">Vícepráce z hlasovek · 30 až 80 tis. Kč na zakázce</span></div>
           <span class="go" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke-width="1.6"><path d="M2.5 9.5L9.5 2.5M4.5 2.5h5v5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </div>
-      </article>
-      <article class="case">
+      </a>
+      <a class="case" href="#kontakt">
         <div class="shot"><img src="../img/sklad.jpg" alt="Sklad"></div>
         <div class="meta">
           <div><h3>E-shop</h3><span class="k">Marže proti konkurenci · ranní seznam, ne dashboard</span></div>
           <span class="go" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke-width="1.6"><path d="M2.5 9.5L9.5 2.5M4.5 2.5h5v5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </div>
-      </article>
-      <article class="case">
+      </a>
+      <a class="case" href="#kontakt">
         <div class="shot"><img src="../img/papir.jpg" alt="Papírování"></div>
         <div class="meta">
           <div><h3>Účetní kancelář</h3><span class="k">Došlé doklady · sporné označí a nechá na vás</span></div>
           <span class="go" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke-width="1.6"><path d="M2.5 9.5L9.5 2.5M4.5 2.5h5v5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </div>
-      </article>
-      <article class="case">
+      </a>
+      <a class="case" href="#kontakt">
         <div class="shot"><img src="../img/dilna.jpg" alt="Dílna"></div>
         <div class="meta">
           <div><h3>Autoservis</h3><span class="k">Vícepráce na zakázce · z diktafonu k podkladu</span></div>
           <span class="go" aria-hidden="true"><svg viewBox="0 0 12 12" fill="none" stroke-width="1.6"><path d="M2.5 9.5L9.5 2.5M4.5 2.5h5v5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
         </div>
-      </article>
+      </a>
     </div>
   </div>
 </section>
@@ -235,14 +335,16 @@ img{max-width:100%;display:block}
 <section class="serv" id="sluzby">
   <div class="wrap">
     <span class="lbl">Služby</span>
-    <div class="srow on">
+    <div data-wipe>
+    <a class="srow on" href="#kontakt">
       <h3>AI AUTOMATIZACE</h3>
       <span class="thumbs" aria-hidden="true"><span><img src="../img/papir.jpg" alt=""></span><span></span><span></span></span>
       <span class="n mono">(01)</span>
+    </a>
+    <a class="srow" href="#kontakt"><h3>OBYČEJNÁ AUTOMATIZACE</h3><span class="n mono">(02)</span></a>
+    <a class="srow" href="#kontakt"><h3>ROZPIS A PILOT</h3><span class="n mono">(03)</span></a>
+    <a class="srow" href="#kontakt"><h3>PROVOZ A ÚDRŽBA</h3><span class="n mono">(04)</span></a>
     </div>
-    <div class="srow"><h3>OBYČEJNÁ AUTOMATIZACE</h3><span class="n mono">(02)</span></div>
-    <div class="srow"><h3>ROZPIS A PILOT</h3><span class="n mono">(03)</span></div>
-    <div class="srow"><h3>PROVOZ A ÚDRŽBA</h3><span class="n mono">(04)</span></div>
   </div>
 </section>
 
@@ -312,5 +414,55 @@ img{max-width:100%;display:block}
   </div>
 </footer>
 
+
+<script>
+(function(){
+  var d=document, root=d.documentElement;
+  root.classList.add('js');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* sticky bar reveals the compact wordmark once the masthead is gone */
+  var bar=d.getElementById('navbar'), stuck=false;
+  function onScroll(){
+    var top = bar.getBoundingClientRect().top;
+    var s = top <= 1;
+    if(s!==stuck){ stuck=s; bar.classList.toggle('is-stuck', s); }
+  }
+  addEventListener('scroll', onScroll, {passive:true}); onScroll();
+
+  /* drawer */
+  var burger=d.getElementById('burger'), drawer=d.getElementById('drawer'), x=d.getElementById('drawerX');
+  function setMenu(open){
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open ? 'Zavřít menu' : 'Otevřít menu');
+    drawer.classList.toggle('is-open', open);
+    d.body.classList.toggle('nav-open', open);
+    if(open){ var f=drawer.querySelector('a'); if(f) f.focus({preventScroll:true}); }
+    else { burger.focus({preventScroll:true}); }
+  }
+  burger.addEventListener('click', function(){ setMenu(burger.getAttribute('aria-expanded')!=='true'); });
+  if(x) x.addEventListener('click', function(){ setMenu(false); });
+  drawer.addEventListener('click', function(e){ if(e.target.closest('a')) setMenu(false); });
+  d.addEventListener('keydown', function(e){
+    if(e.key==='Escape' && burger.getAttribute('aria-expanded')==='true') setMenu(false);
+  });
+  addEventListener('resize', function(){ if(innerWidth>820) setMenu(false); });
+
+  if(reduce) return;
+
+  /* signature: hold the wordmark toggle at "off", throw it once on first paint */
+  var mark=d.querySelector('.mark');
+  if(mark){
+    mark.classList.add('arm');
+    requestAnimationFrame(function(){ setTimeout(function(){ mark.classList.remove('arm'); }, 240); });
+  }
+
+  /* editorial wipe */
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{rootMargin:'0px 0px -10% 0px',threshold:.12});
+  d.querySelectorAll('[data-wipe]').forEach(function(g){ io.observe(g); });
+})();
+</script>
 </body>
 </html>
