@@ -7,7 +7,7 @@
 <title>Off Plate · Ne všechno potřebuje AI</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"> <!-- slop-lint-ignore: Inter + Sora are the locked Off-Plate brand faces, BRAND.md -->
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"> <!-- slop-lint-ignore: Inter + Sora are the locked Off-Plate brand faces, BRAND.md -->
 <style>
 :root{
   --navy:#002B59; --navy-deep:#001B3A;
@@ -30,7 +30,7 @@ p{margin:0}
 a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 button{font:inherit}
-.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
+.mono{font-variant-numeric:tabular-nums;letter-spacing:.01em}
 :focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:8px}
 [id]{scroll-margin-top:104px}
 
@@ -52,25 +52,31 @@ button{font:inherit}
 @media(min-width:1900px){.wrap{width:min(93%,2040px)}}
 
 /* ---------- pill nav ---------- */
-.nav{position:sticky;top:0;z-index:80;padding:16px 0 12px;background:var(--white);transition:box-shadow .24s var(--ease)}
-.nav.is-stuck{box-shadow:0 1px 0 var(--line)}
+.nav{position:sticky;top:0;z-index:80;padding:14px 0 10px;background:transparent;pointer-events:none}
+.nav-in{pointer-events:auto;background:var(--white);border-radius:999px;padding:6px 6px 6px 18px;transition:box-shadow .3s var(--ease),transform .3s var(--slide)}
+.nav.is-stuck .nav-in{box-shadow:0 16px 40px rgba(16,24,32,.14);transform:translateY(4px)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;gap:18px}
 .brand{display:inline-flex;align-items:center;gap:10px;font-family:Sora,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.05em;min-height:48px}
 .brand .knob{width:38px;height:21px;border-radius:999px;background:var(--navy);position:relative;flex:0 0 auto;transition:background .26s var(--ease)}
-.brand .knob i{position:absolute;top:3px;right:3px;width:15px;height:15px;border-radius:50%;background:var(--white);transition:right .34s var(--slide)}
-.brand:hover .knob{background:var(--teal)}
-.brand:hover .knob i{right:20px}
+.brand .knob i{position:absolute;top:3px;right:20px;width:15px;height:15px;border-radius:50%;background:var(--white);transition:right .4s var(--slide)}
+.nav.is-stuck .brand .knob{background:var(--teal)}
+.nav.is-stuck .brand .knob i{right:3px}
 .navpill{display:flex;align-items:center;gap:2px;background:var(--paper);border-radius:999px;padding:5px 10px}
 .navpill a{display:inline-flex;align-items:center;min-height:44px;padding:0 15px;border-radius:999px;font-size:15.5px;font-weight:500;color:var(--muted);transition:color .18s var(--ease),background .18s var(--ease)}
 .navpill a:hover,.navpill a.on{color:var(--ink);background:var(--white)}
 @media(max-width:1180px){.navpill{display:none}}
 .nav-right{display:flex;align-items:center;gap:8px}
-.iconbtn{width:48px;height:48px;border-radius:999px;background:var(--paper);border:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background .18s var(--ease)}
-.iconbtn:hover{background:var(--mint)}
-.iconbtn svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.7}
-.cta{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--white);border-radius:999px;min-height:48px;padding:0 22px;font-size:15.5px;font-weight:600;white-space:nowrap;transition:transform .18s var(--ease)}
-.cta:hover{transform:translateY(-2px)}
-@media(max-width:620px){.nav .cta{display:none}}
+.rbtn{width:48px;height:48px;border-radius:999px;background:var(--white);border:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;flex:0 0 auto;transition:background .18s var(--ease),transform .22s var(--ease)}
+.rbtn:hover{background:var(--mint)}
+.rbtn svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.7}
+.rbtn-paper{background:var(--paper)}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:var(--white);border-radius:999px;min-height:50px;line-height:1;padding:0 24px;font-size:15.5px;font-weight:600;white-space:nowrap;transition:transform .18s var(--ease),background .18s var(--ease)}
+.btn:hover{transform:translateY(-2px)}
+.btn-line{background:transparent;color:var(--ink);border:1px solid rgba(16,24,32,.22)}
+.btn-line:hover{background:var(--white)}
+.btn-inv{background:var(--white);color:var(--ink)}
+.btn-inv-line{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.42)}
+@media(max-width:620px){.nav .btn{display:none}}
 .burger{display:none}
 @media(max-width:1180px){.burger{display:inline-flex}}
 .burger i{display:block;width:18px;height:1.8px;background:var(--ink);position:relative}
@@ -86,13 +92,13 @@ button{font:inherit}
 .drawer-panel{position:absolute;left:12px;right:12px;top:12px;background:var(--white);border-radius:34px;padding:16px;display:flex;flex-direction:column;gap:3px;transform:translateY(-14px);opacity:0;transition:transform .3s var(--slide),opacity .2s var(--ease);max-height:calc(100vh - 24px);overflow-y:auto}
 .drawer.is-open .drawer-panel{transform:none;opacity:1}
 .drawer-top{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 8px 8px}
-.drawer-x{width:48px;height:48px;border-radius:999px;background:var(--paper);border:0;cursor:pointer;position:relative}
+.drawer-x{position:relative}
 .drawer-x::before,.drawer-x::after{content:"";position:absolute;left:50%;top:50%;width:17px;height:1.8px;background:var(--ink)}
 .drawer-x::before{transform:translate(-50%,-50%) rotate(45deg)}
 .drawer-x::after{transform:translate(-50%,-50%) rotate(-45deg)}
 .drawer-panel>a{display:flex;align-items:center;min-height:58px;padding:0 18px;border-radius:20px;font-size:19px;font-weight:600;letter-spacing:-.02em;transition:background .18s var(--ease)}
 .drawer-panel>a:hover,.drawer-panel>a:focus-visible{background:var(--paper)}
-.drawer-panel .cta{margin-top:10px;justify-content:center;min-height:58px}
+.drawer-panel .btn{margin-top:10px;min-height:58px}
 body.nav-open{overflow:hidden}
 
 /* ---------- the bento ---------- */
@@ -106,20 +112,16 @@ body.nav-open{overflow:hidden}
 .pad{padding:clamp(22px,2vw,34px)}
 .meta{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--muted)}
 .meta b{font-weight:600;color:var(--ink)}
-.meta em{font-style:normal;width:3px;height:3px;border-radius:50%;background:rgba(16,24,32,.3);display:block}
+
 .bg-mint{background:var(--mint)}.bg-sand{background:var(--sand)}.bg-sky{background:var(--sky)}
 .bg-paper{background:var(--paper)}.bg-navy{background:var(--navy);color:var(--white)}
-.arrowbtn{width:48px;height:48px;border-radius:999px;background:var(--white);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;transition:transform .22s var(--ease),background .2s var(--ease)}
-.arrowbtn svg{width:17px;height:17px;stroke:var(--ink);fill:none;stroke-width:1.8}
-.w:hover .arrowbtn{transform:translate(3px,-3px)}
+.w:hover .rbtn{transform:translate(3px,-3px)}
 
 /* hero statement */
 .hero-w h1{font-size:clamp(34px,3.5vw,62px);max-width:14ch}
 .hero-w h1 em{font-style:normal;color:var(--teal-tx)}
 .hero-w p{margin-top:18px;color:rgba(16,24,32,.72);max-width:46ch;font-size:clamp(15.5px,1.05vw,17.5px)}
-.hero-w .row{margin-top:auto;padding-top:26px;display:flex;flex-wrap:wrap;gap:10px}
-.ghost{display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border-radius:999px;border:1px solid rgba(16,24,32,.2);font-size:15.5px;font-weight:600;transition:background .18s var(--ease)}
-.ghost:hover{background:var(--white)}
+.hero-w .row{margin-top:auto;padding-top:26px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
 
 /* photo widget with the notch */
 .photo{min-height:clamp(300px,30vw,470px);background:var(--navy)}
@@ -166,9 +168,7 @@ html.js .bento .verd:nth-of-type(2) .sw i{transition-delay:.14s}
 .num.on-dark p{color:rgba(255,255,255,.78)}
 
 /* price widget */
-.price .tier{display:inline-flex;align-items:center;gap:8px;background:var(--white);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;align-self:flex-start}
-.price .tier em{font-style:normal;width:7px;height:7px;border-radius:50%;background:var(--teal)}
-.price h3{font-size:clamp(24px,2.2vw,34px);margin-top:16px}
+.price h3{font-size:clamp(24px,2.2vw,34px)}
 .price p{margin-top:12px;font-size:15.5px;color:rgba(16,24,32,.7);max-width:34ch}
 .price .amt{margin-top:auto;padding-top:22px;font-family:Sora,sans-serif;font-weight:700;font-size:clamp(20px,1.7vw,26px);letter-spacing:-.04em}
 .price .amt small{display:block;font-family:Inter,sans-serif; /* slop-lint-ignore: brand body face, BRAND.md */font-size:13.5px;font-weight:400;color:var(--muted);margin-top:6px;letter-spacing:0}
@@ -211,9 +211,6 @@ html.js .bento .verd:nth-of-type(2) .sw i{transition-delay:.14s}
 .contact h2{font-size:clamp(26px,2.6vw,44px);color:var(--white);max-width:15ch}
 .contact p{margin-top:16px;color:rgba(255,255,255,.8);max-width:44ch}
 .contact .row{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
-.btn-white{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--white);color:var(--ink);font-weight:600;transition:transform .18s var(--ease)}
-.btn-white:hover{transform:translateY(-2px)}
-.btn-clear{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;border:1px solid rgba(255,255,255,.4);color:var(--white);font-weight:600}
 
 /* footer */
 .foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:26px 0 6px;font-size:14px;color:var(--muted)}
@@ -221,7 +218,7 @@ html.js .bento .verd:nth-of-type(2) .sw i{transition-delay:.14s}
 .foot a:hover{color:var(--teal-tx)}
 
 /* ---------- motion ---------- */
-html.js [data-reveal]>*{opacity:0;transform:translateY(14px);transition:opacity .46s var(--ease),transform .46s var(--slide)}
+html.js [data-reveal]>*{opacity:0;transform:scale(.965);transition:opacity .4s var(--ease),transform .5s var(--slide)}
 html.js [data-reveal].in>*{opacity:1;transform:none}
 html.js [data-reveal].in>*:nth-child(2){transition-delay:.06s}
 html.js [data-reveal].in>*:nth-child(3){transition-delay:.12s}
@@ -248,8 +245,8 @@ html.js [data-reveal].in>*:nth-child(6){transition-delay:.30s}
       <a href="#obory">Obory</a><a href="#verdikt">Verdikty</a><a href="#cenik">Ceník</a><a href="#postup">Postup</a><a href="#novinky">Novinky</a>
     </nav>
     <div class="nav-right">
-      <button class="iconbtn burger" id="burger" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="drawer"><i></i></button>
-      <a class="cta" href="#kontakt"><span>Domluvit hovor</span>
+      <button class="rbtn rbtn-paper burger" id="burger" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="drawer"><i></i></button>
+      <a class="btn" href="#kontakt"><span>Domluvit hovor</span>
         <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
     </div>
   </div>
@@ -257,10 +254,10 @@ html.js [data-reveal].in>*:nth-child(6){transition-delay:.30s}
 
 <div class="drawer" id="drawer">
   <div class="drawer-panel">
-    <div class="drawer-top"><span class="meta"><b>Menu</b></span><button class="drawer-x" id="drawerX" type="button" aria-label="Zavřít menu"></button></div>
+    <div class="drawer-top"><span class="meta"><b>Menu</b></span><button class="rbtn rbtn-paper drawer-x" id="drawerX" type="button" aria-label="Zavřít menu"></button></div>
     <a href="#obory">Obory</a><a href="#verdikt">Verdikty</a><a href="#cenik">Ceník</a>
     <a href="#postup">Postup</a><a href="#novinky">Novinky</a><a href="#kontakt">Kontakt</a>
-    <a class="cta" href="#kontakt"><span>Domluvit hovor</span></a>
+    <a class="btn" href="#kontakt"><span>Domluvit hovor</span></a>
   </div>
 </div>
 
@@ -269,12 +266,11 @@ html.js [data-reveal].in>*:nth-child(6){transition-delay:.30s}
   <!-- row: hero -->
   <section class="bento" data-reveal>
     <article class="w c7 bg-mint pad hero-w">
-      <span class="meta"><b>AI a automatizace</b><em aria-hidden="true"></em>pro české firmy do 50 lidí</span>
-      <h1 style="margin-top:20px">Ne všechno <em>potřebuje AI.</em></h1>
-      <p>Projdeme, jak vaše firma doopravdy běží, a rozdělíme agendu na tři hromádky: co potřebuje AI, co zvládne obyčejná automatizace a co je lepší nechat být. Pak postavíme tu jednu věc, na které se shodneme.</p>
+      <h1>Ne všechno <em>potřebuje AI.</em></h1>
+      <p>Stavíme pro české firmy do padesáti lidí. Projdeme, jak ta vaše doopravdy běží, a rozdělíme agendu na tři hromádky: co potřebuje AI, co zvládne obyčejná automatizace a co je lepší nechat být. Pak postavíme tu jednu věc, na které se shodneme.</p>
       <div class="row">
-        <a class="cta" href="#kontakt"><span>Domluvit 45 minut</span></a>
-        <a class="ghost" href="#verdikt">Co u vás AI nepotřebuje</a>
+        <a class="btn" href="#kontakt"><span>Domluvit 45 minut</span></a>
+        <a class="btn btn-line" href="#verdikt">Co u vás AI nepotřebuje</a>
       </div>
     </article>
 
@@ -282,7 +278,7 @@ html.js [data-reveal].in>*:nth-child(6){transition-delay:.30s}
       <img src="../img/dilna.jpg" alt="Dílna s ponkem a nářadím">
       <span class="badge" aria-hidden="true"><span><i></i></span></span>
       <div class="notch">
-        <span class="meta"><b>Obor</b><em aria-hidden="true"></em>Autoservis</span>
+        <span class="meta"><b>Autoservis</b></span>
         <h3>Odsud pochází většina papírování</h3>
       </div>
     </article>
@@ -331,7 +327,7 @@ html.js [data-reveal].in>*:nth-child(6){transition-delay:.30s}
         <span>Autoservisy</span><span>Restaurace</span><span>Účetní</span>
       </div>
       <div class="foot"><b>Váš obor tu není?</b>
-        <a class="arrowbtn" href="#kontakt" aria-label="Napište nám"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="rbtn" href="#kontakt" aria-label="Napište nám"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </article>
   </section>
@@ -350,19 +346,16 @@ html.js [data-reveal].in>*:nth-child(6){transition-delay:.30s}
   <!-- row: pricing -->
   <section class="bento" id="cenik" data-reveal>
     <article class="w c4 bg-sand pad price">
-      <span class="tier"><em aria-hidden="true"></em>Začátek</span>
       <h3>Starter</h3>
       <p>Jedna hotová automatizace na vašich skutečných datech, za pevnou cenu. Nezavazuje k ničemu dalšímu.</p>
       <span class="amt mono">12 000 Kč<small>jednorázově</small></span>
     </article>
     <article class="w c4 bg-mint pad price">
-      <span class="tier"><em aria-hidden="true"></em>Jeden proces</span>
       <h3>Build</h3>
       <p>Jeden proces, který vám mizí ze stolu úplně. Napojený na to, co už používáte, s předáním a návodem.</p>
       <span class="amt mono">od 25 000 Kč<small>+ od 4 000 Kč měsíčně</small></span>
     </article>
     <article class="w c4 mesh pad price on-dark" style="color:#fff">
-      <span class="tier" style="color:var(--ink)"><em aria-hidden="true"></em>Celý provoz</span>
       <h3>System</h3>
       <p>Několik buildů spojených do celku, který drží běžnou agendu sám. Vy řešíte jenom výjimky, které vám pošle.</p>
       <span class="amt mono">od 40 000 Kč<small>+ od 12 000 Kč měsíčně</small></span>
@@ -401,8 +394,7 @@ html.js [data-reveal].in>*:nth-child(6){transition-delay:.30s}
       </div>
     </article>
     <article class="w c5 mesh pad quote">
-      <span class="meta" style="color:rgba(255,255,255,.7)"><b style="color:#fff">Poznámka na okraj</b></span>
-      <h2 style="margin-top:18px">Nejlepší zakázka je občas ta, <span>kterou vám rozmluvíme.</span></h2>
+      <h2>Nejlepší zakázka je občas ta, <span>kterou vám rozmluvíme.</span></h2>
       <span class="meta">Dva ze tří verdiktů znamenají, že nestavíme</span>
     </article>
   </section>
@@ -412,17 +404,17 @@ html.js [data-reveal].in>*:nth-child(6){transition-delay:.30s}
     <a class="w c4 bg-paper pad news" href="/novinky/pravo/">
       <span class="shot"><img src="../img/papir.jpg" alt=""></span>
       <h3>Soud v Mnichově rozhodl ve sporu o trénovací data</h3>
-      <span class="meta"><b>Právo</b><em aria-hidden="true"></em><span class="mono">20. 8. 2026</span></span>
+      <span class="meta"><b>Právo</b><span class="mono">20. 8. 2026</span></span>
     </a>
     <a class="w c4 bg-paper pad news" href="/novinky/eshop/">
       <span class="shot"><img src="../img/sklad.jpg" alt=""></span>
       <h3>Shoptet rozšířil AI popisky produktů na všechny tarify</h3>
-      <span class="meta"><b>E-shopy</b><em aria-hidden="true"></em><span class="mono">20. 8. 2026</span></span>
+      <span class="meta"><b>E-shopy</b><span class="mono">20. 8. 2026</span></span>
     </a>
     <a class="w c4 bg-paper pad news" href="/novinky/ucetnictvi/">
       <span class="shot"><img src="../img/dilna.jpg" alt=""></span>
       <h3>Stanovisko k automatizovanému zpracování dokladů</h3>
-      <span class="meta"><b>Účetnictví</b><em aria-hidden="true"></em><span class="mono">19. 8. 2026</span></span>
+      <span class="meta"><b>Účetnictví</b><span class="mono">19. 8. 2026</span></span>
     </a>
   </section>
 
@@ -432,8 +424,8 @@ html.js [data-reveal].in>*:nth-child(6){transition-delay:.30s}
       <h2>Napište, co vás nejvíc zdržuje</h2>
       <p>Odpovídá Michael Florian, obvykle do konce pracovního dne. Když to nebude něco pro nás, řekneme to rovnou a poradíme, kam se obrátit.</p>
       <div class="row">
-        <a class="btn-white" href="mailto:michael@off-plate.com">Poslat e-mail</a>
-        <a class="btn-clear" href="/novinky/">Novinky podle oboru</a>
+        <a class="btn btn-inv" href="mailto:michael@off-plate.com">Poslat e-mail</a>
+        <a class="btn btn-inv-line" href="/novinky/">Novinky podle oboru</a>
       </div>
     </article>
     <article class="w c4 bg-mint pad tags">
@@ -442,7 +434,7 @@ html.js [data-reveal].in>*:nth-child(6){transition-delay:.30s}
         <span>Shoptet</span><span>Pohoda</span><span>Heureka</span><span>Fakturoid</span><span>WhatsApp</span><span>Gmail</span>
       </div>
       <div class="foot"><b>A na to, co máte vy</b>
-        <a class="arrowbtn" href="#kontakt" aria-label="Napište nám"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="rbtn" href="#kontakt" aria-label="Napište nám"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </article>
   </section>

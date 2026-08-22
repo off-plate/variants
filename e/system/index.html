@@ -1,0 +1,336 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Off Plate E, design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"> <!-- slop-lint-ignore: Inter + Sora are the locked Off-Plate brand faces, BRAND.md -->
+<style>
+/* ============ the tokens E uses. change them here, E follows ============ */
+:root{
+  --navy:#002B59; --navy-deep:#001B3A;
+  --paper:#F2EFEB; --white:#FFFFFF;
+  --teal:#1F7A7A; --teal-tx:#196565;
+  --amber:#D08C2E;
+  --ink:#101820; --muted:#5A6472;
+  --mint:#CBE7E1; --mint-2:#E4F2EF;
+  --sand:#F6E3C4; --sky:#D3DDEC;
+  --line:rgba(16,24,32,.11);
+  --r:32px; --r-sm:20px;
+  --ease:cubic-bezier(.2,.7,.3,1); --slide:cubic-bezier(.66,0,.2,1);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--mint-2);color:var(--ink);font-family:Inter,system-ui,sans-serif; /* slop-lint-ignore: brand body face, BRAND.md */font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Sora,sans-serif;font-weight:700;letter-spacing:-.04em;line-height:1.03;margin:0}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:8px}
+.wrap{width:min(95%,1500px);margin-inline:auto}
+.num{font-variant-numeric:tabular-nums;letter-spacing:.01em}
+.mesh{background:
+  radial-gradient(58% 66% at 16% 20%, rgba(31,122,122,.92) 0%, rgba(31,122,122,0) 62%),
+  radial-gradient(52% 60% at 86% 16%, rgba(208,140,46,.74) 0%, rgba(208,140,46,0) 58%),
+  radial-gradient(70% 78% at 74% 94%, rgba(0,27,58,.96) 0%, rgba(0,27,58,0) 66%),
+  linear-gradient(150deg,#0A4470 0%,#001B3A 100%)}
+
+/* system-page chrome */
+.sheet{background:var(--white);border-radius:44px;margin:clamp(10px,1.6vw,26px);padding:8px 0 40px;overflow:clip}
+.sys-head{padding:48px 0 28px;border-bottom:1px solid var(--line)}
+.sys-head h1{font-size:clamp(38px,5.5vw,84px);letter-spacing:-.05em}
+.sys-head p{margin-top:18px;max-width:74ch;color:var(--muted)}
+.sys-sec{padding:44px 0;border-bottom:1px solid var(--line)}
+.sys-sec>h2{font-size:clamp(26px,2.8vw,42px);margin-bottom:8px}
+.sys-note{color:var(--muted);max-width:78ch;margin-bottom:24px;font-size:15px}
+.sys-lbl{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--muted);display:block;margin:24px 0 12px}
+.demo{background:var(--mint-2);border-radius:var(--r);padding:26px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.demo.dark{background:var(--navy-deep)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th{text-align:left;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:10px 14px 10px 0;border-bottom:1px solid var(--line)}
+td{padding:11px 14px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
+td b{font-weight:600}
+code{background:var(--paper);padding:2px 8px;border-radius:8px;font-size:13.5px;font-family:inherit}
+.chip{width:186px;border-radius:var(--r-sm);overflow:hidden;background:var(--white);border:1px solid var(--line)}
+.chip i{display:block;height:70px}
+.chip div{padding:10px 13px;font-size:13px}
+.chip b{display:block;font-weight:600}
+.chip span{color:var(--muted)}
+
+/* ============ THE E LIBRARY ============ */
+/* 1 · widget */
+.w{border-radius:var(--r);position:relative;overflow:hidden;display:flex;flex-direction:column;width:300px;min-height:190px}
+.pad{padding:24px}
+.bg-mint{background:var(--mint)}.bg-sand{background:var(--sand)}.bg-sky{background:var(--sky)}
+.bg-paper{background:var(--paper)}.bg-navy{background:var(--navy);color:var(--white)}
+
+/* 2 · button */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:var(--white);border-radius:999px;min-height:50px;line-height:1;padding:0 24px;font-size:15.5px;font-weight:600;white-space:nowrap;transition:transform .18s var(--ease),background .18s var(--ease)}
+.btn:hover,.btn.is-hover{transform:translateY(-2px)}
+.btn-line{background:transparent;color:var(--ink);border:1px solid rgba(16,24,32,.22)}
+.btn-line:hover,.btn-line.is-hover{background:var(--white)}
+.btn-inv{background:var(--white);color:var(--ink)}
+.btn-inv-line{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.42)}
+
+/* 3 · round icon button */
+.rbtn{width:48px;height:48px;border-radius:999px;background:var(--white);border:0;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;transition:background .18s var(--ease),transform .22s var(--ease)}
+.rbtn:hover,.rbtn.is-hover{background:var(--mint)}
+.rbtn svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.7}
+.rbtn-paper{background:var(--paper)}
+
+/* 4 · brand mark */
+.brand{display:inline-flex;align-items:center;gap:10px;font-family:Sora,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.05em;min-height:48px}
+.brand .knob{width:38px;height:21px;border-radius:999px;background:var(--navy);position:relative;flex:0 0 auto}
+.brand .knob i{position:absolute;top:3px;width:15px;height:15px;border-radius:50%;background:var(--white);transition:right .4s var(--slide)}
+.brand.off .knob i{right:20px}
+.brand.on .knob{background:var(--teal)}
+.brand.on .knob i{right:3px}
+
+/* 5 · verdict toggle */
+.sw{width:64px;height:30px;border-radius:999px;background:var(--white);position:relative;display:block}
+.sw i{position:absolute;top:4px;width:22px;height:22px;border-radius:50%}
+.sw.p1 i{left:4px;background:var(--muted)}
+.sw.p2 i{left:21px;background:var(--amber)}
+.sw.p3 i{left:38px;background:var(--teal)}
+
+/* 6 · tag pill */
+.tag{background:var(--white);border-radius:999px;padding:10px 16px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;transition:transform .18s var(--ease)}
+.tag:hover,.tag.is-hover{transform:translateY(-2px)}
+
+/* 7 · link row */
+.lrow{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;padding:8px 4px;border-top:1px solid rgba(16,24,32,.14);font-weight:600;font-size:16px;width:100%;transition:padding .22s var(--slide),color .18s var(--ease)}
+.lrow:hover,.lrow.is-hover{padding-left:12px;color:var(--teal-tx)}
+.lrow svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;flex:0 0 auto}
+
+/* 8 · step card */
+.step{background:var(--white);border-radius:var(--r-sm);padding:18px;display:flex;flex-direction:column;width:210px;transition:transform .2s var(--ease)}
+.step:hover,.step.is-hover{transform:translateY(-3px)}
+.step .n{width:34px;height:34px;border-radius:999px;background:var(--paper);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;margin-bottom:14px}
+.step h3{font-size:16.5px;letter-spacing:-.02em}
+.step p{margin-top:8px;font-size:14px;color:var(--muted)}
+.step .when{margin-top:12px;font-size:12.5px;font-weight:600;color:var(--teal-tx)}
+
+/* 9 · fact item */
+.hitem{padding:14px 0;border-top:1px solid rgba(16,24,32,.13);max-width:44ch}
+.hitem h3{font-size:15.5px;font-weight:600;letter-spacing:0;font-family:Inter,sans-serif /* slop-lint-ignore: brand body face, BRAND.md */}
+.hitem p{margin-top:6px;font-size:14.5px;color:var(--muted)}
+
+/* 10 · news card content */
+.news{width:300px;background:var(--paper);border-radius:var(--r);padding:20px;display:flex;flex-direction:column}
+.news .shot{aspect-ratio:16/10;overflow:hidden;border-radius:var(--r-sm)}
+.news .shot img{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--slide)}
+.news:hover .shot img,.news.is-hover .shot img{transform:scale(1.05)}
+.news h3{font-size:17px;margin-top:14px;letter-spacing:-.025em}
+.meta{display:flex;align-items:center;gap:12px;font-size:13.5px;color:var(--muted);margin-top:10px}
+.meta b{font-weight:600;color:var(--ink)}
+
+/* 11 · photo caption pill */
+.photo-demo{width:300px;aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;position:relative;background:var(--navy)}
+.photo-demo img{width:100%;height:100%;object-fit:cover}
+.photo-tag{position:absolute;left:14px;bottom:14px;background:rgba(255,255,255,.94);border-radius:999px;padding:9px 15px;font-size:13.5px;font-weight:600}
+.badge{position:absolute;left:14px;top:14px;width:48px;height:48px;border-radius:999px;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center}
+.badge span{width:22px;height:12px;border-radius:999px;background:var(--teal);position:relative;display:block}
+.badge span i{position:absolute;top:2px;right:2px;width:8px;height:8px;border-radius:50%;background:var(--white)}
+
+/* metric + price contents */
+.numc b{display:block;font-family:Sora,sans-serif;font-weight:700;font-size:38px;letter-spacing:-.05em;line-height:1}
+.numc p{margin-top:10px;font-size:14.5px;color:rgba(16,24,32,.68)}
+.pricec h3{font-size:26px}
+.pricec p{margin-top:10px;font-size:14.5px;color:rgba(16,24,32,.7)}
+.pricec .amt{margin-top:auto;padding-top:18px;font-family:Sora,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.04em}
+.pricec .amt small{display:block;font-family:Inter,sans-serif; /* slop-lint-ignore: brand body face, BRAND.md */font-size:13px;font-weight:400;color:var(--muted);margin-top:5px}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<header class="sys-head wrap">
+  <h1>E, the system</h1>
+  <p>The guideline page for the Off Plate direction E, the bento. Every token and every component the homepage uses is rendered here once, in its states. If two things do the same job for the user they are one component here, and context differences are modifiers on it. A component missing from this page gets added here first and used on the page second.</p>
+  <p style="margin-top:12px"><b>Provenance.</b> Navy <span class="num">#002B59</span>, teal <span class="num">#1F7A7A</span> and amber <span class="num">#D08C2E</span> are the locked Off Plate brand palette from BRAND.md; the mint, sand and sky tints are those three colours raised toward the cream so widgets can carry colour without shouting. The mesh gradient is built from the same four brand colours and nothing else.</p>
+</header>
+
+<section class="sys-sec wrap" id="colour">
+  <h2>Colour as roles</h2>
+  <p class="sys-note">A colour is a job. A new widget takes the role that matches its job and has no other choice.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:12px">
+    <div class="chip"><i style="background:#E4F2EF"></i><div><b>--mint-2 <span class="num">#E4F2EF</span></b><span>the ground behind the sheet</span></div></div>
+    <div class="chip"><i style="background:#FFFFFF;border-bottom:1px solid var(--line)"></i><div><b>--white <span class="num">#FFFFFF</span></b><span>the sheet, buttons on tints, pills</span></div></div>
+    <div class="chip"><i style="background:#F2EFEB"></i><div><b>--paper <span class="num">#F2EFEB</span></b><span>quiet widgets: facts, news, process</span></div></div>
+    <div class="chip"><i style="background:#CBE7E1"></i><div><b>--mint <span class="num">#CBE7E1</span></b><span>the hero and the AI verdict, teal's tint</span></div></div>
+    <div class="chip"><i style="background:#F6E3C4"></i><div><b>--sand <span class="num">#F6E3C4</span></b><span>the automation verdict and Starter, amber's tint</span></div></div>
+    <div class="chip"><i style="background:#D3DDEC"></i><div><b>--sky <span class="num">#D3DDEC</span></b><span>the nothing verdict and Obory, navy's tint</span></div></div>
+    <div class="chip"><i style="background:#101820"></i><div><b>--ink <span class="num">#101820</span></b><span>text and filled buttons, never decoration</span></div></div>
+    <div class="chip"><i style="background:#002B59"></i><div><b>--navy <span class="num">#002B59</span></b><span>one dark widget per row at most</span></div></div>
+    <div class="chip"><i class="mesh"></i><div><b>.mesh</b><span>gradient from the four brand colours; System, quote, contact</span></div></div>
+    <div class="chip"><i style="background:#1F7A7A"></i><div><b>--teal <span class="num">#1F7A7A</span></b><span>the toggle on-state and active accents; #196565 when it carries text</span></div></div>
+  </div>
+  <span class="sys-lbl">Rules that fall out of this</span>
+  <p class="sys-note" style="margin-bottom:0">Each verdict owns its tint: sky means nothing, sand means automation, mint means AI, and the knob colours match (muted, amber, teal). Amber never carries text on a light ground. Tints never sit on tints; every widget sits on the white sheet.</p>
+</section>
+
+<section class="sys-sec wrap" id="type">
+  <h2>Type as roles</h2>
+  <p class="sys-note">Sora 700 for headings, Inter 400/500/600 for everything read. Numbers, money and dates take tabular figures via <code>.num</code>. No monospace anywhere in E, by decision.</p>
+  <table>
+    <tr><th>Role</th><th>Face</th><th>Size</th><th>Notes</th></tr>
+    <tr><td><b>H1 hero</b></td><td>Sora 700</td><td><code>clamp(34px, 3.5vw, 62px)</code></td><td>teal emphasis span allowed, sentence case</td></tr>
+    <tr><td><b>H2 widget</b></td><td>Sora 700</td><td><code>clamp(22px, 1.9vw, 32px)</code></td><td>one per widget</td></tr>
+    <tr><td><b>H3 title</b></td><td>Sora 700</td><td><code>clamp(17px, 1.5vw, 24px)</code></td><td>cards and rows</td></tr>
+    <tr><td><b>Metric</b></td><td>Sora 700</td><td><code>clamp(32px, 3.2vw, 52px)</code></td><td>tabular, tracking -.05em</td></tr>
+    <tr><td><b>Body</b></td><td>Inter 400</td><td><code>15.5px to 17.5px</code> fluid</td><td>max 46ch</td></tr>
+    <tr><td><b>Meta</b></td><td>Inter 400/600</td><td><code>13.5px</code></td><td>label bold ink, value muted, gap separates, no dot glyphs</td></tr>
+  </table>
+  <p class="sys-note" style="margin-top:14px;margin-bottom:0">H4 to H6 do not exist in E. Anything below H3 is body or meta.</p>
+</section>
+
+<section class="sys-sec wrap" id="scales">
+  <h2>Scales and motion</h2>
+  <table>
+    <tr><th style="width:170px">Scale</th><th>Values</th><th style="width:300px">Ceiling</th></tr>
+    <tr><td><b>Shell</b></td><td><code>min(95%, 1660px)</code>, above 1900px <code>min(93%, 2040px)</code></td><td>the sheet itself is the only wider element</td></tr>
+    <tr><td><b>Grid</b></td><td>12 columns, gap <code>clamp(12px, 1.1vw, 18px)</code>, spans 3 to 12</td><td>every widget goes span 12 under 720px</td></tr>
+    <tr><td><b>Radius</b></td><td>sheet 44, widget 32, inner card 20, pills 999</td><td>44; nothing outside this four-step scale</td></tr>
+    <tr><td><b>Shadow</b></td><td>one recipe: <code>0 16px 40px rgba(16,24,32,.14)</code></td><td>the floating nav island only; widgets lift by transform, never by shadow</td></tr>
+    <tr><td><b>Motion</b></td><td>two curves, <code>--ease</code> for state and <code>--slide</code> for movement; reveal is a settle, opacity with <code>scale(.965)</code> to 1</td><td>500ms; no translate fade-ups, everything off under reduced motion</td></tr>
+  </table>
+</section>
+
+<section class="sys-sec wrap" id="components">
+  <h2>Components</h2>
+  <p class="sys-note">Hover states are forced here with a class so they sit next to rest. The widget is the one surface component; everything else lives inside one.</p>
+
+  <span class="sys-lbl">1 · Widget. One surface, five ground variants plus mesh; size is a grid span, never a new class</span>
+  <div class="demo">
+    <div class="w bg-paper pad"><p class="meta"><b>bg-paper</b></p></div>
+    <div class="w bg-mint pad"><p class="meta"><b>bg-mint</b></p></div>
+    <div class="w bg-sand pad"><p class="meta"><b>bg-sand</b></p></div>
+    <div class="w bg-sky pad"><p class="meta"><b>bg-sky</b></p></div>
+    <div class="w bg-navy pad"><p class="meta" style="color:rgba(255,255,255,.75)"><b style="color:#fff">bg-navy</b></p></div>
+    <div class="w mesh pad"><p class="meta" style="color:rgba(255,255,255,.75)"><b style="color:#fff">mesh</b></p></div>
+  </div>
+
+  <span class="sys-lbl">2 · Button. One component: filled, outline, and their dark-ground inverses. One height, 50px; the drawer sizes it to 58</span>
+  <div class="demo">
+    <a class="btn" href="#components">Domluvit 45 minut</a>
+    <a class="btn is-hover" href="#components">Domluvit 45 minut</a>
+    <a class="btn btn-line" href="#components">Co u vás AI nepotřebuje</a>
+  </div>
+  <div class="demo dark" style="margin-top:10px">
+    <a class="btn btn-inv" href="#components">Poslat e-mail</a>
+    <a class="btn btn-inv-line" href="#components">Novinky podle oboru</a>
+  </div>
+
+  <span class="sys-lbl">3 · Round icon button. One component for burger, arrows and close; paper modifier on white grounds</span>
+  <div class="demo">
+    <button class="rbtn" type="button" aria-label="Ukázka šipky"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="rbtn is-hover" type="button" aria-label="Ukázka šipky, hover"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="rbtn rbtn-paper" type="button" aria-label="Ukázka menu"><svg viewBox="0 0 18 18"><path d="M3 5h12M3 9h12M3 13h12" stroke-linecap="round"/></svg></button>
+  </div>
+
+  <span class="sys-lbl">4 · Brand mark. Off at the top of the page; the nav island flips it on as you scroll. The photo badge is the same mark reduced to its toggle</span>
+  <div class="demo">
+    <span class="brand off"><span class="knob" aria-hidden="true"><i></i></span>off plate</span>
+    <span class="brand on"><span class="knob" aria-hidden="true"><i></i></span>off plate</span>
+    <span class="badge" style="position:static" aria-hidden="true"><span><i></i></span></span>
+  </div>
+
+  <span class="sys-lbl">5 · Verdict toggle. Three positions, one per verdict, knob colour bound to the tint. All three start left and settle in sequence on first view</span>
+  <div class="demo">
+    <span class="sw p1" aria-hidden="true"><i></i></span>
+    <span class="sw p2" aria-hidden="true"><i></i></span>
+    <span class="sw p3" aria-hidden="true"><i></i></span>
+  </div>
+
+  <span class="sys-lbl">6 · Tag pill. Trades, integrations and filters are all this one pill</span>
+  <div class="demo">
+    <span class="tag">Stavební firmy</span>
+    <span class="tag is-hover">E-shopy</span>
+    <span class="tag">Shoptet</span>
+  </div>
+
+  <span class="sys-lbl">7 · Link row. States: rest, hover slide</span>
+  <div class="demo" style="flex-direction:column;align-items:stretch;gap:0">
+    <a class="lrow" href="#components">AI automatizace <svg viewBox="0 0 20 20"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    <a class="lrow is-hover" href="#components">Obyčejná automatizace <svg viewBox="0 0 20 20"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+  </div>
+
+  <span class="sys-lbl">8 · Step card, with its long-copy state</span>
+  <div class="demo" style="align-items:flex-start">
+    <div class="step"><span class="n num">01</span><h3>Hovor</h3><p>Kde se práce hromadí a podle jakého čísla poznáte zlepšení.</p><span class="when">45 minut, zdarma</span></div>
+    <div class="step is-hover"><span class="n num">03</span><h3>Pilot</h3><p>Na vaší hotové zakázce, kde znáte správný výsledek. Uvidíte i to, kde se systém plete, dřív než se rozhodnete.</p><span class="when">10 až 14 dní</span></div>
+  </div>
+
+  <span class="sys-lbl">9 · Fact item</span>
+  <div class="demo" style="align-items:flex-start">
+    <div class="hitem"><h3>Postavíme to, vy to vlastníte</h3><p>Scénáře, přístupy i dokumentaci máte u sebe. Když odejdete, berete si to s sebou.</p></div>
+    <div class="hitem"><h3>Kde leží vaše data</h3><p>V Česku nebo v EU. Zpracovatelskou smlouvu podepíšeme dřív, než na data sáhneme.</p></div>
+  </div>
+
+  <span class="sys-lbl">10 · News card. The meta line separates by gap; category bold ink, date muted tabular</span>
+  <div class="demo" style="align-items:flex-start">
+    <a class="news" href="#components">
+      <span class="shot"><img src="../../img/papir.jpg" alt=""></span>
+      <h3>Soud v Mnichově rozhodl ve sporu o trénovací data</h3>
+      <span class="meta"><b>Právo</b><span class="num">20. 8. 2026</span></span>
+    </a>
+    <a class="news is-hover" href="#components">
+      <span class="shot"><img src="../../img/sklad.jpg" alt=""></span>
+      <h3>Shoptet rozšířil AI popisky produktů na všechny tarify</h3>
+      <span class="meta"><b>E-shopy</b><span class="num">20. 8. 2026</span></span>
+    </a>
+  </div>
+
+  <span class="sys-lbl">11 · Photo widget. Caption is the pill; the badge is the mark. The hero notch is the one exception, it is the hero photo's title block and no other photo may borrow it</span>
+  <div class="demo">
+    <div class="photo-demo">
+      <img src="../../img/dilna.jpg" alt="Dílna s ponkem">
+      <span class="badge" aria-hidden="true"><span><i></i></span></span>
+      <span class="photo-tag">Autoservis</span>
+    </div>
+  </div>
+
+  <span class="sys-lbl">12 · Metric and price, the two contents of a numbers widget</span>
+  <div class="demo" style="align-items:stretch">
+    <div class="w bg-paper pad numc"><b class="num">45 min</b><p>První hovor, zdarma. Odejdete z něj s rozpisem.</p></div>
+    <div class="w bg-sand pad pricec"><h3>Starter</h3><p>Jedna hotová automatizace na vašich datech, za pevnou cenu.</p><span class="amt num">12 000 Kč<small>jednorázově</small></span></div>
+  </div>
+</section>
+
+<section class="sys-sec wrap" id="nav">
+  <h2>Navigation</h2>
+  <p class="sys-note" style="margin-bottom:0">The header is a floating island: a white pill that carries the mark, the section links and the button. At the top of the page it rests flush; on scroll it lifts on the page's one shadow and the brand toggle flips from off to on, which is the signature doing the work of a scrolled state. Section links highlight as their section passes. Under 1180px the links move to a drawer of 58px rows that closes on Escape and on link tap and returns focus to the burger; under 620px the button moves into the drawer too.</p>
+</section>
+
+<section class="sys-sec wrap" id="inventory">
+  <h2>Inventory</h2>
+  <p class="sys-note">One purpose sentence each; two rows that come to share a sentence get merged. The one-edit test E must keep passing: make every filled button amber, one definition changes. The bento rows on the homepage are compositions of these twelve, never new components.</p>
+  <table>
+    <tr><th>Component</th><th>Purpose, one sentence</th><th>Variants</th><th>Appears</th></tr>
+    <tr><td><b>.w</b></td><td>Give one idea its own tile in the bento</td><td>5 grounds, mesh, grid spans</td><td>every row</td></tr>
+    <tr><td><b>.btn</b></td><td>The action we want taken on the current surface</td><td>line, inv, inv-line</td><td>nav, hero, contact, drawer</td></tr>
+    <tr><td><b>.rbtn</b></td><td>A single icon action in a circle</td><td>paper</td><td>nav, widget corners, drawer</td></tr>
+    <tr><td><b>.brand</b></td><td>Say whose page this is and carry the toggle signature</td><td>off, on; badge reduction</td><td>nav, drawer, hero photo</td></tr>
+    <tr><td><b>.sw</b></td><td>Show which of the three verdicts a thing got</td><td>three positions</td><td>verdict row</td></tr>
+    <tr><td><b>.tag</b></td><td>Name one trade or tool at a glance</td><td>none</td><td>obory, integrations</td></tr>
+    <tr><td><b>.lrow</b></td><td>One destination in a short list of offers</td><td>none</td><td>co stavíme</td></tr>
+    <tr><td><b>.step</b></td><td>One stage of the process with its duration</td><td>none</td><td>postup</td></tr>
+    <tr><td><b>.hitem</b></td><td>Answer one hard question before it is asked</td><td>none</td><td>co si vyjasníme</td></tr>
+    <tr><td><b>.news</b></td><td>Link one article with its trade and date</td><td>none</td><td>novinky</td></tr>
+    <tr><td><b>.photo-tag</b></td><td>Caption a photograph with its trade</td><td>none</td><td>photo widgets</td></tr>
+    <tr><td><b>.meta</b></td><td>Pair a bold label with a muted value</td><td>none</td><td>cards, drawer</td></tr>
+  </table>
+  <span class="sys-lbl">Banned in E, by decision</span>
+  <p class="sys-note" style="margin-bottom:0">Monospace type. Dot separators anywhere, navigation included. Eyebrow labels above headings and cadence labels under them. Translate fade-up reveals. Shadows on widgets. A second dark widget in one row. Tints stacked on tints.</p>
+</section>
+
+<footer class="wrap" style="padding:26px 0 6px;color:var(--muted);font-size:13.5px">
+  <p>Off Plate direction E. This page is the source of truth; the homepage follows it. Updated 22 Aug 2026.</p>
+</footer>
+
+</div>
+</body>
+</html>
