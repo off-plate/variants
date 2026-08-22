@@ -30,7 +30,7 @@ a{color:inherit;text-decoration:none}
 img{max-width:100%;display:block}
 button{font:inherit;cursor:pointer}
 :focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:8px}
-.wrap{width:min(95%,1500px);margin-inline:auto}
+.wrap{width:min(95%,1520px);margin-inline:auto}
 .num{font-variant-numeric:tabular-nums;letter-spacing:.01em}
 .mesh{background:
   radial-gradient(58% 66% at 16% 20%, rgba(31,122,122,.92) 0%, rgba(31,122,122,0) 62%),
@@ -45,10 +45,12 @@ button{font:inherit;cursor:pointer}
 .sys-head p{margin-top:18px;max-width:74ch;color:var(--muted)}
 .sys-sec{padding:44px 0;border-bottom:1px solid var(--line)}
 .sys-sec>h2{font-size:clamp(26px,2.8vw,42px);margin-bottom:8px}
-.sys-note{color:var(--muted);max-width:78ch;margin-bottom:24px;font-size:15px}
-.sys-lbl{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--muted);display:block;margin:24px 0 12px}
-.demo{background:var(--mint-2);border-radius:var(--r);padding:26px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+.sys-note{color:var(--muted);max-width:80ch;margin-bottom:24px;font-size:15px}
+.sys-lbl{font-size:12px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:var(--muted);display:block;margin:26px 0 12px}
+.demo{background:var(--mint-2);border-radius:var(--r);padding:24px;display:flex;flex-wrap:wrap;gap:16px;align-items:center}
 .demo.dark{background:var(--navy-deep)}
+.demo.grid2{display:grid;grid-template-columns:1fr 1fr;align-items:stretch}
+@media(max-width:900px){.demo.grid2{grid-template-columns:1fr}}
 table{border-collapse:collapse;width:100%;font-size:14.5px}
 th{text-align:left;font-size:12px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:10px 14px 10px 0;border-bottom:1px solid var(--line)}
 td{padding:11px 14px 11px 0;border-bottom:1px solid var(--line);vertical-align:top}
@@ -60,14 +62,12 @@ code{background:var(--paper);padding:2px 8px;border-radius:8px;font-size:13.5px;
 .chip b{display:block;font-weight:600}
 .chip span{color:var(--muted)}
 
-/* ============ THE E LIBRARY ============ */
-/* 1 · widget */
-.w{border-radius:var(--r);position:relative;overflow:hidden;display:flex;flex-direction:column;width:300px;min-height:190px}
-.pad{padding:24px}
+/* ============ THE E LIBRARY, atoms ============ */
+.w{border-radius:var(--r);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.pad{padding:clamp(22px,2vw,30px)}
 .bg-mint{background:var(--mint)}.bg-sand{background:var(--sand)}.bg-sky{background:var(--sky)}
 .bg-paper{background:var(--paper)}.bg-navy{background:var(--navy);color:var(--white)}
 
-/* 2 · button */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:10px;background:var(--ink);color:var(--white);border-radius:999px;min-height:50px;line-height:1;padding:0 24px;font-size:15.5px;font-weight:600;white-space:nowrap;transition:transform .18s var(--ease),background .18s var(--ease)}
 .btn:hover,.btn.is-hover{transform:translateY(-2px)}
 .btn-line{background:transparent;color:var(--ink);border:1px solid rgba(16,24,32,.22)}
@@ -75,13 +75,11 @@ code{background:var(--paper);padding:2px 8px;border-radius:8px;font-size:13.5px;
 .btn-inv{background:var(--white);color:var(--ink)}
 .btn-inv-line{background:transparent;color:var(--white);border:1px solid rgba(255,255,255,.42)}
 
-/* 3 · round icon button */
 .rbtn{width:48px;height:48px;border-radius:999px;background:var(--white);border:0;display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;transition:background .18s var(--ease),transform .22s var(--ease)}
 .rbtn:hover,.rbtn.is-hover{background:var(--mint)}
 .rbtn svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.7}
 .rbtn-paper{background:var(--paper)}
 
-/* 4 · brand mark */
 .brand{display:inline-flex;align-items:center;gap:10px;font-family:Sora,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.05em;min-height:48px}
 .brand .knob{width:38px;height:21px;border-radius:999px;background:var(--navy);position:relative;flex:0 0 auto}
 .brand .knob i{position:absolute;top:3px;width:15px;height:15px;border-radius:50%;background:var(--white);transition:right .4s var(--slide)}
@@ -89,59 +87,129 @@ code{background:var(--paper);padding:2px 8px;border-radius:8px;font-size:13.5px;
 .brand.on .knob{background:var(--teal)}
 .brand.on .knob i{right:3px}
 
-/* 5 · verdict toggle */
-.sw{width:64px;height:30px;border-radius:999px;background:var(--white);position:relative;display:block}
+.sw{width:64px;height:30px;border-radius:999px;background:var(--white);position:relative;display:block;flex:0 0 auto}
 .sw i{position:absolute;top:4px;width:22px;height:22px;border-radius:50%}
 .sw.p1 i{left:4px;background:var(--muted)}
 .sw.p2 i{left:21px;background:var(--amber)}
 .sw.p3 i{left:38px;background:var(--teal)}
 
-/* 6 · tag pill */
 .tag{background:var(--white);border-radius:999px;padding:10px 16px;font-size:14px;font-weight:600;display:inline-flex;align-items:center;transition:transform .18s var(--ease)}
 .tag:hover,.tag.is-hover{transform:translateY(-2px)}
 
-/* 7 · link row */
 .lrow{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:56px;padding:8px 4px;border-top:1px solid rgba(16,24,32,.14);font-weight:600;font-size:16px;width:100%;transition:padding .22s var(--slide),color .18s var(--ease)}
 .lrow:hover,.lrow.is-hover{padding-left:12px;color:var(--teal-tx)}
 .lrow svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;flex:0 0 auto}
 
-/* 8 · step card */
-.step{background:var(--white);border-radius:var(--r-sm);padding:18px;display:flex;flex-direction:column;width:210px;transition:transform .2s var(--ease)}
+.step{background:var(--white);border-radius:var(--r-sm);padding:18px;display:flex;flex-direction:column;transition:transform .2s var(--ease)}
 .step:hover,.step.is-hover{transform:translateY(-3px)}
 .step .n{width:34px;height:34px;border-radius:999px;background:var(--paper);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;margin-bottom:14px}
 .step h3{font-size:16.5px;letter-spacing:-.02em}
-.step p{margin-top:8px;font-size:14px;color:var(--muted)}
+.step p{margin-top:8px;font-size:14px;color:var(--muted);flex:1}
 .step .when{margin-top:12px;font-size:12.5px;font-weight:600;color:var(--teal-tx)}
 
-/* 9 · fact item */
-.hitem{padding:14px 0;border-top:1px solid rgba(16,24,32,.13);max-width:44ch}
+.hitem{padding:15px 0;border-top:1px solid rgba(16,24,32,.13)}
 .hitem h3{font-size:15.5px;font-weight:600;letter-spacing:0;font-family:Inter,sans-serif /* slop-lint-ignore: brand body face, BRAND.md */}
 .hitem p{margin-top:6px;font-size:14.5px;color:var(--muted)}
 
-/* 10 · news card content */
-.news{width:300px;background:var(--paper);border-radius:var(--r);padding:20px;display:flex;flex-direction:column}
+.meta{display:flex;align-items:center;gap:12px;font-size:13.5px;color:var(--muted)}
+.meta b{font-weight:600;color:var(--ink)}
+
+.badge{width:48px;height:48px;border-radius:999px;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;flex:0 0 auto}
+.badge span{width:22px;height:12px;border-radius:999px;background:var(--teal);position:relative;display:block}
+.badge span i{position:absolute;top:2px;right:2px;width:8px;height:8px;border-radius:50%;background:var(--white)}
+.photo-tag{background:rgba(255,255,255,.94);border-radius:999px;padding:9px 15px;font-size:13.5px;font-weight:600;display:inline-flex}
+
+/* ============ widget compositions ============ */
+/* statement widget */
+.stmt-w h2{font-size:clamp(26px,2.6vw,44px)}
+.stmt-w h2 em{font-style:normal;color:var(--teal-tx)}
+.stmt-w.on-mesh{color:var(--white)}
+.stmt-w.on-mesh h2{color:var(--white)}
+.stmt-w p{margin-top:14px;color:rgba(16,24,32,.72);max-width:46ch;font-size:16px}
+.stmt-w.on-mesh p{color:rgba(255,255,255,.8)}
+.stmt-w .row{margin-top:auto;padding-top:24px;display:flex;flex-wrap:wrap;gap:10px;align-items:center}
+
+/* photo widget */
+.photo{min-height:300px}
+.photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.photo .badge{position:absolute;left:16px;top:16px}
+.photo .photo-tag{position:absolute;left:16px;bottom:16px}
+.notch{position:absolute;left:0;bottom:0;z-index:3;background:var(--white);border-top-right-radius:34px;padding:18px 26px 4px 0;max-width:86%}
+.notch h3{font-size:clamp(19px,1.6vw,26px);margin-top:8px;text-transform:uppercase;letter-spacing:-.03em;max-width:16ch}
+.notch .meta{padding-left:2px}
+
+/* verdict widget */
+.verd h3{font-size:clamp(19px,1.5vw,24px);margin-top:18px}
+.verd p{margin-top:9px;font-size:15px;color:rgba(16,24,32,.68)}
+
+/* links widget */
+.links h2{font-size:clamp(21px,1.8vw,28px)}
+.links .list{margin-top:16px;display:flex;flex-direction:column}
+
+/* tags widget */
+.tags h2{font-size:clamp(19px,1.5vw,25px)}
+.tagcloud{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}
+.tags .tfoot{margin-top:auto;padding-top:22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.tags .tfoot b{font-family:Sora,sans-serif;font-size:16.5px;letter-spacing:-.02em}
+
+/* metric widget */
+.numc b{display:block;font-family:Sora,sans-serif;font-weight:700;font-size:clamp(30px,2.8vw,44px);letter-spacing:-.05em;line-height:1}
+.numc p{margin-top:11px;font-size:14.5px;color:rgba(16,24,32,.68)}
+.numc.on-dark p{color:rgba(255,255,255,.78)}
+
+/* price widget */
+.pricec h3{font-size:clamp(22px,2vw,30px)}
+.pricec p{margin-top:11px;font-size:15px;color:rgba(16,24,32,.7);flex:1}
+.pricec .amt{margin-top:auto;padding-top:18px;font-family:Sora,sans-serif;font-weight:700;font-size:clamp(19px,1.6vw,24px);letter-spacing:-.04em}
+.pricec .amt small{display:block;font-family:Inter,sans-serif; /* slop-lint-ignore: brand body face, BRAND.md */font-size:13px;font-weight:400;color:var(--muted);margin-top:5px}
+.pricec.on-dark{color:#fff}
+.pricec.on-dark p{color:rgba(255,255,255,.78)}
+.pricec.on-dark .amt small{color:rgba(255,255,255,.66)}
+
+/* process widget */
+.proc h2{font-size:clamp(21px,1.8vw,30px)}
+.proc .steps{margin-top:18px;display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media(max-width:1100px){.proc .steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.proc .steps{grid-template-columns:1fr}}
+
+/* facts widget */
+.honest h2{font-size:clamp(21px,1.8vw,30px);margin-bottom:4px}
+.hlist{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(20px,2.4vw,44px)}
+@media(max-width:760px){.hlist{grid-template-columns:1fr}}
+
+/* quote widget */
+.quote{color:var(--white)}
+.quote h2{font-size:clamp(21px,2vw,32px);max-width:18ch}
+.quote h2 span{color:rgba(255,255,255,.5)}
+.quote .meta{margin-top:auto;padding-top:22px;color:rgba(255,255,255,.6)}
+
+/* news card */
+.news{display:flex;flex-direction:column}
 .news .shot{aspect-ratio:16/10;overflow:hidden;border-radius:var(--r-sm)}
 .news .shot img{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--slide)}
 .news:hover .shot img,.news.is-hover .shot img{transform:scale(1.05)}
-.news h3{font-size:17px;margin-top:14px;letter-spacing:-.025em}
-.meta{display:flex;align-items:center;gap:12px;font-size:13.5px;color:var(--muted);margin-top:10px}
-.meta b{font-weight:600;color:var(--ink)}
+.news h3{font-size:clamp(16px,1.3vw,19px);margin-top:14px;letter-spacing:-.025em}
+.news .meta{margin-top:10px}
 
-/* 11 · photo caption pill */
-.photo-demo{width:300px;aspect-ratio:4/3;border-radius:var(--r);overflow:hidden;position:relative;background:var(--navy)}
-.photo-demo img{width:100%;height:100%;object-fit:cover}
-.photo-tag{position:absolute;left:14px;bottom:14px;background:rgba(255,255,255,.94);border-radius:999px;padding:9px 15px;font-size:13.5px;font-weight:600}
-.badge{position:absolute;left:14px;top:14px;width:48px;height:48px;border-radius:999px;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center}
-.badge span{width:22px;height:12px;border-radius:999px;background:var(--teal);position:relative;display:block}
-.badge span i{position:absolute;top:2px;right:2px;width:8px;height:8px;border-radius:50%;background:var(--white)}
+/* nav island + drawer demos */
+.navdemo{pointer-events:none;background:var(--white);border-radius:999px;padding:6px 6px 6px 18px;display:flex;align-items:center;justify-content:space-between;gap:14px;width:100%}
+.navdemo.is-stuck{box-shadow:0 16px 40px rgba(16,24,32,.14)}
+.navpill{display:flex;align-items:center;gap:2px;background:var(--paper);border-radius:999px;padding:5px 10px}
+.navpill a{display:inline-flex;align-items:center;min-height:44px;padding:0 15px;border-radius:999px;font-size:15.5px;font-weight:500;color:var(--muted)}
+.navpill a.on{color:var(--ink);background:var(--white)}
+@media(max-width:900px){.navpill{display:none}}
+.drawerdemo{background:var(--white);border-radius:34px;padding:16px;width:min(100%,420px);display:flex;flex-direction:column;gap:3px}
+.drawerdemo .top{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 8px 8px}
+.drawerdemo a{display:flex;align-items:center;min-height:58px;padding:0 18px;border-radius:20px;font-size:19px;font-weight:600;letter-spacing:-.02em}
+.drawerdemo a.on{background:var(--paper)}
+.xdemo{position:relative}
+.xdemo::before,.xdemo::after{content:"";position:absolute;left:50%;top:50%;width:17px;height:1.8px;background:var(--ink)}
+.xdemo::before{transform:translate(-50%,-50%) rotate(45deg)}
+.xdemo::after{transform:translate(-50%,-50%) rotate(-45deg)}
 
-/* metric + price contents */
-.numc b{display:block;font-family:Sora,sans-serif;font-weight:700;font-size:38px;letter-spacing:-.05em;line-height:1}
-.numc p{margin-top:10px;font-size:14.5px;color:rgba(16,24,32,.68)}
-.pricec h3{font-size:26px}
-.pricec p{margin-top:10px;font-size:14.5px;color:rgba(16,24,32,.7)}
-.pricec .amt{margin-top:auto;padding-top:18px;font-family:Sora,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.04em}
-.pricec .amt small{display:block;font-family:Inter,sans-serif; /* slop-lint-ignore: brand body face, BRAND.md */font-size:13px;font-weight:400;color:var(--muted);margin-top:5px}
+/* footer strip */
+.footdemo{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;font-size:14px;color:var(--muted);width:100%;padding:4px 8px}
+.footdemo span{display:flex;gap:22px;flex-wrap:wrap}
 </style>
 </head>
 <body>
@@ -149,8 +217,8 @@ code{background:var(--paper);padding:2px 8px;border-radius:8px;font-size:13.5px;
 
 <header class="sys-head wrap">
   <h1>E, the system</h1>
-  <p>The guideline page for the Off Plate direction E, the bento. Every token and every component the homepage uses is rendered here once, in its states. If two things do the same job for the user they are one component here, and context differences are modifiers on it. A component missing from this page gets added here first and used on the page second.</p>
-  <p style="margin-top:12px"><b>Provenance.</b> Navy <span class="num">#002B59</span>, teal <span class="num">#1F7A7A</span> and amber <span class="num">#D08C2E</span> are the locked Off Plate brand palette from BRAND.md; the mint, sand and sky tints are those three colours raised toward the cream so widgets can carry colour without shouting. The mesh gradient is built from the same four brand colours and nothing else.</p>
+  <p>The guideline page for the Off Plate direction E, the bento. The homepage carries 24 widget instances; they collapse into the eleven widget layouts and ten atoms on this page, and nothing else. A layout that appears here once may be filled with any content; a layout missing from here gets added here first and used on the page second.</p>
+  <p style="margin-top:12px"><b>Provenance.</b> Navy <span class="num">#002B59</span>, teal <span class="num">#1F7A7A</span> and amber <span class="num">#D08C2E</span> are the locked Off Plate palette from BRAND.md; mint, sand and sky are those three raised toward the cream. The mesh gradient uses the same four colours and nothing else.</p>
 </header>
 
 <section class="sys-sec wrap" id="colour">
@@ -160,13 +228,13 @@ code{background:var(--paper);padding:2px 8px;border-radius:8px;font-size:13.5px;
     <div class="chip"><i style="background:#E4F2EF"></i><div><b>--mint-2 <span class="num">#E4F2EF</span></b><span>the ground behind the sheet</span></div></div>
     <div class="chip"><i style="background:#FFFFFF;border-bottom:1px solid var(--line)"></i><div><b>--white <span class="num">#FFFFFF</span></b><span>the sheet, buttons on tints, pills</span></div></div>
     <div class="chip"><i style="background:#F2EFEB"></i><div><b>--paper <span class="num">#F2EFEB</span></b><span>quiet widgets: facts, news, process</span></div></div>
-    <div class="chip"><i style="background:#CBE7E1"></i><div><b>--mint <span class="num">#CBE7E1</span></b><span>the hero and the AI verdict, teal's tint</span></div></div>
+    <div class="chip"><i style="background:#CBE7E1"></i><div><b>--mint <span class="num">#CBE7E1</span></b><span>hero and the AI verdict, teal's tint</span></div></div>
     <div class="chip"><i style="background:#F6E3C4"></i><div><b>--sand <span class="num">#F6E3C4</span></b><span>the automation verdict and Starter, amber's tint</span></div></div>
     <div class="chip"><i style="background:#D3DDEC"></i><div><b>--sky <span class="num">#D3DDEC</span></b><span>the nothing verdict and Obory, navy's tint</span></div></div>
     <div class="chip"><i style="background:#101820"></i><div><b>--ink <span class="num">#101820</span></b><span>text and filled buttons, never decoration</span></div></div>
     <div class="chip"><i style="background:#002B59"></i><div><b>--navy <span class="num">#002B59</span></b><span>one dark widget per row at most</span></div></div>
     <div class="chip"><i class="mesh"></i><div><b>.mesh</b><span>gradient from the four brand colours; System, quote, contact</span></div></div>
-    <div class="chip"><i style="background:#1F7A7A"></i><div><b>--teal <span class="num">#1F7A7A</span></b><span>the toggle on-state and active accents; #196565 when it carries text</span></div></div>
+    <div class="chip"><i style="background:#1F7A7A"></i><div><b>--teal <span class="num">#1F7A7A</span></b><span>toggle on-state and accents; #196565 when it carries text</span></div></div>
   </div>
   <span class="sys-lbl">Rules that fall out of this</span>
   <p class="sys-note" style="margin-bottom:0">Each verdict owns its tint: sky means nothing, sand means automation, mint means AI, and the knob colours match (muted, amber, teal). Amber never carries text on a light ground. Tints never sit on tints; every widget sits on the white sheet.</p>
@@ -174,7 +242,7 @@ code{background:var(--paper);padding:2px 8px;border-radius:8px;font-size:13.5px;
 
 <section class="sys-sec wrap" id="type">
   <h2>Type as roles</h2>
-  <p class="sys-note">Sora 700 for headings, Inter 400/500/600 for everything read. Numbers, money and dates take tabular figures via <code>.num</code>. No monospace anywhere in E, by decision.</p>
+  <p class="sys-note">Sora 700 for headings, Inter 400/500/600 for everything read. Numbers, money and dates take tabular figures via <code>.num</code>. No monospace anywhere in E, by decision. H4 to H6 do not exist; anything below H3 is body or meta.</p>
   <table>
     <tr><th>Role</th><th>Face</th><th>Size</th><th>Notes</th></tr>
     <tr><td><b>H1 hero</b></td><td>Sora 700</td><td><code>clamp(34px, 3.5vw, 62px)</code></td><td>teal emphasis span allowed, sentence case</td></tr>
@@ -184,7 +252,6 @@ code{background:var(--paper);padding:2px 8px;border-radius:8px;font-size:13.5px;
     <tr><td><b>Body</b></td><td>Inter 400</td><td><code>15.5px to 17.5px</code> fluid</td><td>max 46ch</td></tr>
     <tr><td><b>Meta</b></td><td>Inter 400/600</td><td><code>13.5px</code></td><td>label bold ink, value muted, gap separates, no dot glyphs</td></tr>
   </table>
-  <p class="sys-note" style="margin-top:14px;margin-bottom:0">H4 to H6 do not exist in E. Anything below H3 is body or meta.</p>
 </section>
 
 <section class="sys-sec wrap" id="scales">
@@ -194,137 +261,250 @@ code{background:var(--paper);padding:2px 8px;border-radius:8px;font-size:13.5px;
     <tr><td><b>Shell</b></td><td><code>min(95%, 1660px)</code>, above 1900px <code>min(93%, 2040px)</code></td><td>the sheet itself is the only wider element</td></tr>
     <tr><td><b>Grid</b></td><td>12 columns, gap <code>clamp(12px, 1.1vw, 18px)</code>, spans 3 to 12</td><td>every widget goes span 12 under 720px</td></tr>
     <tr><td><b>Radius</b></td><td>sheet 44, widget 32, inner card 20, pills 999</td><td>44; nothing outside this four-step scale</td></tr>
-    <tr><td><b>Shadow</b></td><td>one recipe: <code>0 16px 40px rgba(16,24,32,.14)</code></td><td>the floating nav island only; widgets lift by transform, never by shadow</td></tr>
-    <tr><td><b>Motion</b></td><td>two curves, <code>--ease</code> for state and <code>--slide</code> for movement; reveal is a settle, opacity with <code>scale(.965)</code> to 1</td><td>500ms; no translate fade-ups, everything off under reduced motion</td></tr>
+    <tr><td><b>Shadow</b></td><td>one recipe: <code>0 16px 40px rgba(16,24,32,.14)</code></td><td>the floating nav island only; widgets lift by transform</td></tr>
+    <tr><td><b>Motion</b></td><td>two curves, <code>--ease</code> for state, <code>--slide</code> for movement; reveal is a settle, opacity with <code>scale(.965)</code> to 1</td><td>500ms; no translate fade-ups, everything off under reduced motion</td></tr>
   </table>
 </section>
 
-<section class="sys-sec wrap" id="components">
-  <h2>Components</h2>
-  <p class="sys-note">Hover states are forced here with a class so they sit next to rest. The widget is the one surface component; everything else lives inside one.</p>
+<section class="sys-sec wrap" id="atoms">
+  <h2>Atoms</h2>
+  <p class="sys-note">Hover states are forced with a class so they sit next to rest.</p>
 
-  <span class="sys-lbl">1 · Widget. One surface, five ground variants plus mesh; size is a grid span, never a new class</span>
+  <span class="sys-lbl">Button. Filled, outline, and their dark-ground inverses. One 50px height; the drawer sizes it to 58</span>
   <div class="demo">
-    <div class="w bg-paper pad"><p class="meta"><b>bg-paper</b></p></div>
-    <div class="w bg-mint pad"><p class="meta"><b>bg-mint</b></p></div>
-    <div class="w bg-sand pad"><p class="meta"><b>bg-sand</b></p></div>
-    <div class="w bg-sky pad"><p class="meta"><b>bg-sky</b></p></div>
-    <div class="w bg-navy pad"><p class="meta" style="color:rgba(255,255,255,.75)"><b style="color:#fff">bg-navy</b></p></div>
-    <div class="w mesh pad"><p class="meta" style="color:rgba(255,255,255,.75)"><b style="color:#fff">mesh</b></p></div>
-  </div>
-
-  <span class="sys-lbl">2 · Button. One component: filled, outline, and their dark-ground inverses. One height, 50px; the drawer sizes it to 58</span>
-  <div class="demo">
-    <a class="btn" href="#components">Domluvit 45 minut</a>
-    <a class="btn is-hover" href="#components">Domluvit 45 minut</a>
-    <a class="btn btn-line" href="#components">Co u vás AI nepotřebuje</a>
+    <a class="btn" href="#atoms">Domluvit 45 minut</a>
+    <a class="btn is-hover" href="#atoms">Domluvit 45 minut</a>
+    <a class="btn btn-line" href="#atoms">Co u vás AI nepotřebuje</a>
   </div>
   <div class="demo dark" style="margin-top:10px">
-    <a class="btn btn-inv" href="#components">Poslat e-mail</a>
-    <a class="btn btn-inv-line" href="#components">Novinky podle oboru</a>
+    <a class="btn btn-inv" href="#atoms">Poslat e-mail</a>
+    <a class="btn btn-inv-line" href="#atoms">Novinky podle oboru</a>
   </div>
 
-  <span class="sys-lbl">3 · Round icon button. One component for burger, arrows and close; paper modifier on white grounds</span>
+  <span class="sys-lbl">Round icon button, one circle for burger, arrows and close; paper modifier on white grounds</span>
   <div class="demo">
-    <button class="rbtn" type="button" aria-label="Ukázka šipky"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    <button class="rbtn is-hover" type="button" aria-label="Ukázka šipky, hover"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
-    <button class="rbtn rbtn-paper" type="button" aria-label="Ukázka menu"><svg viewBox="0 0 18 18"><path d="M3 5h12M3 9h12M3 13h12" stroke-linecap="round"/></svg></button>
+    <button class="rbtn" type="button" aria-label="Šipka"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="rbtn is-hover" type="button" aria-label="Šipka, hover"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+    <button class="rbtn rbtn-paper" type="button" aria-label="Menu"><svg viewBox="0 0 18 18"><path d="M3 5h12M3 9h12M3 13h12" stroke-linecap="round"/></svg></button>
+    <button class="rbtn rbtn-paper xdemo" type="button" aria-label="Zavřít"></button>
   </div>
 
-  <span class="sys-lbl">4 · Brand mark. Off at the top of the page; the nav island flips it on as you scroll. The photo badge is the same mark reduced to its toggle</span>
+  <span class="sys-lbl">Brand mark, off and on; the badge on photos is the same mark reduced to its toggle</span>
   <div class="demo">
     <span class="brand off"><span class="knob" aria-hidden="true"><i></i></span>off plate</span>
     <span class="brand on"><span class="knob" aria-hidden="true"><i></i></span>off plate</span>
-    <span class="badge" style="position:static" aria-hidden="true"><span><i></i></span></span>
+    <span class="badge" aria-hidden="true"><span><i></i></span></span>
   </div>
 
-  <span class="sys-lbl">5 · Verdict toggle. Three positions, one per verdict, knob colour bound to the tint. All three start left and settle in sequence on first view</span>
+  <span class="sys-lbl">Verdict toggle, three positions, knob colour bound to the tint</span>
   <div class="demo">
     <span class="sw p1" aria-hidden="true"><i></i></span>
     <span class="sw p2" aria-hidden="true"><i></i></span>
     <span class="sw p3" aria-hidden="true"><i></i></span>
   </div>
 
-  <span class="sys-lbl">6 · Tag pill. Trades, integrations and filters are all this one pill</span>
+  <span class="sys-lbl">Tag pill, photo caption pill, meta line</span>
   <div class="demo">
     <span class="tag">Stavební firmy</span>
     <span class="tag is-hover">E-shopy</span>
-    <span class="tag">Shoptet</span>
+    <span class="photo-tag">Autoservis</span>
+    <span class="meta"><b>Právo</b><span class="num">20. 8. 2026</span></span>
   </div>
 
-  <span class="sys-lbl">7 · Link row. States: rest, hover slide</span>
-  <div class="demo" style="flex-direction:column;align-items:stretch;gap:0">
-    <a class="lrow" href="#components">AI automatizace <svg viewBox="0 0 20 20"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-    <a class="lrow is-hover" href="#components">Obyčejná automatizace <svg viewBox="0 0 20 20"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-  </div>
-
-  <span class="sys-lbl">8 · Step card, with its long-copy state</span>
+  <span class="sys-lbl">Link row, step card, fact item</span>
   <div class="demo" style="align-items:flex-start">
-    <div class="step"><span class="n num">01</span><h3>Hovor</h3><p>Kde se práce hromadí a podle jakého čísla poznáte zlepšení.</p><span class="when">45 minut, zdarma</span></div>
-    <div class="step is-hover"><span class="n num">03</span><h3>Pilot</h3><p>Na vaší hotové zakázce, kde znáte správný výsledek. Uvidíte i to, kde se systém plete, dřív než se rozhodnete.</p><span class="when">10 až 14 dní</span></div>
+    <div style="flex:1;min-width:280px">
+      <a class="lrow" href="#atoms">AI automatizace <svg viewBox="0 0 20 20"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      <a class="lrow is-hover" href="#atoms">Obyčejná automatizace <svg viewBox="0 0 20 20"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+    <div class="step" style="width:220px"><span class="n num">03</span><h3>Pilot</h3><p>Na vaší hotové zakázce, kde znáte správný výsledek.</p><span class="when">10 až 14 dní</span></div>
+    <div class="hitem" style="max-width:300px"><h3>Postavíme to, vy to vlastníte</h3><p>Scénáře, přístupy i dokumentaci máte u sebe.</p></div>
+  </div>
+</section>
+
+<section class="sys-sec wrap" id="widgets">
+  <h2>Widgets, all eleven</h2>
+  <p class="sys-note">Every distinct layout on the homepage, deduplicated. The count after each name is how many instances of it the homepage carries. The bento rows are compositions of these; a twelfth layout does not exist until it exists here.</p>
+
+  <span class="sys-lbl">1 · Statement widget, 2 uses. Heading, paragraph, button row. The hero and the contact widget are this one layout; hero runs it on mint with dark buttons and the page H1, contact runs it on mesh with inverse buttons</span>
+  <div class="demo grid2">
+    <div class="w bg-mint pad stmt-w" style="min-height:260px">
+      <h2>Ne všechno <em>potřebuje AI.</em></h2>
+      <p>Stavíme pro české firmy do padesáti lidí. Projdeme, jak ta vaše doopravdy běží.</p>
+      <div class="row"><a class="btn" href="#widgets">Domluvit 45 minut</a><a class="btn btn-line" href="#widgets">Co u vás AI nepotřebuje</a></div>
+    </div>
+    <div class="w mesh pad stmt-w on-mesh" style="min-height:260px">
+      <h2>Napište, co vás nejvíc zdržuje</h2>
+      <p>Odpovídá Michael Florian, obvykle do konce pracovního dne.</p>
+      <div class="row"><a class="btn btn-inv" href="#widgets">Poslat e-mail</a><a class="btn btn-inv-line" href="#widgets">Novinky podle oboru</a></div>
+    </div>
   </div>
 
-  <span class="sys-lbl">9 · Fact item</span>
-  <div class="demo" style="align-items:flex-start">
-    <div class="hitem"><h3>Postavíme to, vy to vlastníte</h3><p>Scénáře, přístupy i dokumentaci máte u sebe. Když odejdete, berete si to s sebou.</p></div>
-    <div class="hitem"><h3>Kde leží vaše data</h3><p>V Česku nebo v EU. Zpracovatelskou smlouvu podepíšeme dřív, než na data sáhneme.</p></div>
+  <span class="sys-lbl">2 · Photo widget, 4 uses. Full-bleed photograph; variant notch (hero row only: badge plus the white corner slab with meta and title) and variant caption (the pill)</span>
+  <div class="demo grid2">
+    <div class="w photo">
+      <img src="../../img/dilna.jpg" alt="Dílna s ponkem a nářadím">
+      <span class="badge" aria-hidden="true"><span><i></i></span></span>
+      <div class="notch"><span class="meta"><b>Autoservis</b></span><h3>Odsud pochází většina papírování</h3></div>
+    </div>
+    <div class="w photo">
+      <img src="../../img/stavba.jpg" alt="Stavba">
+      <span class="photo-tag">Stavební firma</span>
+    </div>
   </div>
 
-  <span class="sys-lbl">10 · News card. The meta line separates by gap; category bold ink, date muted tabular</span>
-  <div class="demo" style="align-items:flex-start">
-    <a class="news" href="#components">
+  <span class="sys-lbl">3 · Verdict widget, 3 uses. Toggle, title, body; tint bound to the verdict</span>
+  <div class="demo grid2" style="grid-template-columns:1fr 1fr 1fr">
+    <div class="w bg-sky pad verd"><span class="sw p1" aria-hidden="true"><i></i></span><h3>Nepotřebujete nic</h3><p>Funguje to, stojí to málo a systém by tomu jenom překážel.</p></div>
+    <div class="w bg-sand pad verd"><span class="sw p2" aria-hidden="true"><i></i></span><h3>Obyčejná automatizace</h3><p>Přeposlat, připomenout, vyplnit, poslat dál.</p></div>
+    <div class="w bg-mint pad verd"><span class="sw p3" aria-hidden="true"><i></i></span><h3>Potřebuje AI</h3><p>Někdo musí přečíst nepořádek a rozhodnout se.</p></div>
+  </div>
+
+  <span class="sys-lbl">4 · Links widget, 1 use. Heading plus link rows</span>
+  <div class="demo">
+    <div class="w bg-sand pad links" style="width:min(100%,480px)">
+      <h2>Co stavíme</h2>
+      <div class="list">
+        <a class="lrow" href="#widgets">AI automatizace <svg viewBox="0 0 20 20"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="lrow" href="#widgets">Obyčejná automatizace <svg viewBox="0 0 20 20"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a class="lrow" href="#widgets">Rozpis a pilot <svg viewBox="0 0 20 20"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </div>
+  </div>
+
+  <span class="sys-lbl">5 · Tags widget, 2 uses (Obory on sky, Napojujeme se na on mint). Heading, tag cloud, footer line with the arrow</span>
+  <div class="demo grid2">
+    <div class="w bg-sky pad tags" style="min-height:250px">
+      <h2>Obory</h2>
+      <div class="tagcloud"><span class="tag">Stavební firmy</span><span class="tag">E-shopy</span><span class="tag">Zubní kliniky</span><span class="tag">Autoservisy</span></div>
+      <div class="tfoot"><b>Váš obor tu není?</b><a class="rbtn" href="#widgets" aria-label="Napište nám"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    </div>
+    <div class="w bg-mint pad tags" style="min-height:250px">
+      <h2>Napojujeme se na</h2>
+      <div class="tagcloud"><span class="tag">Shoptet</span><span class="tag">Pohoda</span><span class="tag">Heureka</span><span class="tag">Fakturoid</span><span class="tag">WhatsApp</span><span class="tag">Gmail</span></div>
+      <div class="tfoot"><b>A na to, co máte vy</b><a class="rbtn" href="#widgets" aria-label="Napište nám"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
+    </div>
+  </div>
+
+  <span class="sys-lbl">6 · Metric widget, 3 uses. Big number, supporting line; navy variant for the one dark slot in the row</span>
+  <div class="demo grid2" style="grid-template-columns:1fr 1fr 1fr">
+    <div class="w bg-paper pad numc"><b class="num">45 min</b><p>První hovor, zdarma. Odejdete z něj s rozpisem.</p></div>
+    <div class="w bg-paper pad numc"><b class="num">10 až 14 dní</b><p>Pilot na vaší hotové zakázce.</p></div>
+    <div class="w bg-navy pad numc on-dark"><b class="num">0 Kč</b><p>Cena za odchod. Scénáře i přístupy zůstávají vám.</p></div>
+  </div>
+
+  <span class="sys-lbl">7 · Price widget, 3 uses. Title, pitch, amount with its term; mesh variant for System</span>
+  <div class="demo grid2" style="grid-template-columns:1fr 1fr 1fr">
+    <div class="w bg-sand pad pricec"><h3>Starter</h3><p>Jedna hotová automatizace na vašich datech, za pevnou cenu.</p><span class="amt num">12 000 Kč<small>jednorázově</small></span></div>
+    <div class="w bg-mint pad pricec"><h3>Build</h3><p>Jeden proces, který vám mizí ze stolu úplně.</p><span class="amt num">od 25 000 Kč<small>+ od 4 000 Kč měsíčně</small></span></div>
+    <div class="w mesh pad pricec on-dark"><h3>System</h3><p>Několik buildů spojených do celku.</p><span class="amt num">od 40 000 Kč<small>+ od 12 000 Kč měsíčně</small></span></div>
+  </div>
+
+  <span class="sys-lbl">8 · Process widget, 1 use. Heading plus the step-card grid</span>
+  <div class="demo">
+    <div class="w bg-paper pad proc" style="width:100%">
+      <h2>Jak spolupráce probíhá</h2>
+      <div class="steps">
+        <div class="step"><span class="n num">01</span><h3>Hovor</h3><p>Kde se práce hromadí. Bez čísla nestavíme.</p><span class="when">45 minut, zdarma</span></div>
+        <div class="step"><span class="n num">02</span><h3>Rozpis</h3><p>Agenda na tři hromádky, písemně.</p><span class="when">do týdne</span></div>
+        <div class="step"><span class="n num">03</span><h3>Pilot</h3><p>Na vaší hotové zakázce.</p><span class="when">10 až 14 dní</span></div>
+        <div class="step"><span class="n num">04</span><h3>Stavba</h3><p>Postavíme a napojíme na vaše nástroje.</p><span class="when">3 až 6 týdnů</span></div>
+        <div class="step"><span class="n num">05</span><h3>Provoz</h3><p>Hlídáme, že to běží.</p><span class="when">měsíčně</span></div>
+      </div>
+    </div>
+  </div>
+
+  <span class="sys-lbl">9 · Facts widget, 1 use. Heading plus the two-column fact list</span>
+  <div class="demo">
+    <div class="w bg-paper pad honest" style="width:100%">
+      <h2>Co si vyjasníme dřív, než se zeptáte</h2>
+      <div class="hlist">
+        <div class="hitem"><h3>Postavíme to, vy to vlastníte</h3><p>Scénáře, přístupy i dokumentaci máte u sebe.</p></div>
+        <div class="hitem"><h3>Když přestanete platit</h3><p>Přestaneme hlídat a opravovat.</p></div>
+        <div class="hitem"><h3>Kde leží vaše data</h3><p>V Česku nebo v EU, se zpracovatelskou smlouvou.</p></div>
+        <div class="hitem"><h3>Nemáme veřejnou referenci</h3><p>Jsme na začátku a nebudeme předstírat opak.</p></div>
+      </div>
+    </div>
+  </div>
+
+  <span class="sys-lbl">10 · Quote widget, 1 use. Statement on mesh with the fade span, source line pinned to the bottom</span>
+  <div class="demo">
+    <div class="w mesh pad quote" style="width:min(100%,520px);min-height:240px">
+      <h2>Nejlepší zakázka je občas ta, <span>kterou vám rozmluvíme.</span></h2>
+      <span class="meta" style="color:rgba(255,255,255,.6)">Dva ze tří verdiktů znamenají, že nestavíme</span>
+    </div>
+  </div>
+
+  <span class="sys-lbl">11 · News card, 3 uses. Photograph, title, meta</span>
+  <div class="demo grid2" style="grid-template-columns:1fr 1fr 1fr">
+    <a class="w bg-paper pad news" href="#widgets">
       <span class="shot"><img src="../../img/papir.jpg" alt=""></span>
       <h3>Soud v Mnichově rozhodl ve sporu o trénovací data</h3>
       <span class="meta"><b>Právo</b><span class="num">20. 8. 2026</span></span>
     </a>
-    <a class="news is-hover" href="#components">
+    <a class="w bg-paper pad news is-hover" href="#widgets">
       <span class="shot"><img src="../../img/sklad.jpg" alt=""></span>
       <h3>Shoptet rozšířil AI popisky produktů na všechny tarify</h3>
       <span class="meta"><b>E-shopy</b><span class="num">20. 8. 2026</span></span>
     </a>
-  </div>
-
-  <span class="sys-lbl">11 · Photo widget. Caption is the pill; the badge is the mark. The hero notch is the one exception, it is the hero photo's title block and no other photo may borrow it</span>
-  <div class="demo">
-    <div class="photo-demo">
-      <img src="../../img/dilna.jpg" alt="Dílna s ponkem">
-      <span class="badge" aria-hidden="true"><span><i></i></span></span>
-      <span class="photo-tag">Autoservis</span>
-    </div>
-  </div>
-
-  <span class="sys-lbl">12 · Metric and price, the two contents of a numbers widget</span>
-  <div class="demo" style="align-items:stretch">
-    <div class="w bg-paper pad numc"><b class="num">45 min</b><p>První hovor, zdarma. Odejdete z něj s rozpisem.</p></div>
-    <div class="w bg-sand pad pricec"><h3>Starter</h3><p>Jedna hotová automatizace na vašich datech, za pevnou cenu.</p><span class="amt num">12 000 Kč<small>jednorázově</small></span></div>
+    <a class="w bg-paper pad news" href="#widgets">
+      <span class="shot"><img src="../../img/dilna.jpg" alt=""></span>
+      <h3>Stanovisko k automatizovanému zpracování dokladů</h3>
+      <span class="meta"><b>Účetnictví</b><span class="num">19. 8. 2026</span></span>
+    </a>
   </div>
 </section>
 
-<section class="sys-sec wrap" id="nav">
-  <h2>Navigation</h2>
-  <p class="sys-note" style="margin-bottom:0">The header is a floating island: a white pill that carries the mark, the section links and the button. At the top of the page it rests flush; on scroll it lifts on the page's one shadow and the brand toggle flips from off to on, which is the signature doing the work of a scrolled state. Section links highlight as their section passes. Under 1180px the links move to a drawer of 58px rows that closes on Escape and on link tap and returns focus to the burger; under 620px the button moves into the drawer too.</p>
+<section class="sys-sec wrap" id="navsec">
+  <h2>Navigation and shell</h2>
+  <p class="sys-note">The sheet (radius 44) wraps the whole page on the mint-2 ground. The nav island rests flush at the top; on scroll it lifts on the page's only shadow while the brand toggle flips on and section links highlight. Under 1180px the links move to the drawer, 58px rows, Escape and link tap close it; under 620px the button moves into the drawer too. The footer is one strip.</p>
+  <span class="sys-lbl">Nav island, rest and lifted</span>
+  <div class="demo" style="flex-direction:column;align-items:stretch">
+    <div class="navdemo">
+      <span class="brand off"><span class="knob" aria-hidden="true"><i></i></span>off plate</span>
+      <span class="navpill"><a>Obory</a><a>Verdikty</a><a>Ceník</a><a>Postup</a><a>Novinky</a></span>
+      <span class="btn">Domluvit hovor</span>
+    </div>
+    <div class="navdemo is-stuck">
+      <span class="brand on"><span class="knob" aria-hidden="true"><i></i></span>off plate</span>
+      <span class="navpill"><a>Obory</a><a>Verdikty</a><a>Ceník</a><a class="on">Postup</a><a>Novinky</a></span>
+      <span class="btn">Domluvit hovor</span>
+    </div>
+  </div>
+  <span class="sys-lbl">Drawer and footer strip</span>
+  <div class="demo" style="align-items:flex-start">
+    <div class="drawerdemo">
+      <div class="top"><span class="meta"><b>Menu</b></span><span class="rbtn rbtn-paper xdemo" aria-hidden="true"></span></div>
+      <a class="on">Obory</a><a>Verdikty</a><a>Ceník</a>
+      <span class="btn" style="margin-top:10px;min-height:58px">Domluvit hovor</span>
+    </div>
+    <div class="footdemo" style="flex:1;min-width:300px">
+      <span>© 2026 Off Plate, Praha. Ceny jsou zástupné.</span>
+      <span><a href="#navsec">Novinky</a><a href="#navsec">Ceník</a><a href="#navsec">English</a></span>
+    </div>
+  </div>
 </section>
 
 <section class="sys-sec wrap" id="inventory">
   <h2>Inventory</h2>
-  <p class="sys-note">One purpose sentence each; two rows that come to share a sentence get merged. The one-edit test E must keep passing: make every filled button amber, one definition changes. The bento rows on the homepage are compositions of these twelve, never new components.</p>
+  <p class="sys-note">One purpose sentence each; two rows that come to share a sentence get merged. The homepage's 24 widget instances all resolve to the eleven layouts. The one-edit test E must keep passing: make every filled button amber, one definition changes.</p>
   <table>
-    <tr><th>Component</th><th>Purpose, one sentence</th><th>Variants</th><th>Appears</th></tr>
-    <tr><td><b>.w</b></td><td>Give one idea its own tile in the bento</td><td>5 grounds, mesh, grid spans</td><td>every row</td></tr>
-    <tr><td><b>.btn</b></td><td>The action we want taken on the current surface</td><td>line, inv, inv-line</td><td>nav, hero, contact, drawer</td></tr>
-    <tr><td><b>.rbtn</b></td><td>A single icon action in a circle</td><td>paper</td><td>nav, widget corners, drawer</td></tr>
-    <tr><td><b>.brand</b></td><td>Say whose page this is and carry the toggle signature</td><td>off, on; badge reduction</td><td>nav, drawer, hero photo</td></tr>
-    <tr><td><b>.sw</b></td><td>Show which of the three verdicts a thing got</td><td>three positions</td><td>verdict row</td></tr>
-    <tr><td><b>.tag</b></td><td>Name one trade or tool at a glance</td><td>none</td><td>obory, integrations</td></tr>
-    <tr><td><b>.lrow</b></td><td>One destination in a short list of offers</td><td>none</td><td>co stavíme</td></tr>
-    <tr><td><b>.step</b></td><td>One stage of the process with its duration</td><td>none</td><td>postup</td></tr>
-    <tr><td><b>.hitem</b></td><td>Answer one hard question before it is asked</td><td>none</td><td>co si vyjasníme</td></tr>
-    <tr><td><b>.news</b></td><td>Link one article with its trade and date</td><td>none</td><td>novinky</td></tr>
-    <tr><td><b>.photo-tag</b></td><td>Caption a photograph with its trade</td><td>none</td><td>photo widgets</td></tr>
-    <tr><td><b>.meta</b></td><td>Pair a bold label with a muted value</td><td>none</td><td>cards, drawer</td></tr>
+    <tr><th>Component</th><th>Purpose, one sentence</th><th>Variants</th><th>Instances</th></tr>
+    <tr><td><b>statement</b></td><td>Say one thing and offer the two actions that follow from it</td><td>hero (mint, H1), contact (mesh, inverse)</td><td>2</td></tr>
+    <tr><td><b>photo</b></td><td>Ground a row in the client's real world</td><td>notch (hero row only), caption pill</td><td>4</td></tr>
+    <tr><td><b>verdict</b></td><td>Explain one of the three verdicts in its own colour</td><td>tint per verdict</td><td>3</td></tr>
+    <tr><td><b>links</b></td><td>List the offers as destinations</td><td>none</td><td>1</td></tr>
+    <tr><td><b>tags</b></td><td>Show a set of names at a glance and invite the missing one</td><td>ground tint</td><td>2</td></tr>
+    <tr><td><b>metric</b></td><td>State one number we commit to</td><td>navy for the dark slot</td><td>3</td></tr>
+    <tr><td><b>price</b></td><td>Sell one tier with its pitch and its amount</td><td>mesh for System</td><td>3</td></tr>
+    <tr><td><b>process</b></td><td>Walk the whole engagement in five steps</td><td>none</td><td>1</td></tr>
+    <tr><td><b>facts</b></td><td>Answer the hard questions before they are asked</td><td>none</td><td>1</td></tr>
+    <tr><td><b>quote</b></td><td>State the one claim of the business at full volume</td><td>none</td><td>1</td></tr>
+    <tr><td><b>news</b></td><td>Link one article with its trade and date</td><td>none</td><td>3</td></tr>
+    <tr><td colspan="4" style="color:var(--muted)">Atoms: btn (line, inv, inv-line), rbtn (paper), brand (off, on, badge), sw (three positions), tag, photo-tag, lrow, step, hitem, meta. Shell: sheet, nav island, drawer, footer strip.</td></tr>
   </table>
   <span class="sys-lbl">Banned in E, by decision</span>
-  <p class="sys-note" style="margin-bottom:0">Monospace type. Dot separators anywhere, navigation included. Eyebrow labels above headings and cadence labels under them. Translate fade-up reveals. Shadows on widgets. A second dark widget in one row. Tints stacked on tints.</p>
+  <p class="sys-note" style="margin-bottom:0">Monospace type. Dot separators anywhere, navigation included. Eyebrow labels above headings and cadence labels under them. Translate fade-up reveals. Shadows on widgets. A second dark widget in one row. Tints stacked on tints. A twelfth widget layout that has not been added to this page first.</p>
 </section>
 
 <footer class="wrap" style="padding:26px 0 6px;color:var(--muted);font-size:13.5px">
