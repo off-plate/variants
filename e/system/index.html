@@ -286,7 +286,6 @@ code{background:var(--paper);padding:2px 8px;border-radius:8px;font-size:13.5px;
     <button class="rbtn" type="button" aria-label="Šipka"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="rbtn is-hover" type="button" aria-label="Šipka, hover"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
     <button class="rbtn rbtn-paper" type="button" aria-label="Menu"><svg viewBox="0 0 18 18"><path d="M3 5h12M3 9h12M3 13h12" stroke-linecap="round"/></svg></button>
-    <button class="rbtn rbtn-paper xdemo" type="button" aria-label="Zavřít"></button>
   </div>
 
   <span class="sys-lbl">Brand mark, off and on; the badge on photos is the same mark reduced to its toggle</span>
@@ -324,23 +323,18 @@ code{background:var(--paper);padding:2px 8px;border-radius:8px;font-size:13.5px;
 
 <section class="sys-sec wrap" id="widgets">
   <h2>Widgets, all eleven</h2>
-  <p class="sys-note">Every distinct layout on the homepage, deduplicated. The count after each name is how many instances of it the homepage carries. The bento rows are compositions of these; a twelfth layout does not exist until it exists here.</p>
+  <p class="sys-note">Every distinct layout on the homepage, deduplicated, rendered once. A second render exists only where the structure differs (the photo widget's two caption forms) or where a state changes something (the navigation below). Ground tints are listed in words; rendering the same layout again in another tint says nothing.</p>
 
-  <span class="sys-lbl">1 · Statement widget, 2 uses. Heading, paragraph, button row. The hero and the contact widget are this one layout; hero runs it on mint with dark buttons and the page H1, contact runs it on mesh with inverse buttons</span>
-  <div class="demo grid2">
-    <div class="w bg-mint pad stmt-w" style="min-height:260px">
+  <span class="sys-lbl">1. Statement widget. Heading, paragraph, button row. 2 uses: the hero runs it on mint with the page H1; the contact runs the identical layout on mesh with the inverse buttons</span>
+  <div class="demo">
+    <div class="w bg-mint pad stmt-w" style="width:min(100%,560px);min-height:250px">
       <h2>Ne všechno <em>potřebuje AI.</em></h2>
       <p>Stavíme pro české firmy do padesáti lidí. Projdeme, jak ta vaše doopravdy běží.</p>
       <div class="row"><a class="btn" href="#widgets">Domluvit 45 minut</a><a class="btn btn-line" href="#widgets">Co u vás AI nepotřebuje</a></div>
     </div>
-    <div class="w mesh pad stmt-w on-mesh" style="min-height:260px">
-      <h2>Napište, co vás nejvíc zdržuje</h2>
-      <p>Odpovídá Michael Florian, obvykle do konce pracovního dne.</p>
-      <div class="row"><a class="btn btn-inv" href="#widgets">Poslat e-mail</a><a class="btn btn-inv-line" href="#widgets">Novinky podle oboru</a></div>
-    </div>
   </div>
 
-  <span class="sys-lbl">2 · Photo widget, 4 uses. Full-bleed photograph; variant notch (hero row only: badge plus the white corner slab with meta and title) and variant caption (the pill)</span>
+  <span class="sys-lbl">2. Photo widget. 4 uses. Two structural forms: the notch (hero row only, badge plus the white corner slab with meta and title) and the caption pill (everywhere else)</span>
   <div class="demo grid2">
     <div class="w photo">
       <img src="../../img/dilna.jpg" alt="Dílna s ponkem a nářadím">
@@ -353,104 +347,74 @@ code{background:var(--paper);padding:2px 8px;border-radius:8px;font-size:13.5px;
     </div>
   </div>
 
-  <span class="sys-lbl">3 · Verdict widget, 3 uses. Toggle, title, body; tint bound to the verdict</span>
-  <div class="demo grid2" style="grid-template-columns:1fr 1fr 1fr">
-    <div class="w bg-sky pad verd"><span class="sw p1" aria-hidden="true"><i></i></span><h3>Nepotřebujete nic</h3><p>Funguje to, stojí to málo a systém by tomu jenom překážel.</p></div>
-    <div class="w bg-sand pad verd"><span class="sw p2" aria-hidden="true"><i></i></span><h3>Obyčejná automatizace</h3><p>Přeposlat, připomenout, vyplnit, poslat dál.</p></div>
-    <div class="w bg-mint pad verd"><span class="sw p3" aria-hidden="true"><i></i></span><h3>Potřebuje AI</h3><p>Někdo musí přečíst nepořádek a rozhodnout se.</p></div>
+  <span class="sys-lbl">3. Verdict widget. 3 uses, one per verdict; the toggle position and the ground tint are bound (sky and left for nothing, sand and middle for automation, mint and right for AI)</span>
+  <div class="demo">
+    <div class="w bg-mint pad verd" style="width:min(100%,420px)"><span class="sw p3" aria-hidden="true"><i></i></span><h3>Potřebuje AI</h3><p>Někdo musí přečíst nepořádek, porozumět mu a rozhodnout se.</p></div>
   </div>
 
-  <span class="sys-lbl">4 · Links widget, 1 use. Heading plus link rows</span>
+  <span class="sys-lbl">4. Links widget. 1 use. Heading plus link rows; the row is the lrow atom, four of them on the page</span>
   <div class="demo">
     <div class="w bg-sand pad links" style="width:min(100%,480px)">
       <h2>Co stavíme</h2>
       <div class="list">
         <a class="lrow" href="#widgets">AI automatizace <svg viewBox="0 0 20 20"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a class="lrow" href="#widgets">Obyčejná automatizace <svg viewBox="0 0 20 20"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
-        <a class="lrow" href="#widgets">Rozpis a pilot <svg viewBox="0 0 20 20"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
       </div>
     </div>
   </div>
 
-  <span class="sys-lbl">5 · Tags widget, 2 uses (Obory on sky, Napojujeme se na on mint). Heading, tag cloud, footer line with the arrow</span>
-  <div class="demo grid2">
-    <div class="w bg-sky pad tags" style="min-height:250px">
+  <span class="sys-lbl">5. Tags widget. 2 uses (Obory on sky, Napojujeme se na on mint), one layout: heading, tag cloud, footer line with the arrow</span>
+  <div class="demo">
+    <div class="w bg-sky pad tags" style="width:min(100%,480px);min-height:240px">
       <h2>Obory</h2>
-      <div class="tagcloud"><span class="tag">Stavební firmy</span><span class="tag">E-shopy</span><span class="tag">Zubní kliniky</span><span class="tag">Autoservisy</span></div>
+      <div class="tagcloud"><span class="tag">Stavební firmy</span><span class="tag">E-shopy</span><span class="tag">Zubní kliniky</span></div>
       <div class="tfoot"><b>Váš obor tu není?</b><a class="rbtn" href="#widgets" aria-label="Napište nám"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
     </div>
-    <div class="w bg-mint pad tags" style="min-height:250px">
-      <h2>Napojujeme se na</h2>
-      <div class="tagcloud"><span class="tag">Shoptet</span><span class="tag">Pohoda</span><span class="tag">Heureka</span><span class="tag">Fakturoid</span><span class="tag">WhatsApp</span><span class="tag">Gmail</span></div>
-      <div class="tfoot"><b>A na to, co máte vy</b><a class="rbtn" href="#widgets" aria-label="Napište nám"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></a></div>
-    </div>
   </div>
 
-  <span class="sys-lbl">6 · Metric widget, 3 uses. Big number, supporting line; navy variant for the one dark slot in the row</span>
-  <div class="demo grid2" style="grid-template-columns:1fr 1fr 1fr">
-    <div class="w bg-paper pad numc"><b class="num">45 min</b><p>První hovor, zdarma. Odejdete z něj s rozpisem.</p></div>
-    <div class="w bg-paper pad numc"><b class="num">10 až 14 dní</b><p>Pilot na vaší hotové zakázce.</p></div>
-    <div class="w bg-navy pad numc on-dark"><b class="num">0 Kč</b><p>Cena za odchod. Scénáře i přístupy zůstávají vám.</p></div>
-  </div>
-
-  <span class="sys-lbl">7 · Price widget, 3 uses. Title, pitch, amount with its term; mesh variant for System</span>
-  <div class="demo grid2" style="grid-template-columns:1fr 1fr 1fr">
-    <div class="w bg-sand pad pricec"><h3>Starter</h3><p>Jedna hotová automatizace na vašich datech, za pevnou cenu.</p><span class="amt num">12 000 Kč<small>jednorázově</small></span></div>
-    <div class="w bg-mint pad pricec"><h3>Build</h3><p>Jeden proces, který vám mizí ze stolu úplně.</p><span class="amt num">od 25 000 Kč<small>+ od 4 000 Kč měsíčně</small></span></div>
-    <div class="w mesh pad pricec on-dark"><h3>System</h3><p>Několik buildů spojených do celku.</p><span class="amt num">od 40 000 Kč<small>+ od 12 000 Kč měsíčně</small></span></div>
-  </div>
-
-  <span class="sys-lbl">8 · Process widget, 1 use. Heading plus the step-card grid</span>
+  <span class="sys-lbl">6. Metric widget. 3 uses, one layout: big number, supporting line. Grounds on the page: paper, paper, navy</span>
   <div class="demo">
-    <div class="w bg-paper pad proc" style="width:100%">
+    <div class="w bg-paper pad numc" style="width:min(100%,380px)"><b class="num">45 min</b><p>První hovor, zdarma. Odejdete z něj s rozpisem.</p></div>
+  </div>
+
+  <span class="sys-lbl">7. Price widget. 3 uses, one layout: title, pitch, amount with its term. Grounds on the page: sand, mint, mesh</span>
+  <div class="demo">
+    <div class="w bg-sand pad pricec" style="width:min(100%,380px)"><h3>Starter</h3><p>Jedna hotová automatizace na vašich datech, za pevnou cenu.</p><span class="amt num">12 000 Kč<small>jednorázově</small></span></div>
+  </div>
+
+  <span class="sys-lbl">8. Process widget. 1 use. Heading plus a five-column grid of the step atom; one step rendered here, five on the page</span>
+  <div class="demo">
+    <div class="w bg-paper pad proc" style="width:min(100%,560px)">
       <h2>Jak spolupráce probíhá</h2>
-      <div class="steps">
+      <div class="steps" style="grid-template-columns:minmax(0,240px)">
         <div class="step"><span class="n num">01</span><h3>Hovor</h3><p>Kde se práce hromadí. Bez čísla nestavíme.</p><span class="when">45 minut, zdarma</span></div>
-        <div class="step"><span class="n num">02</span><h3>Rozpis</h3><p>Agenda na tři hromádky, písemně.</p><span class="when">do týdne</span></div>
-        <div class="step"><span class="n num">03</span><h3>Pilot</h3><p>Na vaší hotové zakázce.</p><span class="when">10 až 14 dní</span></div>
-        <div class="step"><span class="n num">04</span><h3>Stavba</h3><p>Postavíme a napojíme na vaše nástroje.</p><span class="when">3 až 6 týdnů</span></div>
-        <div class="step"><span class="n num">05</span><h3>Provoz</h3><p>Hlídáme, že to běží.</p><span class="when">měsíčně</span></div>
       </div>
     </div>
   </div>
 
-  <span class="sys-lbl">9 · Facts widget, 1 use. Heading plus the two-column fact list</span>
+  <span class="sys-lbl">9. Facts widget. 1 use. Heading plus a two-column grid of the fact atom; one fact rendered here, six on the page</span>
   <div class="demo">
-    <div class="w bg-paper pad honest" style="width:100%">
+    <div class="w bg-paper pad honest" style="width:min(100%,560px)">
       <h2>Co si vyjasníme dřív, než se zeptáte</h2>
-      <div class="hlist">
+      <div class="hlist" style="grid-template-columns:1fr">
         <div class="hitem"><h3>Postavíme to, vy to vlastníte</h3><p>Scénáře, přístupy i dokumentaci máte u sebe.</p></div>
-        <div class="hitem"><h3>Když přestanete platit</h3><p>Přestaneme hlídat a opravovat.</p></div>
-        <div class="hitem"><h3>Kde leží vaše data</h3><p>V Česku nebo v EU, se zpracovatelskou smlouvou.</p></div>
-        <div class="hitem"><h3>Nemáme veřejnou referenci</h3><p>Jsme na začátku a nebudeme předstírat opak.</p></div>
       </div>
     </div>
   </div>
 
-  <span class="sys-lbl">10 · Quote widget, 1 use. Statement on mesh with the fade span, source line pinned to the bottom</span>
+  <span class="sys-lbl">10. Quote widget. 1 use. Statement on mesh with the fade span, source line pinned to the bottom</span>
   <div class="demo">
-    <div class="w mesh pad quote" style="width:min(100%,520px);min-height:240px">
+    <div class="w mesh pad quote" style="width:min(100%,520px);min-height:230px">
       <h2>Nejlepší zakázka je občas ta, <span>kterou vám rozmluvíme.</span></h2>
       <span class="meta" style="color:rgba(255,255,255,.6)">Dva ze tří verdiktů znamenají, že nestavíme</span>
     </div>
   </div>
 
-  <span class="sys-lbl">11 · News card, 3 uses. Photograph, title, meta</span>
-  <div class="demo grid2" style="grid-template-columns:1fr 1fr 1fr">
-    <a class="w bg-paper pad news" href="#widgets">
+  <span class="sys-lbl">11. News card. 3 uses, one layout: photograph, title, meta</span>
+  <div class="demo">
+    <a class="w bg-paper pad news" href="#widgets" style="width:min(100%,380px)">
       <span class="shot"><img src="../../img/papir.jpg" alt=""></span>
       <h3>Soud v Mnichově rozhodl ve sporu o trénovací data</h3>
       <span class="meta"><b>Právo</b><span class="num">20. 8. 2026</span></span>
-    </a>
-    <a class="w bg-paper pad news is-hover" href="#widgets">
-      <span class="shot"><img src="../../img/sklad.jpg" alt=""></span>
-      <h3>Shoptet rozšířil AI popisky produktů na všechny tarify</h3>
-      <span class="meta"><b>E-shopy</b><span class="num">20. 8. 2026</span></span>
-    </a>
-    <a class="w bg-paper pad news" href="#widgets">
-      <span class="shot"><img src="../../img/dilna.jpg" alt=""></span>
-      <h3>Stanovisko k automatizovanému zpracování dokladů</h3>
-      <span class="meta"><b>Účetnictví</b><span class="num">19. 8. 2026</span></span>
     </a>
   </div>
 </section>
@@ -475,7 +439,7 @@ code{background:var(--paper);padding:2px 8px;border-radius:8px;font-size:13.5px;
   <div class="demo" style="align-items:flex-start">
     <div class="drawerdemo">
       <div class="top"><span class="meta"><b>Menu</b></span><span class="rbtn rbtn-paper xdemo" aria-hidden="true"></span></div>
-      <a class="on">Obory</a><a>Verdikty</a><a>Ceník</a>
+      <a class="on">Obory</a><a>Verdikty</a>
       <span class="btn" style="margin-top:10px;min-height:58px">Domluvit hovor</span>
     </div>
     <div class="footdemo" style="flex:1;min-width:300px">
@@ -487,7 +451,7 @@ code{background:var(--paper);padding:2px 8px;border-radius:8px;font-size:13.5px;
 
 <section class="sys-sec wrap" id="inventory">
   <h2>Inventory</h2>
-  <p class="sys-note">One purpose sentence each; two rows that come to share a sentence get merged. The homepage's 24 widget instances all resolve to the eleven layouts. The one-edit test E must keep passing: make every filled button amber, one definition changes.</p>
+  <p class="sys-note">One purpose sentence each; two rows that come to share a sentence get merged. The homepage's 24 widget instances all resolve to the eleven layouts, and each layout renders above exactly once per structure and state. The one-edit test E must keep passing: make every filled button amber, one definition changes.</p>
   <table>
     <tr><th>Component</th><th>Purpose, one sentence</th><th>Variants</th><th>Instances</th></tr>
     <tr><td><b>statement</b></td><td>Say one thing and offer the two actions that follow from it</td><td>hero (mint, H1), contact (mesh, inverse)</td><td>2</td></tr>
