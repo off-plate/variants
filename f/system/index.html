@@ -1,0 +1,295 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Off Plate F, design system</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet"> <!-- slop-lint-ignore: Inter + Sora are the locked Off-Plate brand faces, BRAND.md -->
+<style>
+/* ============ the same tokens the page uses. change them here, F follows ============ */
+:root{
+  --ground:#E7E3DC; --paper:#F2EFEB; --white:#FBFAF8;
+  --ink:#141310; --ink-2:#3A382F;
+  --amber:#D08C2E; --amber-dk:#A66B1B;
+  --muted:#6E6A60;
+  --line:rgba(20,19,16,.22); --line-2:rgba(20,19,16,.12);
+  --ease:cubic-bezier(.2,.7,.3,1); --slide:cubic-bezier(.66,0,.2,1);
+}
+*{box-sizing:border-box}
+body{margin:0;background:var(--ground);color:var(--ink);font-family:Inter,system-ui,sans-serif; /* slop-lint-ignore: brand body face, BRAND.md */font-size:16px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Sora,sans-serif;font-weight:700;letter-spacing:-.055em;line-height:.9;margin:0;text-transform:uppercase}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{font:inherit;cursor:pointer}
+:focus-visible{outline:2px solid var(--amber-dk);outline-offset:2px}
+.wrap{width:min(94vw,1500px);margin-inline:auto}
+.num{font-variant-numeric:tabular-nums;letter-spacing:.01em}
+
+/* system-page chrome (not part of the F library) */
+.sys-head{padding:56px 0 30px;border-bottom:1px solid var(--line)}
+.sys-head h1{font-size:clamp(44px,7vw,120px)}
+.sys-head p{margin-top:20px;max-width:72ch;color:var(--ink-2)}
+.sys-sec{padding:52px 0;border-bottom:1px solid var(--line)}
+.sys-sec>h2{font-size:clamp(28px,3vw,48px);margin-bottom:8px}
+.sys-note{color:var(--muted);max-width:78ch;margin-bottom:28px;font-size:15px}
+.sys-lbl{font-size:11.5px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--muted);display:block;margin:26px 0 12px}
+.demo{background:var(--white);border:1px solid var(--line-2);padding:26px;display:flex;flex-wrap:wrap;gap:18px;align-items:center}
+.demo.col{flex-direction:column;align-items:stretch;gap:0}
+.demo.dark{background:var(--ink)}
+table{border-collapse:collapse;width:100%;font-size:14.5px}
+th{text-align:left;font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600;padding:10px 14px 10px 0;border-bottom:1px solid var(--line)}
+td{padding:11px 14px 11px 0;border-bottom:1px solid var(--line-2);vertical-align:top}
+td b{font-weight:600}
+code{font-family:inherit;background:var(--paper);padding:2px 7px;font-size:13.5px;border:1px solid var(--line-2)}
+
+/* ============ THE F LIBRARY. every class below is the one used on the page ============ */
+
+/* colour chips (documentation device) */
+.chip{width:190px;border:1px solid var(--line-2);background:var(--white)}
+.chip i{display:block;height:74px}
+.chip div{padding:10px 12px;font-size:13px}
+.chip b{display:block;font-weight:600}
+.chip span{color:var(--muted)}
+
+/* type roles */
+.t-display{font-family:Sora,sans-serif;font-weight:700;letter-spacing:-.055em;line-height:.8;text-transform:uppercase}
+.t-h2{font-family:Sora,sans-serif;font-weight:700;letter-spacing:-.055em;line-height:.92;text-transform:uppercase}
+.t-h3{font-family:Sora,sans-serif;font-weight:700;letter-spacing:-.04em;line-height:.94;text-transform:uppercase}
+.t-body{font-size:16.5px;line-height:1.5;color:var(--ink-2)}
+.t-small{font-size:15px;line-height:1.5;color:var(--muted)}
+.t-label{font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
+
+/* 1 · brand mark */
+.mark{display:inline-flex;align-items:center;gap:9px;font-family:Sora,sans-serif;font-weight:700;font-size:23px;letter-spacing:-.05em;text-transform:uppercase;color:var(--amber-dk);min-height:48px}
+.mark .tog{width:34px;height:19px;background:var(--amber);position:relative;flex:0 0 auto}
+.mark .tog i{position:absolute;top:2.5px;width:14px;height:14px;background:var(--ground);transition:right .4s var(--slide)}
+.mark.off .tog i{right:17.5px}
+.mark.on .tog i{right:2.5px}
+.mark.xl{font-size:clamp(40px,6vw,84px);gap:.12em}
+.mark.xl .tog{width:.84em;height:.48em}
+.mark.xl .tog i{width:.38em;height:.38em;top:11%}
+
+/* 2 · button */
+.btn{display:inline-flex;align-items:center;justify-content:center;min-height:52px;line-height:1;padding:0 26px;background:var(--ink);color:var(--paper);font-weight:600;font-size:15px;letter-spacing:.06em;text-transform:uppercase;border:0;transition:background .18s var(--ease)}
+.btn:hover,.btn.is-hover{background:var(--amber-dk)}
+.btn-line{background:transparent;color:var(--ink);border:1px solid var(--line)}
+.btn-line:hover,.btn-line.is-hover{background:var(--ink);color:var(--paper)}
+
+/* 3 · text link */
+.tlink{display:inline-flex;align-items:center;min-height:44px;color:var(--amber-dk);font-weight:600;letter-spacing:.16em;text-transform:uppercase;font-size:13px;transition:color .18s var(--ease)}
+.tlink:hover,.tlink.is-hover{color:var(--ink)}
+
+/* 4 · filter tab */
+.tab{display:inline-flex;align-items:center;gap:10px;min-height:48px;padding:0 20px;border:1px solid var(--line);background:transparent;color:var(--ink);font-size:14px;font-weight:600;letter-spacing:.09em;text-transform:uppercase;transition:border-color .18s var(--ease),color .18s var(--ease)}
+.tab .ct{font-size:12.5px;font-weight:400;color:var(--muted);letter-spacing:0;font-variant-numeric:tabular-nums}
+.tab:hover,.tab.is-hover{border-color:var(--ink)}
+.tab[aria-pressed="true"]{border-color:var(--amber);color:var(--amber-dk)}
+.tab[aria-pressed="true"] .ct{color:var(--amber-dk)}
+
+/* 5 · photo frame */
+.shotc{position:relative;overflow:hidden;background:var(--paper);width:min(100%,380px)}
+.shotc img{width:100%;aspect-ratio:4/3;object-fit:cover;transition:transform .6s var(--slide)}
+.shotc:hover img,.shotc.is-hover img{transform:scale(1.04)}
+.shotc .cat{position:absolute;left:0;top:0;background:var(--ground);padding:8px 14px;font-size:11.5px;letter-spacing:.16em;text-transform:uppercase;font-weight:600;z-index:2}
+
+/* 6 · story card */
+.item{display:flex;flex-direction:column;width:min(100%,380px)}
+.item h3{font-size:clamp(20px,1.7vw,26px);letter-spacing:-.04em;line-height:.94;text-transform:uppercase;font-family:Sora,sans-serif;margin-top:14px}
+.item p{margin-top:11px;font-size:15px;color:var(--muted);flex:1}
+.item .foot{margin-top:14px;padding-top:12px;border-top:1px solid var(--line-2);display:flex;justify-content:space-between;gap:12px;align-items:center}
+.item .fig{font-size:13.5px;font-weight:600;color:var(--amber-dk)}
+.item .go{font-size:19px;transition:transform .22s var(--ease)}
+.item:hover .go,.item.is-hover .go{transform:translateX(5px)}
+
+/* 7 · hairline row */
+.hrow{display:grid;grid-template-columns:minmax(120px,1fr) 3fr minmax(150px,1fr);gap:26px;padding:20px 0;border-top:1px solid var(--line);align-items:baseline;transition:background .2s var(--ease),padding-left .22s var(--slide);width:100%}
+.hrow:last-of-type{border-bottom:1px solid var(--line)}
+.hrow:hover,.hrow.is-hover{background:rgba(20,19,16,.035);padding-left:10px}
+.hrow h3{font-size:clamp(19px,1.6vw,26px)}
+.hrow p{color:var(--ink-2);font-size:15.5px;max-width:52ch}
+.hrow .end{text-align:right;font-family:Sora,sans-serif;font-weight:700;font-size:19px;letter-spacing:-.03em}
+.hrow .end small{display:block;font-family:Inter,sans-serif; /* slop-lint-ignore: brand body face, BRAND.md */font-size:13px;font-weight:400;color:var(--muted);margin-top:5px;letter-spacing:0}
+.hrow .end.plain{font-family:Inter,sans-serif; /* slop-lint-ignore: brand body face, BRAND.md */font-weight:400;font-size:13px;letter-spacing:.12em;text-transform:uppercase;color:var(--muted)}
+@media(max-width:760px){.hrow{grid-template-columns:1fr;gap:8px}.hrow .end{text-align:left}}
+
+/* 8 · fact item */
+.hitem{padding:16px 0;border-top:1px solid var(--line-2);max-width:44ch}
+.hitem h3{font-family:Inter,sans-serif; /* slop-lint-ignore: brand body face, BRAND.md */font-size:15.5px;font-weight:600;letter-spacing:0;text-transform:none}
+.hitem p{margin-top:6px;font-size:15px;color:var(--muted)}
+
+/* 9 · statement band content */
+.bandc{background:var(--ink);color:var(--paper);padding:40px;width:100%}
+.bandc h2{font-size:clamp(24px,2.6vw,44px);line-height:.92}
+.bandc h2 em{font-style:normal;color:var(--amber)}
+.band-verdicts{margin-top:22px;display:flex;flex-wrap:wrap;gap:10px 28px}
+.band-verdicts span{color:rgba(242,239,235,.66);font-size:13px;letter-spacing:.14em;text-transform:uppercase;font-weight:600;border-left:2px solid var(--amber);padding-left:12px}
+
+/* 10 · empty state */
+.empty{padding:24px 0;color:var(--muted);font-size:15.5px}
+</style>
+</head>
+<body>
+
+<header class="sys-head wrap">
+  <h1>F, the system</h1>
+  <p>The guideline page for the Off Plate direction F, the magazine layout. Every token and every component the page uses is rendered here, in every state, once. If two things do the same job for the user, they are one component here, and context differences are modifiers. A component missing from this page gets added here first and used on the page second.</p>
+  <p style="margin-top:14px"><b>Provenance.</b> The amber is the brand toggle taken from the Off Plate logo, darkened to <span class="num">#A66B1B</span> where it carries text so it reads on the warm ground. Ink, ground and paper are the Off Plate cream family pushed one step warmer to sit under black display type. Navy and teal stay reserved for the other directions; F deliberately runs on one accent.</p>
+</header>
+
+<section class="sys-sec wrap" id="colour">
+  <h2>Colour as roles</h2>
+  <p class="sys-note">A colour is a job. A new component takes the role that matches its job and has no other choice.</p>
+  <div style="display:flex;flex-wrap:wrap;gap:14px">
+    <div class="chip"><i style="background:#E7E3DC"></i><div><b>--ground <span class="num">#E7E3DC</span></b><span>the page itself, and nothing else sits directly on it but hairlines and type</span></div></div>
+    <div class="chip"><i style="background:#F2EFEB"></i><div><b>--paper <span class="num">#F2EFEB</span></b><span>raised surfaces: image placeholders, code chips</span></div></div>
+    <div class="chip"><i style="background:#FBFAF8"></i><div><b>--white <span class="num">#FBFAF8</span></b><span>demo cards on this page only</span></div></div>
+    <div class="chip"><i style="background:#141310"></i><div><b>--ink <span class="num">#141310</span></b><span>text, the statement band, filled buttons. Never decoration</span></div></div>
+    <div class="chip"><i style="background:#3A382F"></i><div><b>--ink-2 <span class="num">#3A382F</span></b><span>body copy on ground</span></div></div>
+    <div class="chip"><i style="background:#D08C2E"></i><div><b>--amber <span class="num">#D08C2E</span></b><span>the mark, fills, the 2px accents. Never body text</span></div></div>
+    <div class="chip"><i style="background:#A66B1B"></i><div><b>--amber-dk <span class="num">#A66B1B</span></b><span>amber wherever it carries text or focus. 4.6:1 on ground</span></div></div>
+    <div class="chip"><i style="background:#6E6A60"></i><div><b>--muted <span class="num">#6E6A60</span></b><span>secondary text. 4.9:1 on ground</span></div></div>
+  </div>
+  <span class="sys-lbl">Rules that fall out of this</span>
+  <p class="t-small" style="max-width:74ch">One accent, no gradients in F. Amber on ground is decoration only; the moment it carries text it becomes amber-dk. Hairlines are --line on ground and --line-2 inside components, and they are the only borders. Radius is 0 everywhere with no exceptions. Shadows do not exist in F.</p>
+</section>
+
+<section class="sys-sec wrap" id="type">
+  <h2>Type as roles</h2>
+  <p class="sys-note">Two families, no third. Sora 700 for display, always uppercase, tracked tight. Inter 400/500/600 for everything that is read. Numbers and dates take tabular figures via <code>.num</code>; there is no monospace anywhere in F.</p>
+  <div class="demo col">
+    <div style="padding:14px 0;border-bottom:1px solid var(--line-2)"><span class="t-label" style="color:var(--muted)">H1 display, Sora 700, clamp(64px, 13vw, 230px), line-height .8, tracking -.055em</span><div class="t-display" style="font-size:clamp(40px,6vw,96px)">Automatizace</div></div>
+    <div style="padding:14px 0;border-bottom:1px solid var(--line-2)"><span class="t-label" style="color:var(--muted)">H2 section, Sora 700, clamp(30px, 4vw, 64px)</span><div class="t-h2" style="font-size:clamp(26px,3.4vw,52px)">Ceník</div></div>
+    <div style="padding:14px 0;border-bottom:1px solid var(--line-2)"><span class="t-label" style="color:var(--muted)">H3 title, Sora 700, clamp(19px, 1.7vw, 28px)</span><div class="t-h3" style="font-size:24px">Vícepráce z hlasovek a fotek z místa</div></div>
+    <div style="padding:14px 0;border-bottom:1px solid var(--line-2)"><span class="t-label" style="color:var(--muted)">H4 on this scale is H3 at its clamp floor; H5 and H6 do not exist in F, use the label role</span><div class="t-h3" style="font-size:19px">Podklady na revizi pojišťovny</div></div>
+    <div style="padding:14px 0;border-bottom:1px solid var(--line-2)"><span class="t-label" style="color:var(--muted)">Body, Inter 400, 16.5px / 1.5, max 60ch</span><p class="t-body" style="max-width:60ch">Projdeme, jak vaše firma doopravdy běží, a rozdělíme agendu na tři hromádky.</p></div>
+    <div style="padding:14px 0;border-bottom:1px solid var(--line-2)"><span class="t-label" style="color:var(--muted)">Small, Inter 400, 15px, muted</span><p class="t-small">Party diktují, co udělaly navíc. Systém to přepíše a přiřadí k zakázce.</p></div>
+    <div style="padding:14px 0"><span class="t-label" style="color:var(--muted)">Label, Inter 600, 11.5px, tracked .16em, uppercase. The only small type allowed; 12.5px floor on phones</span><div class="t-label">Stavební firma</div></div>
+  </div>
+</section>
+
+<section class="sys-sec wrap" id="scales">
+  <h2>Scales and motion</h2>
+  <table>
+    <tr><th style="width:200px">Scale</th><th>Values</th><th style="width:280px">Ceiling</th></tr>
+    <tr><td><b>Shell</b></td><td><code>min(94vw, 1720px)</code>, above 2000px <code>min(92vw, 2060px)</code></td><td>photography may not exceed the shell in F</td></tr>
+    <tr><td><b>Spacing</b></td><td>fluid clamps only: section <code>clamp(40px, 5vw, 90px)</code>, row <code>clamp(14px, 1.6vw, 26px)</code></td><td>no fixed pixel margins between sections</td></tr>
+    <tr><td><b>Radius</b></td><td>0</td><td>0, no exceptions, nothing may borrow one</td></tr>
+    <tr><td><b>Shadow</b></td><td>none</td><td>none</td></tr>
+    <tr><td><b>Motion</b></td><td>two curves: <code>--ease cubic-bezier(.2,.7,.3,1)</code> for state, <code>--slide cubic-bezier(.66,0,.2,1)</code> for movement and the wipe</td><td>700ms maximum; reveals are left-to-right clip wipes, never fade-ups; everything off under reduced motion</td></tr>
+  </table>
+</section>
+
+<section class="sys-sec wrap" id="components">
+  <h2>Components</h2>
+  <p class="sys-note">Ten components. Each is defined once, shown in its states, and listed in the inventory below with its one-sentence purpose. Hover and focus states are forced here with a class so they sit next to rest.</p>
+
+  <span class="sys-lbl">1 · Brand mark. States: off, on (the page flips it as you scroll past the masthead). Sizes: bar, footer</span>
+  <div class="demo">
+    <a class="mark off" href="#components">off plate</a>
+    <a class="mark on" href="#components">off plate</a>
+    <a class="mark on xl" href="#components">off plate</a>
+  </div>
+
+  <span class="sys-lbl">2 · Button. Variants: filled, outline. States: rest, hover, focus ring on tab</span>
+  <div class="demo">
+    <a class="btn" href="#components">Domluvit 45 minut</a>
+    <a class="btn is-hover" href="#components">Domluvit 45 minut</a>
+    <a class="btn btn-line" href="#components">Projít obory</a>
+    <a class="btn btn-line is-hover" href="#components">Projít obory</a>
+  </div>
+
+  <span class="sys-lbl">3 · Text link. States: rest, hover</span>
+  <div class="demo">
+    <a class="tlink" href="#components">Všechny obory</a>
+    <a class="tlink is-hover" href="#components">Všechny obory</a>
+  </div>
+
+  <span class="sys-lbl">4 · Filter tab. States: rest, hover, selected. The count is real data, generated from the grid</span>
+  <div class="demo">
+    <button class="tab" type="button">Stavba <span class="ct num">(2)</span></button>
+    <button class="tab is-hover" type="button">Stavba <span class="ct num">(2)</span></button>
+    <button class="tab" type="button" aria-pressed="true">Vše <span class="ct num">(8)</span></button>
+  </div>
+
+  <span class="sys-lbl">5 · Photo frame. Category tag belongs to the frame. States: rest, hover zoom</span>
+  <div class="demo">
+    <div class="shotc"><span class="cat">Stavební firma</span><img src="../../img/stavba.jpg" alt="Stavba"></div>
+    <div class="shotc is-hover"><span class="cat">E-shop</span><img src="../../img/sklad.jpg" alt="Sklad"></div>
+  </div>
+
+  <span class="sys-lbl">6 · Story card. One component; wide and tall are span modifiers on the grid. Long-title state included</span>
+  <div class="demo" style="align-items:flex-start">
+    <article class="item">
+      <div class="shotc" style="width:100%"><span class="cat">Stavební firma</span><img src="../../img/stavba.jpg" alt="Stavba"></div>
+      <h3>Vícepráce z hlasovek a fotek z místa</h3>
+      <p>Party diktují, co udělaly navíc. Systém to přepíše a přiřadí k zakázce.</p>
+      <div class="foot"><span class="fig">30 až 80 tis. Kč na zakázce</span><span class="go" aria-hidden="true">&rarr;</span></div>
+    </article>
+    <article class="item is-hover">
+      <div class="shotc is-hover" style="width:100%"><span class="cat">Účetní kancelář</span><img src="../../img/papir.jpg" alt="Doklady"></div>
+      <h3>Čtení a předkontace došlých dokladů, včetně skenů, fotek a PDF z mailu</h3>
+      <p>Dlouhý titulek se láme, karta drží. Sporné případy systém nezaúčtuje sám.</p>
+      <div class="foot"><span class="fig">Sporné zvlášť</span><span class="go" aria-hidden="true">&rarr;</span></div>
+    </article>
+  </div>
+
+  <span class="sys-lbl">7 · Hairline row. One component, three content variants: price, step, news. This is the merge; the scaffold is defined once for all three sections</span>
+  <div class="demo col">
+    <div class="hrow"><h3>Starter</h3><p>Jedna hotová automatizace na vašich skutečných datech, za pevnou cenu.</p><span class="end num">12 000 Kč<small>jednorázově</small></span></div>
+    <div class="hrow is-hover"><h3 style="font-family:Inter,sans-serif; /* slop-lint-ignore: brand body face, BRAND.md */font-size:13px;letter-spacing:.12em;color:var(--amber-dk)">02</h3><p><b style="font-family:Sora,sans-serif;text-transform:uppercase;letter-spacing:-.04em;font-size:20px">Rozpis, co potřebuje AI a co ne</b><br>Agenda rozdělená na tři hromádky, písemně.</p><span class="end plain">do týdne</span></div>
+    <div class="hrow"><h3 style="font-size:17px">Soud v Mnichově rozhodl ve sporu o trénovací data</h3><p class="t-small">Právo</p><span class="end plain num">20. 8. 2026</span></div>
+  </div>
+
+  <span class="sys-lbl">8 · Fact item</span>
+  <div class="demo">
+    <div class="hitem"><h3>Postavíme to, vy to vlastníte</h3><p>Scénáře, přístupy i dokumentaci máte u sebe. Když odejdete, berete si to s sebou.</p></div>
+    <div class="hitem"><h3>Kde leží vaše data</h3><p>V Česku nebo v EU. Zpracovatelskou smlouvu podepíšeme dřív, než na data sáhneme.</p></div>
+  </div>
+
+  <span class="sys-lbl">9 · Statement band. Ink ground, one amber emphasis, verdicts as 2px-rule labels</span>
+  <div class="demo dark" style="padding:0">
+    <div class="bandc">
+      <h2>Dva ze tří verdiktů znamenají, že vám <em>nic nepostavíme.</em></h2>
+      <div class="band-verdicts"><span>Nepotřebujete nic</span><span>Obyčejná automatizace</span><span>Potřebuje AI</span></div>
+    </div>
+  </div>
+
+  <span class="sys-lbl">10 · Empty state. Appears when a filter has no items; it asks for contact</span>
+  <div class="demo"><p class="empty">Pro tenhle obor tu zatím nic nemáme. Napište nám a projdeme to spolu.</p></div>
+</section>
+
+<section class="sys-sec wrap" id="nav">
+  <h2>Navigation</h2>
+  <p class="sys-note">Judged as an image, per DESIGN.md. The sticky bar carries three things that work: an amber reading-progress line along its bottom edge, the brand toggle that flips from off to on once you pass the masthead, and the filter rail pinned beneath it. On mobile the links move to a full-screen drawer with 70px rows; the drawer closes on Escape, on link tap, and returns focus to the burger. Nothing else is sticky.</p>
+</section>
+
+<section class="sys-sec wrap" id="inventory">
+  <h2>Inventory</h2>
+  <p class="sys-note">One purpose sentence each. Two rows that ever come to share a sentence get merged back into one component. The one-edit test this page must keep passing: make every filled button amber instead of ink, one definition changes.</p>
+  <table>
+    <tr><th>Component</th><th>Purpose, one sentence</th><th>Variants</th><th>Appears</th></tr>
+    <tr><td><b>.mark</b></td><td>Say whose page this is and carry the toggle signature</td><td>off, on, xl</td><td>bar, drawer, footer</td></tr>
+    <tr><td><b>.btn</b></td><td>The action we want taken on the current surface</td><td>filled, outline</td><td>masthead, contact</td></tr>
+    <tr><td><b>.tlink</b></td><td>A secondary path that must not compete with a button</td><td>none</td><td>bar, news head</td></tr>
+    <tr><td><b>.tab</b></td><td>Narrow the story grid to one trade</td><td>selected</td><td>filter rail</td></tr>
+    <tr><td><b>.shot</b></td><td>Frame a photograph and name its trade</td><td>ratio modifiers</td><td>masthead, story cards, news rows</td></tr>
+    <tr><td><b>.item</b></td><td>Sell one automation with its trade, its pitch and its money figure</td><td>wide, tall (grid spans)</td><td>story grid</td></tr>
+    <tr><td><b>.hrow</b></td><td>Present one entry of a list for scanning down a hairline table</td><td>price, step, news content</td><td>ceník, postup, novinky</td></tr>
+    <tr><td><b>.hitem</b></td><td>Answer one hard question before it is asked</td><td>none</td><td>co si vyjasníme</td></tr>
+    <tr><td><b>.band</b></td><td>State the one claim of the business at full volume</td><td>none</td><td>after the grid</td></tr>
+    <tr><td><b>.empty</b></td><td>Turn a filtered-out grid into a contact prompt</td><td>none</td><td>story grid</td></tr>
+  </table>
+  <span class="sys-lbl">Banned in F, by decision</span>
+  <p class="t-small" style="max-width:76ch">Monospace type anywhere. Middot separators anywhere, navigation included. Eyebrow labels above headings and cadence labels under them; a heading carries its own meaning or it is rewritten. Border radius. Shadows. A second accent. Fade-up reveals.</p>
+</section>
+
+<footer class="wrap" style="padding:30px 0 40px;color:var(--muted);font-size:13.5px">
+  <p>Off Plate direction F. This page is the source of truth; the homepage follows it. Updated 22 Aug 2026.</p>
+</footer>
+
+</body>
+</html>
