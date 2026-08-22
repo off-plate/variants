@@ -38,6 +38,7 @@ img{max-width:100%;display:block}
 @media(max-width:720px){.wrap,.bleed{width:calc(100% - 40px)}}
 /* full-bleed rail for photography, so the page uses its width */
 .bleed{width:min(96vw,1740px);margin-inline:auto}
+.wrap .wrap,.wrap .bleed,.bleed .wrap,.bleed .bleed{width:100%;margin-inline:0}
 @media(min-width:1900px){.bleed{width:min(95vw,2000px)}}
 
 /* soft gradient, brand colours only */
@@ -186,7 +187,7 @@ body.nav-open{overflow:hidden}
 .p-grad{color:var(--navy-deep)}
 
 /* verdicts */
-.verd{background:var(--paper);border-radius:44px;margin:0 auto;padding:76px 0}
+.verd{background:var(--paper);border-radius:44px;padding:clamp(40px,4.6vw,76px) clamp(24px,3vw,56px)}
 .vgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px}
 @media(max-width:900px){.vgrid{grid-template-columns:1fr}}
 .vcard{background:var(--white);border-radius:30px;padding:30px;min-height:230px;display:flex;flex-direction:column}
@@ -245,6 +246,26 @@ body.nav-open{overflow:hidden}
 .ocard .tags{display:flex;flex-wrap:wrap;gap:6px;margin-top:14px}
 .ocard .tags span{background:var(--white);border-radius:999px;padding:7px 13px;font-size:13px;font-weight:600}
 .o-mint{background:var(--mint)}.o-sand{background:var(--sand)}.o-sky{background:var(--sky)}
+
+/* služby: the ghost list from the editorial variant, softened for C */
+.serv{padding:0 0 84px}
+.slist{display:flex;flex-direction:column}
+.srow{display:flex;align-items:center;gap:clamp(12px,2vw,28px);padding:clamp(12px,1.5vw,20px) clamp(14px,2vw,28px);border-radius:26px;transition:background .22s var(--ease)}
+.srow h3{font-size:clamp(26px,4.2vw,62px);letter-spacing:-.04em;color:rgba(16,24,32,.24);transition:color .24s var(--ease),transform .26s var(--slide)}
+.srow .chips{display:flex;gap:8px;flex:0 0 auto}
+.srow .chips span{width:clamp(40px,4.2vw,70px);height:clamp(28px,3vw,48px);border-radius:16px;overflow:hidden;display:block;opacity:0;transform:translateY(6px);transition:opacity .24s var(--ease),transform .26s var(--slide)}
+.srow .chips img{width:100%;height:100%;object-fit:cover;filter:saturate(.72)}
+.srow .chips .c-teal{background:var(--teal)}
+.srow .chips .c-sand{background:var(--sand)}
+.srow .n{font-size:13.5px;color:var(--muted);margin-left:auto;flex:0 0 auto}
+.srow:hover,.srow:focus-visible{background:var(--paper)}
+.srow:hover h3,.srow:focus-visible h3{color:var(--ink);transform:translateX(10px)}
+.srow:hover .chips span,.srow:focus-visible .chips span{opacity:1;transform:none}
+.srow:hover .chips span:nth-child(2){transition-delay:.05s}
+.srow:hover .chips span:nth-child(3){transition-delay:.1s}
+.srow.on h3{color:var(--ink)}
+.srow.on .chips span{opacity:1;transform:none}
+@media(max-width:640px){.srow .chips{display:none}.srow .n{margin-left:auto}}
 
 /* statement band with inline photo chips */
 .stmt{border-radius:44px;padding:clamp(40px,6vw,92px) clamp(26px,4vw,68px)}
@@ -420,6 +441,34 @@ html.js [data-reveal].in>*:nth-child(5){transition-delay:.32s}
   </div>
 </section>
 
+<section class="serv" id="sluzby">
+  <div class="bleed">
+    <div class="sec-head"><h2>Co stavíme</h2></div>
+    <div class="slist" data-reveal>
+      <a class="srow on" href="#cenik">
+        <h3>AI automatizace</h3>
+        <span class="chips" aria-hidden="true"><span><img src="../img/papir.jpg" alt=""></span><span class="c-teal"></span><span class="c-sand"></span></span>
+        <span class="n mono">(01)</span>
+      </a>
+      <a class="srow" href="#cenik">
+        <h3>Obyčejná automatizace</h3>
+        <span class="chips" aria-hidden="true"><span><img src="../img/sklad.jpg" alt=""></span><span class="c-sand"></span></span>
+        <span class="n mono">(02)</span>
+      </a>
+      <a class="srow" href="#jak">
+        <h3>Rozpis a pilot</h3>
+        <span class="chips" aria-hidden="true"><span><img src="../img/stavba.jpg" alt=""></span><span class="c-teal"></span></span>
+        <span class="n mono">(03)</span>
+      </a>
+      <a class="srow" href="#jak">
+        <h3>Provoz a údržba</h3>
+        <span class="chips" aria-hidden="true"><span><img src="../img/dilna.jpg" alt=""></span><span class="c-teal"></span><span class="c-sand"></span></span>
+        <span class="n mono">(04)</span>
+      </a>
+    </div>
+  </div>
+</section>
+
 <section class="sec" id="cenik">
   <div class="wrap">
     <div class="sec-head">
@@ -471,14 +520,12 @@ html.js [data-reveal].in>*:nth-child(5){transition-delay:.32s}
 <section class="sec" id="verdikt" style="padding-top:0">
   <div class="wrap">
     <div class="verd">
-      <div class="wrap">
         <div class="sec-head"><h2>Každá úloha dostane jeden ze tří verdiktů</h2></div>
         <div class="vgrid" data-reveal>
           <div class="vcard v1"><span class="sw" aria-hidden="true"><i></i></span><h3>Nepotřebujete nic</h3><p>Funguje to, stojí to málo a systém by tomu jenom překážel. Nejčastější verdikt, který od nás uslyšíte.</p></div>
           <div class="vcard v2"><span class="sw" aria-hidden="true"><i></i></span><h3>Obyčejná automatizace</h3><p>Přeposlat, připomenout, vyplnit, poslat dál. AI tady nemá co dělat a jenom by prodražila provoz.</p></div>
           <div class="vcard v3"><span class="sw" aria-hidden="true"><i></i></span><h3>Potřebuje AI</h3><p>Někdo musí přečíst nepořádek, porozumět mu a rozhodnout se. Tam se to vrátí, a nikde jinde.</p></div>
         </div>
-      </div>
     </div>
   </div>
 </section>
