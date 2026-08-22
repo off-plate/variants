@@ -1,0 +1,525 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="robots" content="noindex,nofollow">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Off Plate · Ne všechno potřebuje AI</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet"> <!-- slop-lint-ignore: Inter + Sora are the locked Off-Plate brand faces, BRAND.md -->
+<style>
+:root{
+  --navy:#002B59; --navy-deep:#001B3A;
+  --paper:#F2EFEB; --white:#FFFFFF;
+  --teal:#1F7A7A; --teal-tx:#196565;
+  --amber:#D08C2E; --amber-tx:#B0721E;
+  --ink:#101820; --muted:#5A6472;
+  --mint:#CBE7E1; --mint-2:#E4F2EF;
+  --sand:#F6E3C4; --sand-2:#FBF0DE;
+  --sky:#D3DDEC;  --sky-2:#E7ECF5;
+  --line:rgba(16,24,32,.11);
+  --r:32px; --r-sm:20px;
+  --ease:cubic-bezier(.2,.7,.3,1); --slide:cubic-bezier(.66,0,.2,1);
+}
+*{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--mint-2);color:var(--ink);font-family:Inter,system-ui,sans-serif; /* slop-lint-ignore: brand body face, BRAND.md */font-size:17px;line-height:1.55;-webkit-font-smoothing:antialiased}
+h1,h2,h3{font-family:Sora,sans-serif;font-weight:700;letter-spacing:-.04em;line-height:1.02;margin:0}
+p{margin:0}
+a{color:inherit;text-decoration:none}
+img{max-width:100%;display:block}
+button{font:inherit}
+.mono{font-family:'JetBrains Mono',ui-monospace,monospace;font-variant-numeric:tabular-nums}
+:focus-visible{outline:2px solid var(--teal);outline-offset:3px;border-radius:8px}
+[id]{scroll-margin-top:104px}
+
+/* mesh gradient, brand colours only */
+.mesh{background:
+  radial-gradient(58% 66% at 16% 20%, rgba(31,122,122,.92) 0%, rgba(31,122,122,0) 62%),
+  radial-gradient(52% 60% at 86% 16%, rgba(208,140,46,.74) 0%, rgba(208,140,46,0) 58%),
+  radial-gradient(70% 78% at 74% 94%, rgba(0,27,58,.96) 0%, rgba(0,27,58,0) 66%),
+  linear-gradient(150deg,#0A4470 0%,#001B3A 100%)}
+.mesh-soft{background:
+  radial-gradient(58% 66% at 16% 20%, rgba(31,122,122,.5) 0%, rgba(31,122,122,0) 62%),
+  radial-gradient(52% 60% at 86% 18%, rgba(208,140,46,.5) 0%, rgba(208,140,46,0) 60%),
+  radial-gradient(64% 72% at 76% 90%, rgba(0,43,89,.42) 0%, rgba(0,43,89,0) 64%),
+  linear-gradient(155deg,#F7F2EA 0%,#E6EDEB 100%)}
+
+/* the page floats as one rounded sheet, like the reference */
+.sheet{background:var(--white);border-radius:44px;margin:clamp(10px,1.6vw,26px);padding:0 0 clamp(14px,1.6vw,26px);overflow:clip}
+.wrap{width:min(95%,1660px);margin-inline:auto}
+@media(min-width:1900px){.wrap{width:min(93%,2040px)}}
+
+/* ---------- pill nav ---------- */
+.nav{position:sticky;top:0;z-index:80;padding:16px 0 12px;background:var(--white);transition:box-shadow .24s var(--ease)}
+.nav.is-stuck{box-shadow:0 1px 0 var(--line)}
+.nav-in{display:flex;align-items:center;justify-content:space-between;gap:18px}
+.brand{display:inline-flex;align-items:center;gap:10px;font-family:Sora,sans-serif;font-weight:700;font-size:22px;letter-spacing:-.05em;min-height:48px}
+.brand .knob{width:38px;height:21px;border-radius:999px;background:var(--navy);position:relative;flex:0 0 auto;transition:background .26s var(--ease)}
+.brand .knob i{position:absolute;top:3px;right:3px;width:15px;height:15px;border-radius:50%;background:var(--white);transition:right .34s var(--slide)}
+.brand:hover .knob{background:var(--teal)}
+.brand:hover .knob i{right:20px}
+.navpill{display:flex;align-items:center;gap:2px;background:var(--paper);border-radius:999px;padding:5px 10px}
+.navpill a{display:inline-flex;align-items:center;min-height:44px;padding:0 15px;border-radius:999px;font-size:15.5px;font-weight:500;color:var(--muted);transition:color .18s var(--ease),background .18s var(--ease)}
+.navpill a:hover,.navpill a.on{color:var(--ink);background:var(--white)}
+.navpill i{width:4px;height:4px;border-radius:50%;background:rgba(16,24,32,.22);flex:0 0 auto}
+@media(max-width:1180px){.navpill{display:none}}
+.nav-right{display:flex;align-items:center;gap:8px}
+.iconbtn{width:48px;height:48px;border-radius:999px;background:var(--paper);border:0;display:inline-flex;align-items:center;justify-content:center;cursor:pointer;transition:background .18s var(--ease)}
+.iconbtn:hover{background:var(--mint)}
+.iconbtn svg{width:18px;height:18px;stroke:var(--ink);fill:none;stroke-width:1.7}
+.cta{display:inline-flex;align-items:center;gap:10px;background:var(--ink);color:var(--white);border-radius:999px;min-height:48px;padding:0 22px;font-size:15.5px;font-weight:600;white-space:nowrap;transition:transform .18s var(--ease)}
+.cta:hover{transform:translateY(-2px)}
+@media(max-width:620px){.nav .cta{display:none}}
+.burger{display:none}
+@media(max-width:1180px){.burger{display:inline-flex}}
+.burger i{display:block;width:18px;height:1.8px;background:var(--ink);position:relative}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;width:18px;height:1.8px;background:var(--ink);transition:transform .26s var(--ease),top .26s var(--ease)}
+.burger i::before{top:-6px}.burger i::after{top:6px}
+.burger[aria-expanded="true"] i{background:transparent}
+.burger[aria-expanded="true"] i::before{top:0;transform:rotate(45deg)}
+.burger[aria-expanded="true"] i::after{top:0;transform:rotate(-45deg)}
+
+/* drawer */
+.drawer{position:fixed;inset:0;z-index:90;background:rgba(16,24,32,.4);opacity:0;pointer-events:none;transition:opacity .26s var(--ease)}
+.drawer.is-open{opacity:1;pointer-events:auto}
+.drawer-panel{position:absolute;left:12px;right:12px;top:12px;background:var(--white);border-radius:34px;padding:16px;display:flex;flex-direction:column;gap:3px;transform:translateY(-14px);opacity:0;transition:transform .3s var(--slide),opacity .2s var(--ease);max-height:calc(100vh - 24px);overflow-y:auto}
+.drawer.is-open .drawer-panel{transform:none;opacity:1}
+.drawer-top{display:flex;align-items:center;justify-content:space-between;min-height:52px;padding:0 8px 8px}
+.drawer-x{width:48px;height:48px;border-radius:999px;background:var(--paper);border:0;cursor:pointer;position:relative}
+.drawer-x::before,.drawer-x::after{content:"";position:absolute;left:50%;top:50%;width:17px;height:1.8px;background:var(--ink)}
+.drawer-x::before{transform:translate(-50%,-50%) rotate(45deg)}
+.drawer-x::after{transform:translate(-50%,-50%) rotate(-45deg)}
+.drawer-panel>a{display:flex;align-items:center;min-height:58px;padding:0 18px;border-radius:20px;font-size:19px;font-weight:600;letter-spacing:-.02em;transition:background .18s var(--ease)}
+.drawer-panel>a:hover,.drawer-panel>a:focus-visible{background:var(--paper)}
+.drawer-panel .cta{margin-top:10px;justify-content:center;min-height:58px}
+body.nav-open{overflow:hidden}
+
+/* ---------- the bento ---------- */
+.bento{display:grid;grid-template-columns:repeat(12,1fr);gap:clamp(12px,1.1vw,18px);margin-top:clamp(16px,2vw,30px)}
+.w{border-radius:var(--r);position:relative;overflow:hidden;display:flex;flex-direction:column}
+.c3{grid-column:span 3}.c4{grid-column:span 4}.c5{grid-column:span 5}
+.c6{grid-column:span 6}.c7{grid-column:span 7}.c8{grid-column:span 8}
+.c9{grid-column:span 9}.c12{grid-column:span 12}
+@media(max-width:1180px){.c3,.c4{grid-column:span 6}.c5,.c7,.c8,.c9{grid-column:span 12}}
+@media(max-width:720px){.bento>*{grid-column:span 12!important}}
+.pad{padding:clamp(22px,2vw,34px)}
+.meta{display:flex;align-items:center;gap:9px;font-size:13.5px;color:var(--muted)}
+.meta b{font-weight:600;color:var(--ink)}
+.meta em{font-style:normal;width:3px;height:3px;border-radius:50%;background:rgba(16,24,32,.3);display:block}
+.bg-mint{background:var(--mint)}.bg-sand{background:var(--sand)}.bg-sky{background:var(--sky)}
+.bg-paper{background:var(--paper)}.bg-navy{background:var(--navy);color:var(--white)}
+.arrowbtn{width:48px;height:48px;border-radius:999px;background:var(--white);display:inline-flex;align-items:center;justify-content:center;flex:0 0 auto;transition:transform .22s var(--ease),background .2s var(--ease)}
+.arrowbtn svg{width:17px;height:17px;stroke:var(--ink);fill:none;stroke-width:1.8}
+.w:hover .arrowbtn{transform:translate(3px,-3px)}
+
+/* hero statement */
+.hero-w h1{font-size:clamp(34px,3.5vw,62px);max-width:14ch}
+.hero-w h1 em{font-style:normal;color:var(--teal-tx)}
+.hero-w p{margin-top:18px;color:rgba(16,24,32,.72);max-width:46ch;font-size:clamp(15.5px,1.05vw,17.5px)}
+.hero-w .row{margin-top:auto;padding-top:26px;display:flex;flex-wrap:wrap;gap:10px}
+.ghost{display:inline-flex;align-items:center;min-height:48px;padding:0 22px;border-radius:999px;border:1px solid rgba(16,24,32,.2);font-size:15.5px;font-weight:600;transition:background .18s var(--ease)}
+.ghost:hover{background:var(--white)}
+
+/* photo widget with the notch */
+.photo{min-height:clamp(300px,30vw,470px);background:var(--navy)}
+.photo>img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;transition:transform .6s var(--slide)}
+.photo:hover>img{transform:scale(1.04)}
+.badge{position:absolute;left:18px;top:18px;width:52px;height:52px;border-radius:999px;background:rgba(255,255,255,.9);display:flex;align-items:center;justify-content:center;z-index:3}
+.badge span{width:22px;height:12px;border-radius:999px;background:var(--teal);position:relative;display:block}
+.badge span i{position:absolute;top:2px;right:2px;width:8px;height:8px;border-radius:50%;background:var(--white)}
+.notch{position:absolute;left:0;bottom:0;z-index:3;background:var(--white);border-top-right-radius:34px;padding:20px 30px 4px 0;max-width:86%}
+.notch .meta{padding-left:2px}
+.notch h3{font-size:clamp(19px,1.7vw,30px);margin-top:10px;text-transform:uppercase;letter-spacing:-.03em;max-width:16ch}
+.photo-tag{position:absolute;left:18px;bottom:18px;z-index:3;background:rgba(255,255,255,.94);border-radius:999px;padding:9px 16px;font-size:13.5px;font-weight:600}
+
+/* verdict widget */
+.verd .sw{width:64px;height:30px;border-radius:999px;background:var(--white);position:relative;display:block}
+.verd .sw i{position:absolute;top:4px;width:22px;height:22px;border-radius:50%;transition:left .52s var(--slide)}
+.v1 .sw i{left:4px;background:var(--muted)}
+.v2 .sw i{left:21px;background:var(--amber)}
+.v3 .sw i{left:38px;background:var(--teal)}
+html.js .bento.arm .verd .sw i{left:4px}
+html.js .bento .verd:nth-of-type(2) .sw i{transition-delay:.14s}
+.verd h3{font-size:clamp(19px,1.5vw,24px);margin-top:20px}
+.verd p{margin-top:10px;font-size:15.5px;color:rgba(16,24,32,.68)}
+
+/* link list widget */
+.links h2{font-size:clamp(22px,1.9vw,30px);max-width:16ch}
+.links .list{margin-top:20px;display:flex;flex-direction:column}
+.links a{display:flex;align-items:center;justify-content:space-between;gap:16px;min-height:60px;padding:8px 4px;border-top:1px solid rgba(16,24,32,.14);font-weight:600;font-size:clamp(15px,1.1vw,17px);letter-spacing:-.01em;transition:padding .22s var(--slide),color .18s var(--ease)}
+.links a:hover,.links a:focus-visible{padding-left:12px;color:var(--teal-tx)}
+.links a svg{width:20px;height:20px;stroke:currentColor;fill:none;stroke-width:1.7;flex:0 0 auto;transition:transform .22s var(--ease)}
+.links a:hover svg{transform:translateX(4px)}
+
+/* tag cloud widget */
+.tags h2{font-size:clamp(20px,1.6vw,26px)}
+.tagcloud{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.tagcloud span{background:var(--white);border-radius:999px;padding:10px 16px;font-size:14px;font-weight:600;transition:transform .18s var(--ease)}
+.tagcloud span:hover{transform:translateY(-2px)}
+.tags .foot{margin-top:auto;padding-top:22px;display:flex;align-items:center;justify-content:space-between;gap:14px}
+.tags .foot b{font-family:Sora,sans-serif;font-size:17px;letter-spacing:-.02em}
+
+/* number widget */
+.num b{display:block;font-family:Sora,sans-serif;font-weight:700;font-size:clamp(32px,3.2vw,52px);letter-spacing:-.05em;line-height:1}
+.num p{margin-top:12px;font-size:15px;color:rgba(16,24,32,.68)}
+.num.on-dark p{color:rgba(255,255,255,.78)}
+
+/* price widget */
+.price .tier{display:inline-flex;align-items:center;gap:8px;background:var(--white);border-radius:999px;padding:7px 14px;font-size:13px;font-weight:600;align-self:flex-start}
+.price .tier em{font-style:normal;width:7px;height:7px;border-radius:50%;background:var(--teal)}
+.price h3{font-size:clamp(24px,2.2vw,34px);margin-top:16px}
+.price p{margin-top:12px;font-size:15.5px;color:rgba(16,24,32,.7);max-width:34ch}
+.price .amt{margin-top:auto;padding-top:22px;font-family:Sora,sans-serif;font-weight:700;font-size:clamp(20px,1.7vw,26px);letter-spacing:-.04em}
+.price .amt small{display:block;font-family:Inter,sans-serif; /* slop-lint-ignore: brand body face, BRAND.md */font-size:13.5px;font-weight:400;color:var(--muted);margin-top:6px;letter-spacing:0}
+.price.on-dark p{color:rgba(255,255,255,.78)}
+.price.on-dark .amt small{color:rgba(255,255,255,.66)}
+
+/* process widget */
+.proc h2{font-size:clamp(22px,1.9vw,32px)}
+.steps{margin-top:22px;flex:1;display:grid;grid-template-columns:repeat(5,1fr);gap:12px}
+@media(max-width:1180px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+.step{background:var(--white);border-radius:var(--r-sm);padding:18px;display:flex;flex-direction:column;transition:transform .2s var(--ease)}
+.step:hover{transform:translateY(-3px)}
+.step .n{width:34px;height:34px;border-radius:999px;background:var(--paper);display:flex;align-items:center;justify-content:center;font-size:13px;font-weight:600;margin-bottom:14px}
+.step h3{font-size:16.5px;letter-spacing:-.02em}
+.step p{margin-top:8px;font-size:14px;color:var(--muted);flex:1}
+.step .when{margin-top:12px;font-size:12.5px;font-weight:600;color:var(--teal-tx)}
+
+/* quote widget */
+.quote h2{font-size:clamp(22px,2.1vw,34px);color:var(--white);max-width:18ch}
+.quote h2 span{color:rgba(255,255,255,.5)}
+.quote .meta{margin-top:auto;padding-top:24px;color:rgba(255,255,255,.6)}
+
+/* honest widget */
+.honest h2{font-size:clamp(22px,1.9vw,32px);margin-bottom:6px}
+.hlist{display:grid;grid-template-columns:1fr 1fr;gap:0 clamp(20px,2.4vw,44px)}
+@media(max-width:760px){.hlist{grid-template-columns:1fr}}
+.hitem{padding:16px 0;border-top:1px solid rgba(16,24,32,.13)}
+.hitem h3{font-family:Inter,sans-serif; /* slop-lint-ignore: brand body face, BRAND.md */font-size:15.5px;font-weight:600;letter-spacing:0}
+.hitem p{margin-top:6px;font-size:14.5px;color:var(--muted)}
+
+/* news widget */
+.news .shot{aspect-ratio:16/10;overflow:hidden;border-radius:var(--r-sm);position:relative}
+.news .shot img{width:100%;height:100%;object-fit:cover;transition:transform .55s var(--slide)}
+.news:hover .shot img{transform:scale(1.05)}
+.news h3{font-size:clamp(17px,1.3vw,21px);margin-top:16px;letter-spacing:-.025em}
+.news .meta{margin-top:12px}
+
+/* contact widget */
+.contact h2{font-size:clamp(26px,2.6vw,44px);color:var(--white);max-width:15ch}
+.contact p{margin-top:16px;color:rgba(255,255,255,.8);max-width:44ch}
+.contact .row{margin-top:26px;display:flex;flex-wrap:wrap;gap:10px}
+.btn-white{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;background:var(--white);color:var(--ink);font-weight:600;transition:transform .18s var(--ease)}
+.btn-white:hover{transform:translateY(-2px)}
+.btn-clear{display:inline-flex;align-items:center;min-height:52px;padding:0 24px;border-radius:999px;border:1px solid rgba(255,255,255,.4);color:var(--white);font-weight:600}
+
+/* footer */
+.foot{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap;padding:26px 0 6px;font-size:14px;color:var(--muted)}
+.foot a{display:inline-flex;align-items:center;min-height:44px}
+.foot a:hover{color:var(--teal-tx)}
+
+/* ---------- motion ---------- */
+html.js [data-reveal]>*{opacity:0;transform:translateY(14px);transition:opacity .46s var(--ease),transform .46s var(--slide)}
+html.js [data-reveal].in>*{opacity:1;transform:none}
+html.js [data-reveal].in>*:nth-child(2){transition-delay:.06s}
+html.js [data-reveal].in>*:nth-child(3){transition-delay:.12s}
+html.js [data-reveal].in>*:nth-child(4){transition-delay:.18s}
+html.js [data-reveal].in>*:nth-child(5){transition-delay:.24s}
+html.js [data-reveal].in>*:nth-child(6){transition-delay:.30s}
+@media (prefers-reduced-motion: reduce){
+  html{scroll-behavior:auto}
+  html.js [data-reveal]>*{opacity:1!important;transform:none!important;transition:none!important}
+  html.js .bento.arm .verd .sw i{left:auto}
+  .v1 .sw i{left:4px}.v2 .sw i{left:21px}.v3 .sw i{left:38px}
+  .drawer,.drawer-panel,.photo>img{transition:none}
+}
+@media (prefers-reduced-motion: no-preference){html{scroll-behavior:smooth}}
+</style>
+</head>
+<body>
+<div class="sheet">
+
+<header class="nav">
+  <div class="wrap nav-in">
+    <a class="brand" href="#top"><span class="knob" aria-hidden="true"><i></i></span>off plate</a>
+    <nav class="navpill">
+      <a href="#obory">Obory</a><i aria-hidden="true"></i>
+      <a href="#verdikt">Verdikty</a><i aria-hidden="true"></i>
+      <a href="#cenik">Ceník</a><i aria-hidden="true"></i>
+      <a href="#postup">Postup</a><i aria-hidden="true"></i>
+      <a href="#novinky">Novinky</a>
+    </nav>
+    <div class="nav-right">
+      <button class="iconbtn burger" id="burger" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="drawer"><i></i></button>
+      <a class="cta" href="#kontakt"><span>Domluvit hovor</span>
+        <svg viewBox="0 0 18 18" aria-hidden="true"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer">
+  <div class="drawer-panel">
+    <div class="drawer-top"><span class="meta"><b>Menu</b></span><button class="drawer-x" id="drawerX" type="button" aria-label="Zavřít menu"></button></div>
+    <a href="#obory">Obory</a><a href="#verdikt">Verdikty</a><a href="#cenik">Ceník</a>
+    <a href="#postup">Postup</a><a href="#novinky">Novinky</a><a href="#kontakt">Kontakt</a>
+    <a class="cta" href="#kontakt"><span>Domluvit hovor</span></a>
+  </div>
+</div>
+
+<main class="wrap" id="top">
+
+  <!-- row: hero -->
+  <section class="bento" data-reveal>
+    <article class="w c7 bg-mint pad hero-w">
+      <span class="meta"><b>AI a automatizace</b><em aria-hidden="true"></em>pro české firmy do 50 lidí</span>
+      <h1 style="margin-top:20px">Ne všechno <em>potřebuje AI.</em></h1>
+      <p>Projdeme, jak vaše firma doopravdy běží, a rozdělíme agendu na tři hromádky: co potřebuje AI, co zvládne obyčejná automatizace a co je lepší nechat být. Pak postavíme tu jednu věc, na které se shodneme.</p>
+      <div class="row">
+        <a class="cta" href="#kontakt"><span>Domluvit 45 minut</span></a>
+        <a class="ghost" href="#verdikt">Co u vás AI nepotřebuje</a>
+      </div>
+    </article>
+
+    <article class="w c5 photo">
+      <img src="../img/dilna.jpg" alt="Dílna s ponkem a nářadím">
+      <span class="badge" aria-hidden="true"><span><i></i></span></span>
+      <div class="notch">
+        <span class="meta"><b>Obor</b><em aria-hidden="true"></em>Autoservis</span>
+        <h3>Odsud pochází většina papírování</h3>
+      </div>
+    </article>
+  </section>
+
+  <!-- row: verdicts -->
+  <section class="bento" id="verdikt" data-reveal>
+    <article class="w c4 bg-paper pad verd v1">
+      <span class="sw" aria-hidden="true"><i></i></span>
+      <h3>Nepotřebujete nic</h3>
+      <p>Funguje to, stojí to málo a systém by tomu jenom překážel. Nejčastější verdikt, který od nás uslyšíte.</p>
+    </article>
+    <article class="w c4 bg-sand pad verd v2">
+      <span class="sw" aria-hidden="true"><i></i></span>
+      <h3>Obyčejná automatizace</h3>
+      <p>Přeposlat, připomenout, vyplnit, poslat dál. AI tady nemá co dělat a jenom by prodražila provoz.</p>
+    </article>
+    <article class="w c4 bg-mint pad verd v3">
+      <span class="sw" aria-hidden="true"><i></i></span>
+      <h3>Potřebuje AI</h3>
+      <p>Někdo musí přečíst nepořádek, porozumět mu a rozhodnout se. Tam se to vrátí, a nikde jinde.</p>
+    </article>
+  </section>
+
+  <!-- row: what we build + photo + tags -->
+  <section class="bento" id="obory" data-reveal>
+    <article class="w c5 bg-sand pad links">
+      <h2>Co stavíme</h2>
+      <div class="list">
+        <a href="#cenik">AI automatizace <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#cenik">Obyčejná automatizace <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#postup">Rozpis a pilot <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+        <a href="#postup">Provoz a údržba <svg viewBox="0 0 20 20" aria-hidden="true"><path d="M4 10h12M12 5l5 5-5 5" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </article>
+
+    <article class="w c4 photo">
+      <img src="../img/stavba.jpg" alt="Stavba, kde vzniká vícepráce">
+      <span class="photo-tag">Stavební firma · 30 až 80 tis. Kč na zakázce</span>
+    </article>
+
+    <article class="w c3 bg-sky pad tags">
+      <h2>Obory</h2>
+      <div class="tagcloud">
+        <span>Stavební firmy</span><span>E-shopy</span><span>Zubní kliniky</span>
+        <span>Autoservisy</span><span>Restaurace</span><span>Účetní</span>
+      </div>
+      <div class="foot"><b>Váš obor tu není?</b>
+        <a class="arrowbtn" href="#kontakt" aria-label="Napište nám"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </article>
+  </section>
+
+  <!-- row: commitments -->
+  <section class="bento" data-reveal>
+    <article class="w c3 bg-paper pad num"><b class="mono">45 min</b><p>První hovor, zdarma. Odejdete z něj s rozpisem i v případě, že si nás nevezmete.</p></article>
+    <article class="w c3 bg-paper pad num"><b class="mono">10 až 14 dní</b><p>Pilot na vaší hotové zakázce, kde už znáte správný výsledek a zkontrolujete nás.</p></article>
+    <article class="w c3 bg-navy pad num on-dark"><b class="mono">0 Kč</b><p>Cena za odchod. Scénáře, přístupy i návod zůstávají vám.</p></article>
+    <article class="w c3 photo" style="min-height:220px">
+      <img src="../img/papir.jpg" alt="Stůl s rozdělanou administrativou">
+      <span class="photo-tag">Účetní kancelář</span>
+    </article>
+  </section>
+
+  <!-- row: pricing -->
+  <section class="bento" id="cenik" data-reveal>
+    <article class="w c4 bg-sand pad price">
+      <span class="tier"><em aria-hidden="true"></em>Začátek</span>
+      <h3>Starter</h3>
+      <p>Jedna hotová automatizace na vašich skutečných datech, za pevnou cenu. Nezavazuje k ničemu dalšímu.</p>
+      <span class="amt mono">12 000 Kč<small>jednorázově</small></span>
+    </article>
+    <article class="w c4 bg-mint pad price">
+      <span class="tier"><em aria-hidden="true"></em>Jeden proces</span>
+      <h3>Build</h3>
+      <p>Jeden proces, který vám mizí ze stolu úplně. Napojený na to, co už používáte, s předáním a návodem.</p>
+      <span class="amt mono">od 25 000 Kč<small>+ od 4 000 Kč měsíčně</small></span>
+    </article>
+    <article class="w c4 mesh pad price on-dark" style="color:#fff">
+      <span class="tier" style="color:var(--ink)"><em aria-hidden="true"></em>Celý provoz</span>
+      <h3>System</h3>
+      <p>Několik buildů spojených do celku, který drží běžnou agendu sám. Vy řešíte jenom výjimky, které vám pošle.</p>
+      <span class="amt mono">od 40 000 Kč<small>+ od 12 000 Kč měsíčně</small></span>
+    </article>
+  </section>
+
+  <!-- row: process + photo -->
+  <section class="bento" id="postup" data-reveal>
+    <article class="w c8 bg-paper pad proc">
+      <h2>Jak spolupráce probíhá</h2>
+      <div class="steps">
+        <div class="step"><span class="n mono">01</span><h3>Hovor</h3><p>Kde se práce hromadí a podle jakého čísla poznáte zlepšení. Bez čísla nestavíme.</p><span class="when">45 minut, zdarma</span></div>
+        <div class="step"><span class="n mono">02</span><h3>Rozpis</h3><p>Agenda rozdělená na tři hromádky, písemně, včetně toho, co stavět nebudeme.</p><span class="when">do týdne</span></div>
+        <div class="step"><span class="n mono">03</span><h3>Pilot</h3><p>Na vaší hotové zakázce, kde znáte správný výsledek. Uvidíte i to, kde se plete.</p><span class="when">10 až 14 dní</span></div>
+        <div class="step"><span class="n mono">04</span><h3>Stavba</h3><p>Postavíme nacisto a napojíme na vaše nástroje. Co nejde, řekneme předem.</p><span class="when">3 až 6 týdnů</span></div>
+        <div class="step"><span class="n mono">05</span><h3>Provoz</h3><p>Hlídáme, že to běží. Když skončíte, scénáře i přístupy zůstávají vám.</p><span class="when">měsíčně</span></div>
+      </div>
+    </article>
+    <article class="w c4 photo">
+      <img src="../img/sklad.jpg" alt="Sklad e-shopu">
+      <span class="photo-tag">E-shop · marže z vašich faktur</span>
+    </article>
+  </section>
+
+  <!-- row: honest + quote -->
+  <section class="bento" data-reveal>
+    <article class="w c7 bg-paper pad honest">
+      <h2>Co si vyjasníme dřív, než se zeptáte</h2>
+      <div class="hlist">
+        <div class="hitem"><h3>Postavíme to, vy to vlastníte</h3><p>Scénáře, prompty, přístupy i dokumentaci máte u sebe. Když odejdete, berete si to s sebou.</p></div>
+        <div class="hitem"><h3>Když přestanete platit</h3><p>Přestaneme hlídat a opravovat. Systém běží dál, dokud se něco nerozbije.</p></div>
+        <div class="hitem"><h3>Kde leží vaše data</h3><p>V Česku nebo v EU. Zpracovatelskou smlouvu podepíšeme dřív, než na data sáhneme.</p></div>
+        <div class="hitem"><h3>Neříkáme kredity, říkáme provoz</h3><p>Za běhu systém platí za AI. Dáme na to strop a napíšeme ho do smlouvy.</p></div>
+        <div class="hitem"><h3>Za rozhodnutí ručíte vy</h3><p>Systém připraví podklad a označí, co je sporné. Podepisuje to člověk u vás.</p></div>
+        <div class="hitem"><h3>Nemáme veřejnou referenci</h3><p>Jsme na začátku a nebudeme předstírat opak. Proto začínáme pilotem na vašich datech.</p></div>
+      </div>
+    </article>
+    <article class="w c5 mesh pad quote">
+      <span class="meta" style="color:rgba(255,255,255,.7)"><b style="color:#fff">Poznámka na okraj</b></span>
+      <h2 style="margin-top:18px">Nejlepší zakázka je občas ta, <span>kterou vám rozmluvíme.</span></h2>
+      <span class="meta">Dva ze tří verdiktů znamenají, že nestavíme</span>
+    </article>
+  </section>
+
+  <!-- row: news -->
+  <section class="bento" id="novinky" data-reveal>
+    <a class="w c4 bg-paper pad news" href="/novinky/pravo/">
+      <span class="shot"><img src="../img/papir.jpg" alt=""></span>
+      <h3>Soud v Mnichově rozhodl ve sporu o trénovací data</h3>
+      <span class="meta"><b>Právo</b><em aria-hidden="true"></em><span class="mono">20. 8. 2026</span></span>
+    </a>
+    <a class="w c4 bg-paper pad news" href="/novinky/eshop/">
+      <span class="shot"><img src="../img/sklad.jpg" alt=""></span>
+      <h3>Shoptet rozšířil AI popisky produktů na všechny tarify</h3>
+      <span class="meta"><b>E-shopy</b><em aria-hidden="true"></em><span class="mono">20. 8. 2026</span></span>
+    </a>
+    <a class="w c4 bg-paper pad news" href="/novinky/ucetnictvi/">
+      <span class="shot"><img src="../img/dilna.jpg" alt=""></span>
+      <h3>Stanovisko k automatizovanému zpracování dokladů</h3>
+      <span class="meta"><b>Účetnictví</b><em aria-hidden="true"></em><span class="mono">19. 8. 2026</span></span>
+    </a>
+  </section>
+
+  <!-- row: contact -->
+  <section class="bento" id="kontakt" data-reveal>
+    <article class="w c8 mesh pad contact">
+      <h2>Napište, co vás nejvíc zdržuje</h2>
+      <p>Odpovídá Michael Florian, obvykle do konce pracovního dne. Když to nebude něco pro nás, řekneme to rovnou a poradíme, kam se obrátit.</p>
+      <div class="row">
+        <a class="btn-white" href="mailto:michael@off-plate.com">Poslat e-mail</a>
+        <a class="btn-clear" href="/novinky/">Novinky podle oboru</a>
+      </div>
+    </article>
+    <article class="w c4 bg-mint pad tags">
+      <h2>Napojujeme se na</h2>
+      <div class="tagcloud">
+        <span>Shoptet</span><span>Pohoda</span><span>Heureka</span><span>Fakturoid</span><span>WhatsApp</span><span>Gmail</span>
+      </div>
+      <div class="foot"><b>A na to, co máte vy</b>
+        <a class="arrowbtn" href="#kontakt" aria-label="Napište nám"><svg viewBox="0 0 18 18"><path d="M4 14L14 4M6 4h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></a>
+      </div>
+    </article>
+  </section>
+
+  <div class="foot">
+    <span>© 2026 Off Plate, Praha · IČO 00000000 · ceny jsou zástupné</span>
+    <span><a href="/novinky/">Novinky</a> · <a href="#cenik">Ceník</a> · <a href="/en/">English</a></span>
+  </div>
+
+</main>
+</div>
+
+<script>
+(function(){
+  var d=document, root=d.documentElement;
+  root.classList.add('js');
+  var reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  var nav=d.querySelector('.nav'), stuck=false;
+  function onScroll(){var v=window.scrollY>10; if(v!==stuck){stuck=v; nav.classList.toggle('is-stuck',v);}}
+  addEventListener('scroll',onScroll,{passive:true}); onScroll();
+
+  var burger=d.getElementById('burger'), drawer=d.getElementById('drawer'), x=d.getElementById('drawerX');
+  function setMenu(open){
+    burger.setAttribute('aria-expanded', String(open));
+    burger.setAttribute('aria-label', open?'Zavřít menu':'Otevřít menu');
+    drawer.classList.toggle('is-open', open);
+    d.body.classList.toggle('nav-open', open);
+    if(open){var f=drawer.querySelector('a'); if(f) f.focus({preventScroll:true});}
+    else burger.focus({preventScroll:true});
+  }
+  burger.addEventListener('click',function(){setMenu(burger.getAttribute('aria-expanded')!=='true')});
+  if(x) x.addEventListener('click',function(){setMenu(false)});
+  drawer.addEventListener('click',function(e){
+    if(e.target===drawer) setMenu(false);
+    if(e.target.closest('a')) setMenu(false);
+  });
+  d.addEventListener('keydown',function(e){
+    if(e.key==='Escape'&&burger.getAttribute('aria-expanded')==='true') setMenu(false);
+  });
+  addEventListener('resize',function(){if(innerWidth>1180) setMenu(false)});
+
+  /* mark the nav item for the section you are in */
+  var links=[].slice.call(d.querySelectorAll('.navpill a'));
+  var targets=links.map(function(a){return d.querySelector(a.getAttribute('href'))}).filter(Boolean);
+  if(targets.length){
+    var so=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(!e.isIntersecting) return;
+        links.forEach(function(a){a.classList.toggle('on', a.getAttribute('href')==='#'+e.target.id)});
+      });
+    },{rootMargin:'-45% 0px -50% 0px'});
+    targets.forEach(function(t){so.observe(t)});
+  }
+
+  if(reduce) return;
+
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('in'); io.unobserve(e.target); } });
+  },{rootMargin:'0px 0px -10% 0px',threshold:.12});
+  d.querySelectorAll('[data-reveal]').forEach(function(g){io.observe(g)});
+
+  /* signature: the verdict toggles all start at "nothing" and settle in sequence */
+  var vb=d.querySelector('#verdikt');
+  if(vb){
+    vb.classList.add('arm');
+    var vio=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.remove('arm'); vio.unobserve(e.target); } });
+    },{threshold:.35});
+    vio.observe(vb);
+  }
+})();
+</script>
+</body>
+</html>
