@@ -128,3 +128,41 @@
   });
   addEventListener('resize', function(){ if(innerWidth>900 && !menu.hidden) setMenu(false); });
 })();
+
+/* ── ambient loops: armed on screen, bounded, and preference-aware ────────
+   Every loop in site.css attaches through the `.mo` class rather than from
+   CSS alone. Two things follow: nothing animates while it is scrolled off
+   screen, and no loop runs forever in one sitting, because each has a
+   bounded iteration count and leaving the viewport removes the class so a
+   later re-entry restarts it.
+
+   The reduced-motion preference is read live. Toggling it in the OS fires no
+   page reload, so a page loaded before the switch would otherwise keep its
+   stale state for the whole session. */
+(function(){
+  var SEL='.circles,.trust,.tl';
+  var mq=matchMedia('(prefers-reduced-motion: reduce)');
+  var io=null;
+  function each(fn){ document.querySelectorAll(SEL).forEach(fn); }
+  function disarm(){
+    if(io){ io.disconnect(); io=null; }
+    each(function(el){ el.classList.remove('mo'); });
+  }
+  function arm(){
+    disarm();
+    if(mq.matches) return;                    // Tier 1: never attach at all
+    // Two thresholds on purpose. Arm the motion once a quarter of the block is
+    // in view, but only stand it down once the block is fully gone: a single
+    // .25 threshold would strip the class, and with it the hero group's
+    // visibility, while a fifth of the row was still on screen.
+    io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.intersectionRatio>=.25) e.target.classList.add('mo');
+        else if(e.intersectionRatio===0) e.target.classList.remove('mo');
+      });
+    },{threshold:[0,.25]});
+    each(function(el){ io.observe(el); });
+  }
+  arm();
+  mq.addEventListener('change', arm);
+})();

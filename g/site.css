@@ -60,14 +60,22 @@ html{color-scheme:dark}
   --grey:#9A9A9A; --grey-2:#6A6A6A;
   --card:#F4F2EF; --card-dark:#111111;
   --r:22px; --r-sm:14px;
-  --ease:cubic-bezier(.2,.7,.3,1);
+  /* ── motion language, Corporate personality ───────────────────────────
+     Off-Plate sells restraint, so the motion is calm and sharp: no
+     overshoot, two curves, one hero move. Durations are multiples of the
+     200ms base unit. Travel is capped at 16px and scale at .98 to 1. */
+  --ease-out:cubic-bezier(.2,0,0,1);      /* entrances, landings, ~90% of moves */
+  --ease-in:cubic-bezier(.7,0,.84,0);     /* exits only */
+  --ease:var(--ease-out);                 /* the signature curve */
+  --t1:.2s; --t2:.4s; --t4:.8s;           /* base unit and its multiples */
+  --stag:60ms;                            /* one stagger rhythm, everywhere */
   --shell:min(93vw,1680px);
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scrollbar-gutter:stable}
 body{
   margin:0;background:var(--bg);color:var(--fg);
-  transition:background-color .3s var(--ease),color .3s var(--ease);
+  transition:background-color var(--t1) var(--ease),color var(--t1) var(--ease);
   font-family:Inter,'Helvetica Neue',Helvetica,system-ui,sans-serif; /* slop-lint-ignore: brand body face, BRAND.md */font-size:16px;line-height:1.5;
   -webkit-font-smoothing:antialiased;overflow-x:hidden;
 }
@@ -88,8 +96,8 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
 .topbar{
   position:fixed;top:0;left:0;right:0;z-index:90;
   padding:20px 0;
-  transition:transform .34s var(--ease),padding .26s var(--ease),
-             background-color .26s var(--ease),border-color .26s var(--ease);
+  transition:transform var(--t2) var(--ease),padding var(--t1) var(--ease),
+             background-color var(--t1) var(--ease),border-color var(--t1) var(--ease);
   border-bottom:1px solid transparent;
 }
 .topbar__in{display:flex;align-items:center;justify-content:space-between;gap:16px}
@@ -101,7 +109,7 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
 .topbar.is-hidden{transform:translateY(-102%)}
 
 .topbar__right{display:flex;align-items:center;gap:10px}
-.topbar__cta{transition:transform .18s var(--ease),background .18s var(--ease)}
+.topbar__cta{transition:transform var(--t1) var(--ease),background var(--t1) var(--ease)}
 .btn--sm{min-height:38px;padding:0 16px;font-size:10.5px}
 
 /* burger + full-screen menu, phones only */
@@ -113,7 +121,7 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
 }
 .burger i{display:block;width:17px;height:1.7px;background:var(--fg);position:relative}
 .burger i::before,.burger i::after{content:"";position:absolute;left:0;top:0;width:17px;height:1.7px;
-  background:var(--fg);transition:transform .26s var(--ease)}
+  background:var(--fg);transition:transform var(--t1) var(--ease)}
 .burger i::before{transform:translateY(-5.5px)}
 .burger i::after{transform:translateY(5.5px)}
 .burger[aria-expanded="true"] i{background:transparent}
@@ -124,11 +132,22 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
   position:fixed;inset:0;z-index:95;background:color-mix(in srgb,var(--bg) 97%,transparent);
   -webkit-backdrop-filter:blur(20px);backdrop-filter:blur(20px);
   display:flex;flex-direction:column;justify-content:center;
-  padding:96px 26px 40px;opacity:0;transition:opacity .26s var(--ease);
+  padding:96px 26px 40px;opacity:0;
+  transition:opacity var(--t1) var(--ease-in);
   overscroll-behavior:contain;
 }
 .menu[hidden]{display:none}
-.menu.is-open{opacity:1}
+.menu.is-open{opacity:1;transition:opacity var(--t2) var(--ease-out)}
+/* the links arrive on the page's one stagger rhythm rather than as one flat
+   fade, and leave together, because exits do not need choreography */
+.menu a{opacity:0;transform:translateY(10px);
+        transition:opacity var(--t1) var(--ease-in),transform var(--t1) var(--ease-in)}
+.menu.is-open a{opacity:1;transform:none;
+        transition:opacity var(--t2) var(--ease-out),transform var(--t2) var(--ease-out);
+        transition-delay:calc(60ms + var(--i,0) * var(--stag))}
+.menu a:nth-child(2){--i:1} .menu a:nth-child(3){--i:2}
+.menu a:nth-child(4){--i:3} .menu a:nth-child(5){--i:4}
+.menu a:nth-child(6){--i:5}
 .menu a:not(.btn){color:var(--fg);
   font-size:clamp(30px,9vw,44px);font-weight:800;letter-spacing:-.04em;
   text-transform:uppercase;line-height:1;padding:14px 0;min-height:56px;
@@ -151,8 +170,11 @@ body.is-locked{overflow:hidden}
 
 .wordmark{display:inline-flex;align-items:center;min-height:44px;flex:0 0 auto}
 .wordmark img{width:clamp(122px,10vw,158px);height:auto;display:block;
-              transition:width .26s var(--ease)}
-.topbar.is-stuck .wordmark img{width:clamp(108px,8.4vw,134px)}
+              transform-origin:left center;
+              transition:transform var(--t1) var(--ease)}
+/* the condense shrinks the lockup by scale, not width: width is a layout
+   property, and it is an image, so scaling distorts nothing */
+.topbar.is-stuck .wordmark img{transform:scale(.85)}
 .wordmark .wm-light{display:none}
 [data-theme=light] .topbar.is-stuck .wordmark .wm-dark{display:none}
 [data-theme=light] .topbar.is-stuck .wordmark .wm-light{display:block}
@@ -165,7 +187,7 @@ body.is-locked{overflow:hidden}
 .navbox a{
   display:flex;align-items:center;justify-content:center;min-height:36px;padding:0 17px;white-space:nowrap;
   border-radius:999px;font-size:12.5px;font-weight:600;color:var(--fg-dim);
-  transition:background .18s var(--ease),color .18s var(--ease);
+  transition:background var(--t1) var(--ease),color var(--t1) var(--ease);
 }
 .navbox a:hover,.navbox a[data-state=hover]{color:var(--fg);background:var(--glass)}
 .navbox a[aria-current]{background:var(--fg);color:var(--bg)}
@@ -183,7 +205,7 @@ body.is-locked{overflow:hidden}
   display:inline-flex;align-items:center;gap:9px;margin-top:26px;
   border:1px solid var(--line-2);border-radius:999px;padding:9px 18px 9px 12px;
   font-size:12.5px;font-weight:500;color:var(--fg);
-  transition:border-color .18s var(--ease),background .18s var(--ease);
+  transition:border-color var(--t1) var(--ease),background var(--t1) var(--ease);
 }
 .pillbtn:hover,.pillbtn[data-state=hover]{border-color:var(--fg);background:var(--glass)}
 .pillbtn span{width:19px;height:19px;border-radius:50%;background:var(--amber);color:#04070C;
@@ -209,8 +231,8 @@ body.is-locked{overflow:hidden}
 }
 .btn{display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:0 20px;
      min-height:44px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
-     transition:transform .18s var(--ease),background .18s var(--ease)}
-.btn:active,.btn[data-state=active]{transform:scale(.98)}
+     transition:transform var(--t1) var(--ease),background var(--t1) var(--ease)}
+.btn:active,.btn[data-state=active]{transform:scale(.96);transition-duration:90ms}
 .btn--dark{background:var(--invert);color:var(--invert-fg);border:1px solid var(--line-2)}
 .btn--dark:hover,.btn--dark[data-state=hover]{background:#242424}
 .btn--light{background:var(--fg);color:var(--bg)}
@@ -220,7 +242,7 @@ body.is-locked{overflow:hidden}
 .btn--light i{background:rgba(0,0,0,.1)}
 .round{width:44px;height:44px;border-radius:50%;background:var(--fg);color:var(--bg);
        display:grid;place-items:center;font-size:16px;flex:0 0 auto;
-       transition:transform .2s var(--ease)}
+       transition:transform var(--t1) var(--ease)}
 .round:hover,.round[data-state=hover]{transform:rotate(45deg)}
 
 /* ── card grid ────────────────────────────────────────────────────────── */
@@ -282,7 +304,7 @@ body.is-locked{overflow:hidden}
         font-size:clamp(9.5px,.86vw,17px);font-weight:700;letter-spacing:.04em;
         text-transform:uppercase;background:var(--fg);color:var(--bg);
         margin-left:clamp(-30px,-1.4vw,-10px);position:relative;isolation:isolate;
-        transition:transform .26s var(--ease)}
+        transition:transform var(--t1) var(--ease)}
 .circle:first-child{margin-left:0}
 .circle:nth-child(1),.circle:nth-child(5){transform:translateY(clamp(12px,1.6vw,42px))}
 .circle:nth-child(2),.circle:nth-child(4){transform:translateY(clamp(-52px,-2.2vw,-16px))}
@@ -322,7 +344,7 @@ body.is-locked{overflow:hidden}
 .work .body{padding-top:16px}
 .work .shot{display:block;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:var(--invert);isolation:isolate;
             box-shadow:var(--shadow-card)}
-.work .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.work .shot img{width:100%;height:100%;object-fit:cover;transition:transform var(--t2) var(--ease)}
 .work a:hover .shot img,.work a[data-state=hover] .shot img{transform:scale(1.05)}
 .work h3{font-size:15px;letter-spacing:-.01em;margin-top:16px;color:var(--relief-fg)}
 .work .tags span{color:var(--relief-accent)}
@@ -333,7 +355,7 @@ body.is-locked{overflow:hidden}
 .workbar .rail i{position:absolute;left:0;top:0;bottom:0;background:var(--relief-fg);width:32%}
 .rnd{width:44px;height:44px;border-radius:50%;border:1px solid var(--line-2);background:transparent;
      color:var(--relief-fg);display:grid;place-items:center;cursor:pointer;flex:0 0 auto;font-size:15px;
-     transition:background .18s var(--ease),color .18s var(--ease)}
+     transition:background var(--t1) var(--ease),color var(--t1) var(--ease)}
 .rnd:hover,.rnd[data-state=hover]{background:var(--relief-fg);color:var(--relief)}
 
 /* ── news, staggered cards on black ───────────────────────────────────── */
@@ -344,7 +366,7 @@ body.is-locked{overflow:hidden}
       align-items:center}
 .crew a{display:block;border-radius:18px;overflow:hidden;position:relative;background:var(--invert);isolation:isolate}
 .crew .shot{display:block;aspect-ratio:3/4.1;overflow:hidden;border-radius:18px;isolation:isolate}
-.crew .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.crew .shot img{width:100%;height:100%;object-fit:cover;transition:transform var(--t2) var(--ease)}
 .crew a:hover .shot img,.crew a[data-state=hover] .shot img{transform:scale(1.05)}
 .crew .lab{position:absolute;left:0;right:0;bottom:0;padding:16px 14px;
            background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.86))}
@@ -390,7 +412,7 @@ body.is-locked{overflow:hidden}
 .fcol li{display:flex;align-items:center;gap:10px}
 .fcol a{font-size:clamp(17px,1.55vw,27px);font-weight:400;letter-spacing:-.02em;
         color:#fff;line-height:1.24;min-height:44px;display:flex;align-items:center;
-        transition:color .18s var(--ease)}
+        transition:color var(--t1) var(--ease)}
 .fcol a:hover,.fcol a[data-state=hover]{color:var(--ember-hot)}
 .fcol .ic{width:22px;height:22px;flex:0 0 auto;color:#fff}
 .fcol--stack{display:flex;flex-direction:column;gap:2px;align-items:flex-start}
@@ -400,74 +422,77 @@ body.is-locked{overflow:hidden}
 
 
 /* ── motion: the card grid loads itself ───────────────────────────────────
-   Everything below is opt-in under prefers-reduced-motion and fires once,
-   when the grid is first seen. Only transform and opacity animate, so it
-   stays on the compositor. */
+   Support tier, not hero. One stagger rhythm (--stag) drives every group, so
+   the delays are computed from an index rather than a table of magic numbers.
+   The whole arrival is capped under 800ms: a group that outlasts that stops
+   reading as one event. Only transform and opacity animate.
+   Follow-through: a card lands, then the thing attached to it settles one
+   stagger later, rather than everything stopping on the same frame. */
 @media (prefers-reduced-motion: no-preference){
 
-  .cards .card{transition:opacity .5s var(--ease),transform .6s var(--ease)}
-  .cards.is-armed .card{opacity:0;transform:translateY(18px)}
+  .cards .card{
+    transition:opacity var(--t2) var(--ease),transform var(--t2) var(--ease);
+    transition-delay:calc(var(--i,0) * var(--stag));
+  }
+  .cards.is-armed .card{opacity:0;transform:translateY(16px)}
   .cards.is-live .card{opacity:1;transform:none}
-  .cards.is-live .card:nth-child(2){transition-delay:.07s}
-  .cards.is-live .card:nth-child(3){transition-delay:.14s}
-  .cards.is-live .card:nth-child(4){transition-delay:.21s}
-  .cards.is-live .card:nth-child(5){transition-delay:.28s}
+  .cards .card:nth-child(2){--i:1}
+  .cards .card:nth-child(3){--i:2}
+  .cards .card:nth-child(4){--i:3}
+  .cards .card:nth-child(5){--i:4}
 
-  /* the dial fills like a meter taking a reading */
-  .dial b{transform-origin:bottom;transition:transform .55s cubic-bezier(.2,.9,.25,1)}
+  /* the dial fills like a meter taking a reading. Dense group, so a tighter
+     stagger than the cards: nine bars on the card rhythm would drag past 1s. */
+  .dial b{
+    transform-origin:bottom;
+    transition:transform var(--t2) var(--ease);
+    transition-delay:calc(200ms + var(--i,0) * 25ms);
+  }
   .cards.is-armed .dial b{transform:scaleY(0)}
   .cards.is-live .dial b{transform:scaleY(1)}
-  .cards.is-live .dial b:nth-child(1){transition-delay:.30s}
-  .cards.is-live .dial b:nth-child(2){transition-delay:.36s}
-  .cards.is-live .dial b:nth-child(3){transition-delay:.42s}
-  .cards.is-live .dial b:nth-child(4){transition-delay:.48s}
-  .cards.is-live .dial b:nth-child(5){transition-delay:.54s}
-  .cards.is-live .dial b:nth-child(6){transition-delay:.60s}
-  .cards.is-live .dial b:nth-child(7){transition-delay:.66s}
-  .cards.is-live .dial b:nth-child(8){transition-delay:.72s}
-  .cards.is-live .dial b:nth-child(9){transition-delay:.78s}
-  .gauge .num{transition:opacity .45s var(--ease) .62s,transform .45s var(--ease) .62s}
+  .dial b:nth-child(2){--i:1}  .dial b:nth-child(3){--i:2}
+  .dial b:nth-child(4){--i:3}  .dial b:nth-child(5){--i:4}
+  .dial b:nth-child(6){--i:5}  .dial b:nth-child(7){--i:6}
+  .dial b:nth-child(8){--i:7}  .dial b:nth-child(9){--i:8}
+  /* follow-through: the reading settles one stagger after the last bar */
+  .gauge .num{transition:opacity var(--t2) var(--ease) 400ms,
+                         transform var(--t2) var(--ease) 400ms}
   .cards.is-armed .gauge .num{opacity:0;transform:translateX(-8px)}
   .cards.is-live .gauge .num{opacity:1;transform:none}
 
   /* the timeline draws itself left to right, one step after another */
-  .tl .bar{transform-origin:left;transition:transform .5s cubic-bezier(.22,.85,.3,1)}
-  .tl .bar>*{transition:opacity .3s var(--ease)}
+  .tl .bar{
+    transform-origin:left;
+    transition:transform var(--t2) var(--ease);
+    transition-delay:calc(180ms + var(--i,0) * 40ms);
+  }
+  /* follow-through: each label appears one stagger behind its own bar */
+  .tl .bar>*{transition:opacity var(--t1) var(--ease);
+             transition-delay:calc(180ms + var(--i,0) * 40ms + var(--stag))}
   .cards.is-armed .tl .bar{transform:scaleX(0)}
   .cards.is-armed .tl .bar>*{opacity:0}
   .cards.is-live .tl .bar{transform:scaleX(1)}
   .cards.is-live .tl .bar>*{opacity:1}
-  .cards.is-live .tl .row:nth-child(1) .bar{transition-delay:.34s}
-  .cards.is-live .tl .row:nth-child(2) .bar{transition-delay:.46s}
-  .cards.is-live .tl .row:nth-child(3) .bar{transition-delay:.58s}
-  .cards.is-live .tl .row:nth-child(4) .bar{transition-delay:.70s}
-  .cards.is-live .tl .row:nth-child(5) .bar{transition-delay:.82s}
-  .cards.is-live .tl .row:nth-child(1) .bar>*{transition-delay:.60s}
-  .cards.is-live .tl .row:nth-child(2) .bar>*{transition-delay:.72s}
-  .cards.is-live .tl .row:nth-child(3) .bar>*{transition-delay:.84s}
-  .cards.is-live .tl .row:nth-child(4) .bar>*{transition-delay:.96s}
-  .cards.is-live .tl .row:nth-child(5) .bar>*{transition-delay:1.08s}
-  .tl .axis{transition:opacity .4s var(--ease) 1.0s}
+  .tl .row:nth-child(2) .bar{--i:1}  .tl .row:nth-child(3) .bar{--i:2}
+  .tl .row:nth-child(4) .bar{--i:3}  .tl .row:nth-child(5) .bar{--i:4}
+  .tl .axis{transition:opacity var(--t2) var(--ease) 400ms}
   .cards.is-armed .tl .axis{opacity:0}
   .cards.is-live .tl .axis{opacity:1}
 
-  /* the loader keeps loading: a segment fills, then a sweep passes over */
-  .loader b{transform-origin:left;transition:transform .45s var(--ease)}
+  /* the loader fills its four segments */
+  .loader b{
+    transform-origin:left;
+    transition:transform var(--t2) var(--ease);
+    transition-delay:calc(240ms + var(--i,0) * 40ms);
+  }
   .cards.is-armed .loader b{transform:scaleX(0)}
   .cards.is-live .loader b{transform:scaleX(1)}
-  .cards.is-live .loader b:nth-child(1){transition-delay:.34s}
-  .cards.is-live .loader b:nth-child(2){transition-delay:.44s}
-  .cards.is-live .loader b:nth-child(3){transition-delay:.54s}
-  .cards.is-live .loader b:nth-child(4){transition-delay:.64s}
-  .loader{position:relative;overflow:hidden}
-  .cards.is-live .loader::after{
-    content:"";position:absolute;inset:0;pointer-events:none;
-    background:linear-gradient(100deg,transparent 38%,rgba(255,255,255,.85) 50%,transparent 62%);
-    transform:translateX(-100%);animation:sweep 2.6s 1.1s var(--ease) infinite;
-  }
-  @keyframes sweep{0%{transform:translateX(-100%)}55%,100%{transform:translateX(115%)}}
+  .loader b:nth-child(2){--i:1}  .loader b:nth-child(3){--i:2}
+  .loader b:nth-child(4){--i:3}
 
-  .bigfig{transition:opacity .5s var(--ease) .72s,transform .5s var(--ease) .72s}
+  /* follow-through on the price card: the figure settles after its loader */
+  .bigfig{transition:opacity var(--t2) var(--ease) 420ms,
+                     transform var(--t2) var(--ease) 420ms}
   .cards.is-armed .bigfig{opacity:0;transform:translateY(10px)}
   .cards.is-live .bigfig{opacity:1;transform:none}
 }
@@ -592,7 +617,35 @@ body.is-locked{overflow:hidden}
               padding-right:env(safe-area-inset-right)}
 }
 
-@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+/* ── reduced motion: tiered, not a kill switch ────────────────────────────
+   The old rule was `*{transition:none}`, which is the over-correction the
+   accessibility guidance warns about: it removes the safe motion too, so
+   elements teleport between states and the focus ring snaps. It also breaks
+   any code waiting on transitionend, because a 0s transition fires no event.
+
+   Tier 1, removed: every loop and every large translate. Those live behind
+   `(prefers-reduced-motion: no-preference)` and simply never attach.
+   Tier 2, softened: movement becomes a short cross-fade, no displacement.
+   Tier 3, kept: opacity, colour and the focus ring, at 150ms. */
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms!important;      /* .01ms, not 0s: the event still fires */
+    animation-iteration-count:1!important;   /* no loop survives at near-zero duration */
+    transition-duration:.01ms!important;
+    scroll-behavior:auto!important;
+  }
+  /* Tier 3 restored on top of the net, so state changes stay legible */
+  a,button,.btn,.rbtn,.round,.rnd,.card,.circle,.navbox a,.work a,.crew a,
+  .pillbtn,.themer,.burger,.menu,.menu a,.topbar{
+    transition-property:opacity,color,background-color,border-color,box-shadow!important;
+    transition-duration:150ms!important;
+    transition-timing-function:var(--ease)!important;
+  }
+  /* Tier 2: nothing that is offered as a translate keeps its displacement */
+  html.js [data-rise],html.js [data-rise].is-in,
+  .cards .card,.menu a,.menu.is-open a{transform:none!important}
+  html.js [data-rise]{opacity:1!important}
+}
 
 /* documented in /g/system/ : the disabled look for any control */
 .btn[disabled],.btn.is-disabled,.rnd[disabled]{cursor:not-allowed;pointer-events:none}
@@ -608,13 +661,13 @@ body.is-locked{overflow:hidden}
   border:1px solid var(--glass-line);background:var(--glass);color:var(--fg);
   display:grid;place-items:center;position:relative;overflow:hidden;
   -webkit-backdrop-filter:blur(10px);backdrop-filter:blur(10px);
-  transition:background .18s var(--ease),border-color .18s var(--ease),transform .18s var(--ease);
+  transition:background var(--t1) var(--ease),border-color var(--t1) var(--ease),transform var(--t1) var(--ease);
 }
 .themer:hover{background:var(--fg);color:var(--bg);border-color:var(--fg)}
 .themer:active{transform:scale(.94)}
 .themer svg{grid-area:1/1;width:19px;height:19px;stroke:currentColor;fill:none;stroke-width:1.8;
             stroke-linecap:round;stroke-linejoin:round;
-            transition:opacity .28s var(--ease),transform .34s var(--emph,cubic-bezier(.2,0,0,1))}
+            transition:opacity var(--t1) var(--ease),transform var(--t2) var(--ease)}
 .themer .sun{opacity:0;transform:rotate(-70deg) scale(.6)}
 .themer .moon{opacity:1;transform:none}
 [data-theme=light] .themer .sun{opacity:1;transform:none}
@@ -631,65 +684,65 @@ body.is-locked{overflow:hidden}
 }
 
 @media (hover:hover) and (pointer:fine){
-  .card{transition:transform .3s var(--ease),box-shadow .3s var(--ease)}
+  .card{transition:transform var(--t1) var(--ease)}
   .card:hover{transform:translateY(-5px)}
-  .card--dark:hover{box-shadow:0 22px 50px rgba(0,0,0,.45)}
+  /* No hover shadow. The pseudo-element version is clipped by the card's own
+     overflow:hidden, and animating box-shadow directly repaints a large
+     blurred region. DESIGN.md prefers hairlines to drop shadows anyway, and
+     only one card of five had this, which read as an inconsistency. The 5px
+     lift is the whole gesture. */
 
   .btn{position:relative}
-  .btn i{transition:transform .24s var(--ease)}
+  .btn i{transition:transform var(--t1) var(--ease)}
   .btn:hover i{transform:translateX(3px)}
 
-  .pillbtn span{transition:transform .28s var(--emph,cubic-bezier(.2,0,0,1))}
+  .pillbtn span{transition:transform var(--t1) var(--ease)}
   .pillbtn:hover span{transform:rotate(90deg)}
 
-  .work a h3{transition:transform .26s var(--ease)}
+  .work a h3{transition:transform var(--t1) var(--ease)}
   .work a:hover h3{transform:translateX(5px)}
 
-  .crew a{transition:transform .3s var(--ease)}
+  .crew a{transition:transform var(--t1) var(--ease)}
   .crew a:hover{transform:translateY(-6px)}
-  .crew .lab{transition:transform .3s var(--ease)}
+  .crew .lab{transition:transform var(--t1) var(--ease)}
   .crew a:hover .lab{transform:translateY(-3px)}
 
-  .circle{transition:transform .34s var(--emph,cubic-bezier(.2,0,0,1)),
-                     background-color .24s var(--ease),color .24s var(--ease)}
+  .circle{transition:transform var(--t2) var(--ease),
+                     background-color var(--t1) var(--ease),color var(--t1) var(--ease)}
   .circle:hover{background:var(--ember);color:#fff}
   .circle--pic:hover{background:transparent}
 
-  .fcol a{position:relative;transition:color .18s var(--ease),transform .22s var(--ease)}
+  .fcol a{position:relative;transition:color var(--t1) var(--ease),transform .22s var(--ease)}
   .fcol a:hover{transform:translateX(4px)}
 
   .navbox a::after{
     content:"";position:absolute;left:14px;right:14px;bottom:6px;height:1.5px;
     background:currentColor;transform:scaleX(0);transform-origin:right;
-    transition:transform .26s var(--ease);
+    transition:transform var(--t1) var(--ease);
   }
   .navbox a:hover::after{transform:scaleX(1);transform-origin:left}
   .navbox a[aria-current]::after{display:none}
 
-  .lib-toc a,.replay{transition:background .16s var(--ease),transform .16s var(--ease)}
+  .lib-toc a,.replay{transition:background var(--t1) var(--ease),transform var(--t1) var(--ease)}
   .replay:hover{transform:translateY(-1px)}
 }
 
 /* one quiet arrival per group, opacity and a short lift, never on body copy */
 @media (prefers-reduced-motion: no-preference){
   html.js [data-rise]{opacity:0;transform:translateY(14px);
-    transition:opacity .55s var(--ease),transform .6s var(--ease)}
+    transition:opacity var(--t2) var(--ease),transform var(--t2) var(--ease)}
   html.js [data-rise].is-in{opacity:1;transform:none}
   html.js [data-rise][data-rise-d="1"]{transition-delay:.08s}
-  html.js [data-rise][data-rise-d="2"]{transition-delay:.16s}
-  html.js [data-rise][data-rise-d="3"]{transition-delay:.24s}
+  html.js [data-rise][data-rise-d="2"]{transition-delay:var(--t1)}
+  html.js [data-rise][data-rise-d="3"]{transition-delay:var(--t1)}
 
   /* the hero settles rather than simply appearing */
   html.js .hero h1,html.js .hero .pillbtn,html.js .hero__btm > div:last-child{
-    animation:heroIn .8s var(--ease) backwards}
+    animation:heroIn var(--t4) var(--ease) backwards}
   html.js .hero .pillbtn{animation-delay:.12s}
-  html.js .hero__btm > div:last-child{animation-delay:.2s}
-  @keyframes heroIn{from{opacity:0;transform:translateY(20px)}}
+  html.js .hero__btm > div:last-child{animation-delay:var(--t1)}
+  @keyframes heroIn{from{opacity:0;transform:translateY(16px)}}
 
-  /* the footer mark breathes, very slightly, so the plate is never static */
-  .foot__mark{animation:markBreathe 9s ease-in-out infinite}
-  @keyframes markBreathe{0%,100%{transform:translate(-50%,-50%) scale(1)}
-                         50%{transform:translate(-50%,-50%) scale(1.035)}}
 }
 
 /* the hero image is always dark, whatever the theme */
@@ -785,96 +838,130 @@ body.is-locked{overflow:hidden}
 /* selection is the brand */
 ::selection{background:var(--teal);color:#F2EFEB}
 
-/* ── the verdict circles: an idle loop, and a different move on hover ─────
-   Idle is a slow vertical drift on a 7s cycle, each circle offset so the row
-   reads as a chain settling rather than five things bouncing together. The
-   accent circle also pans its own image. Hover is deliberately a different
-   gesture: it lifts, scales and takes the brand fill, so pointing at one
-   never looks like the idle. */
+/* ── the hero move, and the only ambient loops on the page ────────────────
+   Direction: one hero per frame. The verdict circles ARE the argument
+   (nothing, automation, AI, breakdown, run), so they get the page's single
+   bold move and everything else holds still.
+
+   The old build drifted all five circles at once on offset phases, which put
+   5 of 5 elements in motion and left the eye no home. This is a wave: each
+   circle holds for 70% of its cycle and acts for 30%, so at any instant one
+   or two are moving and the row reads left to right, which is the sequence
+   the copy is describing.
+
+   Every loop below is bounded and gated. `.mo` is added by site.js when the
+   element enters the viewport and removed when it leaves, so nothing
+   animates off-screen and no loop runs forever in one sitting. */
 @media (prefers-reduced-motion: no-preference){
-  .circle{animation:circleDrift 7s ease-in-out infinite;will-change:transform}
-  .circle:nth-child(1){animation-delay:0s}
-  .circle:nth-child(2){animation-delay:-1.4s}
-  .circle:nth-child(3){animation-delay:-2.8s}
-  .circle:nth-child(4){animation-delay:-4.2s}
-  .circle:nth-child(5){animation-delay:-5.6s}
-  @keyframes circleDrift{
-    0%,100%{transform:translateY(0) scale(1)}
-    50%    {transform:translateY(-14px) scale(1.018)}
+
+  /* THE HERO MOVE. The five circles land left to right, in the order the
+     copy argues: nothing, automation, AI, breakdown, run. It runs once per
+     arrival and then the row rests, so the page's one bold moment is also
+     the one that carries the sentence.
+
+     It is deliberately off the 800ms group cap. That cap keeps support-tier
+     groups reading as a single event; the hero is the one thing allowed to
+     take its time, at 140ms apart and 600ms each, landing at 1160ms. The
+     previous build looped a 12px drift here instead, which put all five in
+     perpetual motion and was too small to read as anything at all. */
+  /* Nothing is hidden at rest, by CSS or by a class. `backwards` fill does
+     the hiding: the circle only takes the `from` keyframe once the animation
+     is actually attached, and only for the length of its own delay. Hiding
+     with a rule that waits on a class leaves the row permanently invisible
+     any time the class does not arrive, which is exactly what happened here
+     on the first attempt and what a full-page screenshot showed. */
+  .circles.mo .circle{
+    animation:circleLand 600ms var(--ease) backwards;
+    animation-delay:calc(var(--i,0) * 140ms);
   }
-  /* the accent circle's plate drifts inside its own mask */
-  .circle--pic img{animation:platePan 18s ease-in-out infinite;will-change:transform}
+  .circles .circle:nth-child(2){--i:1}
+  .circles .circle:nth-child(3){--i:2}
+  .circles .circle:nth-child(4){--i:3}
+  .circles .circle:nth-child(5){--i:4}
+  @keyframes circleLand{
+    from{opacity:0;transform:translateY(16px) scale(.92)}
+    to  {opacity:1;transform:none}
+  }
+  .circles.mo .circle{opacity:1;transform:none}
+
+  /* the accent circle's plate drifts inside its own mask: the hero's own
+     secondary layer, not a second hero competing with it */
+  .circles.mo .circle--pic img{animation:platePan 20s var(--ease) 2}
   @keyframes platePan{
     0%,100%{transform:scale(1.16) translate(-2%,-1%)}
-    50%    {transform:scale(1.24) translate(2%,2%)}
-  }
-  /* the teal ring pulses very slightly so the accent reads as live */
-  .circle--pic{animation:circleDrift 7s ease-in-out infinite,ringPulse 3.4s ease-in-out infinite}
-  @keyframes ringPulse{
-    0%,100%{box-shadow:0 0 0 3px color-mix(in srgb,var(--teal) 70%,transparent)}
-    50%    {box-shadow:0 0 0 7px color-mix(in srgb,var(--teal) 34%,transparent)}
+    50%    {transform:scale(1.22) translate(2%,2%)}
   }
 
-  /* hover is a different gesture from the idle: it stops drifting and commits */
+  /* the teal ring: a transform+opacity pseudo-element, so the pulse is
+     compositor work. The old build animated box-shadow, which repaints a
+     large blurred region on every frame of an infinite loop. */
+  .circle--pic::after{
+    content:"";position:absolute;inset:-3px;border-radius:50%;
+    border:3px solid var(--teal);opacity:1;pointer-events:none;
+  }
+  .circles.mo .circle--pic::after{animation:ringPulse 3.2s var(--ease) 4}
+  @keyframes ringPulse{
+    0%,100%{transform:scale(1);opacity:.85}
+    50%    {transform:scale(1.06);opacity:.3}
+  }
+
+  /* hover is deliberately a different gesture from the wave: the circle stops
+     drifting and commits. No letter-spacing, which is a layout property and
+     reflowed the row on every frame of the hover. */
   @media (hover:hover) and (pointer:fine){
-    .circle:hover{
+    /* The !important is load-bearing, not a specificity hack. A paused CSS
+       animation still supplies the element's transform, and animations beat
+       normal declarations in the cascade, so `transform:translateY(-18px)`
+       was silently ignored and the circle never lifted. Only an important
+       declaration outranks a running or paused animation. Measured: 0px of
+       lift before this, 18px after. */
+    .circle:hover,.circle[data-state=hover]{
       animation-play-state:paused;
-      transform:translateY(-22px) scale(1.07);
+      transform:translateY(-18px) scale(1.06)!important;
       background:var(--amber);color:#04070C;
-      transition:transform .34s var(--emph,cubic-bezier(.2,0,0,1)),
-                 background-color .24s var(--ease),color .24s var(--ease);
-      z-index:5;
+      transition:transform var(--t2) var(--ease),
+                 background-color var(--t1) var(--ease),color var(--t1) var(--ease);
+      z-index:5;will-change:transform;
     }
-    .circle--pic:hover{background:transparent;transform:translateY(-22px) scale(1.1)}
-    .circle--pic:hover img{animation-play-state:paused;transform:scale(1.3)}
-    .circle:hover span,.circle:hover{letter-spacing:.09em}
+    .circle--pic:hover,.circle--pic[data-state=hover]{background:transparent;transform:translateY(-18px) scale(1.08)!important}
+    .circle--pic:hover img,.circle--pic[data-state=hover] img{animation-play-state:paused;transform:scale(1.26)!important}
   }
 }
 
-/* ── LOOP ANIMATIONS ──────────────────────────────────────────────────────
-   Distinct from the first-load sequence above. These never stop while the
-   element is on screen, and none of them move layout. Kept slow (3.4s to 18s)
-   so the page reads as alive rather than busy. */
+/* ── ambient loops: one per frame, and that is the whole budget ───────────
+   Cut in this pass, and why: the badge glow and the CTA arrow nudge
+   loop-animated the hero while it is being read; the dial pulse said the
+   reading was unstable, which is the opposite of what the number means; the
+   rail hint pulsed a scrollbar that carries no meaning; the footer mark
+   breathed a full-bleed element, which is a vestibular trigger; the loader
+   shine ran a loading metaphor on a price that is not loading. Ten loops
+   became four, and each of the four is the only one in its frame. */
 @media (prefers-reduced-motion: no-preference){
 
-  /* the dial keeps taking its reading: the filled bars breathe in sequence */
-  .dial b.on{animation:dialPulse 2.8s ease-in-out infinite;transform-origin:bottom}
-  .dial b.on:nth-child(1){animation-delay:0s}
-  .dial b.on:nth-child(2){animation-delay:.16s}
-  .dial b.on:nth-child(3){animation-delay:.32s}
-  .dial b.on:nth-child(4){animation-delay:.48s}
-  @keyframes dialPulse{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.62;transform:scaleY(.9)}}
+  /* hero frame: the liveness dot beside the reply promise. It is the only
+     thing moving while the headline is read. */
+  .trust p b::after{
+    content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+    background:var(--amber);margin-left:7px;vertical-align:middle;
+  }
+  .trust.mo p b::after{animation:dot 3.2s var(--ease) 5}
+  @keyframes dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.85)}}
 
-  /* a scan passes along the timeline, left to right, on a long cycle */
+  /* cards frame: a scan passes along the timeline, saying the process runs */
   .tl{position:relative;overflow:hidden}
   .tl::after{
     content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
     background:linear-gradient(100deg,transparent 42%,
       color-mix(in srgb,var(--teal) 26%,transparent) 50%,transparent 58%);
-    transform:translateX(-100%);animation:tlScan 5.2s var(--ease) infinite;
+    transform:translateX(-100%);
   }
+  .tl.mo::after{animation:tlScan 5.2s var(--ease) 1s 3}
   @keyframes tlScan{0%{transform:translateX(-100%)}60%,100%{transform:translateX(110%)}}
-
-  /* the headline badge glows very slightly, so the amber is never inert */
-  .badge{animation:badgeGlow 3.6s ease-in-out infinite}
-  @keyframes badgeGlow{
-    0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--amber) 55%,transparent)}
-    50%    {box-shadow:0 0 0 9px color-mix(in srgb,var(--amber) 0%,transparent)}
-  }
-
-  /* the free-breakdown dot beside the trust line keeps blinking slowly */
-  .trust p b::after{
-    content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
-    background:var(--amber);margin-left:7px;vertical-align:middle;
-    animation:dot 2.2s ease-in-out infinite;
-  }
-  @keyframes dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.8)}}
-
-  /* the sector row's progress rail drifts while idle, hinting it scrolls */
-  .workbar .rail i{animation:railHint 4.4s ease-in-out infinite}
-  @keyframes railHint{0%,100%{opacity:1}50%{opacity:.55}}
-
-  /* the arrow on the primary button nudges once every few seconds */
-  .hero .btn--dark i{animation:nudge 4s ease-in-out infinite}
-  @keyframes nudge{0%,86%,100%{transform:translateX(0)}92%{transform:translateX(4px)}}
 }
+
+/* ── the motion-language table, /g/system/ only ───────────────────────── */
+.mtab{width:100%;border-collapse:collapse;font-size:12.5px}
+.mtab td{padding:9px 16px;border-bottom:1px solid var(--line);vertical-align:top}
+.mtab tr:last-child td{border-bottom:0}
+.mtab td:first-child{width:34%;color:var(--fg-dim);white-space:nowrap}
+.mtab code{font-size:11.5px;background:var(--glass);padding:1px 5px;border-radius:4px}

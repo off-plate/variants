@@ -374,7 +374,7 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
         <div class="spec__head"><b>Sticky bar, three states</b><span>.topbar / .is-stuck / .is-hidden</span></div>
         <div class="spec__body spec__body--bar">
           <div style="width:100%;position:relative;height:74px;border-bottom:1px solid var(--lib-line);
-                      background:linear-gradient(90deg,#2a1409,#150a05)">
+                      background:linear-gradient(90deg,#002B59,#04070C)">
             <div class="topbar" style="position:absolute;inset:0 0 auto 0">
               <div class="topbar__in" style="padding-inline:20px">
                 <span class="wordmark"><b>OFF</b><b>PLATE</b></span>
@@ -383,7 +383,7 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
             </div>
           </div>
           <div style="width:100%;position:relative;height:64px;border-bottom:1px solid var(--lib-line);
-                      background:linear-gradient(90deg,#2a1409,#150a05)">
+                      background:linear-gradient(90deg,#002B59,#04070C)">
             <div class="topbar is-stuck" style="position:absolute;inset:0 0 auto 0">
               <div class="topbar__in" style="padding-inline:20px">
                 <span class="wordmark"><b>OFF</b><b>PLATE</b></span>
@@ -393,7 +393,7 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
             </div>
           </div>
           <div style="width:100%;position:relative;height:64px;overflow:hidden;
-                      background:linear-gradient(90deg,#2a1409,#150a05)">
+                      background:linear-gradient(90deg,#002B59,#04070C)">
             <div class="topbar is-stuck is-hidden" style="position:absolute;inset:0 0 auto 0">
               <div class="topbar__in" style="padding-inline:20px"><span class="wordmark"><b>OFF</b><b>PLATE</b></span></div>
             </div>
@@ -491,7 +491,7 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
           <span class="bigfig" style="margin-top:24px;display:block">12,000 CZK</span>
           <p style="color:#4A4A4A;font-size:12.5px;margin-top:10px">One off, no commitment.</p>
         </div>
-        <div class="spec__foot">The loader is decorative and keeps sweeping; the figure never counts up.</div>
+        <div class="spec__foot">The loader fills once on arrival and then holds. The figure never counts up.</div>
       </div>
     </div>
   </div>
@@ -541,17 +541,32 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
 <section class="sec" id="motion">
   <div class="lib">
     <h2>MOTION</h2>
-    <p class="note">Three kinds, kept apart on purpose. <b>First load</b> runs once when a block is
-       first seen and then stops. <b>Loop</b> never stops while the element is on screen. <b>Hover</b>
-       is pointer-driven and is always a different gesture from the loop, so pointing at something never
-       looks like the thing it was already doing. Only <code>transform</code> and <code>opacity</code>
-       animate; everything is inside <code>prefers-reduced-motion: no-preference</code>, and under
-       <code>reduce</code> nothing arms and every element renders at its final state.</p>
+    <p class="note">The personality is Corporate: calm and sharp, no overshoot, because a firm whose
+       argument is <i>you probably need less than you think</i> cannot move like a toy. Two curves do
+       every move on the site. Durations are multiples of one 200ms base unit. One stagger rhythm.
+       One hero move, the verdict circles, and everything else holds still so the eye has a home.</p>
 
-    <h3 class="grp">First load <span>runs once, then stops</span></h3>
+    <div class="spec">
+      <div class="spec__head"><b>Motion language</b><span>the whole vocabulary</span></div>
+      <div class="spec__body" style="display:block;padding:0">
+        <table class="mtab">
+          <tr><td>Personality</td><td><b>Corporate</b> · calm and sharp, 0% overshoot</td></tr>
+          <tr><td>Entrances, landings</td><td><code>--ease-out</code> <code>cubic-bezier(.2,0,0,1)</code> · ~90% of every move</td></tr>
+          <tr><td>Exits</td><td><code>--ease-in</code> <code>cubic-bezier(.7,0,.84,0)</code> · the only other curve</td></tr>
+          <tr><td>Base unit</td><td><code>--t1</code> 200ms micro · <code>--t2</code> 400ms interface · <code>--t4</code> 800ms hero</td></tr>
+          <tr><td>Stagger</td><td><code>--stag</code> 60ms, top to bottom · 25 to 40ms inside dense groups</td></tr>
+          <tr><td>Intensity budget</td><td>travel &le; 16px · scale .96 to 1.08 · no overshoot anywhere</td></tr>
+          <tr><td>Group cap</td><td>800ms from first to last element. Measured: 786ms</td></tr>
+          <tr><td>Ambient budget</td><td>one loop per frame, bounded runs, paused off screen</td></tr>
+        </table>
+      </div>
+      <div class="spec__foot">A third curve is a defect. So is a duration off the unit.</div>
+    </div>
+
+    <h3 class="grp">First load</h3>
     <div class="grid g2">
       <div class="motion">
-        <div class="motion__head"><b>Card grid</b><span>opacity + 18px rise · 500ms · 70ms stagger</span>
+        <div class="motion__head"><b>Card grid</b><span>opacity + 16px rise · 400ms · 60ms stagger</span>
           <button class="replay" data-replay="grid" type="button">Replay</button></div>
         <div class="motion__body">
           <div class="cards" data-demo="grid" style="padding:0;grid-template-columns:repeat(3,1fr);gap:8px">
@@ -561,9 +576,8 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
           </div>
         </div>
       </div>
-
       <div class="motion">
-        <div class="motion__head"><b>Dial fill</b><span>scaleY 0 to 1 · 550ms · 60ms stagger</span>
+        <div class="motion__head"><b>Dial fill</b><span>scaleY 0 to 1 · 400ms · 25ms stagger, 9 bars</span>
           <button class="replay" data-replay="dial" type="button">Replay</button></div>
         <div class="motion__body">
           <div class="cards" data-demo="dial" style="padding:0;display:block">
@@ -574,9 +588,8 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
           </div>
         </div>
       </div>
-
       <div class="motion">
-        <div class="motion__head"><b>Timeline draw</b><span>scaleX 0 to 1 · 500ms · 120ms stagger</span>
+        <div class="motion__head"><b>Timeline draw</b><span>scaleX 0 to 1 · 400ms · 40ms stagger, label +60ms</span>
           <button class="replay" data-replay="tl" type="button">Replay</button></div>
         <div class="motion__body">
           <div class="cards" data-demo="tl" style="padding:0;display:block">
@@ -591,9 +604,8 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
           </div>
         </div>
       </div>
-
       <div class="motion">
-        <div class="motion__head"><b>Hero settle</b><span>opacity + 20px rise · 800ms · 3 steps</span>
+        <div class="motion__head"><b>Hero settle</b><span>opacity + 16px rise · 800ms · 3 steps, 120ms apart</span>
           <button class="replay" data-replay="hero" type="button">Replay</button></div>
         <div class="motion__body" style="background:var(--invert);color:var(--invert-fg)">
           <div data-demo="hero" class="herodemo">
@@ -605,100 +617,64 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
       </div>
     </div>
 
-    <h3 class="grp">Loop <span>never stops while on screen</span></h3>
-    <div class="grid g3">
+    <h3 class="grp">Loop</h3>
+    <p class="note">Four, one per frame of the page, and that is the entire budget. Each attaches through
+       a <code>.mo</code> class that <code>site.js</code> adds when the element enters the viewport and
+       removes when it leaves, so nothing animates off screen. Each has a bounded iteration count, so no
+       loop runs indefinitely in one sitting.</p>
+    <div class="grid g2">
       <div class="motion">
-        <div class="motion__head"><b>Verdict circles drift</b><span>translateY 14px · 7s · offset per circle</span></div>
+        <div class="motion__head"><b>Verdict wave</b><span>translateY 12px · 5s &times;3 · holds 4s, acts 1s · 600ms apart</span></div>
         <div class="motion__body" style="background:var(--bg);display:flex;justify-content:center;padding:30px 10px">
           <div class="circles" style="padding:0;gap:0">
             <div class="circle" style="width:92px;font-size:7.5px;margin-left:0">Nothing</div>
             <div class="circle" style="width:92px;font-size:7.5px;margin-left:-8px">Automation</div>
             <div class="circle circle--pic" style="width:98px;margin-left:-8px"><img src="../art/o1.jpg" alt=""><span style="font-size:14px">AI</span></div>
+            <div class="circle" style="width:92px;font-size:7.5px;margin-left:-8px">Breakdown</div>
+            <div class="circle" style="width:92px;font-size:7.5px;margin-left:-8px">Run</div>
           </div>
         </div>
       </div>
-
       <div class="motion">
-        <div class="motion__head"><b>Accent ring pulse</b><span>box-shadow 3 to 7px · 3.4s</span></div>
+        <div class="motion__head"><b>Accent ring</b><span>scale 1 to 1.06, opacity .85 to .3 · 3.2s &times;4</span></div>
         <div class="motion__body" style="background:var(--bg);display:flex;justify-content:center;align-items:center;padding:30px">
-          <div class="circle circle--pic" style="width:120px;margin:0"><img src="../art/o4.jpg" alt=""><span style="font-size:17px">AI</span></div>
-        </div>
-      </div>
-
-      <div class="motion">
-        <div class="motion__head"><b>Plate pan</b><span>scale 1.16 to 1.24 · 18s</span></div>
-        <div class="motion__body" style="background:var(--bg);display:flex;justify-content:center;align-items:center;padding:30px">
-          <div class="circle circle--pic" style="width:120px;margin:0"><img src="../art/o3.jpg" alt=""><span style="font-size:17px">AI</span></div>
-        </div>
-      </div>
-
-      <div class="motion">
-        <div class="motion__head"><b>Dial breathe</b><span>opacity + scaleY · 2.8s · staggered</span></div>
-        <div class="motion__body">
-          <div class="gauge" style="margin-top:0;padding-top:0">
-            <span class="dial"><b class="on" style="height:26%"></b><b class="on" style="height:38%"></b><b class="on" style="height:52%"></b><b class="on" style="height:66%"></b><b style="height:80%"></b><b style="height:92%"></b><b style="height:78%"></b><b style="height:60%"></b><b style="height:42%"></b></span>
-            <span class="num">2 of 5<span>tasks need AI</span></span>
+          <div class="circles" style="padding:0;gap:0;justify-content:center">
+            <div class="circle circle--pic" style="width:120px;margin:0"><img src="../art/o4.jpg" alt=""><span style="font-size:17px">AI</span></div>
           </div>
         </div>
       </div>
-
       <div class="motion">
-        <div class="motion__head"><b>Timeline scan</b><span>teal sweep · 5.2s</span></div>
+        <div class="motion__head"><b>Timeline scan</b><span>teal sweep, translateX · 5.2s &times;3</span></div>
         <div class="motion__body">
           <div class="tl" style="margin-top:0">
             <div class="row"><span class="bar hot" style="left:0;width:20%"><b>Call</b></span></div>
             <div class="row"><span class="bar" style="left:14%;width:24%"><b>Breakdown</b></span></div>
             <div class="row"><span class="bar" style="left:32%;width:26%"><b>Pilot</b></span></div>
-            <div class="row"><span class="bar" style="left:52%;width:30%"><b>Build</b></span></div>
           </div>
         </div>
       </div>
-
       <div class="motion">
-        <div class="motion__head"><b>Loader sweep</b><span>highlight pass · 2.6s</span></div>
-        <div class="motion__body">
-          <div class="cards is-live" style="padding:0;display:block">
-            <span class="loader"><b></b><b></b><b></b><b></b></span>
-            <span class="bigfig" style="margin-top:20px;display:block;font-size:32px">12,000 CZK</span>
+        <div class="motion__head"><b>Liveness dot</b><span>opacity 1 to .35, scale .85 · 3.2s &times;5</span></div>
+        <div class="motion__body" style="background:var(--invert);color:var(--invert-fg);display:flex;align-items:center">
+          <div class="trust">
+            <span class="faces"><i><img src="../art/chip.jpg" alt=""></i></span>
+            <p style="color:var(--invert-fg)"><b style="color:var(--invert-fg)">Free breakdown</b>Michael Florian replies, usually by end of day</p>
           </div>
-        </div>
-      </div>
-
-      <div class="motion">
-        <div class="motion__head"><b>Badge glow</b><span>expanding ring · 3.6s</span></div>
-        <div class="motion__body" style="background:var(--invert);display:flex;align-items:center;justify-content:center;padding:34px">
-          <span class="badge" style="font-size:13px">3 <i>verdicts</i></span>
-        </div>
-      </div>
-
-      <div class="motion">
-        <div class="motion__head"><b>Arrow nudge</b><span>translateX 4px once every 4s</span></div>
-        <div class="motion__body" style="background:var(--invert);display:flex;align-items:center;justify-content:center;padding:30px">
-          <span class="hero" style="min-height:0;padding:0;background:none;display:block">
-            <span class="btn btn--dark">Book a call <i>&rarr;</i></span>
-          </span>
-        </div>
-      </div>
-
-      <div class="motion">
-        <div class="motion__head"><b>Footer mark breathe</b><span>scale 1 to 1.035 · 9s</span></div>
-        <div class="motion__body" style="background:#04070C;position:relative;overflow:hidden;min-height:150px">
-          <p class="foot__mark" style="position:absolute;font-size:74px;filter:blur(3px)">OFF<br>PLATE</p>
         </div>
       </div>
     </div>
 
-    <h3 class="grp">Hover <span>pointer only, and never the loop's gesture</span></h3>
+    <h3 class="grp">Hover</h3>
     <div class="grid g3">
       <div class="motion">
-        <div class="motion__head"><b>Circle commits</b><span>lift 22px + amber fill · 340ms</span>
+        <div class="motion__head"><b>Circle commits</b><span>lift 18px + scale 1.06 + amber fill · 400ms</span>
           <button class="replay" data-replay="circ" type="button">Play</button></div>
-        <div class="motion__body" style="background:var(--bg);display:flex;justify-content:center;padding:34px">
-          <div class="circle" data-demo="circ" style="width:110px;font-size:9px;margin:0">Automation</div>
+        <div class="motion__body" style="background:var(--bg);display:flex;justify-content:center;padding:26px">
+          <div class="circle" data-demo="circ" style="width:120px;font-size:9px;margin:0">Automation</div>
         </div>
       </div>
       <div class="motion">
-        <div class="motion__head"><b>Image scale</b><span>scale 1.05 · 500ms</span>
+        <div class="motion__head"><b>Image scale</b><span>scale 1.05 · 400ms</span>
           <button class="replay" data-replay="hoverimg" type="button">Play</button></div>
         <div class="motion__body" style="background:var(--relief)">
           <div class="work" data-demo="hoverimg" style="width:100%;padding:0;overflow:visible;cursor:default">
@@ -709,7 +685,7 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
         </div>
       </div>
       <div class="motion">
-        <div class="motion__head"><b>Round button</b><span>rotate 45° · 200ms</span>
+        <div class="motion__head"><b>Round button</b><span>rotate 45&deg; · 200ms</span>
           <button class="replay" data-replay="rot" type="button">Play</button></div>
         <div class="motion__body" style="background:var(--relief);display:flex;align-items:center;gap:14px">
           <a class="round" href="#motion" data-demo="rot" aria-label="Demo">&#8599;</a>
@@ -717,6 +693,16 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
         </div>
       </div>
     </div>
+
+    <h3 class="grp">Cut in this pass</h3>
+    <p class="note">Ten ambient loops became four. What went, and the reason, so none of it comes back
+       by accident: the <b>badge glow</b> and the <b>CTA arrow nudge</b> animated the hero while it is
+       being read; the <b>dial breathe</b> made a finished reading look unstable, which is the opposite
+       of what the number says; the <b>rail hint</b> pulsed a scrollbar that carries no meaning; the
+       <b>footer mark breathe</b> scaled a full-bleed element, which is a vestibular trigger; the
+       <b>loader sweep</b> ran a loading metaphor over a price that is not loading. The <b>ring pulse</b>
+       survived but was rebuilt: it animated <code>box-shadow</code>, repainting a large blurred region
+       on every frame, and is now a transform and opacity on a pseudo-element.</p>
   </div>
 </section>
 
