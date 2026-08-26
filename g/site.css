@@ -73,6 +73,21 @@ html{color-scheme:dark}
 }
 *,*::before,*::after{box-sizing:border-box}
 html{-webkit-text-size-adjust:100%;scrollbar-gutter:stable}
+
+/* ── anchor navigation ────────────────────────────────────────────────────
+   Every nav item and every in-page CTA was a hard jump. Native smooth scroll,
+   not a scroll-hijacking library: the page keeps the browser's own scrolling,
+   the back button, find-in-page and a trackpad flick all behave normally, and
+   it costs nothing to ship. Opt-in under no-preference, because smooth
+   scrolling is a Tier 1 vestibular trigger.
+
+   scroll-margin-top is the other half, and the half that is usually missed:
+   without it every section lands underneath the fixed bar. It clears the
+   condensed bar plus a little air. */
+@media (prefers-reduced-motion: no-preference){
+  html{scroll-behavior:smooth}
+}
+:target,#verdikty,#cenik,#obory,#novinky,#kontakt{scroll-margin-top:96px}
 body{
   margin:0;background:var(--bg);color:var(--fg);
   transition:background-color var(--t1) var(--ease),color var(--t1) var(--ease);
@@ -306,8 +321,14 @@ body.is-locked{overflow:hidden}
         margin-left:clamp(-30px,-1.4vw,-10px);position:relative;isolation:isolate;
         transition:transform var(--t1) var(--ease)}
 .circle:first-child{margin-left:0}
-.circle:nth-child(1),.circle:nth-child(5){transform:translateY(clamp(12px,1.6vw,42px))}
-.circle:nth-child(2),.circle:nth-child(4){transform:translateY(clamp(-52px,-2.2vw,-16px))}
+/* The row's resting stagger lives in --y, not in a transform. Anything that
+   moves a circle then composes with it: translateY(calc(var(--y) - 18px)).
+   Writing it as a flat transform is what flattened the row, because the
+   landing animation and the hover both had to end on `transform:none` or
+   an absolute value, and either one throws the stagger away. */
+.circle{--y:0px;transform:translateY(var(--y))}
+.circle:nth-child(1),.circle:nth-child(5){--y:clamp(12px,1.6vw,42px)}
+.circle:nth-child(2),.circle:nth-child(4){--y:clamp(-52px,-2.2vw,-16px)}
 
 .circle--pic{overflow:hidden;z-index:3;width:clamp(126px,14.6vw,368px);
              background:var(--invert);color:#fff}
@@ -372,8 +393,12 @@ body.is-locked{overflow:hidden}
            background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.86))}
 .crew .lab b{display:block;font-size:12px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
 .crew .lab span{display:block;font-size:10px;color:rgba(255,255,255,.78);margin-top:4px}
-.crew a:nth-child(1),.crew a:nth-child(5){transform:scale(.9)}
-.crew a:nth-child(2),.crew a:nth-child(4){transform:scale(.96)}
+/* Same rule as the verdict circles: the row's resting fan lives in --s, so
+   anything that moves a card composes with it. As a flat transform the hover
+   overwrote it and the outer cards jumped 11% in size on pointer-over. */
+.crew a{--s:1;transform:scale(var(--s))}
+.crew a:nth-child(1),.crew a:nth-child(5){--s:.9}
+.crew a:nth-child(2),.crew a:nth-child(4){--s:.96}
 .slider{display:flex;justify-content:center;margin-top:30px}
 .slider .bar{display:flex;align-items:center;gap:14px;background:var(--paper);color:var(--ink);
              border-radius:999px;padding:5px 5px 5px 26px;min-width:min(420px,72vw)}
@@ -503,7 +528,7 @@ body.is-locked{overflow:hidden}
   .card--wide{grid-column:span 2}
   .work a{flex:0 0 clamp(240px,40vw,340px)}
   .crew{grid-template-columns:repeat(3,minmax(0,1fr))}
-  .crew a:nth-child(n){transform:none}
+  .crew a:nth-child(n){--s:1}
   .crew a:nth-child(4),.crew a:nth-child(5){display:none}
   .foot__cols{grid-template-columns:1fr 1fr;gap:26px}
   .fcol--stack{grid-column:span 2}
@@ -703,7 +728,7 @@ body.is-locked{overflow:hidden}
   .work a:hover h3{transform:translateX(5px)}
 
   .crew a{transition:transform var(--t1) var(--ease)}
-  .crew a:hover{transform:translateY(-6px)}
+  .crew a:hover{transform:translateY(-6px) scale(var(--s))}
   .crew .lab{transition:transform var(--t1) var(--ease)}
   .crew a:hover .lab{transform:translateY(-3px)}
 
@@ -715,13 +740,8 @@ body.is-locked{overflow:hidden}
   .fcol a{position:relative;transition:color var(--t1) var(--ease),transform .22s var(--ease)}
   .fcol a:hover{transform:translateX(4px)}
 
-  .navbox a::after{
-    content:"";position:absolute;left:14px;right:14px;bottom:6px;height:1.5px;
-    background:currentColor;transform:scaleX(0);transform-origin:right;
-    transition:transform var(--t1) var(--ease);
-  }
-  .navbox a:hover::after{transform:scaleX(1);transform-origin:left}
-  .navbox a[aria-current]::after{display:none}
+  /* No hover underline. The pill already fills on hover, so the rule drew a
+     second, competing hover affordance on the same control. */
 
   .lib-toc a,.replay{transition:background var(--t1) var(--ease),transform var(--t1) var(--ease)}
   .replay:hover{transform:translateY(-1px)}
@@ -879,10 +899,9 @@ body.is-locked{overflow:hidden}
   .circles .circle:nth-child(4){--i:3}
   .circles .circle:nth-child(5){--i:4}
   @keyframes circleLand{
-    from{opacity:0;transform:translateY(16px) scale(.92)}
-    to  {opacity:1;transform:none}
+    from{opacity:0;transform:translateY(calc(var(--y) + 16px)) scale(.92)}
+    to  {opacity:1;transform:translateY(var(--y))}
   }
-  .circles.mo .circle{opacity:1;transform:none}
 
   /* the accent circle's plate drifts inside its own mask: the hero's own
      secondary layer, not a second hero competing with it */
@@ -892,39 +911,31 @@ body.is-locked{overflow:hidden}
     50%    {transform:scale(1.22) translate(2%,2%)}
   }
 
-  /* the teal ring: a transform+opacity pseudo-element, so the pulse is
-     compositor work. The old build animated box-shadow, which repaints a
-     large blurred region on every frame of an infinite loop. */
+  /* The teal ring is drawn, not pulsed. A ring throbbing around a diagram
+     element is the same decoration as the timeline scan: it kept the eye
+     coming back to something that had nothing new to say. */
   .circle--pic::after{
     content:"";position:absolute;inset:-3px;border-radius:50%;
-    border:3px solid var(--teal);opacity:1;pointer-events:none;
-  }
-  .circles.mo .circle--pic::after{animation:ringPulse 3.2s var(--ease) 4}
-  @keyframes ringPulse{
-    0%,100%{transform:scale(1);opacity:.85}
-    50%    {transform:scale(1.06);opacity:.3}
+    border:3px solid var(--teal);pointer-events:none;
   }
 
-  /* hover is deliberately a different gesture from the wave: the circle stops
-     drifting and commits. No letter-spacing, which is a layout property and
-     reflowed the row on every frame of the hover. */
+  /* Hover is colour only. Nothing moves.
+
+     The circles overlap each other by a negative margin, and they are a
+     picture of the argument, not controls: they are not links and there is
+     nothing to click. Lifting and scaling one of them inside an overlapping
+     chain rearranges which disc covers which on every pointer move, which is
+     what read as circles clipping and running over each other. It also fought
+     the landing animation for the same property.
+
+     What is left is the one thing hover is actually for here: showing that
+     the five belong to one scale. */
   @media (hover:hover) and (pointer:fine){
-    /* The !important is load-bearing, not a specificity hack. A paused CSS
-       animation still supplies the element's transform, and animations beat
-       normal declarations in the cascade, so `transform:translateY(-18px)`
-       was silently ignored and the circle never lifted. Only an important
-       declaration outranks a running or paused animation. Measured: 0px of
-       lift before this, 18px after. */
     .circle:hover,.circle[data-state=hover]{
-      animation-play-state:paused;
-      transform:translateY(-18px) scale(1.06)!important;
       background:var(--amber);color:#04070C;
-      transition:transform var(--t2) var(--ease),
-                 background-color var(--t1) var(--ease),color var(--t1) var(--ease);
-      z-index:5;will-change:transform;
+      transition:background-color var(--t1) var(--ease),color var(--t1) var(--ease);
     }
-    .circle--pic:hover,.circle--pic[data-state=hover]{background:transparent;transform:translateY(-18px) scale(1.08)!important}
-    .circle--pic:hover img,.circle--pic[data-state=hover] img{animation-play-state:paused;transform:scale(1.26)!important}
+    .circle--pic:hover,.circle--pic[data-state=hover]{background:var(--invert)}
   }
 }
 
@@ -947,16 +958,10 @@ body.is-locked{overflow:hidden}
   .trust.mo p b::after{animation:dot 3.2s var(--ease) 5}
   @keyframes dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.85)}}
 
-  /* cards frame: a scan passes along the timeline, saying the process runs */
+  /* The timeline scan is gone. A teal line sweeping across "How the work
+     runs" every five seconds described nothing: the bars are a schedule, not
+     a process that is currently executing. */
   .tl{position:relative;overflow:hidden}
-  .tl::after{
-    content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
-    background:linear-gradient(100deg,transparent 42%,
-      color-mix(in srgb,var(--teal) 26%,transparent) 50%,transparent 58%);
-    transform:translateX(-100%);
-  }
-  .tl.mo::after{animation:tlScan 5.2s var(--ease) 1s 3}
-  @keyframes tlScan{0%{transform:translateX(-100%)}60%,100%{transform:translateX(110%)}}
 }
 
 /* ── the motion-language table, /g/system/ only ───────────────────────── */

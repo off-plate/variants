@@ -555,9 +555,9 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
           <tr><td>Exits</td><td><code>--ease-in</code> <code>cubic-bezier(.7,0,.84,0)</code> · the only other curve</td></tr>
           <tr><td>Base unit</td><td><code>--t1</code> 200ms micro · <code>--t2</code> 400ms interface · <code>--t4</code> 800ms hero</td></tr>
           <tr><td>Stagger</td><td><code>--stag</code> 60ms, top to bottom · 25 to 40ms inside dense groups</td></tr>
-          <tr><td>Intensity budget</td><td>travel &le; 16px · scale .96 to 1.08 · no overshoot anywhere</td></tr>
+          <tr><td>Intensity budget</td><td>travel &le; 16px · scale .92 to 1 · no overshoot anywhere</td></tr>
           <tr><td>Group cap</td><td>800ms from first to last element. Measured: 786ms</td></tr>
-          <tr><td>Ambient budget</td><td>one loop per frame, bounded runs, paused off screen</td></tr>
+          <tr><td>Ambient budget</td><td>two loops on the page, bounded runs, paused off screen</td></tr>
         </table>
       </div>
       <div class="spec__foot">A third curve is a defect. So is a duration off the unit.</div>
@@ -618,38 +618,16 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
     </div>
 
     <h3 class="grp">Loop</h3>
-    <p class="note">Four, one per frame of the page, and that is the entire budget. Each attaches through
-       a <code>.mo</code> class that <code>site.js</code> adds when the element enters the viewport and
-       removes when it leaves, so nothing animates off screen. Each has a bounded iteration count, so no
-       loop runs indefinitely in one sitting.</p>
+    <p class="note">Two on the whole page, and that is the entire budget. Each attaches through a
+       <code>.mo</code> class that <code>site.js</code> adds when the element enters the viewport and
+       removes when it leaves, so nothing animates off screen, and each has a bounded iteration count
+       so no loop runs indefinitely in one sitting.</p>
     <div class="grid g2">
       <div class="motion">
-        <div class="motion__head"><b>Verdict wave</b><span>translateY 12px · 5s &times;3 · holds 4s, acts 1s · 600ms apart</span></div>
-        <div class="motion__body" style="background:var(--bg);display:flex;justify-content:center;padding:30px 10px">
-          <div class="circles" style="padding:0;gap:0">
-            <div class="circle" style="width:92px;font-size:7.5px;margin-left:0">Nothing</div>
-            <div class="circle" style="width:92px;font-size:7.5px;margin-left:-8px">Automation</div>
-            <div class="circle circle--pic" style="width:98px;margin-left:-8px"><img src="../art/o1.jpg" alt=""><span style="font-size:14px">AI</span></div>
-            <div class="circle" style="width:92px;font-size:7.5px;margin-left:-8px">Breakdown</div>
-            <div class="circle" style="width:92px;font-size:7.5px;margin-left:-8px">Run</div>
-          </div>
-        </div>
-      </div>
-      <div class="motion">
-        <div class="motion__head"><b>Accent ring</b><span>scale 1 to 1.06, opacity .85 to .3 · 3.2s &times;4</span></div>
+        <div class="motion__head"><b>Plate pan</b><span>scale 1.16 to 1.22, translate 4% · 20s &times;2</span></div>
         <div class="motion__body" style="background:var(--bg);display:flex;justify-content:center;align-items:center;padding:30px">
           <div class="circles" style="padding:0;gap:0;justify-content:center">
             <div class="circle circle--pic" style="width:120px;margin:0"><img src="../art/o4.jpg" alt=""><span style="font-size:17px">AI</span></div>
-          </div>
-        </div>
-      </div>
-      <div class="motion">
-        <div class="motion__head"><b>Timeline scan</b><span>teal sweep, translateX · 5.2s &times;3</span></div>
-        <div class="motion__body">
-          <div class="tl" style="margin-top:0">
-            <div class="row"><span class="bar hot" style="left:0;width:20%"><b>Call</b></span></div>
-            <div class="row"><span class="bar" style="left:14%;width:24%"><b>Breakdown</b></span></div>
-            <div class="row"><span class="bar" style="left:32%;width:26%"><b>Pilot</b></span></div>
           </div>
         </div>
       </div>
@@ -667,7 +645,7 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
     <h3 class="grp">Hover</h3>
     <div class="grid g3">
       <div class="motion">
-        <div class="motion__head"><b>Circle commits</b><span>lift 18px + scale 1.06 + amber fill · 400ms</span>
+        <div class="motion__head"><b>Circle takes the fill</b><span>amber background · 200ms · nothing moves</span>
           <button class="replay" data-replay="circ" type="button">Play</button></div>
         <div class="motion__body" style="background:var(--bg);display:flex;justify-content:center;padding:26px">
           <div class="circle" data-demo="circ" style="width:120px;font-size:9px;margin:0">Automation</div>
@@ -695,14 +673,23 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
     </div>
 
     <h3 class="grp">Cut in this pass</h3>
-    <p class="note">Ten ambient loops became four. What went, and the reason, so none of it comes back
-       by accident: the <b>badge glow</b> and the <b>CTA arrow nudge</b> animated the hero while it is
-       being read; the <b>dial breathe</b> made a finished reading look unstable, which is the opposite
-       of what the number says; the <b>rail hint</b> pulsed a scrollbar that carries no meaning; the
-       <b>footer mark breathe</b> scaled a full-bleed element, which is a vestibular trigger; the
-       <b>loader sweep</b> ran a loading metaphor over a price that is not loading. The <b>ring pulse</b>
-       survived but was rebuilt: it animated <code>box-shadow</code>, repainting a large blurred region
-       on every frame, and is now a transform and opacity on a pseudo-element.</p>
+    <p class="note">Ten ambient loops became two. What went, and why, so none of it comes back by
+       accident. The <b>badge glow</b> and the <b>CTA arrow nudge</b> animated the hero while it is
+       being read. The <b>dial breathe</b> made a finished reading look unstable, which is the
+       opposite of what the number says. The <b>rail hint</b> pulsed a scrollbar. The <b>footer mark
+       breathe</b> scaled a full-bleed element, a vestibular trigger. The <b>loader sweep</b> ran a
+       loading metaphor over a price that is not loading. The <b>timeline scan</b> sent a teal line
+       across the schedule every five seconds, describing a process that is not executing. The
+       <b>ring pulse</b> throbbed around a diagram element; the ring is still drawn, it just holds.</p>
+    <p class="note">Two hover gestures went with them, and for the same reason in both cases: a
+       resting composition written as a flat <code>transform</code> is destroyed by any hover that
+       also sets <code>transform</code>. The <b>verdict circles</b> lost an 18px lift and a 1.06
+       scale, which rearranged which disc covered which on every pointer move; hover is now the
+       amber fill and nothing else, since the circles are a picture of the argument and not
+       controls. The <b>news cards</b> kept their lift but no longer jump 11% in size, because the
+       row's resting fan now lives in a <code>--s</code> variable the hover composes with rather
+       than overwrites. The <b>nav underline</b> went because the pill already fills on hover, so
+       the control carried two competing affordances.</p>
   </div>
 </section>
 
