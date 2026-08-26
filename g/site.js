@@ -1,11 +1,59 @@
+/* theme: resolve before first paint via the inline head script, then this
+   file only handles the toggle. */
+(function(){
+  var root=document.documentElement;
+  root.classList.add('js');
+  var btn=document.getElementById('themer');
+  if(!btn) return;
+  function label(){
+    var light=root.getAttribute('data-theme')==='light';
+    btn.setAttribute('aria-label', light ? 'Switch to dark mode' : 'Switch to light mode');
+    btn.setAttribute('aria-pressed', String(light));
+  }
+  label();
+  btn.addEventListener('click', function(){
+    var light=root.getAttribute('data-theme')==='light';
+    root.setAttribute('data-theme', light ? 'dark' : 'light');
+    try{ localStorage.setItem('g-theme', light ? 'dark' : 'light'); }catch(e){}
+    label();
+  });
+})();
+
+/* scroll progress hairline */
+(function(){
+  var bar=document.querySelector('.scrollbar-progress');
+  if(!bar) return;
+  var t=false;
+  function draw(){
+    var h=document.documentElement.scrollHeight-innerHeight;
+    bar.style.transform='scaleX('+(h>0?Math.min(1,scrollY/h):0)+')';
+    t=false;
+  }
+  addEventListener('scroll',function(){ if(!t){t=true;requestAnimationFrame(draw);} },{passive:true});
+  draw();
+})();
+
+/* one arrival per group */
+(function(){
+  if(!matchMedia('(prefers-reduced-motion: no-preference)').matches) return;
+  var els=document.querySelectorAll('[data-rise]');
+  if(!els.length) return;
+  var io=new IntersectionObserver(function(es){
+    es.forEach(function(e){ if(e.isIntersecting){ e.target.classList.add('is-in'); io.unobserve(e.target); } });
+  },{rootMargin:'0px 0px -8% 0px',threshold:.12});
+  els.forEach(function(e){ io.observe(e); });
+})();
+
 /* Off Plate, variant G. Sticky bar + mobile menu, the card-grid load
    sequence, and the sector slider. Each block no-ops if its markup is
    absent, so /g/system/ can load the same file. */
 (function(){
   var grid=document.querySelector('.cards');
   if(grid && matchMedia('(prefers-reduced-motion: no-preference)').matches){
+    grid.classList.add('is-armed');           // hide only now that JS is alive
     var gio=new IntersectionObserver(function(es){
-      es.forEach(function(e){ if(e.isIntersecting){ grid.classList.add('is-live'); gio.disconnect(); } });
+      es.forEach(function(e){ if(e.isIntersecting){
+        grid.classList.remove('is-armed'); grid.classList.add('is-live'); gio.disconnect(); } });
     },{threshold:.18});
     gio.observe(grid);
   } else if(grid){ grid.classList.add('is-live'); }

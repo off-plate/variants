@@ -11,8 +11,17 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Yellowtail&display=swap" rel="stylesheet"><!-- slop-lint-ignore: Inter is the locked Off-Plate body face, BRAND.md -->
 <link rel="stylesheet" href="site.css">
+<script>
+/* resolve the theme before first paint so there is never a flash */
+(function(){var h=location.hash;                      /* audit gate uses #dark / #light */
+ if(h==='#dark'||h==='#light'){document.documentElement.setAttribute('data-theme',h.slice(1));return}
+ var s;try{s=localStorage.getItem('g-theme')}catch(e){}
+ var m=matchMedia('(prefers-color-scheme: light)').matches;
+ document.documentElement.setAttribute('data-theme', s || (m?'light':'dark'));})();
+</script>
 </head>
 <body>
+<div class="scrollbar-progress" aria-hidden="true"></div>
 
 <div class="topbar" id="topbar">
   <div class="shell topbar__in">
@@ -25,6 +34,10 @@
       <a href="#kontakt">Contact</a>
     </nav>
     <div class="topbar__right">
+      <button class="themer" id="themer" type="button" aria-label="Switch to light mode" aria-pressed="false">
+        <svg class="moon" viewBox="0 0 24 24" aria-hidden="true"><path d="M20.5 14.6A8.6 8.6 0 0 1 9.4 3.5a8.6 8.6 0 1 0 11.1 11.1Z"/></svg>
+        <svg class="sun" viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="4.2"/><path d="M12 2.4v2.2M12 19.4v2.2M4.2 12H2M22 12h-2.2M5.9 5.9 4.4 4.4M19.6 19.6l-1.5-1.5M18.1 5.9l1.5-1.5M4.4 19.6l1.5-1.5"/></svg>
+      </button>
       <a class="btn btn--light btn--sm topbar__cta" href="#kontakt">Book a call</a>
       <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><i></i></button>
     </div>
@@ -129,12 +142,12 @@
 
 <!-- ── statement ────────────────────────────────────────────────────────── -->
 <section class="shell stmt">
-  <p class="hello">hello.</p>
+  <p class="hello" data-rise>hello.</p>
   <h2><span class="dim">WE HELP REAL BUSINESSES GET RID OF REPETITIVE WORK</span>
     <span class="inlinepic"><img src="art/o1.jpg" alt=""></span> WITHOUT SELLING THEM AI THEY DO NOT NEED.</h2>
 </section>
 
-<div class="shell circles">
+<div class="shell circles" data-rise>
   <div class="circle">Nothing</div>
   <div class="circle">Automation</div>
   <div class="circle circle--pic"><img src="art/o1.jpg" alt=""><span>AI</span></div>
@@ -197,7 +210,7 @@
       </div>
       <p>We only write about what changes a decision for a real business. Every item links to the original source so you can check it.</p>
     </div>
-    <div class="crew">
+    <div class="crew" data-rise>
       <a href="#kontakt">
         <span class="shot"><img src="art/n1.jpg" alt="" width="800" height="1000" loading="lazy"></span>
         <span class="lab"><b>Shoptet put AI product copy in the admin, free</b><span>summer 2026</span></span>
