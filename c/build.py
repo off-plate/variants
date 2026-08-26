@@ -147,7 +147,7 @@ def frag(name):
     return open(p, encoding="utf-8").read() if os.path.exists(p) else ""
 
 
-def article_page(slug, kicker, title, date, lede, body, sources, img):
+def article_page(slug, kicker, title, date, lede, body, sources, img=None):
     """One template for all three news articles, so they cannot drift apart."""
     src = "\n".join(
         f'      <p><a href="{u}" rel="nofollow noopener">{html.escape(t)}</a></p>'
@@ -165,14 +165,6 @@ def article_page(slug, kicker, title, date, lede, body, sources, img):
       <h1 class="d2" style="margin-top:8px">{title}</h1>
       <p class="post__date mono" style="margin-top:14px">{date}</p>
       <p class="lede" style="margin-top:26px;max-width:100%">{lede}</p>
-    </div>
-    <figure class="figure" style="margin:clamp(28px,4vw,52px) auto;max-width:68ch">
-      <picture>
-        <source type="image/webp" srcset="../../img/{img}-1200.webp">
-        <img src="../../img/{img}-1200.jpg" alt="" width="1200" height="900" loading="lazy" decoding="async">
-      </picture>
-    </figure>
-    <div class="article">
 {body}
       <div class="source">
         <p><strong>Zdroje</strong></p>

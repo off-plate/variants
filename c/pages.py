@@ -320,7 +320,6 @@ PAGES = [
 <section class="section section--tight">
   <div class="wrap">
     <a class="post" href="ai-act/">
-      <span class="post__shot"><picture><source type="image/webp" srcset="../img/beton-640.webp"><img src="../img/beton-640.jpg" width="640" height="360" alt="" loading="lazy" decoding="async"></picture></span>
       <span>
         <span class="post__kicker">Regulace</span>
         <h2 class="d4" style="margin-top:5px">Od 2.&nbsp;srpna 2026 musíte označovat, co psala AI</h2>
@@ -329,7 +328,6 @@ PAGES = [
       <span class="post__go" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M5 15L15 5M7 5h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
     </a>
     <a class="post" href="gema/">
-      <span class="post__shot"><picture><source type="image/webp" srcset="../img/stavba-640.webp"><img src="../img/stavba-640.jpg" width="640" height="481" alt="" loading="lazy" decoding="async"></picture></span>
       <span>
         <span class="post__kicker">Právo</span>
         <h2 class="d4" style="margin-top:5px">Mnichovský soud rozhodl, že trénování na&nbsp;cizích textech je porušení práv</h2>
@@ -338,7 +336,6 @@ PAGES = [
       <span class="post__go" aria-hidden="true"><svg viewBox="0 0 20 20"><path d="M5 15L15 5M7 5h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
     </a>
     <a class="post" href="shoptet/">
-      <span class="post__shot"><picture><source type="image/webp" srcset="../img/sklad-640.webp"><img src="../img/sklad-640.jpg" width="640" height="480" alt="" loading="lazy" decoding="async"></picture></span>
       <span>
         <span class="post__kicker">E-shopy</span>
         <h2 class="d4" style="margin-top:5px">Shoptet dal AI popisky do&nbsp;administrace zdarma. Co to znamená pro&nbsp;vaše texty</h2>
