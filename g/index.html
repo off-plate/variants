@@ -1,15 +1,15 @@
 <!doctype html>
-<html lang="cs">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="robots" content="noindex,nofollow">
-<title>Off Plate · Varianta G</title>
-<meta name="description" content="Řekneme vám, co ve vaší firmě opravdu potřebuje AI, co zvládne obyčejná automatizace a co je lepší nechat být.">
+<title>Off Plate · Variant G</title>
+<meta name="description" content="We tell you what in your business genuinely needs AI, what plain automation handles, and what is better left alone.">
 <meta name="theme-color" content="#000000">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Pinyon+Script&display=swap" rel="stylesheet"><!-- slop-lint-ignore: Inter is the locked Off-Plate body face, BRAND.md -->
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Yellowtail&display=swap" rel="stylesheet"><!-- slop-lint-ignore: Inter is the locked Off-Plate body face, BRAND.md -->
 <style>
 :root{
   --ink:#000; --paper:#fff;
@@ -35,14 +35,6 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
 .shell{width:var(--shell);margin-inline:auto}
 .cap{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
 
-/* the decorative initial: a high-contrast italic serif standing in for the
-   first letter of a heavy sans headline */
-.init{
-  font-family:'Pinyon Script',cursive;font-weight:400;font-style:normal;
-  text-transform:none;letter-spacing:0;
-  font-size:1.62em;line-height:0;vertical-align:-.14em;
-  margin-right:.17em;padding-right:.02em;
-}
 
 /* ── hero ─────────────────────────────────────────────────────────────── */
 .hero{position:relative;min-height:min(94vh,940px);display:flex;flex-direction:column;
@@ -145,7 +137,8 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
 .tl{margin-top:16px;flex:1;display:flex;flex-direction:column;justify-content:center;gap:7px}
 .tl .row{display:grid;grid-template-columns:1fr;align-items:center;height:21px;position:relative}
 .tl .bar{position:absolute;height:21px;border-radius:6px;background:#E2DED8;
-         display:flex;align-items:center;padding:0 9px;font-size:9.5px;font-weight:600;white-space:nowrap}
+         display:flex;align-items:center;padding:0 9px;white-space:nowrap}
+.tl .bar b{font-size:9.5px;font-weight:600;display:block}
 .tl .bar.hot{background:#141414;color:#fff}
 .tl .axis{display:flex;justify-content:space-between;margin-top:8px;font-size:9px;color:#9A948C}
 
@@ -158,14 +151,11 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
 .card--dark .btn--light{align-self:flex-start;margin-top:16px}
 
 /* ── statement ────────────────────────────────────────────────────────── */
-.stmt{padding:0 0 92px;text-align:center}
-.hello{font-family:'Pinyon Script',cursive;font-size:clamp(40px,4.4vw,62px);line-height:1;
+.stmt{padding:0 0 84px;text-align:center}
+.hello{font-family:Yellowtail,cursive;font-size:clamp(38px,4.2vw,64px);line-height:1;
        text-transform:none;letter-spacing:0;font-weight:400}
-.stmt h2{margin-top:10px;font-size:clamp(25px,3.3vw,52px);line-height:1.1;letter-spacing:-.035em;
-         max-width:23ch;margin-inline:auto}
-.stmt .ser{font-family:'Pinyon Script',cursive;font-weight:400;font-style:normal;
-           text-transform:none;letter-spacing:0;font-size:1.5em;line-height:0;vertical-align:-.12em;
-           margin-right:.18em}
+.stmt h2{margin-top:12px;font-size:clamp(27px,4.15vw,74px);line-height:1.08;letter-spacing:-.04em;
+         max-width:30ch;margin-inline:auto}
 .stmt .dim{color:var(--grey)}
 .inlinepic{display:inline-block;width:1.42em;height:.86em;border-radius:999px;overflow:hidden;isolation:isolate;
            vertical-align:-.1em;margin:0 .08em}
@@ -173,19 +163,19 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
 
 /* overlapping circles */
 .circles{display:flex;justify-content:center;align-items:center;padding:10px 0 100px}
-.circle{width:clamp(102px,11.2vw,172px);aspect-ratio:1;border-radius:50%;
+.circle{width:clamp(132px,15.4vw,390px);aspect-ratio:1;border-radius:50%;
         display:grid;place-items:center;text-align:center;
-        font-size:clamp(8px,.64vw,10.5px);font-weight:700;letter-spacing:.07em;
+        font-size:clamp(9.5px,.86vw,17px);font-weight:700;letter-spacing:.04em;
         text-transform:uppercase;background:var(--paper);color:var(--ink);
-        margin-left:-17px;position:relative;isolation:isolate;
+        margin-left:clamp(-30px,-1.4vw,-10px);position:relative;isolation:isolate;
         transition:transform .26s var(--ease)}
 .circle:first-child{margin-left:0}
-.circle:nth-child(2),.circle:nth-child(4){transform:translateY(-15px)}
-.circle:hover{transform:translateY(-8px)}
-.circle:nth-child(2):hover,.circle:nth-child(4):hover{transform:translateY(-23px)}
-.circle--pic{overflow:hidden;z-index:3;width:clamp(118px,12.8vw,196px)}
+.circle:nth-child(1),.circle:nth-child(5){transform:translateY(clamp(12px,1.6vw,42px))}
+.circle:nth-child(2),.circle:nth-child(4){transform:translateY(clamp(-52px,-2.2vw,-16px))}
+
+.circle--pic{overflow:hidden;z-index:3;width:clamp(126px,14.6vw,368px)}
 .circle--pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-1}
-.circle--pic span{position:relative;z-index:1;font-size:clamp(17px,1.95vw,32px);letter-spacing:-.01em;
+.circle--pic span{position:relative;z-index:1;font-size:clamp(20px,2.5vw,54px);letter-spacing:-.02em;
                   font-weight:800;color:var(--ember);
                   text-shadow:0 2px 16px rgba(0,0,0,.7),0 0 34px rgba(0,0,0,.55)}
 
@@ -290,6 +280,78 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
 .fcol--stack a{text-decoration:underline;text-underline-offset:4px}
 .fcol--stack .gap{margin-top:12px}
 
+
+/* ── motion: the card grid loads itself ───────────────────────────────────
+   Everything below is opt-in under prefers-reduced-motion and fires once,
+   when the grid is first seen. Only transform and opacity animate, so it
+   stays on the compositor. */
+@media (prefers-reduced-motion: no-preference){
+
+  .cards .card{opacity:0;transform:translateY(18px);
+               transition:opacity .5s var(--ease),transform .6s var(--ease)}
+  .cards.is-live .card{opacity:1;transform:none}
+  .cards.is-live .card:nth-child(2){transition-delay:.07s}
+  .cards.is-live .card:nth-child(3){transition-delay:.14s}
+  .cards.is-live .card:nth-child(4){transition-delay:.21s}
+  .cards.is-live .card:nth-child(5){transition-delay:.28s}
+
+  /* the dial fills like a meter taking a reading */
+  .dial b{transform:scaleY(0);transform-origin:bottom;
+          transition:transform .55s cubic-bezier(.2,.9,.25,1)}
+  .cards.is-live .dial b{transform:scaleY(1)}
+  .cards.is-live .dial b:nth-child(1){transition-delay:.30s}
+  .cards.is-live .dial b:nth-child(2){transition-delay:.36s}
+  .cards.is-live .dial b:nth-child(3){transition-delay:.42s}
+  .cards.is-live .dial b:nth-child(4){transition-delay:.48s}
+  .cards.is-live .dial b:nth-child(5){transition-delay:.54s}
+  .cards.is-live .dial b:nth-child(6){transition-delay:.60s}
+  .cards.is-live .dial b:nth-child(7){transition-delay:.66s}
+  .cards.is-live .dial b:nth-child(8){transition-delay:.72s}
+  .cards.is-live .dial b:nth-child(9){transition-delay:.78s}
+  .gauge .num{opacity:0;transform:translateX(-8px);
+              transition:opacity .45s var(--ease) .62s,transform .45s var(--ease) .62s}
+  .cards.is-live .gauge .num{opacity:1;transform:none}
+
+  /* the timeline draws itself left to right, one step after another */
+  .tl .bar{transform:scaleX(0);transform-origin:left;
+           transition:transform .5s cubic-bezier(.22,.85,.3,1)}
+  .tl .bar>*{opacity:0;transition:opacity .3s var(--ease)}
+  .cards.is-live .tl .bar{transform:scaleX(1)}
+  .cards.is-live .tl .bar>*{opacity:1}
+  .cards.is-live .tl .row:nth-child(1) .bar{transition-delay:.34s}
+  .cards.is-live .tl .row:nth-child(2) .bar{transition-delay:.46s}
+  .cards.is-live .tl .row:nth-child(3) .bar{transition-delay:.58s}
+  .cards.is-live .tl .row:nth-child(4) .bar{transition-delay:.70s}
+  .cards.is-live .tl .row:nth-child(5) .bar{transition-delay:.82s}
+  .cards.is-live .tl .row:nth-child(1) .bar>*{transition-delay:.60s}
+  .cards.is-live .tl .row:nth-child(2) .bar>*{transition-delay:.72s}
+  .cards.is-live .tl .row:nth-child(3) .bar>*{transition-delay:.84s}
+  .cards.is-live .tl .row:nth-child(4) .bar>*{transition-delay:.96s}
+  .cards.is-live .tl .row:nth-child(5) .bar>*{transition-delay:1.08s}
+  .tl .axis{opacity:0;transition:opacity .4s var(--ease) 1.0s}
+  .cards.is-live .tl .axis{opacity:1}
+
+  /* the loader keeps loading: a segment fills, then a sweep passes over */
+  .loader b{transform:scaleX(0);transform-origin:left;
+            transition:transform .45s var(--ease)}
+  .cards.is-live .loader b{transform:scaleX(1)}
+  .cards.is-live .loader b:nth-child(1){transition-delay:.34s}
+  .cards.is-live .loader b:nth-child(2){transition-delay:.44s}
+  .cards.is-live .loader b:nth-child(3){transition-delay:.54s}
+  .cards.is-live .loader b:nth-child(4){transition-delay:.64s}
+  .loader{position:relative;overflow:hidden}
+  .cards.is-live .loader::after{
+    content:"";position:absolute;inset:0;pointer-events:none;
+    background:linear-gradient(100deg,transparent 38%,rgba(255,255,255,.85) 50%,transparent 62%);
+    transform:translateX(-100%);animation:sweep 2.6s 1.1s var(--ease) infinite;
+  }
+  @keyframes sweep{0%{transform:translateX(-100%)}55%,100%{transform:translateX(115%)}}
+
+  .bigfig{opacity:0;transform:translateY(10px);
+          transition:opacity .5s var(--ease) .72s,transform .5s var(--ease) .72s}
+  .cards.is-live .bigfig{opacity:1;transform:none}
+}
+
 /* ── responsive ───────────────────────────────────────────────────────── */
 @media(max-width:1080px){
   .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
@@ -340,19 +402,19 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
 
   <div class="shell hero__top">
     <a class="wordmark" href="#"><b>OFF</b><b>PLATE</b></a>
-    <nav class="navbox" aria-label="Hlavní">
-      <a href="#" aria-current="page">Domů</a>
-      <a href="#obory">Obory</a>
-      <a href="#cenik">Ceník</a>
-      <a href="#novinky">Novinky</a>
-      <a href="#kontakt">Kontakt</a>
+    <nav class="navbox" aria-label="Main">
+      <a href="#" aria-current="page">Home</a>
+      <a href="#obory">Sectors</a>
+      <a href="#cenik">Pricing</a>
+      <a href="#novinky">News</a>
+      <a href="#kontakt">Contact</a>
     </nav>
   </div>
 
   <div class="shell hero__btm">
     <div>
-      <h1><span class="init">E</span>FEKTIVNÍ AUTOMATIZACE PRO&nbsp;ČESKÉ FIRMY <span class="badge">3 <i>verdikty</i></span></h1>
-      <a class="pillbtn" href="#verdikty"><span>+</span> Hledáte, kde ve firmě začít s AI?</a>
+      <h1>EFFECTIVE AUTOMATION FOR&nbsp;REAL BUSINESSES <span class="badge">3 <i>verdicts</i></span></h1>
+      <a class="pillbtn" href="#verdikty"><span>+</span> Looking for where to start with AI?</a>
     </div>
 
     <div>
@@ -362,23 +424,23 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
           <i><img src="art/o1.jpg" alt=""></i>
           <i><img src="art/o4.jpg" alt=""></i>
         </span>
-        <p><b>Rozpis zdarma</b>Odpovídá Michael Florian, obvykle do konce dne</p>
+        <p><b>Free breakdown</b>Michael Florian replies, usually by end of day</p>
       </div>
-      <p class="hero__lede">Projdeme vaši agendu a u každé opakované úlohy řekneme jedno ze tří: nepotřebujete nic, stačí obyčejná automatizace, nebo tohle opravdu potřebuje AI.</p>
+      <p class="hero__lede">We go through your recurring work and give every task one of three verdicts: you need nothing, plain automation is enough, or this genuinely needs AI.</p>
       <div class="hero__cta">
-        <a class="btn btn--dark" href="#kontakt">Domluvit hovor <i>&rarr;</i></a>
-        <a class="btn btn--light" href="#cenik">Ceník</a>
-        <a class="round" href="#verdikty" aria-label="Verdikty">&#8599;</a>
+        <a class="btn btn--dark" href="#kontakt">Book a call <i>&rarr;</i></a>
+        <a class="btn btn--light" href="#cenik">Pricing</a>
+        <a class="round" href="#verdikty" aria-label="Verdicts">&#8599;</a>
       </div>
     </div>
   </div>
 </header>
 
 <!-- ── card grid ────────────────────────────────────────────────────────── -->
-<section class="shell cards" id="verdikty" aria-label="Přehled">
+<section class="shell cards" id="verdikty" aria-label="Overview">
   <article class="card">
-    <h3>Tři verdikty na každou opakovanou úlohu</h3>
-    <p>Nepotřebujete nic, stačí obyčejná automatizace, nebo tohle opravdu potřebuje AI. Ke každému verdiktu píšeme důvod, abyste s ním mohli nesouhlasit.</p>
+    <h3>Three verdicts on every recurring task</h3>
+    <p>You need nothing, plain automation is enough, or this genuinely needs AI. Every verdict comes with the reason, so you can disagree with it.</p>
     <div class="byline">
       <i><img src="art/chip.jpg" alt=""></i>
       <b>Michael Florian</b>
@@ -386,7 +448,7 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
   </article>
 
   <article class="card">
-    <h3>Nejčastější verdikt je „nepotřebujete nic“</h3>
+    <h3>The most common verdict is &ldquo;you need nothing&rdquo;</h3>
     <div class="gauge">
       <span class="dial" aria-hidden="true">
         <b class="on" style="height:26%"></b><b class="on" style="height:38%"></b>
@@ -394,53 +456,52 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
         <b style="height:80%"></b><b style="height:92%"></b>
         <b style="height:78%"></b><b style="height:60%"></b><b style="height:42%"></b>
       </span>
-      <span class="num">2 z 5<span>úloh potřebuje AI</span></span>
+      <span class="num">2 of 5<span>tasks need AI</span></span>
     </div>
   </article>
 
   <article class="card card--dark">
-    <h3>Rozpis zdarma: co stavět nebudeme a proč</h3>
-    <p>Dostanete ho písemně do týdne po prvním hovoru.</p>
-    <a class="btn btn--light" href="#kontakt">Chci rozpis</a>
+    <h3>Free breakdown: what we will not build, and why</h3>
+    <p>In writing, within a week of the first call.</p>
+    <a class="btn btn--light" href="#kontakt">Get the breakdown</a>
     <span class="prodshot" aria-hidden="true">
       <picture><source type="image/webp" srcset="art/card.webp"><img src="art/card.jpg" alt="" width="900" height="640"></picture>
     </span>
   </article>
 
   <article class="card card--wide">
-    <h3>Jak spolupráce probíhá</h3>
-    <p>Pět kroků. První dva jsou zdarma a končí písemným rozpisem.</p>
+    <h3>How the work runs</h3>
+    <p>Five steps. The first two are free and end in a written breakdown.</p>
     <div class="tl" aria-hidden="true">
-      <div class="row"><span class="bar hot" style="left:0;width:20%">Hovor</span></div>
-      <div class="row"><span class="bar" style="left:14%;width:24%">Rozpis</span></div>
-      <div class="row"><span class="bar" style="left:32%;width:26%">Pilot</span></div>
-      <div class="row"><span class="bar" style="left:52%;width:30%">Stavba</span></div>
-      <div class="row"><span class="bar" style="left:76%;width:24%">Provoz</span></div>
-      <div class="axis"><span>0</span><span>1 týden</span><span>2 týdny</span><span>4 týdny</span><span>6 týdnů</span><span>dál</span></div>
+      <div class="row"><span class="bar hot" style="left:0;width:20%"><b>Call</b></span></div>
+      <div class="row"><span class="bar" style="left:14%;width:24%"><b>Breakdown</b></span></div>
+      <div class="row"><span class="bar" style="left:32%;width:26%"><b>Pilot</b></span></div>
+      <div class="row"><span class="bar" style="left:52%;width:30%"><b>Build</b></span></div>
+      <div class="row"><span class="bar" style="left:76%;width:24%"><b>Run</b></span></div>
+      <div class="axis"><span>0</span><span>1 week</span><span>2 weeks</span><span>4 weeks</span><span>6 weeks</span><span>on</span></div>
     </div>
   </article>
 
   <article class="card">
     <span class="loader" aria-hidden="true"><b></b><b></b><b></b><b></b></span>
-    <span class="bigfig">12 000 Kč</span>
-    <p style="margin-top:10px">Za jednu hotovou automatizaci na vašich skutečných datech. Jednorázově, bez závazku.</p>
+    <span class="bigfig">12,000 CZK</span>
+    <p style="margin-top:10px">For one finished automation on your real data. One off, no commitment.</p>
   </article>
 </section>
 
 <!-- ── statement ────────────────────────────────────────────────────────── -->
 <section class="shell stmt">
-  <p class="hello">dobrý den.</p>
-  <h2><span class="dim"><span class="ser">P</span>OMÁHÁME ČESKÝM FIRMÁM ZBAVIT SE OPAKOVANÉ PRÁCE</span>
-    <span class="inlinepic"><img src="art/o1.jpg" alt=""></span> ANIŽ BYCHOM JIM PRODÁVALI AI,
-    KTEROU NEPOTŘEBUJÍ.</h2>
+  <p class="hello">hello.</p>
+  <h2><span class="dim">WE HELP REAL BUSINESSES GET RID OF REPETITIVE WORK</span>
+    <span class="inlinepic"><img src="art/o1.jpg" alt=""></span> WITHOUT SELLING THEM AI THEY DO NOT NEED.</h2>
 </section>
 
 <div class="shell circles">
-  <div class="circle">Nic</div>
-  <div class="circle">Automatizace</div>
+  <div class="circle">Nothing</div>
+  <div class="circle">Automation</div>
   <div class="circle circle--pic"><img src="art/o1.jpg" alt=""><span>AI</span></div>
-  <div class="circle">Rozpis</div>
-  <div class="circle">Provoz</div>
+  <div class="circle">Breakdown</div>
+  <div class="circle">Run</div>
 </div>
 
 <!-- ── obory ────────────────────────────────────────────────────────────── -->
@@ -448,41 +509,41 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
   <div class="shell">
     <div class="sechead">
       <div>
-        <h2><span class="init">O</span>BORY</h2>
-        <p class="sub">Kde nejčastěji začínáme</p>
+        <h2>SECTORS</h2>
+        <p class="sub">Where we usually start</p>
       </div>
-      <p>Nezajímá nás obor tolik jako to, kde se u vás hromadí papír. U každého oboru níž je úloha, se kterou se potkáváme nejčastěji.</p>
+      <p>The sector matters less to us than where the paperwork piles up. Each one below carries the task we meet most often there.</p>
     </div>
     <div class="work">
       <a href="#kontakt">
         <span class="shot"><picture><source type="image/webp" srcset="art/o1.webp"><img src="art/o1.jpg" alt="" width="900" height="1200" loading="lazy"></picture></span>
-        <h3>Stavební firma</h3>
-        <p>Vícepráce nadiktované z místa, přiřazené k zakázce a porovnané s nabídkou.</p>
+        <h3>Construction firm</h3>
+        <p>Extra work dictated on site, matched back to the job and compared with the quote.</p>
       </a>
       <a href="#kontakt">
         <span class="shot"><picture><source type="image/webp" srcset="art/o2.webp"><img src="art/o2.jpg" alt="" width="900" height="1100" loading="lazy"></picture></span>
         <h3>E-shop</h3>
-        <p>Marže proti skutečné nákupní ceně z faktur, počítaná každý den.</p>
+        <p>Margin against the real purchase price taken off supplier invoices, every day.</p>
       </a>
       <a href="#kontakt">
         <span class="shot"><picture><source type="image/webp" srcset="art/o3.webp"><img src="art/o3.jpg" alt="" width="900" height="1250" loading="lazy"></picture></span>
-        <h3>Účetní kancelář</h3>
-        <p>Došlé doklady přečtené a předkontované, sporné případy označené.</p>
+        <h3>Accounting office</h3>
+        <p>Incoming documents read and pre-posted, the disputed ones flagged.</p>
       </a>
       <a href="#kontakt">
         <span class="shot"><picture><source type="image/webp" srcset="art/o4.webp"><img src="art/o4.jpg" alt="" width="900" height="1050" loading="lazy"></picture></span>
-        <h3>Autoservis</h3>
-        <p>Nález mechanika přepsaný do zakázky a vysvětlený zákazníkovi.</p>
+        <h3>Vehicle workshop</h3>
+        <p>What the mechanic found, written into the job and explained to the customer.</p>
       </a>
       <a href="#kontakt">
         <span class="shot"><picture><source type="image/webp" srcset="art/n2.webp"><img src="art/n2.jpg" alt="" width="800" height="1150" loading="lazy"></picture></span>
-        <h3>Váš obor</h3>
-        <p>Obor nás zajímá méně než to, kde se u vás hromadí papír.</p>
+        <h3>Your sector</h3>
+        <p>Tell us where the work piles up and we will build the breakdown for it.</p>
       </a>
     </div>
     <div class="workbar">
-      <button class="rnd" type="button" data-work="-1" aria-label="Předchozí">&larr;</button>
-      <button class="rnd" type="button" data-work="1" aria-label="Další">&rarr;</button>
+      <button class="rnd" type="button" data-work="-1" aria-label="Previous">&larr;</button>
+      <button class="rnd" type="button" data-work="1" aria-label="Next">&rarr;</button>
       <span class="rail" aria-hidden="true"><i></i></span>
     </div>
   </div>
@@ -493,37 +554,37 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
   <div class="shell">
     <div class="sechead">
       <div>
-        <h2><span class="init">C</span>O SE ZMĚNILO</h2>
-        <p class="sub">Novinky, s odkazem na zdroj</p>
+        <h2>WHAT CHANGED</h2>
+        <p class="sub">News, with a link to the source</p>
       </div>
-      <p>Píšeme jen o tom, co mění rozhodnutí české firmě. Ke každé zprávě patří odkaz na původní zdroj, ať si to můžete ověřit.</p>
+      <p>We only write about what changes a decision for a real business. Every item links to the original source so you can check it.</p>
     </div>
     <div class="crew">
       <a href="#kontakt">
         <span class="shot"><img src="art/n1.jpg" alt="" width="800" height="1000" loading="lazy"></span>
-        <span class="lab"><b>Shoptet dal AI popisky do administrace zdarma</b><span>léto 2026</span></span>
+        <span class="lab"><b>Shoptet put AI product copy in the admin, free</b><span>summer 2026</span></span>
       </a>
       <a href="#kontakt">
         <span class="shot"><img src="art/o2.jpg" alt="" width="900" height="1100" loading="lazy"></span>
-        <span class="lab"><b>Stanovisko k automatizovanému zpracování dokladů</b><span>srpen 2026</span></span>
+        <span class="lab"><b>Guidance on automated document processing</b><span>August 2026</span></span>
       </a>
       <a href="#kontakt">
         <span class="shot"><img src="art/n3.jpg" alt="" width="800" height="900" loading="lazy"></span>
-        <span class="lab"><b>Od 2. srpna 2026 musíte označovat, co psala AI</b><span>2. srpna 2026</span></span>
+        <span class="lab"><b>From 2 August 2026 you must label what AI wrote</b><span>2 August 2026</span></span>
       </a>
       <a href="#kontakt">
         <span class="shot"><img src="art/n2.jpg" alt="" width="800" height="1150" loading="lazy"></span>
-        <span class="lab"><b>Mnichovský soud rozhodl o trénovacích datech</b><span>11. listopadu 2025</span></span>
+        <span class="lab"><b>Munich court ruled on training data</b><span>11 November 2025</span></span>
       </a>
       <a href="#kontakt">
         <span class="shot"><img src="art/o3.jpg" alt="" width="900" height="1250" loading="lazy"></span>
-        <span class="lab"><b>Kde smí ležet data českých firem</b><span>červenec 2026</span></span>
+        <span class="lab"><b>Where company data is allowed to sit</b><span>July 2026</span></span>
       </a>
     </div>
     <div class="slider">
       <div class="bar">
-        <b>Všechny novinky</b>
-        <a class="round" href="#novinky" aria-label="Další">&rarr;</a>
+        <b>All news</b>
+        <a class="round" href="#novinky" aria-label="Next">&rarr;</a>
       </div>
     </div>
   </div>
@@ -539,33 +600,33 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
       <div class="foot__inner">
         <p class="foot__meta">
           <span>Copyright© <a href="#">Off-Plate</a></span>
-          <span>Pracovní verze, ceny jsou zástupné</span>
+          <span>Working draft, prices are indicative</span>
         </p>
 
         <div class="foot__cols">
           <div class="fcol">
-            <h4>Rozcestník</h4>
+            <h4>Quick links</h4>
             <ul>
-              <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg><a href="#">Domů</a></li>
-              <li><a href="#obory">Obory</a></li>
-              <li><a href="#cenik">Ceník</a></li>
-              <li><a href="#verdikty">Verdikty</a></li>
+              <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M7 17L17 7M9 7h8v8" stroke-linecap="round" stroke-linejoin="round"/></svg><a href="#">Home</a></li>
+              <li><a href="#obory">Sectors</a></li>
+              <li><a href="#cenik">Pricing</a></li>
+              <li><a href="#verdikty">Verdicts</a></li>
             </ul>
           </div>
 
           <div class="fcol">
-            <h4>Sítě</h4>
+            <h4>Social</h4>
             <ul>
               <li><svg class="ic" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.4" cy="6.6" r="1.1" fill="currentColor" stroke="none"/></svg><a href="#">LinkedIn</a></li>
               <li><a href="#">YouTube</a></li>
-              <li><a href="#novinky">Novinky</a></li>
+              <li><a href="#novinky">News</a></li>
             </ul>
           </div>
 
           <div class="fcol fcol--stack">
-            <h4>Ozvěte se <span aria-hidden="true">&#128075;</span></h4>
+            <h4>Knock our door <span aria-hidden="true">&#128075;</span></h4>
             <a href="mailto:michael@off-plate.com">michael@off-plate.com</a>
-            <h4 class="gap">Telefon</h4>
+            <h4 class="gap">Phone number</h4>
             <a href="tel:+420000000000">+420 000 000 000</a>
           </div>
         </div>
@@ -575,6 +636,15 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
 </footer>
 
 <script>
+(function(){
+  var grid=document.querySelector('.cards');
+  if(grid && matchMedia('(prefers-reduced-motion: no-preference)').matches){
+    var gio=new IntersectionObserver(function(es){
+      es.forEach(function(e){ if(e.isIntersecting){ grid.classList.add('is-live'); gio.disconnect(); } });
+    },{threshold:.18});
+    gio.observe(grid);
+  } else if(grid){ grid.classList.add('is-live'); }
+})();
 (function(){
   var row=document.querySelector('.work'); if(!row) return;
   var fill=document.querySelector('.workbar .rail i');
