@@ -662,34 +662,62 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
 
 <script>
 (function(){
-  /* replay a demo by removing the class that triggered it, forcing a reflow,
-     then putting it back. Same mechanism for every animation on the page. */
-  function restart(el){
-    el.classList.remove('is-live');
-    el.classList.add('is-armed');
-    void el.offsetWidth;
-    el.classList.remove('is-armed');
-    el.classList.add('is-live');
+  /* Each demo plays when it scrolls into view, replays on the button, and
+     re-plays every time it re-enters the viewport, so the section is never
+     a wall of finished animations by the time you reach it. */
+  function arm(el){ el.classList.remove('is-live'); el.classList.add('is-armed'); }
+  function play(el){
+    el.classList.add('is-armed'); void el.offsetWidth;
+    el.classList.remove('is-armed'); el.classList.add('is-live');
   }
   var demos={};
   document.querySelectorAll('[data-demo]').forEach(function(d){ demos[d.dataset.demo]=d; });
 
-  // arm every demo that is a .cards clone
+  var reduce = !matchMedia('(prefers-reduced-motion: no-preference)').matches;
   Object.keys(demos).forEach(function(k){
     var d=demos[k];
-    if(d.classList.contains('cards')){ d.classList.add('is-armed'); requestAnimationFrame(function(){ d.classList.remove('is-armed'); d.classList.add('is-live'); }); }
+    if(!d.classList.contains('cards')) return;
+    if(reduce){ d.classList.add('is-live'); return; }
+    arm(d);
   });
+
+  if(!reduce){
+    var io=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        if(e.isIntersecting) play(e.target);
+        else if(e.target.classList.contains('cards')) arm(e.target);
+      });
+    },{threshold:.35});
+    Object.keys(demos).forEach(function(k){
+      if(demos[k].classList.contains('cards')) io.observe(demos[k]);
+    });
+  }
+
+  /* the hover demos loop gently so there is always something moving */
+  function pulse(el,ms){
+    var t=el.matches('[data-demo=rot]') ? el : el.querySelector('a');
+    if(!t) return;
+    t.setAttribute('data-state','hover');
+    setTimeout(function(){ t.removeAttribute('data-state'); }, ms||1100);
+  }
+  if(!reduce){
+    var hio=new IntersectionObserver(function(es){
+      es.forEach(function(e){
+        var d=e.target;
+        if(e.isIntersecting && !d._loop){
+          d._loop=setInterval(function(){ pulse(d,1200); }, 2600);
+          pulse(d,1200);
+        } else if(!e.isIntersecting && d._loop){ clearInterval(d._loop); d._loop=null; }
+      });
+    },{threshold:.4});
+    ['hoverimg','rot'].forEach(function(k){ if(demos[k]) hio.observe(demos[k]); });
+  }
 
   document.querySelectorAll('[data-replay]').forEach(function(b){
     b.addEventListener('click', function(){
       var d=demos[b.dataset.replay];
       if(!d) return;
-      if(d.classList.contains('cards')){ restart(d); return; }
-      // hover-style demos: toggle the frozen state for a beat
-      var t=d.matches('[data-demo=rot]') ? d : d.querySelector('a');
-      if(!t) return;
-      t.setAttribute('data-state','hover');
-      setTimeout(function(){ t.removeAttribute('data-state'); }, 1100);
+      if(d.classList.contains('cards')) play(d); else pulse(d,1200);
     });
   });
 })();

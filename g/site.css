@@ -10,47 +10,49 @@
    a wash: the page ground and the relief band swap places, so the rhythm of
    contrast down the page survives. The ember never changes in either. */
 :root{
-  --bg:#000;              --fg:#fff;
+  --bg:#04070C;           --fg:#F2EFEB;
   --fg-dim:rgba(255,255,255,.78);
   --fg-mute:rgba(255,255,255,.55);
-  --line:rgba(255,255,255,.14);
-  --line-2:rgba(255,255,255,.28);
-  --surface:#F4F2EF;      --surface-fg:#101010;  --surface-dim:#4A4A4A;
-  --relief:#FFFFFF;       --relief-fg:#000000;   --relief-dim:#5A5A5A;
-  --invert:#111111;       --invert-fg:#FFFFFF;
-  --chrome:rgba(10,7,6,.74);
+  --line:rgba(242,239,235,.15);
+  --line-2:rgba(242,239,235,.3);
+  --surface:#F2EFEB;      --surface-fg:#0B1119;  --surface-dim:#4A4A4A;
+  --relief:#F2EFEB;       --relief-fg:#04070C;   --relief-dim:#5A5A5A;
+  --invert:#0A1018;       --invert-fg:#F2EFEB;
+  --chrome:rgba(4,7,12,.78);
   --chrome-line:rgba(255,255,255,.12);
-  --glass:rgba(255,255,255,.1);
-  --glass-line:rgba(255,255,255,.18);
-  --scrim:linear-gradient(180deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.15) 34%,rgba(0,0,0,.55) 72%,#000 100%);
+  --glass:rgba(242,239,235,.1);
+  --glass-line:rgba(242,239,235,.2);
+  --scrim:linear-gradient(180deg,rgba(4,7,12,.66) 0%,rgba(4,7,12,.2) 30%,rgba(4,7,12,.72) 68%,rgba(4,7,12,.94) 88%,var(--bg) 100%);
   --shadow-card:0 1px 0 rgba(0,0,0,.08),0 18px 40px rgba(0,0,0,.10);
-  --fg-hover:#E4E0D9;   --fg-off:#8C8C8C;
-  --accent-tx:#FF8A2B;  --stmt-dim:#9A9A9A;
+  --fg-hover:#DCD8D2;   --fg-off:#8A9299;
+  --accent-tx:#E8A94F;  --stmt-dim:#8E9AA6;
 }
 [data-theme=light]{
-  --bg:#F4F1EB;           --fg:#15110E;
+  --bg:#F2EFEB;           --fg:#0B1119;
   --fg-dim:rgba(21,17,14,.72);
   --fg-mute:rgba(21,17,14,.52);
-  --line:rgba(21,17,14,.14);
-  --line-2:rgba(21,17,14,.26);
-  --surface:#FFFFFF;      --surface-fg:#15110E;  --surface-dim:#5B534A;
-  --relief:#15110E;       --relief-fg:#F4F1EB;   --relief-dim:rgba(244,241,235,.62);
-  --invert:#15110E;       --invert-fg:#F4F1EB;
-  --chrome:rgba(244,241,235,.82);
+  --line:rgba(11,17,25,.14);
+  --line-2:rgba(11,17,25,.26);
+  --surface:#FFFFFF;      --surface-fg:#0B1119;  --surface-dim:#4E5A66;
+  --relief:#002B59;       --relief-fg:#F2EFEB;   --relief-dim:rgba(242,239,235,.72);
+  --invert:#002B59;       --invert-fg:#F2EFEB;
+  --chrome:rgba(242,239,235,.84);
   --chrome-line:rgba(21,17,14,.14);
-  --glass:rgba(21,17,14,.06);
-  --glass-line:rgba(21,17,14,.16);
-  --scrim:linear-gradient(180deg,rgba(0,0,0,.42) 0%,rgba(0,0,0,.06) 34%,rgba(0,0,0,.34) 68%,var(--bg) 100%);
+  --glass:rgba(11,17,25,.06);
+  --glass-line:rgba(11,17,25,.17);
+  --scrim:linear-gradient(180deg,rgba(4,7,12,.6) 0%,rgba(4,7,12,.16) 30%,rgba(4,7,12,.7) 66%,rgba(4,7,12,.9) 86%,var(--bg) 100%);
   --shadow-card:0 1px 0 rgba(21,17,14,.06),0 18px 40px rgba(21,17,14,.09);
-  --fg-hover:#2E2721;   --fg-off:#6F675E;
-  --accent-tx:#A8410A;  --stmt-dim:#5A5248;
+  --fg-hover:#1E2A36;   --fg-off:#5E6A75;
+  --accent-tx:#8A5A12;  --stmt-dim:#5A6672;
 }
 html{color-scheme:dark}
 [data-theme=light]{color-scheme:light}
 
 :root{
   --ink:#000; --paper:#fff;
-  --ember:#F0621A; --ember-hot:#FF8A2B; --ember-deep:#8E2208;
+  /* Off-Plate brand, BRAND.md: navy, teal, amber, off-white */
+  --navy:#002B59; --teal:#1F7A7A; --amber:#D08C2E; --offwhite:#F2EFEB;
+  --ember:var(--amber); --ember-hot:#E8A94F; --ember-deep:#7A4A10;
   --grey:#9A9A9A; --grey-2:#6A6A6A;
   --card:#F4F2EF; --card-dark:#111111;
   --r:22px; --r-sm:14px;
@@ -139,8 +141,8 @@ body.is-locked{overflow:hidden}
 
 /* ── hero ─────────────────────────────────────────────────────────────── */
 .hero{position:relative;min-height:min(94vh,940px);display:flex;flex-direction:column;
-      justify-content:space-between;overflow:hidden;padding:26px 0 44px;
-      background:#0A0705;color:#fff}   /* the photograph is dark in both themes,
+      justify-content:flex-end;overflow:hidden;padding:120px 0 clamp(38px,4vw,64px);
+      background:#04070C;color:#F2EFEB}/* the photograph is dark in both themes,
                                           and this is what shows if it never loads */
 .hero__bg{position:absolute;inset:0;z-index:0}
 .hero__bg img{width:100%;height:100%;object-fit:cover;object-position:50% 42%}
@@ -166,9 +168,9 @@ body.is-locked{overflow:hidden}
 
 .hero__btm{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);
            gap:clamp(24px,4vw,72px);align-items:end}
-.hero h1{font-size:clamp(36px,5.3vw,82px);max-width:16ch;letter-spacing:-.04em;line-height:.96}
+.hero h1{font-size:clamp(36px,5.1vw,78px);max-width:19ch;letter-spacing:-.04em;line-height:.96}
 .badge{
-  display:inline-flex;align-items:baseline;gap:5px;vertical-align:.22em;
+  display:inline-flex;align-items:baseline;gap:5px;vertical-align:.26em;white-space:nowrap;
   background:var(--paper);color:var(--ink);border-radius:999px;
   padding:4px 12px 5px;font-size:.2em;font-weight:700;letter-spacing:0;line-height:1;
 }
@@ -350,7 +352,7 @@ body.is-locked{overflow:hidden}
 .foot__art{
   position:relative;display:flex;align-items:flex-end;border-radius:30px;overflow:hidden;
   isolation:isolate;min-height:clamp(430px,46vw,880px);
-  background:#0A0705;
+  background:#04070C;
 }
 .foot__art>picture{position:absolute;inset:0;z-index:0}
 .foot__art img{width:100%;height:100%;object-fit:cover;object-position:50% 42%}
@@ -360,7 +362,7 @@ body.is-locked{overflow:hidden}
 .foot__mark{
   position:absolute;left:50%;top:44%;transform:translate(-50%,-50%);z-index:1;
   font-size:clamp(120px,33vw,560px);font-weight:800;letter-spacing:-.05em;line-height:.82;
-  text-align:center;color:#E8433A;filter:blur(9px);opacity:.94;
+  text-align:center;color:var(--teal);filter:blur(9px);opacity:.96;
   pointer-events:none;white-space:nowrap;width:max-content;
 }
 .foot__inner{position:relative;z-index:3;width:100%;padding:clamp(22px,2.6vw,44px)}
@@ -614,7 +616,7 @@ body.is-locked{overflow:hidden}
    pointer capability so a phone never inherits a stuck hover. */
 .scrollbar-progress{
   position:fixed;left:0;top:0;height:2px;z-index:99;
-  background:linear-gradient(90deg,var(--ember),var(--ember-hot));
+  background:linear-gradient(90deg,var(--teal),var(--amber));
   transform-origin:left;transform:scaleX(0);will-change:transform;
 }
 
