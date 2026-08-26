@@ -24,6 +24,7 @@
   --glass-line:rgba(242,239,235,.2);
   --scrim:linear-gradient(180deg,rgba(4,7,12,.66) 0%,rgba(4,7,12,.2) 30%,rgba(4,7,12,.72) 68%,rgba(4,7,12,.94) 88%,var(--bg) 100%);
   --shadow-card:0 1px 0 rgba(0,0,0,.08),0 18px 40px rgba(0,0,0,.10);
+  --relief-accent:#14595A;   /* teal on the cream band */
   --fg-hover:#DCD8D2;   --fg-off:#8A9299;
   --accent-tx:#E8A94F;  --stmt-dim:#8E9AA6;
 }
@@ -44,6 +45,7 @@
   --shadow-card:0 1px 0 rgba(21,17,14,.06),0 18px 40px rgba(21,17,14,.09);
   --fg-hover:#1E2A36;   --fg-off:#5E6A75;
   --accent-tx:#8A5A12;  --stmt-dim:#5A6672;
+  --relief-accent:#7FD4CC;   /* the band is navy in light, so the teal lifts */
 }
 html{color-scheme:dark}
 [data-theme=light]{color-scheme:light}
@@ -52,6 +54,8 @@ html{color-scheme:dark}
   --ink:#000; --paper:#fff;
   /* Off-Plate brand, BRAND.md: navy, teal, amber, off-white */
   --navy:#002B59; --teal:#1F7A7A; --amber:#D08C2E; --offwhite:#F2EFEB;
+  /* the same hues, darkened just enough to carry text on cream */
+  --teal-tx:#14595A; --amber-tx:#8A5A12;
   --ember:var(--amber); --ember-hot:#E8A94F; --ember-deep:#7A4A10;
   --grey:#9A9A9A; --grey-2:#6A6A6A;
   --card:#F4F2EF; --card-dark:#111111;
@@ -95,14 +99,9 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
   border-bottom-color:var(--chrome-line);
 }
 .topbar.is-hidden{transform:translateY(-102%)}
-.topbar .wordmark{transition:font-size .26s var(--ease)}
-.topbar.is-stuck .wordmark{font-size:13px}
+
 .topbar__right{display:flex;align-items:center;gap:10px}
-.topbar__cta{
-  opacity:0;transform:translateX(10px);pointer-events:none;
-  transition:opacity .26s var(--ease),transform .26s var(--ease);
-}
-.topbar.is-stuck .topbar__cta{opacity:1;transform:none;pointer-events:auto}
+.topbar__cta{transition:transform .18s var(--ease),background .18s var(--ease)}
 .btn--sm{min-height:38px;padding:0 16px;font-size:10.5px}
 
 /* burger + full-screen menu, phones only */
@@ -130,7 +129,7 @@ h1,h2,h3,h4{margin:0;font-weight:800;line-height:.94;letter-spacing:-.035em;text
 }
 .menu[hidden]{display:none}
 .menu.is-open{opacity:1}
-.menu a{color:var(--fg);
+.menu a:not(.btn){color:var(--fg);
   font-size:clamp(30px,9vw,44px);font-weight:800;letter-spacing:-.04em;
   text-transform:uppercase;line-height:1;padding:14px 0;min-height:56px;
   display:flex;align-items:center;border-bottom:1px solid var(--line);
@@ -150,8 +149,13 @@ body.is-locked{overflow:hidden}
 .hero__top,.hero__btm{position:relative;z-index:2}
 .hero__top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
 
-.wordmark{font-weight:800;font-size:15px;letter-spacing:.02em;line-height:.92;text-transform:uppercase}
-.wordmark b{display:block;font-weight:800}
+.wordmark{display:inline-flex;align-items:center;min-height:44px;flex:0 0 auto}
+.wordmark img{width:clamp(122px,10vw,158px);height:auto;display:block;
+              transition:width .26s var(--ease)}
+.topbar.is-stuck .wordmark img{width:clamp(108px,8.4vw,134px)}
+.wordmark .wm-light{display:none}
+[data-theme=light] .topbar.is-stuck .wordmark .wm-dark{display:none}
+[data-theme=light] .topbar.is-stuck .wordmark .wm-light{display:block}
 
 .navbox{
   background:var(--glass);border:1px solid var(--glass-line);
@@ -182,7 +186,7 @@ body.is-locked{overflow:hidden}
   transition:border-color .18s var(--ease),background .18s var(--ease);
 }
 .pillbtn:hover,.pillbtn[data-state=hover]{border-color:var(--fg);background:var(--glass)}
-.pillbtn span{width:19px;height:19px;border-radius:50%;background:var(--fg);color:var(--bg);
+.pillbtn span{width:19px;height:19px;border-radius:50%;background:var(--amber);color:#04070C;
               display:grid;place-items:center;font-size:13px;font-weight:700;line-height:1}
 
 .trust{display:flex;align-items:center;gap:11px}
@@ -311,6 +315,7 @@ body.is-locked{overflow:hidden}
 .work .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
 .work a:hover .shot img,.work a[data-state=hover] .shot img{transform:scale(1.05)}
 .work h3{font-size:15px;letter-spacing:-.01em;margin-top:14px;color:var(--relief-fg)}
+.work .tags span{color:var(--relief-accent)}
 .work p{font-size:12px;line-height:1.42;color:var(--relief-dim);margin-top:6px;max-width:26ch}
 .work a:nth-child(2){margin-top:clamp(24px,3.2vw,54px)}
 .work a:nth-child(3){margin-top:clamp(48px,6.2vw,104px)}
@@ -504,7 +509,6 @@ body.is-locked{overflow:hidden}
 @media(max-width:900px){
   .navbox{display:none}
   .burger{display:flex}
-  .topbar__cta{display:none}
   .topbar{padding:14px 0}
   .topbar.is-stuck{padding:8px 0}
 }
@@ -695,7 +699,9 @@ body.is-locked{overflow:hidden}
 .topbar:not(.is-stuck) .navbox a{color:rgba(255,255,255,.82)}
 .topbar:not(.is-stuck) .navbox a[aria-current]{background:#fff;color:#000}
 .topbar:not(.is-stuck) .navbox{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.18)}
-.topbar:not(.is-stuck) .wordmark{color:#fff}
+
+.topbar:not(.is-stuck) .topbar__cta{background:var(--amber);color:#04070C;border-color:transparent}
+.topbar:not(.is-stuck) .topbar__cta:hover{background:#E8A94F}
 .topbar:not(.is-stuck) .themer,.topbar:not(.is-stuck) .burger{
   color:#fff;border-color:rgba(255,255,255,.28);background:rgba(255,255,255,.08)}
 .topbar:not(.is-stuck) .burger i,.topbar:not(.is-stuck) .burger i::before,
@@ -711,3 +717,64 @@ body.is-locked{overflow:hidden}
 
 /* the dimmed half of the statement needs to clear 3:1 as display type */
 .stmt .dim{color:var(--stmt-dim)}
+
+/* ── brand colour, used rather than merely declared ───────────────────────
+   The dark build was navy-black and white with the teal and amber only ever
+   appearing inside the photographs. These are the places the brand now shows
+   on the interface itself. */
+
+/* the badge in the headline is the amber */
+.badge{background:var(--amber);color:#04070C}
+.badge i{color:rgba(4,7,12,.84)}
+
+/* section sub-labels and kickers carry the accent */
+.sechead .sub{color:var(--accent-tx);letter-spacing:.14em}
+.paper .sechead .sub{color:var(--relief-accent)}
+
+/* the dial reads as the verdict scale: amber for the count, teal for the rest */
+.dial b.on{background:var(--amber)}
+.gauge .num span{color:var(--teal-tx)}
+
+/* the timeline's free steps are teal, the paid build is amber */
+.tl .bar.hot{background:var(--navy);color:#F2EFEB}
+.loader b:first-child{background:var(--teal)}
+
+/* the price is the amber figure */
+.bigfig{color:var(--amber-tx)}
+
+/* news kickers and the label rule */
+.crew .lab b{color:#F2EFEB}
+.crew .lab span{color:#E8B45E}
+
+/* the trust line and the free-breakdown flag */
+.trust p b{color:var(--amber)}
+.step__when{color:var(--teal-tx)}
+
+/* the outlined pill picks up a teal edge, and its plus is teal */
+.hero .pillbtn{border-color:color-mix(in srgb,var(--teal) 62%,transparent)}
+.hero .pillbtn span{background:var(--amber);color:#04070C}
+.hero .pillbtn:hover{border-color:var(--teal);background:color-mix(in srgb,var(--teal) 16%,transparent)}
+
+/* the dark card is brand navy, not a neutral charcoal */
+.card--dark{background:var(--navy)}
+[data-theme=light] .card--dark{background:var(--navy)}
+.card--dark .btn--light{background:var(--amber);color:#04070C}
+.card--dark .btn--light:hover{background:#E8A94F}
+
+/* the primary button is navy on the light ground and amber on the dark one,
+   so the accent is present at the point of action in both */
+.btn--dark{background:var(--navy);color:#F2EFEB;border-color:transparent}
+.btn--dark:hover,.btn--dark[data-state=hover]{background:#013A76}
+.btn--dark i{background:rgba(242,239,235,.2)}
+
+/* focus is the amber in both themes */
+:focus-visible,[data-state=focus]{outline-color:var(--amber)}
+
+/* the accent circle keeps the teal ring so it reads as the brand mark */
+.circle--pic{box-shadow:0 0 0 3px color-mix(in srgb,var(--teal) 70%,transparent)}
+
+/* hairline rules under section heads, in the accent */
+.sechead{border-bottom:1px solid color-mix(in srgb,var(--teal) 26%,transparent);padding-bottom:22px}
+
+/* selection is the brand */
+::selection{background:var(--teal);color:#F2EFEB}
