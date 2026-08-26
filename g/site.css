@@ -199,6 +199,14 @@ body.is-locked{overflow:hidden}
 .trust p b{display:block;color:#fff;font-weight:600}
 .hero__lede{margin-top:16px;font-size:13.5px;line-height:1.45;color:rgba(255,255,255,.8);max-width:34ch}
 .hero__cta{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:20px}
+/* the hero's right column reads to the page's right edge, so it mirrors the
+   headline sitting flush left. The phone stack is one column and stays left. */
+@media(min-width:761px){
+  .hero__btm > div:last-child{text-align:right}
+  .hero__btm .trust{justify-content:flex-end}
+  .hero__btm .hero__lede{margin-left:auto}
+  .hero__btm .hero__cta{justify-content:flex-end}
+}
 .btn{display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:0 20px;
      min-height:44px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
      transition:transform .18s var(--ease),background .18s var(--ease)}
