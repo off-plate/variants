@@ -1,0 +1,283 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Systém · Off-Plate</title>
+<meta name="description" content="Tokeny a komponenty varianty C, každá ve všech stavech, na jedné stránce.">
+<link rel="canonical" href="https://off-plate.github.io/variants/c/system/">
+<meta name="theme-color" content="#FFFFFF">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Off-Plate">
+<meta property="og:title" content="Systém · Off-Plate">
+<meta property="og:description" content="Tokeny a komponenty varianty C, každá ve všech stavech, na jedné stránce.">
+<meta property="og:url" content="https://off-plate.github.io/variants/c/system/">
+<meta property="og:image" content="https://off-plate.github.io/variants/c/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="preload" href="../fonts/sora-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../fonts.css"><!-- slop-lint-ignore: Inter + Sora are the locked Off-Plate brand faces, BRAND.md -->
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Přeskočit na obsah</a>
+
+<header class="header" id="header">
+  <div class="wrap header-in">
+    <a class="brand" href="../" translate="no"><span class="brand__toggle" aria-hidden="true"><i></i></span>off plate</a>
+    <nav class="nav" aria-label="Hlavní">
+      <a href="../obory/">Obory</a>
+      <a href="../cenik/">Ceník</a>
+      <a href="../jak-to-funguje/">Jak to funguje</a>
+      <a href="../novinky/">Novinky</a>
+    </nav>
+    <div class="header-right">
+      <a class="btn btn--primary" href="../kontakt/">Domluvit hovor</a>
+      <button class="burger" id="burger" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="drawer"><i></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Hlavní">
+    <div class="drawer__head">
+      <span class="brand" aria-hidden="true"><span class="brand__toggle"><i></i></span>off plate</span>
+      <button class="burger" id="burgerClose" type="button" aria-label="Zavřít menu" aria-expanded="true" style="display:flex"><i></i></button>
+    </div>
+    <a href="../obory/">Obory</a>
+    <a href="../cenik/">Ceník</a>
+    <a href="../jak-to-funguje/">Jak to funguje</a>
+    <a href="../novinky/">Novinky</a>
+    <a class="btn btn--primary" href="../kontakt/" style="margin-top:10px">Domluvit hovor</a>
+  </div>
+</div>
+
+<main id="main">
+
+<section class="section section--tight">
+  <div class="wrap">
+    <h1 class="d1" style="max-width:12ch">C, systém</h1>
+    <p class="lede" style="margin-top:22px">Rozvržení, které je tady jednou, unese jakýkoli obsah. Rozvržení, které tu není, se sem doplní dřív, než se použije na&nbsp;stránce. Stránka nikdy nevlastní komponentu.</p>
+    <p class="xs" style="margin-top:14px">Vše níž čte ze&nbsp;stejného <a href="../site.css" style="text-decoration:underline">site.css</a>, jaký používají všechny stránky.</p>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="s-col">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="d2" id="s-col">Barva jako role</h2></div>
+    <div class="sw-grid">
+      <div class="sw-item"><span class="sw-chip" style="background:#002B59"></span><span class="d4">navy</span><span class="xs mono">#002B59</span><span class="xs">Značka, tmavý pás</span></div>
+      <div class="sw-item"><span class="sw-chip" style="background:#1F7A7A"></span><span class="d4">teal</span><span class="xs mono">#1F7A7A</span><span class="xs">Značka, verdikt AI, fokus</span></div>
+      <div class="sw-item"><span class="sw-chip" style="background:#D08C2E"></span><span class="d4">amber</span><span class="xs mono">#D08C2E</span><span class="xs">Značka, verdikt automatizace</span></div>
+      <div class="sw-item"><span class="sw-chip" style="background:#F2EFEB"></span><span class="d4">paper</span><span class="xs mono">#F2EFEB</span><span class="xs">Značka, papír</span></div>
+      <div class="sw-item"><span class="sw-chip" style="background:#10161C"></span><span class="d4">ink</span><span class="xs mono">#10161C</span><span class="xs">Text</span></div>
+      <div class="sw-item"><span class="sw-chip" style="background:#4A5561"></span><span class="d4">ink-2</span><span class="xs mono">#4A5561</span><span class="xs">Text druhé úrovně</span></div>
+      <div class="sw-item"><span class="sw-chip" style="background:#5E6A77"></span><span class="d4">ink-3</span><span class="xs mono">#5E6A77</span><span class="xs">Popisky</span></div>
+      <div class="sw-item"><span class="sw-chip" style="background:#F7F5F2"></span><span class="d4">surface</span><span class="xs mono">#F7F5F2</span><span class="xs">Plocha 1</span></div>
+      <div class="sw-item"><span class="sw-chip" style="background:#EFEBE5"></span><span class="d4">surface-2</span><span class="xs mono">#EFEBE5</span><span class="xs">Plocha 2</span></div>
+    </div>
+    <p class="sm" style="margin:26px 0 14px">Tři odstíny níž nejsou dekorace. Odstín na&nbsp;tomto webu vždy znamená verdikt.</p>
+    <div class="sw-grid">
+      <div class="sw-item"><span class="sw-chip" style="background:#E8ECF1"></span><span class="d4">v-none-bg</span><span class="xs mono">#E8ECF1</span><span class="xs">Nepotřebujete nic</span></div>
+      <div class="sw-item"><span class="sw-chip" style="background:#F8EEDC"></span><span class="d4">v-auto-bg</span><span class="xs mono">#F8EEDC</span><span class="xs">Automatizace</span></div>
+      <div class="sw-item"><span class="sw-chip" style="background:#DDECEA"></span><span class="d4">v-ai-bg</span><span class="xs mono">#DDECEA</span><span class="xs">Potřebuje AI</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="s-type">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="d2" id="s-type">Písmo jako role</h2></div>
+      <div class="sys-type"><span class="xs mono">d1 / Sora 600 / 34→76px</span><p class="d1">Příliš žluťoučký kůň úpěl ďábelské ódy.</p><span class="xs">Nadpis stránky. Prokládání −0,028em, řádkování 1,08.</span></div>
+      <div class="sys-type"><span class="xs mono">d2 / Sora 600 / 28→48px</span><p class="d2">Příliš žluťoučký kůň úpěl ďábelské ódy.</p><span class="xs">Nadpis sekce. Prokládání −0,024em.</span></div>
+      <div class="sys-type"><span class="xs mono">d3 / Sora 600 / 22→30px</span><p class="d3">Příliš žluťoučký kůň úpěl ďábelské ódy.</p><span class="xs">Nadpis bloku.</span></div>
+      <div class="sys-type"><span class="xs mono">d4 / Inter 600 / 17px</span><p class="d4">Příliš žluťoučký kůň úpěl ďábelské ódy.</p><span class="xs">Nadpis karty. Jediný nadpis, který není Sora.</span></div>
+      <div class="sys-type"><span class="xs mono">lede / Inter 400 / 17→19px</span><p class="lede">Příliš žluťoučký kůň úpěl ďábelské ódy.</p><span class="xs">Úvodní odstavec, maximálně 46 znaků na řádek.</span></div>
+      <div class="sys-type"><span class="xs mono">sm / Inter 400 / 15→16px</span><p class="sm">Příliš žluťoučký kůň úpěl ďábelské ódy.</p><span class="xs">Běžný text v kartě.</span></div>
+      <div class="sys-type"><span class="xs mono">xs / Inter 400 / 13→14px</span><p class="xs">Příliš žluťoučký kůň úpěl ďábelské ódy.</p><span class="xs">Popisek, datum, poznámka.</span></div>
+    <div class="sys-type"><span class="xs mono">mono</span><p class="mono">12 000 Kč · 25–60 000 Kč · 2. srpna 2026 · 0123456789</p><span class="xs">Nikoli třetí písmo. Inter s tabulkovými číslicemi, protože jen ty ceny potřebovaly.</span></div>
+    <p class="xs" style="margin-top:20px;max-width:62ch">Vzorník je vždy česká pangramová věta, ne lorem ipsum. Prochází ř&nbsp;ž&nbsp;ť&nbsp;č&nbsp;ů&nbsp;ň&nbsp;ď&nbsp;ó a&nbsp;kolizí ascenderů, na&nbsp;kterých se pozná, jestli řádkování stačí.</p>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="s-scale">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="d2" id="s-scale">Rádius, mezery, pohyb</h2></div>
+    <div class="grid-3">
+      <div class="card">
+        <h3 class="d4">Rádius</h3>
+        <ul class="sys-list">
+          <li><span class="mono">4px</span> štítek</li>
+          <li><span class="mono">8px</span> tlačítko, pole</li>
+          <li><span class="mono">12px</span> karta</li>
+          <li><span class="mono">16px</span> panel</li>
+          <li><span class="mono">24px</span> pás</li>
+          <li><span class="mono">999px</span> jen přepínač, protože je to logo</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3 class="d4">Trvání</h3>
+        <ul class="sys-list">
+          <li><span class="mono">100ms</span> barva, fokus</li>
+          <li><span class="mono">150ms</span> malý vstup</li>
+          <li><span class="mono">200ms</span> panel, hlavička</li>
+          <li><span class="mono">300ms</span> zásuvka, verdikt</li>
+        </ul>
+        <p class="xs" style="margin-top:10px">Strop je 300&nbsp;ms. Pátý stupeň neexistuje.</p>
+      </div>
+      <div class="card">
+        <h3 class="d4">Křivky</h3>
+        <ul class="sys-list">
+          <li><span class="mono">out</span> .05,.7,.1,1</li>
+          <li><span class="mono">in</span> .3,0,.8,.15</li>
+          <li><span class="mono">emph</span> .2,0,0,1</li>
+        </ul>
+        <p class="xs" style="margin-top:10px">Animuje se jen transform a&nbsp;opacity. Žádná vlastnost, která mění rozvržení.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="s-ctl">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="d2" id="s-ctl">Ovládací prvky, ve všech stavech</h2></div>
+    <div class="sys-row">
+      <a class="btn btn--primary" href="#s-ctl">Hlavní</a>
+      <a class="btn btn--ghost" href="#s-ctl">Vedlejší</a>
+      <a class="btn btn--primary btn--sm" href="#s-ctl">Hlavní, malé</a>
+      <button class="btn btn--ghost" type="button" disabled style="opacity:.45;cursor:not-allowed">Nedostupné</button>
+    </div>
+    <p class="xs" style="margin-top:12px">Jedno tlačítko, jedna třída. Změnit barvu všech hlavních tlačítek je jedna úprava v&nbsp;<span class="mono">.btn--primary</span>.</p>
+    <div class="band" style="margin-top:24px">
+      <p class="sm" style="color:rgba(255,255,255,.86);margin-bottom:16px">Na tmavém pásu tytéž prvky, jiné proměnné:</p>
+      <div class="sys-row">
+        <a class="btn btn--onDark" href="#s-ctl">Hlavní</a>
+        <a class="btn btn--clearOnDark" href="#s-ctl">Vedlejší</a>
+      </div>
+    </div>
+    <div class="sys-row" style="margin-top:24px">
+      <span class="tag">Štítek</span>
+      <span class="verdict verdict--none"><span class="verdict__sw" aria-hidden="true"><i></i></span>Nepotřebujete nic</span>
+      <span class="verdict verdict--auto"><span class="verdict__sw" aria-hidden="true"><i></i></span>Automatizace</span>
+      <span class="verdict verdict--ai"><span class="verdict__sw" aria-hidden="true"><i></i></span>Potřebuje AI</span>
+    </div>
+    <p class="xs" style="margin-top:12px">Razítko verdiktu je jedna komponenta se&nbsp;třemi stavy. Knoflík je ve&nbsp;třech polohách, stejně jako přepínač v&nbsp;logu.</p>
+    <div style="max-width:420px;margin-top:26px">
+      <div class="field"><label for="s-in">Pole</label><input id="s-in" type="text" placeholder="Výchozí stav…"></div>
+      <div class="field" style="margin-top:14px"><label for="s-in2">Pole s&nbsp;nápovědou</label><input id="s-in2" type="email" placeholder="jmeno@firma.cz"><span class="hint">Nápověda sedí pod polem, nikdy nad nadpisem.</span></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="s-surf">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="d2" id="s-surf">Plochy</h2></div>
+    <div class="grid-3">
+      <div class="card"><h3 class="d4">card</h3><p class="sm" style="margin-top:8px">Vlasová linka, rádius 12. Bez stínu.</p></div>
+      <div class="panel"><h3 class="d4">panel</h3><p class="sm" style="margin-top:8px">Plocha 1, rádius 16.</p></div>
+      <div class="band" style="padding:24px"><h3 class="d4" style="color:#fff">band</h3><p class="sm" style="margin-top:8px;color:rgba(255,255,255,.86)">Navy, rádius 24. Na webu je právě jeden na stránku.</p></div>
+    </div>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="s-roz">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="d2" id="s-roz">Rozpis</h2></div>
+    <div class="rozpis">
+      <div class="rozpis__head">
+        <span class="rozpis__title"><span aria-hidden="true">▚</span> Rozpis agendy</span>
+        <span class="xs mono">E-shop</span>
+      </div>
+      <ul class="rozpis__rows">
+        <li class="rozpis__row">
+          <span class="rozpis__task">Marže proti nákupní ceně z&nbsp;faktur</span>
+          <span class="rozpis__why">Nákupky chodí v&nbsp;PDF pokaždé jinak. Přečíst je umí model.</span>
+          <span class="verdict verdict--ai"><span class="verdict__sw" aria-hidden="true"><i></i></span>Potřebuje AI</span>
+        </li>
+        <li class="rozpis__row">
+          <span class="rozpis__task">Vyřízení vratky podle e-mailu zákazníka</span>
+          <span class="rozpis__why">Nejdřív je potřeba pochopit, co zákazník vlastně chce.</span>
+          <span class="verdict verdict--ai"><span class="verdict__sw" aria-hidden="true"><i></i></span>Potřebuje AI</span>
+        </li>
+        <li class="rozpis__row">
+          <span class="rozpis__task">Sledování cen konkurence</span>
+          <span class="rozpis__why">Stáhnout čísla a&nbsp;porovnat je. Žádné čtení v&nbsp;tom není.</span>
+          <span class="verdict verdict--auto"><span class="verdict__sw" aria-hidden="true"><i></i></span>Automatizace</span>
+        </li>
+        <li class="rozpis__row">
+          <span class="rozpis__task">Vystavení dobropisu</span>
+          <span class="rozpis__why">Šablona a&nbsp;data, která již v&nbsp;systému máte.</span>
+          <span class="verdict verdict--auto"><span class="verdict__sw" aria-hidden="true"><i></i></span>Automatizace</span>
+        </li>
+        <li class="rozpis__row">
+          <span class="rozpis__task">Denní report tržeb</span>
+          <span class="rozpis__why">Shoptet ho posílá sám. Nechte to být.</span>
+          <span class="verdict verdict--none"><span class="verdict__sw" aria-hidden="true"><i></i></span>Nepotřebujete nic</span>
+        </li>
+      </ul>
+      <div class="rozpis__foot">
+        <span>Z&nbsp;5&nbsp;úloh potřebují AI&nbsp;2. U&nbsp;1 bychom vám neprodali nic.</span>
+      </div>
+    </div>
+    <p class="xs" style="margin-top:14px">Jedna komponenta. Na&nbsp;úvodní stránce je přepínatelná, na&nbsp;stránce oboru statická.</p>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="s-inv">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="d2" id="s-inv">Soupis komponent</h2></div>
+    <div class="qa">
+      <div class="qa__item"><h3 class="d4">btn</h3><p>Vyvolá jednu akci. Varianty primary, ghost, onDark, clearOnDark, sm.</p></div>
+      <div class="qa__item"><h3 class="d4">verdict</h3><p>Ukáže verdikt jedné úlohy ve třech stavech.</p></div>
+      <div class="qa__item"><h3 class="d4">rozpis</h3><p>Ukáže agendu jako seznam úloh s verdiktem.</p></div>
+      <div class="qa__item"><h3 class="d4">card / panel / band</h3><p>Ohraničí obsah na třech úrovních hloubky. Rozdíl je plocha a rádius, ne stín.</p></div>
+      <div class="qa__item"><h3 class="d4">trade</h3><p>Odkáže na obor jedním obrázkem a dvěma větami.</p></div>
+      <div class="qa__item"><h3 class="d4">prow</h3><p>Jeden řádek ceníku.</p></div>
+      <div class="qa__item"><h3 class="d4">step</h3><p>Jeden krok očíslované posloupnosti.</p></div>
+      <div class="qa__item"><h3 class="d4">qa__item</h3><p>Otázka a odpověď na vlasové lince.</p></div>
+      <div class="qa__item"><h3 class="d4">post</h3><p>Odkáže na jeden článek.</p></div>
+      <div class="qa__item"><h3 class="d4">field</h3><p>Jeden vstup formuláře s popiskem a nápovědou.</p></div>
+    </div>
+    <p class="sm" style="margin-top:26px;max-width:62ch">Deset komponent, deset různých vět. Kde by dvě věty byly stejné, jsou to dvě varianty jedné komponenty, ne dvě komponenty. Kulaté šipky v&nbsp;kartě a&nbsp;v&nbsp;řádku novinek byly dřív dvě, teď je to <span class="mono">post__go</span>.</p>
+  </div>
+</section>
+
+<section class="section section--tight" aria-labelledby="s-no">
+  <div class="wrap">
+    <div class="sec-head"><h2 class="d2" id="s-no">Co se sem nesmí vrátit</h2></div>
+    <div class="qa">
+      <div class="qa__item"><h3 class="d4">Podnadpis pod nadpisem</h3><p>Nadpis nedostane vysvětlující řádek. Pod nadpisem smí stát jen údaj, který nikde jinde není.</p></div>
+      <div class="qa__item"><h3 class="d4">Rozostřený přechod</h3><p>Mesh a aurora pozadí. Jeden tmavý pás na stránku, plná barva.</p></div>
+      <div class="qa__item"><h3 class="d4">Odhalování při rolování</h3><p>Karty, které vyjedou zdola. Na webu je jeden pohyb, a je jím razítko verdiktu.</p></div>
+      <div class="qa__item"><h3 class="d4">Pilulková tlačítka</h3><p>Rádius 999 patří jen přepínači v logu.</p></div>
+      <div class="qa__item"><h3 class="d4">Vymyšlená čísla</h3><p>Žádná metrika bez zdroje a bez jednotky. Žádné reference, které neexistují.</p></div>
+      <div class="qa__item"><h3 class="d4">Třetí písmo</h3><p>Sora a Inter. Číslice řeší tabulkové číslice, ne další rodina.</p></div>
+    </div>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-in">
+    <span class="xs">© 2026 Off-Plate, Praha</span>
+    <nav class="xs" aria-label="Patička">
+      <a href="../novinky/">Novinky</a>
+      <a href="../system/">Systém</a>
+      <a href="../en/" lang="en">English</a>
+      <a href="../img/CREDITS.txt">Fotografie</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../site.js" defer></script>
+</body>
+</html>

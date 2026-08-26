@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32">
+  <style>
+    .track{fill:#002B59}
+    .knob{fill:#FFFFFF}
+    @media (prefers-color-scheme: dark){ .track{fill:#1F7A7A} }
+  </style>
+  <rect width="32" height="32" rx="7" fill="#F2EFEB"/>
+  <rect class="track" x="4" y="10" width="24" height="12" rx="6"/>
+  <circle class="knob" cx="22" cy="16" r="4"/>
+</svg>

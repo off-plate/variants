@@ -1,0 +1,10 @@
+# Photography for Off Plate variant C
+# All images graded to one split-tone at build time (see grade pipeline).
+# file | source title | licence | source page
+
+stavba | 2025 - free image of a building worker at a construction site - drilling rusty piles in the peat soil for the foundation. Construction photography Amsterdam city by Fons Heijnsbroek; free download urban photo, The Netherlands.tif | cc0 | https://commons.wikimedia.org/wiki/File:2025_-_free_image_of_a_building_worker_at_a_construction_site_-_drilling_rusty_piles_in_the_peat_soil_for_the_foundation._Construction_photography_Amsterdam_city_by_Fons_Heijnsbroek;_free_download_urban_photo,_The_Netherlands.tif
+sklad | Emergency Planning and Security - San Juan, Puerto Rico, May 29, 2012 -- FEMA's Logistics Management Division open the agency's new, strategically-located Caribbean Distribution Cen - DPLA - d2c4633e1ec7478e8b435ea7ddbce4ce.jpg | public domain | https://commons.wikimedia.org/wiki/File:Emergency_Planning_and_Security_-_San_Juan,_Puerto_Rico,_May_29,_2012_--_FEMA%27s_Logistics_Management_Division_open_the_agency%27s_new,_strategically-located_Caribbean_Distribution_Cen_-_DPLA_-_d2c4633e1ec7478e8b435ea7ddbce4ce.jpg
+dilna | Automobile repair shop in San Francisco (July 2022).jpg | cc0 | https://commons.wikimedia.org/wiki/File:Automobile_repair_shop_in_San_Francisco_(July_2022).jpg
+beton | 2012.08 - 'Concrete & old brick foundation under Central Station Amsterdam', urban photo of construction activities, Fons Heijnsbroek (12101703396).jpg | cc0 | https://commons.wikimedia.org/wiki/File:2012.08_-_%27Concrete_%26_old_brick_foundation_under_Central_Station_Amsterdam%27,_urban_photo_of_construction_activities,_Fons_Heijnsbroek_(12101703396).jpg
+garaz | Car repair shop.jpg | cc by-sa 4.0 | https://commons.wikimedia.org/wiki/File:Car_repair_shop.jpg
+papir | Office Work by Chau Thong Phan | CC0 | https://stocksnap.io/photo/office-work-UP9J4EZYNJ

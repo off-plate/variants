@@ -1,0 +1,121 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Kontakt · Off-Plate</title>
+<meta name="description" content="Napište, co vás nejvíc zdržuje. Odpovídá Michael Florian, obvykle do konce pracovního dne.">
+<link rel="canonical" href="https://off-plate.github.io/variants/c/kontakt/">
+<meta name="theme-color" content="#FFFFFF">
+<meta property="og:type" content="website">
+<meta property="og:locale" content="cs_CZ">
+<meta property="og:site_name" content="Off-Plate">
+<meta property="og:title" content="Kontakt · Off-Plate">
+<meta property="og:description" content="Napište, co vás nejvíc zdržuje. Odpovídá Michael Florian, obvykle do konce pracovního dne.">
+<meta property="og:url" content="https://off-plate.github.io/variants/c/kontakt/">
+<meta property="og:image" content="https://off-plate.github.io/variants/c/img/og.png">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+<link rel="icon" href="../favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="../icon-180.png">
+<link rel="manifest" href="../manifest.webmanifest">
+<link rel="preload" href="../fonts/sora-600.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../fonts.css"><!-- slop-lint-ignore: Inter + Sora are the locked Off-Plate brand faces, BRAND.md -->
+<link rel="stylesheet" href="../site.css">
+</head>
+<body>
+
+<a class="skip" href="#main">Přeskočit na obsah</a>
+
+<header class="header" id="header">
+  <div class="wrap header-in">
+    <a class="brand" href="../" translate="no"><span class="brand__toggle" aria-hidden="true"><i></i></span>off plate</a>
+    <nav class="nav" aria-label="Hlavní">
+      <a href="../obory/">Obory</a>
+      <a href="../cenik/">Ceník</a>
+      <a href="../jak-to-funguje/">Jak to funguje</a>
+      <a href="../novinky/">Novinky</a>
+    </nav>
+    <div class="header-right">
+      <a class="btn btn--primary" href="../kontakt/">Domluvit hovor</a>
+      <button class="burger" id="burger" type="button" aria-label="Otevřít menu" aria-expanded="false" aria-controls="drawer"><i></i></button>
+    </div>
+  </div>
+</header>
+
+<div class="drawer" id="drawer" hidden>
+  <div class="drawer__panel" role="dialog" aria-modal="true" aria-label="Hlavní">
+    <div class="drawer__head">
+      <span class="brand" aria-hidden="true"><span class="brand__toggle"><i></i></span>off plate</span>
+      <button class="burger" id="burgerClose" type="button" aria-label="Zavřít menu" aria-expanded="true" style="display:flex"><i></i></button>
+    </div>
+    <a href="../obory/">Obory</a>
+    <a href="../cenik/">Ceník</a>
+    <a href="../jak-to-funguje/">Jak to funguje</a>
+    <a href="../novinky/">Novinky</a>
+    <a class="btn btn--primary" href="../kontakt/" style="margin-top:10px">Domluvit hovor</a>
+  </div>
+</div>
+
+<main id="main">
+
+<section class="section section--tight">
+  <div class="wrap contact-grid">
+    <div>
+      <h1 class="d1" style="max-width:13ch">Napište, co vás nejvíc zdržuje</h1>
+      <p class="lede" style="margin-top:22px">Odpovídá Michael Florian, obvykle do&nbsp;konce pracovního dne. Když to nebude něco pro&nbsp;nás, řekneme to rovnou a&nbsp;poradíme, kam se obrátit.</p>
+      <div class="qa" style="grid-template-columns:1fr;margin-top:34px">
+        <div class="qa__item"><h2 class="d4">První hovor trvá 45&nbsp;minut</h2><p>Ptáme se, kde se práce hromadí a&nbsp;podle jakého čísla poznáte zlepšení. Nic neprodáváme.</p></div>
+        <div class="qa__item"><h2 class="d4">Rozpis je zdarma</h2><p>Do&nbsp;týdne po&nbsp;hovoru dostanete písemně, co bychom stavěli, co ne a&nbsp;proč.</p></div>
+      </div>
+      <p class="sm" style="margin-top:26px">Nebo rovnou e-mailem: <a href="mailto:michael@off-plate.com" style="text-decoration:underline">michael@off-plate.com</a></p>
+    </div>
+
+    <form class="form" method="post" action="mailto:michael@off-plate.com" enctype="text/plain">
+      <div class="field">
+        <label for="f-name">Jméno</label>
+        <input id="f-name" name="jmeno" type="text" autocomplete="name" required>
+      </div>
+      <div class="field">
+        <label for="f-firma">Firma</label>
+        <input id="f-firma" name="firma" type="text" autocomplete="organization">
+      </div>
+      <div class="field">
+        <label for="f-mail">E-mail</label>
+        <input id="f-mail" name="email" type="email" autocomplete="email" inputmode="email" spellcheck="false" required>
+      </div>
+      <div class="field">
+        <label for="f-tel">Telefon</label>
+        <input id="f-tel" name="telefon" type="tel" autocomplete="tel" inputmode="tel" spellcheck="false">
+        <span class="hint">Nepovinné. Když ho vyplníte, zavoláme radši než píšeme.</span>
+      </div>
+      <div class="field field--area">
+        <label for="f-text">Co vás nejvíc zdržuje</label>
+        <textarea id="f-text" name="zprava" rows="5" required placeholder="Například: každou zakázku přepisujeme ručně z&nbsp;e-mailu do&nbsp;systému…"></textarea>
+      </div>
+      <button class="btn btn--primary" type="submit">Odeslat</button>
+      <p class="xs" style="margin-top:14px">Odesláním nám dáváte jen svůj e-mail a&nbsp;text zprávy. Nic dalšího neukládáme.</p>
+    </form>
+  </div>
+</section>
+
+</main>
+
+<footer class="footer">
+  <div class="wrap footer-in">
+    <span class="xs">© 2026 Off-Plate, Praha</span>
+    <nav class="xs" aria-label="Patička">
+      <a href="../novinky/">Novinky</a>
+      <a href="../system/">Systém</a>
+      <a href="../en/" lang="en">English</a>
+      <a href="../img/CREDITS.txt">Fotografie</a>
+    </nav>
+  </div>
+</footer>
+
+<script src="../site.js" defer></script>
+</body>
+</html>
