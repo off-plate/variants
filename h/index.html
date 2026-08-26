@@ -205,6 +205,58 @@ h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;line-height:1.1}
   .subcard .shot{aspect-ratio:16/10}
   .t-hero .nav a:nth-child(n+4):not(.cta){display:none}
 }
+
+/* ── responsive, measured at 320 / 360 / 390 / 414 / 768 / 834 / 1024 ──── */
+/* tap targets: the bento's small controls were 17 to 40px */
+.pill{min-height:44px}
+.brand{min-height:44px}
+.subcard .more{min-height:44px;align-items:center}
+.t-hero .nav a{min-height:38px;display:inline-flex;align-items:center}
+.arrows button{width:38px;height:38px}
+.circ{width:44px;height:44px}
+@media(hover:none){
+  .t-hero .nav a{min-height:44px}
+  .arrows button{width:44px;height:44px}
+}
+
+@media(max-width:900px){
+  .panel-left h1{font-size:clamp(27px,6.4vw,40px);margin-top:22px}
+  .panel-left .lede{font-size:12.5px;margin-top:12px}
+  .subcard{margin-top:24px}
+  .t-hero .lines{font-size:clamp(16px,4.4vw,24px)}
+  .t-person .shot{min-height:260px}
+  .t-verdict .mark{font-size:36px}
+}
+@media(max-width:600px){
+  body{padding:7px}
+  .tile,.panel-left{padding:17px}
+  .panel-left{padding:20px}
+  .t-hero .nav{gap:2px}
+  .t-hero .nav a{padding:7px 10px;font-size:11.5px}
+  .vlist li{font-size:11.5px}
+  .t-join p,.t-verdict p{font-size:11.5px}
+  .fine{font-size:10.5px}
+  .t-work .strip span{padding:6px}
+  .t-person .head{padding:16px 17px 0}
+  .t-person .quote{padding:16px}
+  .t-person .quote p{font-size:13px}
+}
+@media(max-width:380px){
+  .brand{font-size:14px}
+  .t-hero .nav a:nth-child(n+3):not(.cta){display:none}
+  .panel-left h1{font-size:26px}
+}
+/* short landscape phones: the bento must not lock to viewport height */
+@media(max-height:520px) and (orientation:landscape){
+  .bento{min-height:0}
+  .right{grid-template-rows:auto auto auto}
+}
+@supports(padding:env(safe-area-inset-left)){
+  body{padding-left:max(var(--gap),env(safe-area-inset-left));
+       padding-right:max(var(--gap),env(safe-area-inset-right));
+       padding-bottom:max(var(--gap),env(safe-area-inset-bottom))}
+}
+
 @media (prefers-reduced-motion:reduce){*{transition:none!important}}
 </style>
 </head>
