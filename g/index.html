@@ -1,0 +1,519 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Off Plate · Varianta G</title>
+<meta name="description" content="Řekneme vám, co ve vaší firmě opravdu potřebuje AI, co zvládne obyčejná automatizace a co je lepší nechat být.">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700;800&family=Playfair+Display:ital,wght@1,500;1,600&family=Sacramento&display=swap" rel="stylesheet">
+<style>
+:root{
+  --ink:#000; --paper:#fff;
+  --ember:#F0621A; --ember-hot:#FF8A2B; --ember-deep:#8E2208;
+  --grey:#9A9A9A; --grey-2:#6A6A6A;
+  --card:#F4F2EF; --card-dark:#111111;
+  --r:22px; --r-sm:14px;
+  --ease:cubic-bezier(.2,.7,.3,1);
+  --shell:min(93vw,1680px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scrollbar-gutter:stable}
+body{
+  margin:0;background:var(--ink);color:var(--paper);
+  font-family:Archivo,system-ui,sans-serif;font-size:16px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+p{margin:0}
+h1,h2,h3,h4{margin:0;font-weight:700;line-height:.92;letter-spacing:-.03em;text-transform:uppercase}
+:focus-visible{outline:2px solid var(--ember-hot);outline-offset:3px;border-radius:6px}
+.shell{width:var(--shell);margin-inline:auto}
+.cap{font-size:11px;font-weight:600;letter-spacing:.14em;text-transform:uppercase}
+
+/* the decorative initial: a high-contrast italic serif standing in for the
+   first letter of a heavy sans headline */
+.init{
+  font-family:'Playfair Display',serif;font-style:italic;font-weight:500;
+  text-transform:none;letter-spacing:-.02em;
+  font-size:1.34em;line-height:0;vertical-align:-.06em;padding-right:.02em;
+}
+
+/* ── hero ─────────────────────────────────────────────────────────────── */
+.hero{position:relative;min-height:min(94vh,940px);display:flex;flex-direction:column;
+      justify-content:space-between;overflow:hidden;padding:26px 0 44px}
+.hero__bg{position:absolute;inset:0;z-index:0}
+.hero__bg img{width:100%;height:100%;object-fit:cover;object-position:50% 42%}
+.hero__bg::after{
+  content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(0,0,0,.62) 0%,rgba(0,0,0,.15) 34%,rgba(0,0,0,.55) 72%,#000 100%);
+}
+.hero__top,.hero__btm{position:relative;z-index:2}
+.hero__top{display:flex;justify-content:space-between;align-items:flex-start;gap:20px}
+
+.wordmark{font-weight:800;font-size:15px;letter-spacing:.02em;line-height:.92;text-transform:uppercase}
+.wordmark b{display:block;font-weight:800}
+
+.navbox{
+  background:rgba(255,255,255,.1);border:1px solid rgba(255,255,255,.18);
+  backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);
+  border-radius:var(--r);padding:6px;display:flex;flex-direction:column;gap:2px;min-width:132px;
+}
+.navbox a{
+  display:flex;align-items:center;justify-content:center;min-height:34px;padding:0 18px;
+  border-radius:999px;font-size:12.5px;font-weight:600;color:rgba(255,255,255,.82);
+  transition:background .18s var(--ease),color .18s var(--ease);
+}
+.navbox a:hover{color:#fff;background:rgba(255,255,255,.14)}
+.navbox a[aria-current]{background:var(--paper);color:var(--ink)}
+
+.hero__btm{display:grid;grid-template-columns:minmax(0,1.25fr) minmax(0,.75fr);
+           gap:clamp(24px,4vw,72px);align-items:end}
+.hero h1{font-size:clamp(38px,5.6vw,86px);max-width:15ch;letter-spacing:-.035em}
+.badge{
+  display:inline-flex;align-items:baseline;gap:5px;vertical-align:.22em;
+  background:var(--paper);color:var(--ink);border-radius:999px;
+  padding:4px 12px 5px;font-size:.2em;font-weight:700;letter-spacing:0;line-height:1;
+}
+.badge i{font-style:normal;font-weight:500;color:var(--grey-2);font-size:.72em}
+.pillbtn{
+  display:inline-flex;align-items:center;gap:9px;margin-top:26px;
+  border:1px solid rgba(255,255,255,.34);border-radius:999px;padding:9px 18px 9px 12px;
+  font-size:12.5px;font-weight:500;color:rgba(255,255,255,.88);
+  transition:border-color .18s var(--ease),background .18s var(--ease);
+}
+.pillbtn:hover{border-color:#fff;background:rgba(255,255,255,.08)}
+.pillbtn span{width:19px;height:19px;border-radius:50%;background:var(--paper);color:var(--ink);
+              display:grid;place-items:center;font-size:13px;font-weight:700;line-height:1}
+
+.trust{display:flex;align-items:center;gap:11px}
+.faces{display:flex}
+.faces i{width:27px;height:27px;border-radius:50%;border:2px solid #000;margin-left:-9px;
+         background:var(--ember-deep);overflow:hidden;display:block}
+.faces i:first-child{margin-left:0}
+.faces i img{width:100%;height:100%;object-fit:cover}
+.trust p{font-size:11.5px;line-height:1.3;color:rgba(255,255,255,.72)}
+.trust p b{display:block;color:#fff;font-weight:600}
+.hero__lede{margin-top:16px;font-size:13.5px;line-height:1.45;color:rgba(255,255,255,.8);max-width:34ch}
+.hero__cta{display:flex;align-items:center;gap:9px;flex-wrap:wrap;margin-top:20px}
+.btn{display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:0 20px;
+     min-height:44px;font-size:11.5px;font-weight:700;letter-spacing:.08em;text-transform:uppercase;
+     transition:transform .18s var(--ease),background .18s var(--ease)}
+.btn:active{transform:scale(.98)}
+.btn--dark{background:#151515;color:#fff;border:1px solid rgba(255,255,255,.2)}
+.btn--dark:hover{background:#242424}
+.btn--light{background:var(--paper);color:var(--ink)}
+.btn--light:hover{background:#e8e4de}
+.btn i{width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,.16);
+       display:grid;place-items:center;font-style:normal;font-size:12px}
+.btn--light i{background:rgba(0,0,0,.1)}
+.round{width:44px;height:44px;border-radius:50%;background:var(--paper);color:var(--ink);
+       display:grid;place-items:center;font-size:16px;flex:0 0 auto;
+       transition:transform .2s var(--ease)}
+.round:hover{transform:rotate(45deg)}
+
+/* ── card grid ────────────────────────────────────────────────────────── */
+.cards{padding:34px 0 96px;display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.card{background:var(--card);color:var(--ink);border-radius:var(--r);padding:26px;
+      display:flex;flex-direction:column;min-height:250px;overflow:hidden;position:relative}
+.card h3{font-size:clamp(15px,1.15vw,19px);line-height:1.12;letter-spacing:-.02em;max-width:22ch}
+.card p{font-size:12.5px;line-height:1.45;color:#4A4A4A;margin-top:12px;max-width:34ch}
+.card--dark{background:var(--card-dark);color:#fff}
+.card--dark p{color:rgba(255,255,255,.62)}
+.card--wide{grid-column:span 2}
+.byline{display:flex;align-items:center;gap:9px;margin-top:auto;padding-top:18px}
+.byline i{width:30px;height:30px;border-radius:50%;overflow:hidden;background:var(--ember-deep);display:block}
+.byline i img{width:100%;height:100%;object-fit:cover}
+.byline b{font-size:11px;font-weight:700;letter-spacing:.08em;text-transform:uppercase}
+
+/* gauge: the three verdicts, as a dashed dial */
+.gauge{margin-top:auto;padding-top:16px;display:flex;align-items:flex-end;gap:16px}
+.dial{display:flex;gap:3px;align-items:flex-end;height:64px}
+.dial b{width:9px;border-radius:5px;background:#D6D2CC;display:block}
+.dial b.on{background:#141414}
+.gauge .num{font-size:30px;font-weight:800;letter-spacing:-.04em;line-height:1}
+.gauge .num span{display:block;font-size:9.5px;font-weight:600;letter-spacing:.1em;
+                 color:var(--grey-2);text-transform:uppercase;margin-top:3px}
+
+/* timeline: the five real steps as a gantt */
+.tl{margin-top:16px;flex:1;display:flex;flex-direction:column;justify-content:center;gap:7px}
+.tl .row{display:grid;grid-template-columns:1fr;align-items:center;height:21px;position:relative}
+.tl .bar{position:absolute;height:21px;border-radius:6px;background:#E2DED8;
+         display:flex;align-items:center;padding:0 9px;font-size:9.5px;font-weight:600;white-space:nowrap}
+.tl .bar.hot{background:#141414;color:#fff}
+.tl .axis{display:flex;justify-content:space-between;margin-top:8px;font-size:9px;color:#9A948C}
+
+.bigfig{margin-top:auto;font-size:clamp(38px,4.4vw,62px);font-weight:800;letter-spacing:-.05em;line-height:.9}
+.loader{display:flex;gap:5px;margin-bottom:auto}
+.loader b{height:9px;border-radius:5px;background:#E2DED8;display:block;flex:1}
+.loader b:first-child{background:#141414;flex:0 0 58px}
+.prodshot{position:absolute;right:-14px;top:50%;transform:translateY(-40%);width:52%;
+          border-radius:var(--r-sm);overflow:hidden}
+.card--dark .btn--light{align-self:flex-start;margin-top:16px}
+
+/* ── statement ────────────────────────────────────────────────────────── */
+.stmt{padding:0 0 92px;text-align:center}
+.hello{font-family:Sacramento,cursive;font-size:clamp(40px,4.4vw,62px);line-height:1;
+       text-transform:none;letter-spacing:0;font-weight:400}
+.stmt h2{margin-top:14px;font-size:clamp(26px,3.5vw,54px);line-height:1.06;letter-spacing:-.03em;
+         max-width:23ch;margin-inline:auto}
+.stmt .ser{font-family:'Playfair Display',serif;font-style:italic;font-weight:500;
+           text-transform:none;letter-spacing:-.02em}
+.stmt .dim{color:var(--grey)}
+.inlinepic{display:inline-block;width:1.42em;height:.86em;border-radius:999px;overflow:hidden;
+           vertical-align:-.1em;margin:0 .08em}
+.inlinepic img{width:100%;height:100%;object-fit:cover}
+
+/* overlapping circles */
+.circles{display:flex;justify-content:center;align-items:center;padding:8px 0 96px}
+.circle{width:clamp(112px,12.6vw,196px);aspect-ratio:1;border-radius:50%;display:grid;place-items:center;
+        text-align:center;font-size:clamp(9px,.78vw,12.5px);font-weight:700;letter-spacing:.1em;
+        text-transform:uppercase;background:var(--paper);color:var(--ink);
+        margin-left:-24px;position:relative;transition:transform .26s var(--ease)}
+.circle:first-child{margin-left:0}
+.circle:hover{transform:translateY(-7px)}
+.circle--pic{overflow:hidden;color:var(--ember);z-index:2;transform:scale(1.12)}
+.circle--pic:hover{transform:scale(1.12) translateY(-7px)}
+.circle--pic img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.circle--pic span{position:relative;z-index:1;font-size:clamp(15px,1.7vw,28px);letter-spacing:.02em;
+                  color:#fff;text-shadow:0 2px 18px rgba(0,0,0,.85),0 0 40px rgba(0,0,0,.6)}
+
+/* ── obory, on paper ──────────────────────────────────────────────────── */
+.paper{background:var(--paper);color:var(--ink);padding:88px 0 96px}
+.sechead{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,.8fr);gap:36px;align-items:start;
+         margin-bottom:44px}
+.sechead h2{font-size:clamp(30px,3.9vw,58px);letter-spacing:-.035em}
+.sechead .sub{font-size:11.5px;font-weight:600;letter-spacing:.1em;text-transform:uppercase;
+              color:var(--grey-2);margin-top:12px}
+.sechead > p{font-size:13.5px;line-height:1.5;color:#4A4A4A;max-width:44ch;justify-self:end}
+.sechead .sub{justify-self:start;max-width:none}
+.paper .sechead p{color:#4A4A4A}
+
+.work{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:clamp(14px,1.6vw,26px);
+      align-items:start}
+.work a{display:block}
+.work .shot{border-radius:var(--r-sm);overflow:hidden;aspect-ratio:4/5;background:#111;
+            box-shadow:0 1px 0 rgba(0,0,0,.08),0 18px 40px rgba(0,0,0,.10)}
+.work .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.work a:hover .shot img{transform:scale(1.05)}
+.work h3{font-size:15px;letter-spacing:-.01em;margin-top:14px}
+.work p{font-size:12px;line-height:1.42;color:#5A5A5A;margin-top:6px;max-width:26ch}
+.work a:nth-child(2){margin-top:clamp(26px,3.4vw,58px)}
+.work a:nth-child(3){margin-top:clamp(52px,6.6vw,112px)}
+.work a:nth-child(4){margin-top:clamp(14px,1.8vw,30px)}
+
+/* ── news, staggered cards on black ───────────────────────────────────── */
+.dark{padding:88px 0 92px}
+.dark .sechead p{color:rgba(255,255,255,.66)}
+.crew{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:clamp(10px,1.1vw,18px);
+      align-items:center}
+.crew a{display:block;border-radius:var(--r-sm);overflow:hidden;position:relative;background:#121212}
+.crew .shot{aspect-ratio:3/4.1;overflow:hidden}
+.crew .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
+.crew a:hover .shot img{transform:scale(1.05)}
+.crew .lab{position:absolute;left:0;right:0;bottom:0;padding:16px 14px;
+           background:linear-gradient(180deg,rgba(0,0,0,0),rgba(0,0,0,.86))}
+.crew .lab b{display:block;font-size:12px;font-weight:700;letter-spacing:-.01em;line-height:1.2}
+.crew .lab span{display:block;font-size:10px;color:rgba(255,255,255,.6);margin-top:4px}
+.crew a:nth-child(1),.crew a:nth-child(5){transform:scale(.9)}
+.crew a:nth-child(2),.crew a:nth-child(4){transform:scale(.96)}
+.slider{display:flex;justify-content:center;margin-top:30px}
+.slider .bar{display:flex;align-items:center;gap:14px;background:var(--paper);color:var(--ink);
+             border-radius:999px;padding:5px 5px 5px 26px;min-width:min(420px,72vw)}
+.slider .bar b{flex:1;text-align:center;font-size:10.5px;font-weight:700;letter-spacing:.12em;
+               text-transform:uppercase}
+
+/* ── footer ───────────────────────────────────────────────────────────── */
+.foot{position:relative;padding-top:clamp(60px,7vw,110px)}
+.foot__art{position:relative;height:clamp(190px,26vw,420px);overflow:hidden}
+.foot__art img{width:100%;height:100%;object-fit:cover;object-position:50% 40%}
+.foot__art::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,#000 0%,rgba(0,0,0,.1) 40%,rgba(0,0,0,.55) 78%,#000 100%)}
+.foot__mark{
+  position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);z-index:2;
+  font-size:clamp(74px,19vw,300px);font-weight:800;letter-spacing:-.05em;line-height:.78;
+  text-align:center;color:rgba(255,255,255,.9);
+  filter:blur(2.5px);text-shadow:0 0 60px rgba(240,98,26,.55);pointer-events:none;
+}
+.foot__grid{display:grid;grid-template-columns:1.4fr 1fr 1fr 1.2fr;gap:32px;
+            padding:44px 0 54px;border-top:1px solid rgba(255,255,255,.12);margin-top:34px}
+.foot__grid h4{font-size:10.5px;letter-spacing:.12em;color:var(--grey-2);font-weight:600}
+.foot__grid ul{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:7px}
+.foot__grid a{font-size:13px;color:rgba(255,255,255,.84)}
+.foot__grid a:hover{color:var(--ember-hot)}
+.foot__grid .mail{font-size:13.5px;color:var(--ember-hot);text-decoration:underline;text-underline-offset:3px}
+.foot__legal{font-size:11px;color:var(--grey-2);line-height:1.5}
+
+/* ── responsive ───────────────────────────────────────────────────────── */
+@media(max-width:1080px){
+  .cards{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .card--wide{grid-column:span 2}
+  .work{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .work a:nth-child(n){margin-top:0}
+  .work a:nth-child(2),.work a:nth-child(4){margin-top:clamp(20px,4vw,44px)}
+  .crew{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .crew a:nth-child(n){transform:none}
+  .crew a:nth-child(4),.crew a:nth-child(5){display:none}
+  .foot__grid{grid-template-columns:1fr 1fr;gap:26px}
+}
+@media(max-width:760px){
+  .hero{min-height:auto;padding-bottom:34px}
+  .hero__btm{grid-template-columns:1fr;gap:30px;margin-top:clamp(180px,42vw,300px)}
+  .navbox{flex-direction:row;min-width:0;padding:4px}
+  .navbox a{min-height:32px;padding:0 12px;font-size:11.5px}
+  .navbox a:not([aria-current]):nth-child(n+4){display:none}
+  .cards{grid-template-columns:1fr}
+  .card--wide{grid-column:span 1}
+  .prodshot{position:static;transform:none;width:100%;margin-top:16px}
+  .work{grid-template-columns:1fr}
+  .work a:nth-child(n){margin-top:0}
+  .crew{grid-template-columns:repeat(2,minmax(0,1fr))}
+  .crew a:nth-child(3){display:none}
+  .circles{flex-wrap:wrap;gap:8px;justify-content:center}
+  .circle{margin-left:0;width:clamp(96px,29vw,140px)}
+  .circle--pic{transform:none}
+  .sechead{grid-template-columns:1fr;gap:16px}
+  .sechead p{justify-self:start}
+  .foot__grid{grid-template-columns:1fr}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<!-- ── hero ─────────────────────────────────────────────────────────────── -->
+<header class="hero">
+  <div class="hero__bg" aria-hidden="true">
+    <picture>
+      <source type="image/webp" srcset="art/hero.webp">
+      <img src="art/hero.jpg" alt="" width="2200" height="1450" fetchpriority="high">
+    </picture>
+  </div>
+
+  <div class="shell hero__top">
+    <a class="wordmark" href="#"><b>OFF</b><b>PLATE</b></a>
+    <nav class="navbox" aria-label="Hlavní">
+      <a href="#" aria-current="page">Domů</a>
+      <a href="#obory">Obory</a>
+      <a href="#cenik">Ceník</a>
+      <a href="#novinky">Novinky</a>
+      <a href="#kontakt">Kontakt</a>
+    </nav>
+  </div>
+
+  <div class="shell hero__btm">
+    <div>
+      <h1><span class="init">E</span>FEKTIVNÍ AUTOMATIZACE PRO&nbsp;ČESKÉ FIRMY <span class="badge">3 <i>verdikty</i></span></h1>
+      <a class="pillbtn" href="#verdikty"><span>+</span> Hledáte, kde ve firmě začít s AI?</a>
+    </div>
+
+    <div>
+      <div class="trust">
+        <span class="faces" aria-hidden="true">
+          <i><img src="art/chip.jpg" alt=""></i>
+          <i><img src="art/o1.jpg" alt=""></i>
+          <i><img src="art/o4.jpg" alt=""></i>
+        </span>
+        <p><b>Rozpis zdarma</b>Odpovídá Michael Florian, obvykle do konce dne</p>
+      </div>
+      <p class="hero__lede">Projdeme vaši agendu a u každé opakované úlohy řekneme jedno ze tří: nepotřebujete nic, stačí obyčejná automatizace, nebo tohle opravdu potřebuje AI.</p>
+      <div class="hero__cta">
+        <a class="btn btn--dark" href="#kontakt">Domluvit hovor <i>&rarr;</i></a>
+        <a class="btn btn--light" href="#cenik">Ceník</a>
+        <a class="round" href="#verdikty" aria-label="Verdikty">&#8599;</a>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- ── card grid ────────────────────────────────────────────────────────── -->
+<section class="shell cards" id="verdikty" aria-label="Přehled">
+  <article class="card">
+    <h3>Tři verdikty na každou opakovanou úlohu</h3>
+    <p>Nepotřebujete nic, stačí obyčejná automatizace, nebo tohle opravdu potřebuje AI. Ke každému verdiktu píšeme důvod, abyste s ním mohli nesouhlasit.</p>
+    <div class="byline">
+      <i><img src="art/chip.jpg" alt=""></i>
+      <b>Michael Florian</b>
+    </div>
+  </article>
+
+  <article class="card">
+    <h3>Nejčastější verdikt je „nepotřebujete nic“</h3>
+    <div class="gauge">
+      <span class="dial" aria-hidden="true">
+        <b class="on" style="height:26%"></b><b class="on" style="height:38%"></b>
+        <b class="on" style="height:52%"></b><b class="on" style="height:66%"></b>
+        <b style="height:80%"></b><b style="height:92%"></b>
+        <b style="height:78%"></b><b style="height:60%"></b><b style="height:42%"></b>
+      </span>
+      <span class="num">2 z 5<span>úloh potřebuje AI</span></span>
+    </div>
+  </article>
+
+  <article class="card card--dark">
+    <h3>Rozpis zdarma: co stavět nebudeme a proč</h3>
+    <p>Dostanete ho písemně do týdne po prvním hovoru.</p>
+    <a class="btn btn--light" href="#kontakt">Chci rozpis</a>
+    <span class="prodshot" aria-hidden="true">
+      <picture><source type="image/webp" srcset="art/card.webp"><img src="art/card.jpg" alt="" width="900" height="640"></picture>
+    </span>
+  </article>
+
+  <article class="card card--wide">
+    <h3>Jak spolupráce probíhá</h3>
+    <p>Pět kroků. První dva jsou zdarma a končí písemným rozpisem.</p>
+    <div class="tl" aria-hidden="true">
+      <div class="row"><span class="bar hot" style="left:0;width:20%">Hovor</span></div>
+      <div class="row"><span class="bar" style="left:14%;width:24%">Rozpis</span></div>
+      <div class="row"><span class="bar" style="left:32%;width:26%">Pilot</span></div>
+      <div class="row"><span class="bar" style="left:52%;width:30%">Stavba</span></div>
+      <div class="row"><span class="bar" style="left:76%;width:24%">Provoz</span></div>
+      <div class="axis"><span>0</span><span>1 týden</span><span>2 týdny</span><span>4 týdny</span><span>6 týdnů</span><span>dál</span></div>
+    </div>
+  </article>
+
+  <article class="card">
+    <span class="loader" aria-hidden="true"><b></b><b></b><b></b><b></b></span>
+    <span class="bigfig">12 000 Kč</span>
+    <p style="margin-top:10px">Za jednu hotovou automatizaci na vašich skutečných datech. Jednorázově, bez závazku.</p>
+  </article>
+</section>
+
+<!-- ── statement ────────────────────────────────────────────────────────── -->
+<section class="shell stmt">
+  <p class="hello">dobrý den.</p>
+  <h2><span class="ser">P</span>OMÁHÁME ČESKÝM FIRMÁM ZBAVIT SE <span class="dim">OPAKOVANÉ PRÁCE</span>
+    <span class="inlinepic"><img src="art/o1.jpg" alt=""></span> ANIŽ BYCHOM JIM PRODÁVALI AI,
+    <span class="ser">kterou nepotřebují.</span></h2>
+</section>
+
+<div class="shell circles">
+  <div class="circle">Nic</div>
+  <div class="circle">Automatizace</div>
+  <div class="circle circle--pic"><img src="art/o1.jpg" alt=""><span>AI</span></div>
+  <div class="circle">Rozpis</div>
+  <div class="circle">Provoz</div>
+</div>
+
+<!-- ── obory ────────────────────────────────────────────────────────────── -->
+<section class="paper" id="obory">
+  <div class="shell">
+    <div class="sechead">
+      <div>
+        <h2><span class="init">O</span>BORY</h2>
+        <p class="sub">Kde nejčastěji začínáme</p>
+      </div>
+      <p>Nezajímá nás obor tolik jako to, kde se u vás hromadí papír. U každého oboru níž je úloha, se kterou se potkáváme nejčastěji.</p>
+    </div>
+    <div class="work">
+      <a href="#kontakt">
+        <span class="shot"><picture><source type="image/webp" srcset="art/o1.webp"><img src="art/o1.jpg" alt="" width="900" height="1200" loading="lazy"></picture></span>
+        <h3>Stavební firma</h3>
+        <p>Vícepráce nadiktované z místa, přiřazené k zakázce a porovnané s nabídkou.</p>
+      </a>
+      <a href="#kontakt">
+        <span class="shot"><picture><source type="image/webp" srcset="art/o2.webp"><img src="art/o2.jpg" alt="" width="900" height="1100" loading="lazy"></picture></span>
+        <h3>E-shop</h3>
+        <p>Marže proti skutečné nákupní ceně z faktur, počítaná každý den.</p>
+      </a>
+      <a href="#kontakt">
+        <span class="shot"><picture><source type="image/webp" srcset="art/o3.webp"><img src="art/o3.jpg" alt="" width="900" height="1250" loading="lazy"></picture></span>
+        <h3>Účetní kancelář</h3>
+        <p>Došlé doklady přečtené a předkontované, sporné případy označené.</p>
+      </a>
+      <a href="#kontakt">
+        <span class="shot"><picture><source type="image/webp" srcset="art/o4.webp"><img src="art/o4.jpg" alt="" width="900" height="1050" loading="lazy"></picture></span>
+        <h3>Autoservis</h3>
+        <p>Nález mechanika přepsaný do zakázky a vysvětlený zákazníkovi.</p>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ── novinky ──────────────────────────────────────────────────────────── -->
+<section class="dark" id="novinky">
+  <div class="shell">
+    <div class="sechead">
+      <div>
+        <h2><span class="init">C</span>O SE ZMĚNILO</h2>
+        <p class="sub">Novinky, s odkazem na zdroj</p>
+      </div>
+      <p>Píšeme jen o tom, co mění rozhodnutí české firmě. Ke každé zprávě patří odkaz na původní zdroj, ať si to můžete ověřit.</p>
+    </div>
+    <div class="crew">
+      <a href="#kontakt">
+        <span class="shot"><img src="art/n1.jpg" alt="" width="800" height="1000" loading="lazy"></span>
+        <span class="lab"><b>Shoptet dal AI popisky do administrace zdarma</b><span>léto 2026</span></span>
+      </a>
+      <a href="#kontakt">
+        <span class="shot"><img src="art/o2.jpg" alt="" width="900" height="1100" loading="lazy"></span>
+        <span class="lab"><b>Stanovisko k automatizovanému zpracování dokladů</b><span>srpen 2026</span></span>
+      </a>
+      <a href="#kontakt">
+        <span class="shot"><img src="art/n3.jpg" alt="" width="800" height="900" loading="lazy"></span>
+        <span class="lab"><b>Od 2. srpna 2026 musíte označovat, co psala AI</b><span>2. srpna 2026</span></span>
+      </a>
+      <a href="#kontakt">
+        <span class="shot"><img src="art/n2.jpg" alt="" width="800" height="1150" loading="lazy"></span>
+        <span class="lab"><b>Mnichovský soud rozhodl o trénovacích datech</b><span>11. listopadu 2025</span></span>
+      </a>
+      <a href="#kontakt">
+        <span class="shot"><img src="art/o3.jpg" alt="" width="900" height="1250" loading="lazy"></span>
+        <span class="lab"><b>Kde smí ležet data českých firem</b><span>červenec 2026</span></span>
+      </a>
+    </div>
+    <div class="slider">
+      <div class="bar">
+        <b>Všechny novinky</b>
+        <a class="round" href="#novinky" aria-label="Další">&rarr;</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── footer ───────────────────────────────────────────────────────────── -->
+<footer class="foot" id="kontakt">
+  <div class="foot__art">
+    <picture><source type="image/webp" srcset="art/foot.webp"><img src="art/foot.jpg" alt="" width="2200" height="820" loading="lazy"></picture>
+    <p class="foot__mark" aria-hidden="true">OFF<br>PLATE</p>
+  </div>
+  <div class="shell">
+    <div class="foot__grid">
+      <div>
+        <h4 class="cap">Off Plate</h4>
+        <p class="foot__legal" style="margin-top:14px">Řekneme vám, co ve vaší firmě opravdu potřebuje AI, co zvládne obyčejná automatizace a co je lepší nechat být.</p>
+      </div>
+      <div>
+        <h4 class="cap">Rozcestník</h4>
+        <ul>
+          <li><a href="#obory">Obory</a></li>
+          <li><a href="#cenik">Ceník</a></li>
+          <li><a href="#verdikty">Verdikty</a></li>
+          <li><a href="#novinky">Novinky</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="cap">Sítě</h4>
+        <ul>
+          <li><a href="#kontakt">LinkedIn</a></li>
+          <li><a href="#kontakt">YouTube</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4 class="cap">Ozvěte se</h4>
+        <ul>
+          <li><a class="mail" href="mailto:michael@off-plate.com">michael@off-plate.com</a></li>
+        </ul>
+        <p class="foot__legal" style="margin-top:14px">První hovor 45 minut, zdarma.<br>Rozpis do týdne, také zdarma.</p>
+      </div>
+    </div>
+    <p class="foot__legal" style="padding-bottom:40px">© 2026 Off-Plate, Praha · pracovní verze, ceny jsou zástupné</p>
+  </div>
+</footer>
+
+</body>
+</html>

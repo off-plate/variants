@@ -8,6 +8,8 @@ Live: https://off-plate.github.io/variants/
 - `a/` airy, photographic bands, split CTA, oversized wordmark footer
 - `b/` full-bleed photo hero, floating pill nav, page as one rounded slab
 - `c/` two-tone headline, floating product card, image band closing the hero
+- `g/` tmavá editorial, žhavý grading, obří logotyp v patičce
+- `h/` bento mřížka barevných dlaždic na tmavém podkladu
 - `d/` fixed sidebar, stacked slabs, tag pills, accordion process, contact form
 
 Images are CC0, credited in `img/CREDITS.txt`.

@@ -1,0 +1,335 @@
+<!doctype html>
+<html lang="cs">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Off Plate · Varianta H</title>
+<meta name="description" content="Řekneme vám, co ve vaší firmě opravdu potřebuje AI, co zvládne obyčejná automatizace a co je lepší nechat být.">
+<meta name="theme-color" content="#111318">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#111318;
+  --slate:#6E7391;
+  --slate-deep:#5B6080;
+  --yellow:#F5C518;
+  --yellow-deep:#E0B10C;
+  --mint:#BFE3C6;
+  --ink:#14161C;
+  --panel:#1B1E26;
+  --panel-2:#22262F;
+  --paper:#FFFFFF;
+  --gap:9px;
+  --r:20px;
+  --r-sm:13px;
+  --ease:cubic-bezier(.2,.7,.3,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scrollbar-gutter:stable}
+body{
+  margin:0;background:var(--bg);color:var(--paper);
+  font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-size:15px;line-height:1.5;
+  -webkit-font-smoothing:antialiased;padding:var(--gap);
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+p{margin:0}
+h1,h2,h3,h4{margin:0;font-weight:700;letter-spacing:-.03em;line-height:1.1}
+:focus-visible{outline:2px solid var(--yellow);outline-offset:2px;border-radius:8px}
+.vh{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
+
+/* ── the bento ────────────────────────────────────────────────────────── */
+.bento{
+  display:grid;
+  grid-template-columns:minmax(0,.86fr) minmax(0,1.14fr);
+  gap:var(--gap);
+  min-height:calc(100vh - var(--gap)*2);
+}
+.right{
+  display:grid;gap:var(--gap);
+  grid-template-columns:repeat(12,minmax(0,1fr));
+  grid-template-rows:minmax(230px,1.15fr) minmax(180px,.85fr) minmax(170px,.8fr);
+}
+.tile{border-radius:var(--r);padding:22px;position:relative;overflow:hidden;display:flex;flex-direction:column}
+
+/* left panel */
+.panel-left{background:var(--slate);border-radius:var(--r);padding:clamp(22px,2vw,34px);
+            display:flex;flex-direction:column}
+.brand{display:inline-flex;align-items:center;gap:9px;font-weight:800;font-size:16px;letter-spacing:-.02em}
+.brand .mk{width:26px;height:26px;border-radius:8px;background:var(--yellow);position:relative;flex:0 0 auto}
+.brand .mk::after{content:"";position:absolute;left:6px;top:9px;width:14px;height:8px;
+                  border-radius:99px;background:var(--ink)}
+.brand .mk::before{content:"";position:absolute;left:13px;top:11px;width:5px;height:4px;
+                   border-radius:50%;background:var(--yellow);z-index:2}
+.panel-left h1{margin-top:clamp(26px,3.4vw,54px);font-size:clamp(30px,3.1vw,52px);
+               letter-spacing:-.04em;line-height:1.1;max-width:14ch}
+.panel-left .lede{margin-top:16px;font-size:13px;line-height:1.55;color:rgba(255,255,255,.82);max-width:36ch}
+.pill{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:40px;padding:0 20px;
+      border-radius:999px;background:var(--paper);color:var(--ink);font-size:12.5px;font-weight:700;
+      align-self:flex-start;margin-top:20px;transition:transform .18s var(--ease),background .18s var(--ease)}
+.pill:hover{background:#EFEDE8}
+.pill:active{transform:scale(.98)}
+.pill--dark{background:var(--ink);color:#fff}
+.pill--dark:hover{background:#25282F}
+.pill--yellow{background:var(--yellow);color:var(--ink)}
+.pill--yellow:hover{background:var(--yellow-deep)}
+.pill--ghost{background:transparent;color:#fff;border:1px solid rgba(255,255,255,.4)}
+.pill--ghost:hover{background:rgba(255,255,255,.12)}
+
+.subcard{
+  margin-top:auto;background:rgba(255,255,255,.1);border-radius:var(--r-sm);
+  padding:14px;display:grid;grid-template-columns:minmax(0,.72fr) minmax(0,1fr);
+  gap:16px;align-items:start;
+}
+.subcard .shot{border-radius:10px;overflow:hidden;aspect-ratio:3/4;background:rgba(0,0,0,.25)}
+.subcard .shot img{width:100%;height:100%;object-fit:cover}
+.subcard h2{font-size:15px;letter-spacing:-.02em;margin-top:10px}
+.subcard p{font-size:11.5px;line-height:1.5;color:rgba(255,255,255,.76);margin-top:7px}
+.subcard .more{display:inline-flex;align-items:center;gap:6px;margin-top:12px;
+               font-size:11.5px;font-weight:700;text-decoration:underline;text-underline-offset:3px}
+.hexi{width:46px;height:46px;border-radius:12px;background:linear-gradient(140deg,var(--yellow),#9BD44E);
+      display:grid;place-items:center;font-weight:800;color:var(--ink);font-size:17px}
+
+/* top yellow tile */
+.t-hero{grid-column:span 8;background:var(--yellow);color:var(--ink)}
+.t-hero .nav{display:flex;flex-wrap:wrap;gap:3px;align-items:center}
+.t-hero .nav a{padding:7px 12px;border-radius:999px;font-size:12px;font-weight:600;color:rgba(20,22,28,.78);
+               transition:background .16s var(--ease)}
+.t-hero .nav a:hover{background:rgba(0,0,0,.08);color:var(--ink)}
+.t-hero .nav .cta{margin-left:auto;background:var(--ink);color:var(--yellow)}
+.t-hero .nav .cta:hover{background:#2A2D35}
+.t-hero .body{display:grid;grid-template-columns:minmax(0,.62fr) minmax(0,1fr);gap:20px;
+              align-items:end;flex:1;margin-top:14px}
+.t-hero .art{border-radius:14px 14px 90px 14px;overflow:hidden;aspect-ratio:3/3.4;align-self:end}
+.t-hero .art img{width:100%;height:100%;object-fit:cover}
+.t-hero .lines{font-size:clamp(15px,1.5vw,25px);font-weight:700;letter-spacing:-.03em;line-height:1.32}
+.t-hero .lines span{display:block}
+.t-hero .lines u{text-decoration:none;border-bottom:2.5px solid var(--ink);padding-bottom:1px}
+.t-hero .lines em{font-style:normal;display:inline-flex;align-items:center;gap:7px}
+.t-hero .lines em::before{content:"";width:11px;height:11px;background:var(--ink);
+                          clip-path:polygon(50% 0,100% 50%,50% 100%,0 50%);display:block}
+.t-hero .foot{display:flex;align-items:flex-end;justify-content:space-between;gap:14px;margin-top:14px}
+.t-hero .foot p{font-size:11.5px;color:rgba(20,22,28,.72);max-width:30ch}
+
+/* the profile tile, spanning two rows on the right */
+.t-person{grid-column:span 4;grid-row:span 2;background:var(--panel);padding:0}
+.t-person .head{padding:18px 20px 0}
+.t-person .head b{display:block;font-size:16px;font-weight:700;letter-spacing:-.02em}
+.t-person .head span{display:block;font-size:11.5px;color:rgba(255,255,255,.56);margin-top:3px}
+.t-person .shot{flex:1;margin:14px 0 0;overflow:hidden;position:relative;min-height:200px}
+.t-person .shot img{width:100%;height:100%;object-fit:cover}
+.t-person .quote{position:absolute;left:0;right:0;bottom:0;padding:20px;
+                 background:linear-gradient(180deg,rgba(20,22,28,0),rgba(20,22,28,.92))}
+.t-person .quote p{font-size:14px;font-weight:700;letter-spacing:-.02em;line-height:1.3;max-width:20ch}
+.dots{display:flex;gap:5px;margin-top:12px}
+.dots i{width:5px;height:5px;border-radius:50%;background:rgba(255,255,255,.34);display:block}
+.dots i:first-child{width:16px;border-radius:99px;background:var(--yellow)}
+
+/* verdict tile */
+.t-verdict{grid-column:span 4;background:var(--panel)}
+.t-verdict .mark{font-size:44px;font-weight:800;color:var(--mint);line-height:.8;letter-spacing:-.05em}
+.t-verdict p{font-size:12px;line-height:1.5;color:rgba(255,255,255,.78);margin-top:12px}
+.t-verdict .row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:auto;padding-top:14px}
+.t-verdict .row b{font-size:11.5px;font-weight:700;color:rgba(255,255,255,.62)}
+.arrows{display:flex;gap:6px}
+.arrows button{width:28px;height:28px;border-radius:50%;border:1px solid rgba(255,255,255,.24);
+               background:transparent;color:#fff;cursor:pointer;display:grid;place-items:center;font-size:12px;
+               transition:background .16s var(--ease)}
+.arrows button:hover{background:rgba(255,255,255,.14)}
+
+/* verdict list */
+.vlist{list-style:none;margin:14px 0 0;padding:0;display:flex;flex-direction:column;gap:8px}
+.vlist li{display:flex;align-items:center;gap:9px;font-size:12px;font-weight:600;
+          color:rgba(255,255,255,.86)}
+.vlist i{width:26px;height:15px;border-radius:99px;position:relative;flex:0 0 auto;display:block}
+.vlist i::after{content:"";position:absolute;top:2.5px;width:10px;height:10px;border-radius:50%;background:#fff}
+.vlist .v-none{background:rgba(255,255,255,.2)} .vlist .v-none::after{left:2.5px}
+.vlist .v-auto{background:rgba(245,197,24,.42)} .vlist .v-auto::after{left:8px}
+.vlist .v-ai{background:rgba(191,227,198,.5)}   .vlist .v-ai::after{left:13.5px}
+
+/* join tile */
+.t-join{grid-column:span 4;background:var(--mint);color:var(--ink)}
+.t-join .fine{margin-top:auto;padding-top:14px;font-size:11px;line-height:1.5;color:rgba(20,22,28,.62)}
+.t-join h2{font-size:clamp(19px,1.7vw,27px);letter-spacing:-.035em}
+.t-join p{font-size:12.5px;line-height:1.5;color:rgba(20,22,28,.76);margin-top:10px;max-width:26ch}
+
+/* work tile */
+.t-work{grid-column:span 6;background:var(--yellow);color:var(--ink);padding:20px}
+.t-work .strip{flex:1;display:flex;gap:8px;align-items:stretch;min-height:0;margin-bottom:14px}
+.t-work .strip span{flex:1;border-radius:9px;background:rgba(255,255,255,.62);overflow:hidden;
+                    display:flex;flex-direction:column;gap:5px;padding:8px}
+.t-work .strip i{display:block;border-radius:3px;background:rgba(20,22,28,.16);height:5px}
+.t-work .strip i:nth-child(1){width:70%;height:8px;background:rgba(20,22,28,.4)}
+.t-work .strip i:nth-child(2){width:100%}
+.t-work .strip i:nth-child(3){width:88%}
+.t-work .strip i:nth-child(4){width:54%}
+.t-work .strip i:nth-child(5){margin-top:auto;width:44%;height:10px;border-radius:5px;background:var(--ink)}
+.t-work .bottom{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.t-work b{font-size:15px;font-weight:800;letter-spacing:-.025em}
+.circ{width:34px;height:34px;border-radius:50%;background:var(--ink);color:var(--yellow);
+      display:grid;place-items:center;flex:0 0 auto;font-size:14px;
+      transition:transform .2s var(--ease)}
+.circ:hover{transform:rotate(45deg)}
+
+/* explore tile */
+.t-explore{grid-column:span 6;background:var(--panel);padding:0;justify-content:flex-end}
+.t-explore .bg{position:absolute;inset:0}
+.t-explore .bg img{width:100%;height:100%;object-fit:cover;opacity:.62}
+.t-explore .bg::after{content:"";position:absolute;inset:0;
+  background:linear-gradient(180deg,rgba(17,19,24,.15),rgba(17,19,24,.9))}
+.t-explore .pill{position:relative;z-index:2;margin:0 0 20px 20px}
+
+/* ── responsive ───────────────────────────────────────────────────────── */
+@media(max-width:1180px){
+  .bento{grid-template-columns:1fr}
+  .right{grid-template-rows:auto auto auto}
+  .panel-left h1{font-size:clamp(28px,5vw,44px)}
+}
+@media(max-width:820px){
+  .right{grid-template-columns:repeat(6,minmax(0,1fr))}
+  .t-hero{grid-column:span 6}
+  .t-person{grid-column:span 6;grid-row:auto;min-height:340px}
+  .t-verdict,.t-join{grid-column:span 3}
+  .t-work,.t-explore{grid-column:span 3;min-height:210px}
+}
+@media(max-width:600px){
+  :root{--gap:8px}
+  .right{grid-template-columns:1fr}
+  .t-hero,.t-person,.t-verdict,.t-join,.t-work,.t-explore{grid-column:span 1}
+  .t-hero .body{grid-template-columns:1fr}
+  .t-hero .art{aspect-ratio:16/10;border-radius:12px 12px 60px 12px}
+  .subcard{grid-template-columns:1fr}
+  .subcard .shot{aspect-ratio:16/10}
+  .t-hero .nav a:nth-child(n+4):not(.cta){display:none}
+}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<h1 class="vh">Off Plate, varianta H</h1>
+
+<div class="bento">
+
+  <!-- ── left panel ─────────────────────────────────────────────────────── -->
+  <section class="panel-left" aria-label="Úvod">
+    <a class="brand" href="#"><span class="mk" aria-hidden="true"></span>off plate</a>
+
+    <h1>Zjistíme, co potřebuje&nbsp;AI. Co zvládne automatizace. Co nechat být.</h1>
+    <p class="lede">Projdeme vaši agendu a u každé opakované úlohy řekneme jedno ze tří. Postavíme jenom to poslední, a napíšeme vám i to, co stavět nebudeme.</p>
+    <a class="pill" href="#">Jak to funguje</a>
+
+    <div class="subcard">
+      <span class="shot">
+        <picture><source type="image/webp" srcset="art/b.webp"><img src="art/b.jpg" alt="" width="900" height="1200" loading="lazy"></picture>
+      </span>
+      <div>
+        <span class="hexi" aria-hidden="true">OP</span>
+        <h2>Off-Plate, založeno 2026</h2>
+        <p>Sídlíme v Praze. Stavíme v nástrojích, které už používáte, a scénáře i přístupy zůstávají vám.</p>
+        <a class="more" href="#">O nás <span aria-hidden="true">&rarr;</span></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ── right bento ────────────────────────────────────────────────────── -->
+  <div class="right">
+
+    <!-- yellow hero tile -->
+    <section class="tile t-hero" aria-label="Služby">
+      <nav class="nav" aria-label="Hlavní">
+        <a href="#">Obory</a>
+        <a href="#">Verdikty</a>
+        <a href="#">Ceník</a>
+        <a href="#">Novinky</a>
+        <a href="#">O nás</a>
+        <a class="cta" href="#">Kontakt</a>
+      </nav>
+
+      <div class="body">
+        <span class="art">
+          <picture><source type="image/webp" srcset="art/a.webp"><img src="art/a.jpg" alt="" width="1000" height="1300" loading="lazy"></picture>
+        </span>
+        <div>
+          <p class="lines">
+            <span>Rozpis. Pilot.</span>
+            <span><em>Stavba.</em> <u>Provoz.</u></span>
+          </p>
+          <div class="foot">
+            <p>Pět kroků. První dva jsou zdarma a končí písemným rozpisem.</p>
+            <a class="pill pill--dark" href="#" style="margin-top:0">Služby</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- founder tile, two rows -->
+    <section class="tile t-person" aria-label="Michael Florian">
+      <div class="head">
+        <b>Michael Florian</b>
+        <span>Zakladatel</span>
+      </div>
+      <span class="shot">
+        <picture><source type="image/webp" srcset="art/c.webp"><img src="art/c.jpg" alt="" width="1200" height="900" loading="lazy"></picture>
+        <span class="quote">
+          <p>Nejčastější verdikt, který od nás uslyšíte, je nepotřebujete nic.</p>
+          <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        </span>
+      </span>
+    </section>
+
+    <!-- verdict tile -->
+    <section class="tile t-verdict" aria-label="Verdikty">
+      <span class="mark" aria-hidden="true">3</span>
+      <p>Tři verdikty na každou opakovanou úlohu ve vaší agendě.</p>
+      <ul class="vlist">
+        <li><i class="v-none" aria-hidden="true"></i>Nepotřebujete nic</li>
+        <li><i class="v-auto" aria-hidden="true"></i>Obyčejná automatizace</li>
+        <li><i class="v-ai" aria-hidden="true"></i>Potřebuje AI</li>
+      </ul>
+      <div class="row">
+        <b>Verdikty</b>
+        <span class="arrows">
+          <button type="button" aria-label="Předchozí">&larr;</button>
+          <button type="button" aria-label="Další">&rarr;</button>
+        </span>
+      </div>
+    </section>
+
+    <!-- join tile -->
+    <section class="tile t-join" aria-label="Kontakt">
+      <h2>Ozvěte&nbsp;se.</h2>
+      <p>Napište, co vás nejvíc zdržuje. Odpovídá Michael, obvykle do konce pracovního dne.</p>
+      <a class="pill pill--dark" href="mailto:michael@off-plate.com">Napsat nám</a>
+      <p class="fine">První hovor 45&nbsp;minut, zdarma.<br>Rozpis písemně do&nbsp;týdne, také zdarma.</p>
+    </section>
+
+    <!-- work tile -->
+    <section class="tile t-work" aria-label="Rozpis agendy">
+      <span class="strip" aria-hidden="true">
+        <span><i></i><i></i><i></i><i></i><i></i></span>
+        <span><i></i><i></i><i></i><i></i><i></i></span>
+        <span><i></i><i></i><i></i><i></i><i></i></span>
+      </span>
+      <div class="bottom">
+        <b>Rozpis agendy</b>
+        <a class="circ" href="#" aria-label="Rozpis agendy">&#8599;</a>
+      </div>
+    </section>
+
+    <!-- explore tile -->
+    <section class="tile t-explore" aria-label="Novinky">
+      <span class="bg" aria-hidden="true">
+        <picture><source type="image/webp" srcset="art/d.webp"><img src="art/d.jpg" alt="" width="1200" height="800" loading="lazy"></picture>
+      </span>
+      <a class="pill pill--yellow" href="#">Novinky podle oboru</a>
+    </section>
+
+  </div>
+</div>
+
+</body>
+</html>
