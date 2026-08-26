@@ -118,6 +118,15 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
 .inv p{font-size:13px;color:var(--fg-dim);line-height:1.55}
 @media(max-width:720px){.inv div{grid-template-columns:1fr;gap:4px}}
 
+.grp{font-size:13px;font-weight:700;letter-spacing:.02em;text-transform:none;
+  margin:clamp(26px,3vw,44px) 0 0;padding-bottom:10px;border-bottom:1px solid var(--lib-line)}
+.grp span{font-weight:400;color:var(--fg-dim);margin-left:9px;font-size:12px}
+.herodemo .pillbtn{color:#F2EFEB;border-color:rgba(242,239,235,.34)}
+.herodemo .pillbtn span{background:var(--amber);color:#04070C}
+.herodemo p{font-weight:800;font-size:20px;letter-spacing:-.03em;text-transform:uppercase;line-height:1.1}
+.herodemo.is-live .hd1{animation:heroIn .8s var(--ease) backwards}
+.herodemo.is-live .hd2{animation:heroIn .8s var(--ease) .12s backwards}
+.herodemo.is-live .hd3{animation:heroIn .8s var(--ease) .2s backwards}
 .dont div{border-color:color-mix(in srgb,#C4321F 34%,transparent)}
 .dont b{color:#C4321F}
 [data-theme=dark] .dont b,:root:not([data-theme=light]) .dont b{color:#FF8A7A}
@@ -532,14 +541,17 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
 <section class="sec" id="motion">
   <div class="lib">
     <h2>MOTION</h2>
-    <p class="note">Two curves, nothing over 600ms except the one-off card load sequence, and only
-       <code>transform</code> and <code>opacity</code> ever animate. Everything below is wrapped in
-       <code>prefers-reduced-motion: no-preference</code>; under <code>reduce</code> nothing arms and every element
-       renders at its final state. Press replay to watch each one.</p>
+    <p class="note">Three kinds, kept apart on purpose. <b>First load</b> runs once when a block is
+       first seen and then stops. <b>Loop</b> never stops while the element is on screen. <b>Hover</b>
+       is pointer-driven and is always a different gesture from the loop, so pointing at something never
+       looks like the thing it was already doing. Only <code>transform</code> and <code>opacity</code>
+       animate; everything is inside <code>prefers-reduced-motion: no-preference</code>, and under
+       <code>reduce</code> nothing arms and every element renders at its final state.</p>
 
+    <h3 class="grp">First load <span>runs once, then stops</span></h3>
     <div class="grid g2">
       <div class="motion">
-        <div class="motion__head"><b>Card grid load</b><span>staggered 70ms · 500ms ease-out</span>
+        <div class="motion__head"><b>Card grid</b><span>opacity + 18px rise · 500ms · 70ms stagger</span>
           <button class="replay" data-replay="grid" type="button">Replay</button></div>
         <div class="motion__body">
           <div class="cards" data-demo="grid" style="padding:0;grid-template-columns:repeat(3,1fr);gap:8px">
@@ -551,7 +563,7 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
       </div>
 
       <div class="motion">
-        <div class="motion__head"><b>Dial fill</b><span>scaleY · 550ms · 60ms stagger</span>
+        <div class="motion__head"><b>Dial fill</b><span>scaleY 0 to 1 · 550ms · 60ms stagger</span>
           <button class="replay" data-replay="dial" type="button">Replay</button></div>
         <div class="motion__body">
           <div class="cards" data-demo="dial" style="padding:0;display:block">
@@ -564,7 +576,7 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
       </div>
 
       <div class="motion">
-        <div class="motion__head"><b>Timeline draw</b><span>scaleX · 500ms · 120ms stagger</span>
+        <div class="motion__head"><b>Timeline draw</b><span>scaleX 0 to 1 · 500ms · 120ms stagger</span>
           <button class="replay" data-replay="tl" type="button">Replay</button></div>
         <div class="motion__body">
           <div class="cards" data-demo="tl" style="padding:0;display:block">
@@ -581,34 +593,127 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
       </div>
 
       <div class="motion">
-        <div class="motion__head"><b>Loader sweep</b><span>fill 450ms, then 2.6s loop</span>
-          <button class="replay" data-replay="loader" type="button">Replay</button></div>
-        <div class="motion__body">
-          <div class="cards" data-demo="loader" style="padding:0;display:block">
-            <span class="loader"><b></b><b></b><b></b><b></b></span>
-            <span class="bigfig" style="margin-top:22px;display:block;font-size:38px">12,000 CZK</span>
+        <div class="motion__head"><b>Hero settle</b><span>opacity + 20px rise · 800ms · 3 steps</span>
+          <button class="replay" data-replay="hero" type="button">Replay</button></div>
+        <div class="motion__body" style="background:var(--invert);color:var(--invert-fg)">
+          <div data-demo="hero" class="herodemo">
+            <p class="hd1">Effective automation</p>
+            <p class="hd2">for real businesses</p>
+            <p class="hd3"><span class="pillbtn" style="margin-top:10px"><span>+</span> Where to start with AI?</span></p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="grp">Loop <span>never stops while on screen</span></h3>
+    <div class="grid g3">
+      <div class="motion">
+        <div class="motion__head"><b>Verdict circles drift</b><span>translateY 14px · 7s · offset per circle</span></div>
+        <div class="motion__body" style="background:var(--bg);display:flex;justify-content:center;padding:30px 10px">
+          <div class="circles" style="padding:0;gap:0">
+            <div class="circle" style="width:92px;font-size:7.5px;margin-left:0">Nothing</div>
+            <div class="circle" style="width:92px;font-size:7.5px;margin-left:-8px">Automation</div>
+            <div class="circle circle--pic" style="width:98px;margin-left:-8px"><img src="../art/o1.jpg" alt=""><span style="font-size:14px">AI</span></div>
           </div>
         </div>
       </div>
 
       <div class="motion">
-        <div class="motion__head"><b>Image scale on hover</b><span>transform · 500ms --slide</span>
+        <div class="motion__head"><b>Accent ring pulse</b><span>box-shadow 3 to 7px · 3.4s</span></div>
+        <div class="motion__body" style="background:var(--bg);display:flex;justify-content:center;align-items:center;padding:30px">
+          <div class="circle circle--pic" style="width:120px;margin:0"><img src="../art/o4.jpg" alt=""><span style="font-size:17px">AI</span></div>
+        </div>
+      </div>
+
+      <div class="motion">
+        <div class="motion__head"><b>Plate pan</b><span>scale 1.16 to 1.24 · 18s</span></div>
+        <div class="motion__body" style="background:var(--bg);display:flex;justify-content:center;align-items:center;padding:30px">
+          <div class="circle circle--pic" style="width:120px;margin:0"><img src="../art/o3.jpg" alt=""><span style="font-size:17px">AI</span></div>
+        </div>
+      </div>
+
+      <div class="motion">
+        <div class="motion__head"><b>Dial breathe</b><span>opacity + scaleY · 2.8s · staggered</span></div>
+        <div class="motion__body">
+          <div class="gauge" style="margin-top:0;padding-top:0">
+            <span class="dial"><b class="on" style="height:26%"></b><b class="on" style="height:38%"></b><b class="on" style="height:52%"></b><b class="on" style="height:66%"></b><b style="height:80%"></b><b style="height:92%"></b><b style="height:78%"></b><b style="height:60%"></b><b style="height:42%"></b></span>
+            <span class="num">2 of 5<span>tasks need AI</span></span>
+          </div>
+        </div>
+      </div>
+
+      <div class="motion">
+        <div class="motion__head"><b>Timeline scan</b><span>teal sweep · 5.2s</span></div>
+        <div class="motion__body">
+          <div class="tl" style="margin-top:0">
+            <div class="row"><span class="bar hot" style="left:0;width:20%"><b>Call</b></span></div>
+            <div class="row"><span class="bar" style="left:14%;width:24%"><b>Breakdown</b></span></div>
+            <div class="row"><span class="bar" style="left:32%;width:26%"><b>Pilot</b></span></div>
+            <div class="row"><span class="bar" style="left:52%;width:30%"><b>Build</b></span></div>
+          </div>
+        </div>
+      </div>
+
+      <div class="motion">
+        <div class="motion__head"><b>Loader sweep</b><span>highlight pass · 2.6s</span></div>
+        <div class="motion__body">
+          <div class="cards is-live" style="padding:0;display:block">
+            <span class="loader"><b></b><b></b><b></b><b></b></span>
+            <span class="bigfig" style="margin-top:20px;display:block;font-size:32px">12,000 CZK</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="motion">
+        <div class="motion__head"><b>Badge glow</b><span>expanding ring · 3.6s</span></div>
+        <div class="motion__body" style="background:var(--invert);display:flex;align-items:center;justify-content:center;padding:34px">
+          <span class="badge" style="font-size:13px">3 <i>verdicts</i></span>
+        </div>
+      </div>
+
+      <div class="motion">
+        <div class="motion__head"><b>Arrow nudge</b><span>translateX 4px once every 4s</span></div>
+        <div class="motion__body" style="background:var(--invert);display:flex;align-items:center;justify-content:center;padding:30px">
+          <span class="hero" style="min-height:0;padding:0;background:none;display:block">
+            <span class="btn btn--dark">Book a call <i>&rarr;</i></span>
+          </span>
+        </div>
+      </div>
+
+      <div class="motion">
+        <div class="motion__head"><b>Footer mark breathe</b><span>scale 1 to 1.035 · 9s</span></div>
+        <div class="motion__body" style="background:#04070C;position:relative;overflow:hidden;min-height:150px">
+          <p class="foot__mark" style="position:absolute;font-size:74px;filter:blur(3px)">OFF<br>PLATE</p>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="grp">Hover <span>pointer only, and never the loop's gesture</span></h3>
+    <div class="grid g3">
+      <div class="motion">
+        <div class="motion__head"><b>Circle commits</b><span>lift 22px + amber fill · 340ms</span>
+          <button class="replay" data-replay="circ" type="button">Play</button></div>
+        <div class="motion__body" style="background:var(--bg);display:flex;justify-content:center;padding:34px">
+          <div class="circle" data-demo="circ" style="width:110px;font-size:9px;margin:0">Automation</div>
+        </div>
+      </div>
+      <div class="motion">
+        <div class="motion__head"><b>Image scale</b><span>scale 1.05 · 500ms</span>
           <button class="replay" data-replay="hoverimg" type="button">Play</button></div>
-        <div class="motion__body" style="background:var(--paper)">
+        <div class="motion__body" style="background:var(--relief)">
           <div class="work" data-demo="hoverimg" style="width:100%;padding:0;overflow:visible;cursor:default">
-            <a href="#motion" style="flex:0 0 150px">
-              <span class="shot" style="display:block;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:#111"><img src="../art/o3.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></span>
+            <a href="#motion" style="flex:0 0 130px">
+              <span class="shot" style="display:block;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:var(--invert)"><img src="../art/o2.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></span>
             </a>
           </div>
         </div>
       </div>
-
       <div class="motion">
-        <div class="motion__head"><b>Round button rotate</b><span>transform · 200ms --ease</span>
+        <div class="motion__head"><b>Round button</b><span>rotate 45° · 200ms</span>
           <button class="replay" data-replay="rot" type="button">Play</button></div>
-        <div class="motion__body" style="background:var(--paper);display:flex;align-items:center;gap:14px">
-          <a class="round" href="#motion" data-demo="rot" aria-label="Demo">↗</a>
-          <span style="font-size:12.5px;color:#5A5A5A">45° on hover, back on release.</span>
+        <div class="motion__body" style="background:var(--relief);display:flex;align-items:center;gap:14px">
+          <a class="round" href="#motion" data-demo="rot" aria-label="Demo">&#8599;</a>
+          <span style="font-size:12.5px;color:var(--relief-dim)">Back on release.</span>
         </div>
       </div>
     </div>
@@ -684,18 +789,24 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
   if(!reduce){
     var io=new IntersectionObserver(function(es){
       es.forEach(function(e){
-        if(e.isIntersecting) play(e.target);
-        else if(e.target.classList.contains('cards')) arm(e.target);
+        var d=e.target;
+        if(d.classList.contains('herodemo')){
+          if(e.isIntersecting){ d.classList.remove('is-live'); void d.offsetWidth; d.classList.add('is-live'); }
+          else d.classList.remove('is-live');
+          return;
+        }
+        if(e.isIntersecting) play(d); else arm(d);
       });
     },{threshold:.35});
     Object.keys(demos).forEach(function(k){
-      if(demos[k].classList.contains('cards')) io.observe(demos[k]);
+      var d=demos[k];
+      if(d.classList.contains('cards')||d.classList.contains('herodemo')) io.observe(d);
     });
   }
 
   /* the hover demos loop gently so there is always something moving */
   function pulse(el,ms){
-    var t=el.matches('[data-demo=rot]') ? el : el.querySelector('a');
+    var t=(el.matches('[data-demo=rot]')||el.matches('[data-demo=circ]')) ? el : el.querySelector('a');
     if(!t) return;
     t.setAttribute('data-state','hover');
     setTimeout(function(){ t.removeAttribute('data-state'); }, ms||1100);
@@ -710,14 +821,22 @@ section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-lin
         } else if(!e.isIntersecting && d._loop){ clearInterval(d._loop); d._loop=null; }
       });
     },{threshold:.4});
-    ['hoverimg','rot'].forEach(function(k){ if(demos[k]) hio.observe(demos[k]); });
+    ['hoverimg','rot','circ'].forEach(function(k){ if(demos[k]) hio.observe(demos[k]); });
   }
 
   document.querySelectorAll('[data-replay]').forEach(function(b){
     b.addEventListener('click', function(){
       var d=demos[b.dataset.replay];
       if(!d) return;
-      if(d.classList.contains('cards')) play(d); else pulse(d,1200);
+      if(d.classList.contains('cards')) play(d);
+      else if(d.classList.contains('herodemo')){
+        d.classList.remove('is-live'); void d.offsetWidth; d.classList.add('is-live');
+      }
+      else if(d.classList.contains('circle')){
+        d.setAttribute('data-state','hover');
+        setTimeout(function(){ d.removeAttribute('data-state'); }, 1300);
+      }
+      else pulse(d,1200);
     });
   });
 })();

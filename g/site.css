@@ -298,7 +298,7 @@ body.is-locked{overflow:hidden}
 .paper .sechead p{color:var(--relief-dim)}
 
 .work{
-  display:flex;gap:clamp(14px,1.6vw,26px);align-items:flex-start;
+  display:flex;gap:clamp(14px,1.6vw,26px);align-items:stretch;
   overflow-x:auto;overflow-y:hidden;
   scroll-snap-type:x proximity;scroll-behavior:smooth;
   scrollbar-width:none;-ms-overflow-style:none;
@@ -309,18 +309,16 @@ body.is-locked{overflow:hidden}
 }
 .work::-webkit-scrollbar{display:none}
 .work.is-drag{cursor:grabbing;scroll-snap-type:none}
-.work a{display:block;flex:0 0 clamp(250px,25vw,470px);scroll-snap-align:start}
-.work .shot{display:block;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:#111;isolation:isolate;
+.work a{display:flex;flex-direction:column;flex:0 0 clamp(250px,25vw,470px);scroll-snap-align:start}
+.work .shot{flex:0 0 auto}
+.work .body{padding-top:16px}
+.work .shot{display:block;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:var(--invert);isolation:isolate;
             box-shadow:var(--shadow-card)}
 .work .shot img{width:100%;height:100%;object-fit:cover;transition:transform .5s var(--ease)}
 .work a:hover .shot img,.work a[data-state=hover] .shot img{transform:scale(1.05)}
-.work h3{font-size:15px;letter-spacing:-.01em;margin-top:14px;color:var(--relief-fg)}
+.work h3{font-size:15px;letter-spacing:-.01em;margin-top:16px;color:var(--relief-fg)}
 .work .tags span{color:var(--relief-accent)}
 .work p{font-size:12px;line-height:1.42;color:var(--relief-dim);margin-top:6px;max-width:26ch}
-.work a:nth-child(2){margin-top:clamp(24px,3.2vw,54px)}
-.work a:nth-child(3){margin-top:clamp(48px,6.2vw,104px)}
-.work a:nth-child(4){margin-top:clamp(12px,1.6vw,26px)}
-.work a:nth-child(5){margin-top:clamp(34px,4.4vw,74px)}
 /* the row's own control, mirroring the reference's slider affordance */
 .workbar{display:flex;align-items:center;gap:12px;margin-top:clamp(22px,2.6vw,40px)}
 .workbar .rail{flex:1;height:2px;background:var(--line);position:relative;overflow:hidden}
@@ -778,3 +776,97 @@ body.is-locked{overflow:hidden}
 
 /* selection is the brand */
 ::selection{background:var(--teal);color:#F2EFEB}
+
+/* ── the verdict circles: an idle loop, and a different move on hover ─────
+   Idle is a slow vertical drift on a 7s cycle, each circle offset so the row
+   reads as a chain settling rather than five things bouncing together. The
+   accent circle also pans its own image. Hover is deliberately a different
+   gesture: it lifts, scales and takes the brand fill, so pointing at one
+   never looks like the idle. */
+@media (prefers-reduced-motion: no-preference){
+  .circle{animation:circleDrift 7s ease-in-out infinite;will-change:transform}
+  .circle:nth-child(1){animation-delay:0s}
+  .circle:nth-child(2){animation-delay:-1.4s}
+  .circle:nth-child(3){animation-delay:-2.8s}
+  .circle:nth-child(4){animation-delay:-4.2s}
+  .circle:nth-child(5){animation-delay:-5.6s}
+  @keyframes circleDrift{
+    0%,100%{transform:translateY(0) scale(1)}
+    50%    {transform:translateY(-14px) scale(1.018)}
+  }
+  /* the accent circle's plate drifts inside its own mask */
+  .circle--pic img{animation:platePan 18s ease-in-out infinite;will-change:transform}
+  @keyframes platePan{
+    0%,100%{transform:scale(1.16) translate(-2%,-1%)}
+    50%    {transform:scale(1.24) translate(2%,2%)}
+  }
+  /* the teal ring pulses very slightly so the accent reads as live */
+  .circle--pic{animation:circleDrift 7s ease-in-out infinite,ringPulse 3.4s ease-in-out infinite}
+  @keyframes ringPulse{
+    0%,100%{box-shadow:0 0 0 3px color-mix(in srgb,var(--teal) 70%,transparent)}
+    50%    {box-shadow:0 0 0 7px color-mix(in srgb,var(--teal) 34%,transparent)}
+  }
+
+  /* hover is a different gesture from the idle: it stops drifting and commits */
+  @media (hover:hover) and (pointer:fine){
+    .circle:hover{
+      animation-play-state:paused;
+      transform:translateY(-22px) scale(1.07);
+      background:var(--amber);color:#04070C;
+      transition:transform .34s var(--emph,cubic-bezier(.2,0,0,1)),
+                 background-color .24s var(--ease),color .24s var(--ease);
+      z-index:5;
+    }
+    .circle--pic:hover{background:transparent;transform:translateY(-22px) scale(1.1)}
+    .circle--pic:hover img{animation-play-state:paused;transform:scale(1.3)}
+    .circle:hover span,.circle:hover{letter-spacing:.09em}
+  }
+}
+
+/* ── LOOP ANIMATIONS ──────────────────────────────────────────────────────
+   Distinct from the first-load sequence above. These never stop while the
+   element is on screen, and none of them move layout. Kept slow (3.4s to 18s)
+   so the page reads as alive rather than busy. */
+@media (prefers-reduced-motion: no-preference){
+
+  /* the dial keeps taking its reading: the filled bars breathe in sequence */
+  .dial b.on{animation:dialPulse 2.8s ease-in-out infinite;transform-origin:bottom}
+  .dial b.on:nth-child(1){animation-delay:0s}
+  .dial b.on:nth-child(2){animation-delay:.16s}
+  .dial b.on:nth-child(3){animation-delay:.32s}
+  .dial b.on:nth-child(4){animation-delay:.48s}
+  @keyframes dialPulse{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.62;transform:scaleY(.9)}}
+
+  /* a scan passes along the timeline, left to right, on a long cycle */
+  .tl{position:relative;overflow:hidden}
+  .tl::after{
+    content:"";position:absolute;inset:0;pointer-events:none;z-index:2;
+    background:linear-gradient(100deg,transparent 42%,
+      color-mix(in srgb,var(--teal) 26%,transparent) 50%,transparent 58%);
+    transform:translateX(-100%);animation:tlScan 5.2s var(--ease) infinite;
+  }
+  @keyframes tlScan{0%{transform:translateX(-100%)}60%,100%{transform:translateX(110%)}}
+
+  /* the headline badge glows very slightly, so the amber is never inert */
+  .badge{animation:badgeGlow 3.6s ease-in-out infinite}
+  @keyframes badgeGlow{
+    0%,100%{box-shadow:0 0 0 0 color-mix(in srgb,var(--amber) 55%,transparent)}
+    50%    {box-shadow:0 0 0 9px color-mix(in srgb,var(--amber) 0%,transparent)}
+  }
+
+  /* the free-breakdown dot beside the trust line keeps blinking slowly */
+  .trust p b::after{
+    content:"";display:inline-block;width:6px;height:6px;border-radius:50%;
+    background:var(--amber);margin-left:7px;vertical-align:middle;
+    animation:dot 2.2s ease-in-out infinite;
+  }
+  @keyframes dot{0%,100%{opacity:1;transform:scale(1)}50%{opacity:.35;transform:scale(.8)}}
+
+  /* the sector row's progress rail drifts while idle, hinting it scrolls */
+  .workbar .rail i{animation:railHint 4.4s ease-in-out infinite}
+  @keyframes railHint{0%,100%{opacity:1}50%{opacity:.55}}
+
+  /* the arrow on the primary button nudges once every few seconds */
+  .hero .btn--dark i{animation:nudge 4s ease-in-out infinite}
+  @keyframes nudge{0%,86%,100%{transform:translateX(0)}92%{transform:translateX(4px)}}
+}
