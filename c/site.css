@@ -518,7 +518,7 @@ body.is-locked{overflow:hidden}
 .form .btn{align-self:flex-start}
 
 /* Article pages sit on the same measure as everything else. */
-.article{max-width:68ch}
+.article{max-width:68ch;margin-inline:auto}
 .article > .post__kicker,.article > .d2,.article > .post__date,.article > .lede{max-width:100%}
 
 /* /system/ only. Specimen furniture, never used on a content page. */
@@ -533,6 +533,13 @@ body.is-locked{overflow:hidden}
 .sys-list{list-style:none;margin:10px 0 0;padding:0;font-size:var(--fs-sm);color:var(--ink-2)}
 .sys-list li{padding:5px 0;border-top:1px solid var(--line);display:flex;gap:10px}
 .sys-list .mono{color:var(--ink);min-width:64px}
+
+/* Without JS the burger cannot open the drawer, so the navigation is served
+   as a plain row instead. Only ever rendered inside <noscript>. */
+.noscript-nav{display:flex;flex-wrap:wrap;gap:4px;padding:10px 0 14px;border-bottom:1px solid var(--line)}
+.noscript-nav a{display:inline-flex;align-items:center;min-height:44px;padding:0 12px;
+                border-radius:var(--r-control);font-size:var(--fs-sm);font-weight:600}
+.noscript-nav a:hover{background:var(--surface)}
 
 /* 9 ── Motion ============================================================= */
 /* Two or three deliberate motions on the whole site (research 120).

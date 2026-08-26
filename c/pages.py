@@ -391,9 +391,11 @@ if _en.strip():
         "main": f'''
 <section class="section section--tight">
   <div class="wrap">
-    <h1 class="d1" style="max-width:16ch">Most of your repetitive work does not need AI</h1>
-    <div class="article" style="margin-inline:0;margin-top:30px">
+    <div class="article">
+      <p class="post__kicker">In English</p>
+      <h1 class="d2" style="margin-top:8px">Most of your repetitive work does not need AI</h1>
 {_en}
+      <p style="margin-top:2.5em"><a href="../">Zpět na českou verzi</a></p>
     </div>
   </div>
 </section>

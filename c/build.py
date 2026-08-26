@@ -77,6 +77,12 @@ SHELL = """<!doctype html>
   </div>
 </div>
 
+<noscript>
+  <nav class="wrap noscript-nav" aria-label="{navlabel}">
+{navlinks}
+  </nav>
+</noscript>
+
 <main id="main">
 {main}
 </main>
