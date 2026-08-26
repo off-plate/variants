@@ -1,0 +1,679 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Off Plate · Variant G elements library</title>
+<meta name="description" content="Every token, component, state, section and animation used on variant G, rendered from the same stylesheet the page uses.">
+<meta name="theme-color" content="#000000">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Yellowtail&display=swap" rel="stylesheet"><!-- slop-lint-ignore: Inter is the locked Off-Plate body face, BRAND.md -->
+<link rel="stylesheet" href="../site.css">
+<style>
+/* ── library furniture only. Nothing here is used by the page itself. ───── */
+:root{--lib-line:rgba(255,255,255,.14);--lib-dim:rgba(255,255,255,.55)}
+body{padding-bottom:0}
+section.sec,.lib-hero{scroll-margin-top:70px}
+.lib{width:min(93vw,1560px);margin-inline:auto}
+
+.lib-top{position:sticky;top:0;z-index:80;background:rgba(8,6,6,.86);
+  -webkit-backdrop-filter:blur(18px);backdrop-filter:blur(18px);
+  border-bottom:1px solid var(--lib-line)}
+.lib-top .lib{display:flex;align-items:center;gap:18px;min-height:62px;flex-wrap:wrap}
+.lib-top .mark{font-weight:800;font-size:13px;letter-spacing:.02em;text-transform:uppercase;line-height:.95}
+.lib-toc{display:flex;gap:2px;flex-wrap:wrap;margin-left:auto}
+.lib-toc a{font-size:11.5px;font-weight:600;color:var(--lib-dim);padding:7px 10px;border-radius:999px;
+  min-height:34px;display:inline-flex;align-items:center;transition:background .16s var(--ease),color .16s var(--ease)}
+.lib-toc a:hover{color:#fff;background:rgba(255,255,255,.1)}
+
+.lib-hero{padding:clamp(46px,6vw,96px) 0 clamp(30px,4vw,58px);border-bottom:1px solid var(--lib-line)}
+.lib-hero h1{font-size:clamp(32px,5vw,72px);letter-spacing:-.04em}
+.lib-hero p{margin-top:16px;color:var(--lib-dim);max-width:62ch;font-size:15px;line-height:1.6}
+.lib-hero .meta{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px}
+.chip{display:inline-flex;align-items:center;gap:7px;min-height:34px;padding:0 13px;border-radius:999px;
+  border:1px solid var(--lib-line);font-size:11.5px;font-weight:600;color:var(--lib-dim)}
+.chip b{color:#fff;font-weight:700}
+
+section.sec{padding:clamp(42px,5vw,84px) 0;border-bottom:1px solid var(--lib-line)}
+.sec > .lib > h2{font-size:clamp(22px,2.4vw,36px);letter-spacing:-.03em}
+.sec .note{margin-top:12px;color:var(--lib-dim);max-width:66ch;font-size:14px;line-height:1.6}
+.sec .note code{font-family:ui-monospace,SFMono-Regular,monospace;font-size:12.5px;
+  background:rgba(255,255,255,.09);padding:2px 6px;border-radius:5px;color:#fff}
+
+.grid{display:grid;gap:14px;margin-top:clamp(22px,2.6vw,38px)}
+.g2{grid-template-columns:repeat(2,minmax(0,1fr))}
+.g3{grid-template-columns:repeat(3,minmax(0,1fr))}
+.g4{grid-template-columns:repeat(4,minmax(0,1fr))}
+.g6{grid-template-columns:repeat(auto-fill,minmax(150px,1fr))}
+@media(max-width:1000px){.g3,.g4{grid-template-columns:repeat(2,minmax(0,1fr))}}
+@media(max-width:640px){.g2,.g3,.g4{grid-template-columns:1fr}}
+
+/* a specimen frame: a label, the thing itself, and the code that made it */
+.spec{border:1px solid var(--lib-line);border-radius:16px;overflow:hidden;background:rgba(255,255,255,.026)}
+.spec__head{display:flex;align-items:center;justify-content:space-between;gap:10px;
+  padding:9px 14px;border-bottom:1px solid var(--lib-line);background:rgba(255,255,255,.035)}
+.spec__head b{font-size:11.5px;font-weight:700;letter-spacing:.02em}
+.spec__head span{font-size:10.5px;color:var(--lib-dim);
+  font-family:ui-monospace,SFMono-Regular,monospace}
+.spec__body{padding:22px;display:flex;flex-wrap:wrap;gap:14px;align-items:center;min-height:96px}
+.spec__body--col{flex-direction:column;align-items:flex-start}
+.spec__body--center{justify-content:center}
+.spec__body.on-paper{background:var(--paper)}
+.spec__body.on-card{background:var(--card)}
+.spec__foot{padding:9px 14px;border-top:1px solid var(--lib-line);font-size:11px;color:var(--lib-dim)}
+
+.state{display:flex;flex-direction:column;gap:8px;align-items:flex-start}
+.state em{font-style:normal;font-size:10px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;
+  color:var(--lib-dim)}
+.on-paper .state em,.on-card .state em{color:#8A8A8A}
+
+/* colour */
+.sw{border:1px solid var(--lib-line);border-radius:14px;overflow:hidden}
+.sw i{display:block;height:88px}
+.sw div{padding:11px 13px}
+.sw b{display:block;font-size:12.5px;font-weight:700}
+.sw span{display:block;font-size:11px;color:var(--lib-dim);
+  font-family:ui-monospace,SFMono-Regular,monospace;margin-top:3px}
+.sw p{font-size:11px;color:var(--lib-dim);margin-top:6px;line-height:1.45}
+
+/* type */
+.type-row{display:grid;grid-template-columns:190px minmax(0,1fr);gap:10px 26px;align-items:baseline;
+  padding:18px 0;border-top:1px solid var(--lib-line)}
+.type-row .k{font-size:11px;color:var(--lib-dim);font-family:ui-monospace,SFMono-Regular,monospace;line-height:1.5}
+.type-row .k b{display:block;color:#fff;font-family:Inter,sans-serif;font-size:12px;margin-bottom:3px}
+@media(max-width:720px){.type-row{grid-template-columns:1fr}}
+
+/* tokens */
+.tok{display:flex;flex-direction:column;gap:0;margin-top:24px}
+.tok div{display:grid;grid-template-columns:220px 130px minmax(0,1fr);gap:18px;align-items:center;
+  padding:11px 0;border-top:1px solid var(--lib-line);font-size:13px}
+.tok code{font-family:ui-monospace,SFMono-Regular,monospace;font-size:12px;color:var(--ember-hot)}
+.tok span{color:var(--lib-dim);font-size:12.5px}
+.tok .demo{height:26px;display:flex;align-items:center}
+.tok .demo i{display:block;height:26px;background:var(--paper);border-radius:0}
+@media(max-width:720px){.tok div{grid-template-columns:1fr;gap:5px}}
+
+/* motion */
+.motion{border:1px solid var(--lib-line);border-radius:16px;overflow:hidden}
+.motion__head{display:flex;align-items:center;justify-content:space-between;gap:12px;
+  padding:12px 16px;border-bottom:1px solid var(--lib-line);background:rgba(255,255,255,.035)}
+.motion__head b{font-size:12.5px}
+.motion__head span{font-size:10.5px;color:var(--lib-dim);font-family:ui-monospace,monospace}
+.replay{min-height:34px;padding:0 14px;border-radius:999px;border:1px solid var(--lib-line);
+  background:transparent;color:#fff;font-size:11px;font-weight:700;cursor:pointer;letter-spacing:.05em;
+  text-transform:uppercase;transition:background .16s var(--ease)}
+.replay:hover{background:rgba(255,255,255,.12)}
+.motion__body{padding:22px;background:var(--card);color:var(--ink);min-height:150px}
+
+.inv{margin-top:26px;border-top:1px solid var(--lib-line)}
+.inv div{display:grid;grid-template-columns:210px minmax(0,1fr);gap:10px 26px;
+  padding:14px 0;border-bottom:1px solid var(--lib-line)}
+.inv b{font-size:13px}
+.inv p{font-size:13px;color:var(--lib-dim);line-height:1.55}
+@media(max-width:720px){.inv div{grid-template-columns:1fr;gap:4px}}
+
+.dont div{border-color:rgba(232,67,58,.3)}
+.dont b{color:#FF8A7A}
+</style>
+</head>
+<body>
+
+<div class="lib-top">
+  <div class="lib">
+    <a class="mark" href="../">OFF<br>PLATE</a>
+    <nav class="lib-toc" aria-label="Library sections">
+      <a href="#colour">Colour</a>
+      <a href="#type">Type</a>
+      <a href="#tokens">Tokens</a>
+      <a href="#buttons">Buttons</a>
+      <a href="#nav">Navigation</a>
+      <a href="#surfaces">Surfaces</a>
+      <a href="#data">Data</a>
+      <a href="#media">Media</a>
+      <a href="#motion">Motion</a>
+      <a href="#sections">Sections</a>
+      <a href="#never">Never</a>
+    </nav>
+  </div>
+</div>
+
+<header class="lib-hero">
+  <div class="lib">
+    <h1>VARIANT G<br>ELEMENTS LIBRARY</h1>
+    <p>Every token, component, state, page section and animation used on variant G, rendered live from
+       <code style="font-family:ui-monospace,monospace;font-size:13px">../site.css</code>, the same stylesheet the page loads.
+       Change a token there and this page changes with it. If a component is not on this page, it does not exist yet:
+       add it here first, then use it.</p>
+    <div class="meta">
+      <span class="chip"><b>2</b> families</span>
+      <span class="chip"><b>1</b> accent</span>
+      <span class="chip"><b>4</b> radii</span>
+      <span class="chip"><b>2</b> easing curves</span>
+      <span class="chip"><b>44px</b> minimum touch target</span>
+      <span class="chip"><a href="../" style="color:inherit">← back to the page</a></span>
+    </div>
+  </div>
+</header>
+
+<!-- ── colour ───────────────────────────────────────────────────────────── -->
+<section class="sec" id="colour">
+  <div class="lib">
+    <h2>COLOUR</h2>
+    <p class="note">Two grounds and one accent. Black is the page, paper is the relief, and the ember
+       is the only hue that ever appears. Grey is a step between white and the ground, never a fourth colour.
+       The accent is never used for body text, only for a mark, a highlight or a hover.</p>
+    <div class="grid g6">
+      <div class="sw"><i style="background:#000"></i><div><b>ink</b><span>#000000</span><p>The page ground. Every section that is not paper sits on this.</p></div></div>
+      <div class="sw"><i style="background:#fff"></i><div><b>paper</b><span>#FFFFFF</span><p>Relief ground for the sectors band, and the fill of the light button.</p></div></div>
+      <div class="sw"><i style="background:#F4F2EF"></i><div><b>card</b><span>#F4F2EF</span><p>The card surface. Slightly warm so it is not a flat white against paper.</p></div></div>
+      <div class="sw"><i style="background:#111"></i><div><b>card-dark</b><span>#111111</span><p>The one inverted card in the grid. Not black, so it reads as a surface.</p></div></div>
+      <div class="sw"><i style="background:#F0621A"></i><div><b>ember</b><span>#F0621A</span><p>The accent. The image grade, the AI circle label, the footer mark.</p></div></div>
+      <div class="sw"><i style="background:#FF8A2B"></i><div><b>ember-hot</b><span>#FF8A2B</span><p>Hover and focus only. Never a resting colour.</p></div></div>
+      <div class="sw"><i style="background:#8E2208"></i><div><b>ember-deep</b><span>#8E2208</span><p>Behind an image that has not loaded, so the gap is never grey.</p></div></div>
+      <div class="sw"><i style="background:#9A9A9A"></i><div><b>grey</b><span>#9A9A9A</span><p>The dimmed first half of the statement. Not for body copy.</p></div></div>
+      <div class="sw"><i style="background:#6A6A6A"></i><div><b>grey-2</b><span>#6A6A6A</span><p>Labels and captions on paper.</p></div></div>
+      <div class="sw"><i style="background:#E8433A"></i><div><b>mark red</b><span>#E8433A</span><p>The blurred footer wordmark, and nothing else on the site.</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── type ─────────────────────────────────────────────────────────────── -->
+<section class="sec" id="type">
+  <div class="lib">
+    <h2>TYPE</h2>
+    <p class="note">Two families. Inter carries everything, set in caps and heavy for display and in
+       sentence case for reading. Yellowtail appears exactly once, on the greeting above the statement.
+       There is no decorative first letter anywhere; that treatment was removed on purpose.</p>
+
+    <div class="type-row">
+      <span class="k"><b>Display 1</b>Inter 800 · clamp(36–82px)<br>tracking −.04em · lh .96</span>
+      <span><span style="font-weight:800;font-size:clamp(28px,4.4vw,64px);letter-spacing:-.04em;line-height:.96;text-transform:uppercase;display:block">Effective automation</span></span>
+    </div>
+    <div class="type-row">
+      <span class="k"><b>Display 2</b>Inter 800 · clamp(28–54px)<br>section headings</span>
+      <span><span style="font-weight:800;font-size:clamp(24px,3.2vw,44px);letter-spacing:-.04em;line-height:.98;text-transform:uppercase;display:block">Sectors</span></span>
+    </div>
+    <div class="type-row">
+      <span class="k"><b>Statement</b>Inter 800 · clamp(27–74px)<br>grey then white, 30ch</span>
+      <span><span style="font-weight:800;font-size:clamp(20px,2.6vw,36px);letter-spacing:-.04em;line-height:1.08;text-transform:uppercase;display:block"><span style="color:var(--grey)">We help real businesses</span> get rid of repetitive work.</span></span>
+    </div>
+    <div class="type-row">
+      <span class="k"><b>Card heading</b>Inter 800 · clamp(15–19px)<br>caps · max 22ch</span>
+      <span><span style="font-weight:800;font-size:18px;letter-spacing:-.02em;line-height:1.12;text-transform:uppercase;display:block">Three verdicts on every recurring task</span></span>
+    </div>
+    <div class="type-row">
+      <span class="k"><b>Body</b>Inter 400 · 12.5–14px<br>lh 1.45 · max 34ch</span>
+      <span><span style="font-size:14px;line-height:1.5;color:var(--lib-dim);display:block;max-width:44ch">You need nothing, plain automation is enough, or this genuinely needs AI. Every verdict comes with the reason, so you can disagree with it.</span></span>
+    </div>
+    <div class="type-row">
+      <span class="k"><b>Label</b>Inter 600/700 · 10.5–11.5px<br>tracking .1–.14em · caps</span>
+      <span><span class="cap" style="display:block">Where we usually start</span></span>
+    </div>
+    <div class="type-row">
+      <span class="k"><b>Script</b>Yellowtail 400 · clamp(38–64px)<br>one use on the whole site</span>
+      <span><span class="hello" style="display:block">hello.</span></span>
+    </div>
+  </div>
+</section>
+
+<!-- ── tokens ───────────────────────────────────────────────────────────── -->
+<section class="sec" id="tokens">
+  <div class="lib">
+    <h2>TOKENS</h2>
+    <p class="note">Four radii, two easing curves, one shell width. A radius is chosen by what the
+       element is, never by eye.</p>
+    <div class="tok">
+      <div><code>--r · 22px</code><span class="demo"><i style="width:64px;border-radius:22px"></i></span><span>Cards, the nav pill container, the footer plate uses 30px as the one exception.</span></div>
+      <div><code>18px</code><span class="demo"><i style="width:64px;border-radius:18px"></i></span><span>Every image: sector cards, news cards, the hero product shot.</span></div>
+      <div><code>--r-sm · 14px</code><span class="demo"><i style="width:64px;border-radius:14px"></i></span><span>Small framed media inside a card.</span></div>
+      <div><code>999px</code><span class="demo"><i style="width:64px;border-radius:999px"></i></span><span>Buttons, chips, circles. The default control shape on this variant.</span></div>
+      <div><code>--ease</code><span class="demo"><i style="width:36px;border-radius:999px"></i></span><span>cubic-bezier(.2,.7,.3,1). Everything that enters or responds.</span></div>
+      <div><code>--slide</code><span class="demo"><i style="width:36px;border-radius:999px"></i></span><span>cubic-bezier(.66,0,.2,1). Image scale and the longer moves.</span></div>
+      <div><code>--shell</code><span class="demo"><i style="width:84px;height:4px"></i></span><span>min(93vw, 1680px). Every section starts on this edge.</span></div>
+      <div><code>touch floor</code><span class="demo"><i style="width:44px;height:14px;border-radius:4px"></i></span><span>44px minimum height on anything interactive at a touch width.</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── buttons ──────────────────────────────────────────────────────────── -->
+<section class="sec" id="buttons">
+  <div class="lib">
+    <h2>BUTTONS AND CONTROLS</h2>
+    <p class="note">Every control in every state. Hover, active and focus are rendered with a
+       <code>data-state</code> attribute that mirrors the real pseudo-class, so what you see here is the
+       same declaration the page uses, not a copy of it.</p>
+
+    <div class="grid g2">
+      <div class="spec">
+        <div class="spec__head"><b>Primary, dark ground</b><span>.btn.btn--dark</span></div>
+        <div class="spec__body">
+          <span class="state"><em>rest</em><a class="btn btn--dark" href="#buttons">Book a call <i>→</i></a></span>
+          <span class="state"><em>hover</em><a class="btn btn--dark" data-state="hover" href="#buttons">Book a call <i>→</i></a></span>
+          <span class="state"><em>active</em><a class="btn btn--dark" data-state="active" href="#buttons">Book a call <i>→</i></a></span>
+          <span class="state"><em>focus</em><a class="btn btn--dark" data-state="focus" href="#buttons">Book a call <i>→</i></a></span>
+          <span class="state"><em>disabled</em><span class="btn btn--dark is-disabled">Book a call <i>→</i></span></span>
+        </div>
+        <div class="spec__foot">Used once in the hero. The arrow chip is optional.</div>
+      </div>
+
+      <div class="spec">
+        <div class="spec__head"><b>Light, on any ground</b><span>.btn.btn--light</span></div>
+        <div class="spec__body">
+          <span class="state"><em>rest</em><a class="btn btn--light" href="#buttons">Pricing</a></span>
+          <span class="state"><em>hover</em><a class="btn btn--light" data-state="hover" href="#buttons">Pricing</a></span>
+          <span class="state"><em>active</em><a class="btn btn--light" data-state="active" href="#buttons">Pricing</a></span>
+          <span class="state"><em>focus</em><a class="btn btn--light" data-state="focus" href="#buttons">Pricing</a></span>
+          <span class="state"><em>disabled</em><span class="btn btn--light is-disabled">Pricing</span></span>
+        </div>
+        <div class="spec__foot">The only button allowed on the dark card and in the sticky bar.</div>
+      </div>
+
+      <div class="spec">
+        <div class="spec__head"><b>Small</b><span>.btn--sm</span></div>
+        <div class="spec__body">
+          <span class="state"><em>rest</em><a class="btn btn--light btn--sm" href="#buttons">Book a call</a></span>
+          <span class="state"><em>hover</em><a class="btn btn--light btn--sm" data-state="hover" href="#buttons">Book a call</a></span>
+          <span class="state"><em>dark</em><a class="btn btn--dark btn--sm" href="#buttons">Book a call</a></span>
+        </div>
+        <div class="spec__foot">Sticky bar only. Grows back to 44px at touch widths.</div>
+      </div>
+
+      <div class="spec">
+        <div class="spec__head"><b>Outlined pill</b><span>.pillbtn</span></div>
+        <div class="spec__body spec__body--col">
+          <span class="state"><em>rest</em><a class="pillbtn" href="#buttons"><span>+</span> Looking for where to start with AI?</a></span>
+          <span class="state"><em>hover</em><a class="pillbtn" data-state="hover" href="#buttons"><span>+</span> Looking for where to start with AI?</a></span>
+        </div>
+        <div class="spec__foot">A question, not an action. Sits under the hero headline.</div>
+      </div>
+
+      <div class="spec">
+        <div class="spec__head"><b>Round arrow, light</b><span>.round</span></div>
+        <div class="spec__body">
+          <span class="state"><em>rest</em><a class="round" href="#buttons" aria-label="Rest">↗</a></span>
+          <span class="state"><em>hover</em><a class="round" data-state="hover" href="#buttons" aria-label="Hover">↗</a></span>
+          <span class="state"><em>focus</em><a class="round" data-state="focus" href="#buttons" aria-label="Focus">↗</a></span>
+        </div>
+        <div class="spec__foot">Rotates 45° on hover. Hero and the news slider bar.</div>
+      </div>
+
+      <div class="spec">
+        <div class="spec__head"><b>Round arrow, on paper</b><span>.rnd</span></div>
+        <div class="spec__body on-paper">
+          <span class="state"><em>rest</em><button class="rnd" type="button">←</button></span>
+          <span class="state"><em>hover</em><button class="rnd" data-state="hover" type="button">←</button></span>
+          <span class="state"><em>focus</em><button class="rnd" data-state="focus" type="button">←</button></span>
+          <span class="state"><em>disabled</em><button class="rnd" type="button" disabled>←</button></span>
+        </div>
+        <div class="spec__foot">The sector slider's prev and next. Inverts on hover.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── navigation ───────────────────────────────────────────────────────── -->
+<section class="sec" id="nav">
+  <div class="lib">
+    <h2>NAVIGATION</h2>
+    <p class="note">The bar is fixed and has three states. It is transparent over the hero, condenses
+       into a blurred bar once you pass 28px, and slides out of the way when you scroll down past 240px,
+       returning the moment you scroll up. Below 900px the pill nav is replaced by a burger.</p>
+
+    <div class="grid g2">
+      <div class="spec">
+        <div class="spec__head"><b>Nav pill</b><span>.navbox</span></div>
+        <div class="spec__body">
+          <nav class="navbox" style="position:static">
+            <a href="#nav" aria-current="page">Home</a>
+            <a href="#nav">Sectors</a>
+            <a href="#nav" data-state="hover">Pricing</a>
+            <a href="#nav">News</a>
+          </nav>
+        </div>
+        <div class="spec__foot">Current page is a filled white pill. Third item shown in hover.</div>
+      </div>
+
+      <div class="spec">
+        <div class="spec__head"><b>Burger</b><span>.burger</span></div>
+        <div class="spec__body">
+          <span class="state"><em>closed</em><button class="burger" style="display:flex" type="button" aria-expanded="false" aria-label="Open"><i></i></button></span>
+          <span class="state"><em>open</em><button class="burger" style="display:flex" type="button" aria-expanded="true" aria-label="Close"><i></i></button></span>
+        </div>
+        <div class="spec__foot">Appears under 900px. The bars cross with transform only.</div>
+      </div>
+
+      <div class="spec" style="grid-column:1/-1">
+        <div class="spec__head"><b>Sticky bar, three states</b><span>.topbar / .is-stuck / .is-hidden</span></div>
+        <div class="spec__body spec__body--col" style="gap:0;padding:0">
+          <div style="width:100%;position:relative;height:74px;border-bottom:1px solid var(--lib-line);
+                      background:linear-gradient(90deg,#2a1409,#150a05)">
+            <div class="topbar" style="position:absolute;inset:0 0 auto 0">
+              <div class="lib topbar__in">
+                <span class="wordmark"><b>OFF</b><b>PLATE</b></span>
+                <span style="font-size:11px;color:var(--lib-dim)">over the hero · transparent · 20px padding · no CTA</span>
+              </div>
+            </div>
+          </div>
+          <div style="width:100%;position:relative;height:64px;border-bottom:1px solid var(--lib-line);
+                      background:linear-gradient(90deg,#2a1409,#150a05)">
+            <div class="topbar is-stuck" style="position:absolute;inset:0 0 auto 0">
+              <div class="lib topbar__in">
+                <span class="wordmark"><b>OFF</b><b>PLATE</b></span>
+                <span style="font-size:11px;color:var(--lib-dim)">scrolled · blurred · 9px padding</span>
+                <a class="btn btn--light btn--sm topbar__cta" href="#nav">Book a call</a>
+              </div>
+            </div>
+          </div>
+          <div style="width:100%;position:relative;height:64px;overflow:hidden;
+                      background:linear-gradient(90deg,#2a1409,#150a05)">
+            <div class="topbar is-stuck is-hidden" style="position:absolute;inset:0 0 auto 0">
+              <div class="lib topbar__in"><span class="wordmark"><b>OFF</b><b>PLATE</b></span></div>
+            </div>
+            <span style="position:absolute;left:22px;top:23px;font-size:11px;color:var(--lib-dim)">scrolling down · translated out of view</span>
+          </div>
+        </div>
+        <div class="spec__foot">One rAF-throttled scroll handler drives all three.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── surfaces ─────────────────────────────────────────────────────────── -->
+<section class="sec" id="surfaces">
+  <div class="lib">
+    <h2>SURFACES</h2>
+    <p class="note">Two cards and one plate. The card grid is three columns; a card may span two.
+       Nothing carries a drop shadow on the dark ground; on paper a single soft shadow separates
+       an image from the white.</p>
+    <div class="grid g3">
+      <div class="spec">
+        <div class="spec__head"><b>Card</b><span>.card</span></div>
+        <div class="spec__body" style="padding:14px;background:#000">
+          <article class="card" style="min-height:200px;width:100%">
+            <h3>Three verdicts on every recurring task</h3>
+            <p>Every verdict comes with the reason, so you can disagree with it.</p>
+            <div class="byline"><i style="background:var(--ember-deep)"></i><b>Michael Florian</b></div>
+          </article>
+        </div>
+        <div class="spec__foot">Heading, body, then a byline pinned to the floor.</div>
+      </div>
+      <div class="spec">
+        <div class="spec__head"><b>Card, inverted</b><span>.card--dark</span></div>
+        <div class="spec__body" style="padding:14px;background:#000">
+          <article class="card card--dark" style="min-height:200px;width:100%">
+            <h3>Free breakdown: what we will not build</h3>
+            <p>In writing, within a week.</p>
+            <a class="btn btn--light" href="#surfaces">Get the breakdown</a>
+          </article>
+        </div>
+        <div class="spec__foot">One per grid. Takes the light button and a bleeding image.</div>
+      </div>
+      <div class="spec">
+        <div class="spec__head"><b>Sector card</b><span>.work a</span></div>
+        <div class="spec__body" style="padding:14px;background:var(--paper)">
+          <a href="#surfaces" style="display:block;width:100%">
+            <span class="shot" style="display:block;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:#111;box-shadow:0 1px 0 rgba(0,0,0,.08),0 18px 40px rgba(0,0,0,.1)">
+              <img src="../art/o2.jpg" alt="" style="width:100%;height:100%;object-fit:cover">
+            </span>
+            <h3 style="color:var(--ink);font-size:15px;margin-top:14px;text-transform:uppercase;letter-spacing:-.01em">E-shop</h3>
+            <p style="color:#5A5A5A;font-size:12px;margin-top:6px;line-height:1.42">Margin against the real purchase price.</p>
+          </a>
+        </div>
+        <div class="spec__foot">Image scales 1.05 on hover. Lives in the slider row.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── data ─────────────────────────────────────────────────────────────── -->
+<section class="sec" id="data">
+  <div class="lib">
+    <h2>DATA ELEMENTS</h2>
+    <p class="note">Three ways this variant shows a number. Each is a real figure from the page, not a
+       decoration: a proportion, a schedule and a price. None of them animate their digits.</p>
+    <div class="grid g3">
+      <div class="spec">
+        <div class="spec__head"><b>Dial</b><span>.gauge / .dial</span></div>
+        <div class="spec__body on-card" style="display:block">
+          <div class="gauge" style="margin-top:0;padding-top:0">
+            <span class="dial"><b class="on" style="height:26%"></b><b class="on" style="height:38%"></b><b class="on" style="height:52%"></b><b class="on" style="height:66%"></b><b style="height:80%"></b><b style="height:92%"></b><b style="height:78%"></b><b style="height:60%"></b><b style="height:42%"></b></span>
+            <span class="num">2 of 5<span>tasks need AI</span></span>
+          </div>
+        </div>
+        <div class="spec__foot">Filled bars are the count, empty bars the remainder.</div>
+      </div>
+      <div class="spec">
+        <div class="spec__head"><b>Timeline</b><span>.tl</span></div>
+        <div class="spec__body on-card" style="display:block">
+          <div class="tl" style="margin-top:0">
+            <div class="row"><span class="bar hot" style="left:0;width:20%"><b>Call</b></span></div>
+            <div class="row"><span class="bar" style="left:14%;width:24%"><b>Breakdown</b></span></div>
+            <div class="row"><span class="bar" style="left:32%;width:26%"><b>Pilot</b></span></div>
+            <div class="row"><span class="bar" style="left:52%;width:30%"><b>Build</b></span></div>
+            <div class="row"><span class="bar" style="left:76%;width:24%"><b>Run</b></span></div>
+            <div class="axis"><span>0</span><span>1 week</span><span>2 weeks</span><span>4 weeks</span><span>6 weeks</span><span>on</span></div>
+          </div>
+        </div>
+        <div class="spec__foot">The first bar is filled; it is the step that is free.</div>
+      </div>
+      <div class="spec">
+        <div class="spec__head"><b>Figure and loader</b><span>.bigfig / .loader</span></div>
+        <div class="spec__body on-card" style="display:block">
+          <span class="loader"><b></b><b></b><b></b><b></b></span>
+          <span class="bigfig" style="margin-top:24px;display:block">12,000 CZK</span>
+          <p style="color:#4A4A4A;font-size:12.5px;margin-top:10px">One off, no commitment.</p>
+        </div>
+        <div class="spec__foot">The loader is decorative and keeps sweeping; the figure never counts up.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── media ────────────────────────────────────────────────────────────── -->
+<section class="sec" id="media">
+  <div class="lib">
+    <h2>MEDIA</h2>
+    <p class="note">All imagery is generated or graded to one ember ramp at build time, never with a CSS
+       filter. Every image wrapper is <code>display:block</code> with <code>isolation:isolate</code>, because an
+       inline wrapper does not clip its corners and every image on this page once rendered square because of it.</p>
+    <div class="grid g4">
+      <div class="spec">
+        <div class="spec__head"><b>Verdict circle</b><span>.circle</span></div>
+        <div class="spec__body spec__body--center" style="min-height:180px">
+          <div class="circle" style="margin-left:0;width:132px;transform:none">Automation</div>
+        </div>
+        <div class="spec__foot">White fill, caps label.</div>
+      </div>
+      <div class="spec">
+        <div class="spec__head"><b>Accent circle</b><span>.circle--pic</span></div>
+        <div class="spec__body spec__body--center" style="min-height:180px">
+          <div class="circle circle--pic" style="margin-left:0;width:140px;transform:none"><img src="../art/o1.jpg" alt=""><span>AI</span></div>
+        </div>
+        <div class="spec__foot">One per row. The only ember label on the page.</div>
+      </div>
+      <div class="spec">
+        <div class="spec__head"><b>Inline image</b><span>.inlinepic</span></div>
+        <div class="spec__body" style="min-height:180px">
+          <span style="font-weight:800;font-size:22px;letter-spacing:-.03em;text-transform:uppercase;line-height:1.3">Repetitive work <span class="inlinepic"><img src="../art/o1.jpg" alt=""></span> without AI</span>
+        </div>
+        <div class="spec__foot">Rides inside the statement line at cap height.</div>
+      </div>
+      <div class="spec">
+        <div class="spec__head"><b>Face stack</b><span>.faces</span></div>
+        <div class="spec__body" style="min-height:180px">
+          <span class="faces"><i><img src="../art/chip.jpg" alt=""></i><i><img src="../art/o1.jpg" alt=""></i><i><img src="../art/o4.jpg" alt=""></i></span>
+        </div>
+        <div class="spec__foot">Overlapping by 9px, each ringed in the page ground.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── motion ───────────────────────────────────────────────────────────── -->
+<section class="sec" id="motion">
+  <div class="lib">
+    <h2>MOTION</h2>
+    <p class="note">Two curves, nothing over 600ms except the one-off card load sequence, and only
+       <code>transform</code> and <code>opacity</code> ever animate. Everything below is wrapped in
+       <code>prefers-reduced-motion: no-preference</code>; under <code>reduce</code> nothing arms and every element
+       renders at its final state. Press replay to watch each one.</p>
+
+    <div class="grid g2">
+      <div class="motion">
+        <div class="motion__head"><b>Card grid load</b><span>staggered 70ms · 500ms ease-out</span>
+          <button class="replay" data-replay="grid" type="button">Replay</button></div>
+        <div class="motion__body">
+          <div class="cards" data-demo="grid" style="padding:0;grid-template-columns:repeat(3,1fr);gap:8px">
+            <article class="card" style="min-height:104px;padding:14px"><h3 style="font-size:12px">Verdicts</h3></article>
+            <article class="card" style="min-height:104px;padding:14px"><h3 style="font-size:12px">Breakdown</h3></article>
+            <article class="card card--dark" style="min-height:104px;padding:14px"><h3 style="font-size:12px">Pricing</h3></article>
+          </div>
+        </div>
+      </div>
+
+      <div class="motion">
+        <div class="motion__head"><b>Dial fill</b><span>scaleY · 550ms · 60ms stagger</span>
+          <button class="replay" data-replay="dial" type="button">Replay</button></div>
+        <div class="motion__body">
+          <div class="cards" data-demo="dial" style="padding:0;display:block">
+            <div class="gauge" style="margin-top:0;padding-top:0">
+              <span class="dial"><b class="on" style="height:26%"></b><b class="on" style="height:38%"></b><b class="on" style="height:52%"></b><b class="on" style="height:66%"></b><b style="height:80%"></b><b style="height:92%"></b><b style="height:78%"></b><b style="height:60%"></b><b style="height:42%"></b></span>
+              <span class="num">2 of 5<span>tasks need AI</span></span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="motion">
+        <div class="motion__head"><b>Timeline draw</b><span>scaleX · 500ms · 120ms stagger</span>
+          <button class="replay" data-replay="tl" type="button">Replay</button></div>
+        <div class="motion__body">
+          <div class="cards" data-demo="tl" style="padding:0;display:block">
+            <div class="tl" style="margin-top:0">
+              <div class="row"><span class="bar hot" style="left:0;width:20%"><b>Call</b></span></div>
+              <div class="row"><span class="bar" style="left:14%;width:24%"><b>Breakdown</b></span></div>
+              <div class="row"><span class="bar" style="left:32%;width:26%"><b>Pilot</b></span></div>
+              <div class="row"><span class="bar" style="left:52%;width:30%"><b>Build</b></span></div>
+              <div class="row"><span class="bar" style="left:76%;width:24%"><b>Run</b></span></div>
+              <div class="axis"><span>0</span><span>1 wk</span><span>2 wk</span><span>4 wk</span><span>6 wk</span><span>on</span></div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="motion">
+        <div class="motion__head"><b>Loader sweep</b><span>fill 450ms, then 2.6s loop</span>
+          <button class="replay" data-replay="loader" type="button">Replay</button></div>
+        <div class="motion__body">
+          <div class="cards" data-demo="loader" style="padding:0;display:block">
+            <span class="loader"><b></b><b></b><b></b><b></b></span>
+            <span class="bigfig" style="margin-top:22px;display:block;font-size:38px">12,000 CZK</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="motion">
+        <div class="motion__head"><b>Image scale on hover</b><span>transform · 500ms --slide</span>
+          <button class="replay" data-replay="hoverimg" type="button">Play</button></div>
+        <div class="motion__body" style="background:var(--paper)">
+          <div class="work" data-demo="hoverimg" style="width:100%;padding:0;overflow:visible;cursor:default">
+            <a href="#motion" style="flex:0 0 150px">
+              <span class="shot" style="display:block;border-radius:18px;overflow:hidden;aspect-ratio:4/5;background:#111"><img src="../art/o3.jpg" alt="" style="width:100%;height:100%;object-fit:cover"></span>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="motion">
+        <div class="motion__head"><b>Round button rotate</b><span>transform · 200ms --ease</span>
+          <button class="replay" data-replay="rot" type="button">Play</button></div>
+        <div class="motion__body" style="background:var(--paper);display:flex;align-items:center;gap:14px">
+          <a class="round" href="#motion" data-demo="rot" aria-label="Demo">↗</a>
+          <span style="font-size:12.5px;color:#5A5A5A">45° on hover, back on release.</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ── sections ─────────────────────────────────────────────────────────── -->
+<section class="sec" id="sections">
+  <div class="lib">
+    <h2>PAGE SECTIONS</h2>
+    <p class="note">The nine blocks the page is made of, in order, each with the one job it does.
+       A section that cannot be described in a single sentence does not belong on the page.</p>
+    <div class="inv">
+      <div><b>01 · Hero</b><p>Full-bleed graded photograph, fixed bar over it, the claim bottom-left and the supporting block bottom-right. The only place the headline runs above 40px.</p></div>
+      <div><b>02 · Card grid</b><p>Five cards over three columns carrying the argument as facts: the three verdicts, the proportion, the free breakdown, the schedule, the price. This is where the load animation lives.</p></div>
+      <div><b>03 · Statement</b><p>One sentence, centred, greeting above it. Grey resolves to white so the emphasis lands on the second half.</p></div>
+      <div><b>04 · Verdict circles</b><p>Five overlapping circles naming the scale, with the accent circle in the middle. A picture of the argument, not a control.</p></div>
+      <div><b>05 · Sectors</b><p>The relief band on paper. A horizontal slider of sector cards that always overflows, so the next card is visibly cut.</p></div>
+      <div><b>06 · News</b><p>Five staggered cards on black with a label over each, and a slider bar beneath.</p></div>
+      <div><b>07 · Footer plate</b><p>Tall rounded plate, the red wordmark blurred across it and bleeding off both edges, with the links laid over the lower half.</p></div>
+      <div><b>08 · Mobile menu</b><p>Full-screen overlay under 900px. Focus trapped, scroll locked, Escape closes and returns focus to the burger.</p></div>
+      <div><b>09 · This library</b><p>Every token and component in every state, from the same stylesheet. New component goes here first.</p></div>
+    </div>
+  </div>
+</section>
+
+<!-- ── never ────────────────────────────────────────────────────────────── -->
+<section class="sec" id="never">
+  <div class="lib">
+    <h2>NEVER</h2>
+    <p class="note">Decisions already made, so they do not get remade by accident.</p>
+    <div class="inv dont">
+      <div><b>No decorative initial</b><p>The script first-letter treatment was removed from every heading. Yellowtail is for the greeting and nothing else.</p></div>
+      <div><b>No third family</b><p>Inter and Yellowtail. A monospace look is achieved with tabular numerals, not another font.</p></div>
+      <div><b>No second accent</b><p>One ember. The footer red is a single documented exception on one element.</p></div>
+      <div><b>No CSS filters on images</b><p>The grade is baked at build time. A runtime filter costs paint and still looks like a filter.</p></div>
+      <div><b>No inline image wrappers</b><p>An inline span does not clip its corners. Every media wrapper is display:block.</p></div>
+      <div><b>No layout animation</b><p>Only transform and opacity. Never width, height, top, left or min-height.</p></div>
+      <div><b>No number that counts up</b><p>Figures render at their value. The loader may sweep; the price may not tick.</p></div>
+      <div><b>No target under 44px on touch</b><p>Checked at 320, 360, 390 and 414. Desktop may go to 38px, never lower.</p></div>
+    </div>
+  </div>
+</section>
+
+<footer class="sec" style="border-bottom:0">
+  <div class="lib" style="display:flex;justify-content:space-between;gap:18px;flex-wrap:wrap;align-items:center">
+    <p style="font-size:12px;color:var(--lib-dim)">Off-Plate · variant G elements library · working draft</p>
+    <a class="btn btn--light btn--sm" href="../">Back to the page</a>
+  </div>
+</footer>
+
+<script>
+(function(){
+  /* replay a demo by removing the class that triggered it, forcing a reflow,
+     then putting it back. Same mechanism for every animation on the page. */
+  function restart(el){
+    el.classList.remove('is-live');
+    void el.offsetWidth;
+    el.classList.add('is-live');
+  }
+  var demos={};
+  document.querySelectorAll('[data-demo]').forEach(function(d){ demos[d.dataset.demo]=d; });
+
+  // arm every demo that is a .cards clone
+  Object.keys(demos).forEach(function(k){
+    var d=demos[k];
+    if(d.classList.contains('cards')) d.classList.add('is-live');
+  });
+
+  document.querySelectorAll('[data-replay]').forEach(function(b){
+    b.addEventListener('click', function(){
+      var d=demos[b.dataset.replay];
+      if(!d) return;
+      if(d.classList.contains('cards')){ restart(d); return; }
+      // hover-style demos: toggle the frozen state for a beat
+      var t=d.matches('[data-demo=rot]') ? d : d.querySelector('a');
+      if(!t) return;
+      t.setAttribute('data-state','hover');
+      setTimeout(function(){ t.removeAttribute('data-state'); }, 1100);
+    });
+  });
+})();
+</script>
+</body>
+</html>
