@@ -1,0 +1,102 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>JustDo</title>
+<meta name="description" content="Silence creates strong minds. We help people build discipline, clarity, and emotional strength through timeless ideas and modern thinking.">
+<meta name="theme-color" content="#000000">
+<link rel="stylesheet" href="https://api.fontshare.com/v2/css?f[]=zodiak@400,500,700&f[]=general-sans@400,500,600&display=swap">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<div class="frame">
+  <header class="topbar">
+    <a class="wordmark" href="#">JustDo</a>
+    <nav class="navbox" aria-label="Main">
+      <a href="#about" aria-current="page">About</a>
+      <a href="#philosophy">Philosophy</a>
+      <a href="#articles">Articles</a>
+      <a href="#contact">Contact</a>
+    </nav>
+    <a class="login" href="#contact"><svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="8" r="3.6"/><path d="M4.5 20c1.4-4 4.4-6 7.5-6s6.1 2 7.5 6" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"/></svg>Login / Register</a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><i></i></button>
+  </header>
+
+  <main class="hero" id="about">
+    <div class="hero__bust" id="bust">
+      <picture>
+        <source type="image/webp" srcset="art/bust-900.webp 900w, art/bust-1900.webp 1900w" sizes="(max-width:760px) 80vw, 46vw">
+        <img src="art/bust-900.jpg" srcset="art/bust-900.jpg 900w, art/bust-1900.jpg 1900w" sizes="(max-width:760px) 80vw, 46vw" alt="Marble head of a philosopher, Roman, 1st or 2nd century CE, the Metropolitan Museum of Art" width="900" height="1200">
+      </picture>
+      <div class="hero__glow" aria-hidden="true"></div>
+    </div>
+    <div class="hero__copy" data-rise>
+      <h1>Silence Creates<br>Strong Minds</h1>
+      <p>We help people build discipline, clarity, and emotional strength through timeless ideas and modern thinking.</p>
+      <a class="btn" href="#philosophy">Begin Your Journey</a>
+    </div>
+  </main>
+</div>
+
+<div class="menu" id="menu" hidden>
+  <a href="#about" data-close>About</a>
+  <a href="#philosophy" data-close>Philosophy</a>
+  <a href="#articles" data-close>Articles</a>
+  <a href="#contact" data-close>Contact</a>
+  <a class="btn" href="#contact" data-close>Login / Register</a>
+</div>
+
+<section class="shell pillars" id="philosophy">
+  <p class="cap" data-rise>Our philosophy</p>
+  <div class="pillars__grid">
+    <article data-rise data-rise-d="1">
+      <span class="pillars__no">01</span>
+      <h3>Discipline over motivation</h3>
+      <p>Motivation is a mood. Discipline is a practice. We build the second one, on purpose, every day.</p>
+    </article>
+    <article data-rise data-rise-d="2">
+      <span class="pillars__no">02</span>
+      <h3>Silence as a tool</h3>
+      <p>Ten minutes without input, done daily, changes how you think faster than any amount of advice.</p>
+    </article>
+    <article data-rise data-rise-d="3">
+      <span class="pillars__no">03</span>
+      <h3>Old ideas, applied now</h3>
+      <p>Stoic thinking was never about indifference. It was about acting well with what you actually control.</p>
+    </article>
+  </div>
+</section>
+
+<section class="shell quote" data-rise>
+  <blockquote>
+    <p>&ldquo;You have power over your mind, not outside events. Realize this, and you will find strength.&rdquo;</p>
+    <cite>Marcus Aurelius</cite>
+  </blockquote>
+</section>
+
+<section class="shell articles" id="articles">
+  <div class="articles__head" data-rise>
+    <h2>Recent Articles</h2>
+    <a class="more" href="#contact">All articles <i>&rarr;</i></a>
+  </div>
+  <div class="articles__grid">
+    <article data-rise data-rise-d="1"><span class="cap">Discipline</span><h3>The 10-minute silence that resets your whole day</h3></article>
+    <article data-rise data-rise-d="2"><span class="cap">Clarity</span><h3>Why Marcus Aurelius wrote only for himself</h3></article>
+    <article data-rise data-rise-d="3"><span class="cap">Practice</span><h3>What the Stoics actually meant by control</h3></article>
+  </div>
+</section>
+
+<footer class="foot" id="contact">
+  <div class="shell foot__in">
+    <span class="wordmark">JustDo</span>
+    <p>Discipline, clarity and emotional strength, one quiet decision at a time.</p>
+    <p class="foot__meta">All rights reserved &copy; 2026</p>
+  </div>
+</footer>
+
+<script src="site.js" defer></script>
+</body>
+</html>
