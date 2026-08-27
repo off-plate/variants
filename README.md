@@ -12,7 +12,7 @@ Live: https://off-plate.github.io/variants/
 - `h/` bento mřížka barevných dlaždic na tmavém podkladu
 - `d/` fixed sidebar, stacked slabs, tag pills, accordion process, contact form
 - `x/` Lustra, monochrome agency one-pager, live WebGL ink shader as the recurring motif
-- `y/` Plato, isometric city hero, drawn and animated in CSS/SVG (in progress)
+- `y/` Plato, isometric city hero, live cars and pedestrians on CSS motion-path
 - `z/` JustDo, dark editorial with a Met open-access marble bust (in progress)
 - `q/` Pixel Rise, warm 3D product hero built in Three.js (in progress)
 

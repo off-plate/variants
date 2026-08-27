@@ -1,0 +1,165 @@
+@charset "utf-8";
+/* Plato, variant Y. One-to-one recreation: a light isometric-city hero,
+   drawn as one SVG (site generated the iso geometry from a small grid
+   projection so the buildings, roads and trees line up on true 2:1 axes),
+   with cars and pedestrians actually driving and walking the streets via
+   CSS motion-path, not a static illustration. */
+
+:root{
+  --bg:#EAF1F6; --sky-2:#F3F7FA;
+  --fg:#182233; --fg-dim:rgba(24,34,51,.68); --fg-mute:rgba(24,34,51,.52);
+  --line:rgba(24,34,51,.12);
+  --accent:#B24E26; --accent-dark:#8F3E1E; --accent-bright:#E2703A;
+  --paper:#fff;
+  --ease-out:cubic-bezier(.16,1,.3,1); --ease-in:cubic-bezier(.7,0,.84,0); --ease:cubic-bezier(.4,0,.2,1);
+  --t1:.2s; --t2:.4s; --t4:.8s;
+  --shell:min(92vw,1180px);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;scrollbar-gutter:stable}
+body{margin:0;background:var(--bg);color:var(--fg);font-family:'Cabinet Grotesk',system-ui,sans-serif;
+     font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+p{margin:0}
+h1{margin:0;font-weight:800;letter-spacing:-.02em;line-height:1.08}
+:focus-visible{outline:2px solid var(--accent);outline-offset:3px;border-radius:6px}
+.shell{width:var(--shell);margin-inline:auto}
+
+/* ── top bar ─────────────────────────────────────────────────────────── */
+.topbar{position:sticky;top:0;z-index:90;background:rgba(255,255,255,.92);border-bottom:1px solid var(--line)}
+.topbar__in{width:min(94vw,1320px);margin-inline:auto;display:flex;align-items:center;
+  justify-content:space-between;gap:16px;padding:16px 0}
+.wordmark{display:flex;align-items:center;gap:8px;font-size:17px;font-weight:800;letter-spacing:-.01em}
+.wordmark__ic{width:20px;height:20px}
+.navbox{display:flex;gap:30px}
+.navbox a{font-size:13.5px;font-weight:500;color:var(--fg-dim);transition:color var(--t1) var(--ease)}
+.navbox a:hover,.navbox a[aria-current]{color:var(--fg)}
+.topbar__in .btn--reg{margin-left:auto;margin-right:14px}
+.burger{display:none;width:40px;height:40px;border-radius:50%;padding:0;cursor:pointer;
+  border:1px solid var(--line);background:transparent;align-items:center;justify-content:center;flex:0 0 auto}
+.burger i{display:block;width:15px;height:1.5px;background:var(--fg);position:relative}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;top:0;width:15px;height:1.5px;
+  background:var(--fg);transition:transform var(--t1) var(--ease)}
+.burger i::before{transform:translateY(-5px)} .burger i::after{transform:translateY(5px)}
+.burger[aria-expanded="true"] i{background:transparent}
+.burger[aria-expanded="true"] i::before{transform:rotate(45deg)}
+.burger[aria-expanded="true"] i::after{transform:rotate(-45deg)}
+.menu{position:fixed;inset:0;z-index:95;background:#fff;display:flex;flex-direction:column;
+  justify-content:center;padding:96px 26px 40px;opacity:0;transition:opacity var(--t1) var(--ease-in)}
+.menu[hidden]{display:none}
+.menu.is-open{opacity:1;transition:opacity var(--t2) var(--ease-out)}
+.menu a{display:block;font-size:clamp(28px,9vw,40px);font-weight:800;letter-spacing:-.02em;
+  padding:12px 0;border-bottom:1px solid var(--line);opacity:0;transform:translateY(10px);
+  transition:opacity var(--t1) var(--ease-in),transform var(--t1) var(--ease-in)}
+.menu.is-open a{opacity:1;transform:none;transition:opacity var(--t2) var(--ease-out),transform var(--t2) var(--ease-out);
+  transition-delay:calc(60ms + var(--i,0) * 60ms)}
+.menu a:nth-child(2){--i:1} .menu a:nth-child(3){--i:2} .menu a:nth-child(4){--i:3} .menu a:nth-child(5){--i:4}
+.menu .btn{margin-top:20px}
+body.is-locked{overflow:hidden}
+
+.btn{display:inline-flex;align-items:center;gap:9px;border-radius:999px;padding:0 26px;min-height:46px;
+  font-size:13px;font-weight:700;transition:transform var(--t1) var(--ease),background var(--t1) var(--ease),
+  box-shadow var(--t1) var(--ease)}
+.btn--reg{background:var(--accent);color:#fff}
+.btn--reg:hover{background:var(--accent-dark);transform:translateY(-2px)}
+.btn--get{background:var(--accent);color:#fff;font-size:14px;padding:0 30px;min-height:50px}
+.btn--get:hover{background:var(--accent-dark);transform:translateY(-2px)}
+.btn--get:active{transform:scale(.97)}
+.btn i{transition:transform var(--t1) var(--ease)}
+.btn:hover i{transform:translateX(3px)}
+
+/* ── hero ────────────────────────────────────────────────────────────── */
+.hero{position:relative;overflow:hidden;padding-top:clamp(48px,9vh,110px);
+  min-height:min(88vh,860px);display:flex;align-items:center;
+  background:linear-gradient(180deg,var(--sky-2) 0%,var(--bg) 60%)}
+.hero__copy{position:relative;z-index:3;pointer-events:none}
+.hero__copy .btn{pointer-events:auto}
+.hero h1{font-size:clamp(28px,4.2vw,46px);max-width:13ch}
+.hero__copy .btn{margin-top:26px}
+
+.city{position:absolute;left:50%;bottom:clamp(-6vh,-2vh,0);width:min(96vw,1520px);
+  transform:translateX(-38%);z-index:2;pointer-events:none}
+.city__svg{width:100%;height:auto;display:block;overflow:visible}
+
+/* iso face shading: consistent light from the upper-left, top lightest */
+.face--t{filter:none}
+.face--l{filter:brightness(.96)}
+.face--r{filter:brightness(.86)}
+.ground{fill:#DCE7EE}
+.road{fill:none;stroke:#C3CDD6;stroke-width:46;stroke-linecap:round}
+.road__line{fill:none;stroke:#fff;stroke-width:3.4;stroke-dasharray:16 18;opacity:.75}
+.tree polygon,.tree rect{transition:transform var(--t1) var(--ease)}
+.sign__t{font-family:'Cabinet Grotesk',sans-serif;font-weight:700;font-size:11px;fill:#182233;letter-spacing:.01em}
+.lamp circle:first-child{transform-origin:center}
+
+/* ── motion: cars drive, people walk, clouds drift ──────────────────────
+   Corporate-adjacent but warmer: friendly overshoot on the CTA only, linear
+   loops for continuous motion (cars/pedestrians/clouds), everything else
+   ease-out. Distance and duration scale together so nothing looks weightless. */
+@media (prefers-reduced-motion:no-preference){
+  .car{offset-rotate:auto;animation:carA 9s linear infinite}
+  .car--a{offset-path:path("M -590,155 L 30,465")}
+  .car--b{offset-path:path("M 280,60 L -440,420");animation-name:carB;animation-duration:11s;animation-delay:-3s}
+  @keyframes carA{from{offset-distance:0%}to{offset-distance:100%}}
+  @keyframes carB{from{offset-distance:0%}to{offset-distance:100%}}
+  .car--a .car__body,.car--b .car__body{animation:carBob .5s ease-in-out infinite alternate}
+  @keyframes carBob{from{transform:translateY(0)}to{transform:translateY(-1.5px)}}
+
+  .ped{offset-rotate:auto}
+  .ped--a{offset-path:path("M -590,155 L 30,465");animation:pedA 26s linear infinite}
+  .ped--b{offset-path:path("M 280,60 L -440,420");animation:pedB 30s linear infinite;animation-delay:-9s}
+  .ped--c{offset-path:path("M -590,155 L 30,465");animation:pedA 22s linear infinite reverse;animation-delay:-4s}
+  @keyframes pedA{from{offset-distance:2%}to{offset-distance:98%}}
+  @keyframes pedB{from{offset-distance:3%}to{offset-distance:97%}}
+  .ped__body{animation:pedBob .32s ease-in-out infinite alternate;transform-origin:bottom center}
+  @keyframes pedBob{from{transform:translateY(0) rotate(-2deg)}to{transform:translateY(-2.5px) rotate(2deg)}}
+
+  /* a cloud is one circle plus a few more as box-shadow bumps: no blur
+     filter (GPU-cheap, and a soft rect read as a loading skeleton, not sky) */
+  .cloud{position:absolute;width:34px;height:34px;border-radius:50%;background:#fff;
+    animation:drift linear infinite;z-index:1;opacity:.9}
+  .cloud--a{top:10%;left:-12%;animation-duration:58s;
+    box-shadow:26px 4px 0 -3px #fff,50px 8px 0 -8px #fff,16px -12px 0 -6px #fff,-16px 6px 0 -8px #fff}
+  .cloud--b{top:20%;left:-18%;width:24px;height:24px;animation-duration:74s;animation-delay:-24s;opacity:.7;
+    box-shadow:19px 3px 0 -5px #fff,35px 6px 0 -10px #fff,-12px 5px 0 -9px #fff}
+  .cloud--c{top:6%;left:-9%;width:20px;height:20px;animation-duration:44s;animation-delay:-14s;opacity:.8;
+    box-shadow:15px 2px 0 -4px #fff,28px 5px 0 -9px #fff,-10px 4px 0 -8px #fff}
+  @keyframes drift{to{transform:translateX(130vw)}}
+
+  .tree{animation:sway 4.5s ease-in-out infinite;transform-box:fill-box;transform-origin:50% 100%}
+  .tree-pos:nth-of-type(odd) .tree{animation-duration:5.2s;animation-delay:-1.4s}
+  @keyframes sway{0%,100%{transform:rotate(0deg)}50%{transform:rotate(1.4deg)}}
+
+  .lamp circle:first-child{animation:glow 3s ease-in-out infinite}
+  @keyframes glow{0%,100%{opacity:.28}50%{opacity:.5}}
+
+  .city{animation:cityIn 1s var(--ease-out) both}
+  @keyframes cityIn{from{opacity:0;transform:translateX(-38%) translateY(24px)}to{opacity:1;transform:translateX(-38%) translateY(0)}}
+  .hero h1,.hero__copy .btn{animation:copyIn .7s var(--ease-out) both}
+  .hero__copy .btn{animation-delay:.15s}
+  @keyframes copyIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+}
+@media (prefers-reduced-motion:reduce){
+  .city{transform:translateX(-38%)}
+}
+
+/* ── responsive ──────────────────────────────────────────────────────── */
+@media(max-width:980px){
+  .hero{flex-direction:column;justify-content:flex-start;padding-top:40px;min-height:0}
+  .hero__copy{padding-top:8px;padding-bottom:20px}
+  .hero h1{max-width:16ch;text-align:left}
+  .city{position:relative;left:auto;bottom:auto;transform:none;width:118%;margin-left:-9%}
+  @media (prefers-reduced-motion:no-preference){
+    .city{animation:none;opacity:1}
+  }
+}
+@media(max-width:760px){
+  .navbox{display:none}
+  .topbar__in .btn--reg{display:none}
+  .burger{display:flex}
+  .hero h1{font-size:clamp(26px,7.4vw,34px)}
+}
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;
+    transition-duration:.01ms!important;scroll-behavior:auto!important}
+}
