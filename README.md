@@ -14,6 +14,6 @@ Live: https://off-plate.github.io/variants/
 - `x/` Lustra, monochrome agency one-pager, live WebGL ink shader as the recurring motif
 - `y/` Plato, isometric city hero, live cars and pedestrians on CSS motion-path
 - `z/` JustDo, dark editorial hero, a real Met open-access marble bust with pointer parallax
-- `q/` Pixel Rise, warm 3D product hero built in Three.js (in progress)
+- `q/` Pixel Rise, warm 3D product hero, live Three.js scene with orbiting props
 
 Images are CC0, credited in `img/CREDITS.txt`.
