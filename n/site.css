@@ -156,7 +156,10 @@ p{margin:0}
    of the page background the way About is. Eyebrow/headline still share
    the one 3-column grid the rest of the page uses, so "Our Services" and
    the headline land on the same two columns as "About us" did. */
-.services{padding:24px 0 24px}
+/* Same 12px horizontal inset as the hero/.frame — this card had none, so
+   it ran genuinely edge to edge while every other section on the page
+   (hero, About, Testimonial) stops 12px short of the viewport. */
+.services{padding:24px 12px 24px}
 .services__card{
   border-radius:28px;padding:56px 48px;color:#fff;
   background:
