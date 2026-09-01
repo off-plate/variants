@@ -212,17 +212,35 @@ p{margin:0}
   display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:center;
   padding:26px 0;
 }
-.service__spacer{grid-column:1}
+.service__spacer{grid-row:1;grid-column:1}
+/* grid-row:1 here too — collision avoidance only skips items that are
+   FULLY explicit on both axes. Making only .round's row explicit just
+   moved the collision onto .title instead (title is still auto-row, so
+   the grid pushed IT to a second row once round claimed row 1 col 3
+   first). Both need to be fully explicit for the overlap to be allowed
+   rather than resolved by displacement. */
 .service__title{
-  grid-column:2/4;justify-self:start;display:flex;align-items:center;gap:24px;width:100%;
+  grid-row:1;grid-column:2/4;justify-self:start;display:flex;align-items:center;gap:24px;width:100%;
   font-family:Poppins,Inter,sans-serif;font-weight:600;color:#fff;
   font-size:clamp(20px,1.9vw,28px);line-height:1.2;
 }
 /* the title sits in a fixed-width box so the description column starts at
    a consistent x across every row, open or collapsed */
 .service__title::after{content:"";flex:1 1 auto}
+/* grid-row:1 is load-bearing. .service__title spans columns 2/4, which
+   covers column 3 — the same column .round asks for. An item with a fixed
+   column but no fixed row is auto-placed by the grid, and the placement
+   algorithm treats that column-3 overlap as a collision: it pushed .round
+   into a second implicit row rather than letting it share the cell. That
+   inflated the whole row to two stacked rows (title's row + round's row
+   + the row-gap between them) instead of one, which is the actual "too
+   much space before the description" bug — the description sits right
+   where the row ends, so an inflated row reads as an inflated gap above
+   the text below it, with nothing wrong with the text's own spacing at
+   all. Giving .round an explicit row make both placements fully explicit,
+   so they share the cell instead of colliding. */
 .round{
-  grid-column:3;justify-self:end;flex:0 0 auto;
+  grid-row:1;grid-column:3;justify-self:end;flex:0 0 auto;
   display:inline-flex;align-items:center;justify-content:center;
   width:44px;height:44px;border-radius:50%;background:#fff;color:#171518;font-size:16px;
   transition:transform .22s var(--ease),background .18s var(--ease);
