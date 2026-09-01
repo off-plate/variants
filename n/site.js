@@ -60,6 +60,48 @@
 })();
 
 (function(){
+  var track=document.getElementById('reviews'), dotsEl=document.getElementById('dots');
+  if(!track||!dotsEl) return;
+  var dots=Array.prototype.slice.call(dotsEl.children);
+  var cards=Array.prototype.slice.call(track.children);
+
+  function syncDots(){
+    var mid=track.scrollLeft+track.clientWidth/2;
+    var closest=0, best=Infinity;
+    cards.forEach(function(c,i){
+      var d=Math.abs((c.offsetLeft+c.offsetWidth/2)-mid);
+      if(d<best){ best=d; closest=i; }
+    });
+    var dotIndex=Math.min(dots.length-1, Math.round(closest/(cards.length-1)*(dots.length-1)));
+    dots.forEach(function(d,i){ d.classList.toggle('is-active', i===dotIndex); });
+  }
+  dots[0] && dots[0].classList.add('is-active');
+  var ticking=false;
+  track.addEventListener('scroll', function(){
+    if(ticking) return; ticking=true;
+    requestAnimationFrame(function(){ syncDots(); ticking=false; });
+  },{passive:true});
+
+  // pointer drag-to-scroll for mouse users; touch keeps native scrolling
+  var down=false, startX=0, startLeft=0, moved=false;
+  track.addEventListener('pointerdown', function(e){
+    if(e.pointerType==='touch') return;
+    down=true; moved=false; startX=e.clientX; startLeft=track.scrollLeft;
+    track.classList.add('is-dragging'); track.setPointerCapture(e.pointerId);
+  });
+  track.addEventListener('pointermove', function(e){
+    if(!down) return;
+    var dx=e.clientX-startX;
+    if(Math.abs(dx)>4) moved=true;
+    track.scrollLeft=startLeft-dx;
+  });
+  ['pointerup','pointercancel'].forEach(function(t){
+    track.addEventListener(t, function(){ down=false; track.classList.remove('is-dragging'); });
+  });
+  track.addEventListener('click', function(e){ if(moved){ e.preventDefault(); e.stopPropagation(); } }, true);
+})();
+
+(function(){
   var burger=document.getElementById('burger'), menu=document.getElementById('menu');
   if(!burger||!menu) return;
   function set(v){
