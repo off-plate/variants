@@ -9,36 +9,44 @@
   --ease:cubic-bezier(.2,.8,.2,1);
 }
 *,*::before,*::after{box-sizing:border-box}
+html,body{height:100%}
 html{-webkit-text-size-adjust:100%;overflow-x:hidden}
 body{
   margin:0;background:var(--page);color:var(--ink);
   font-family:Inter,'Helvetica Neue',Helvetica,system-ui,sans-serif;
   font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;
-  padding:26px;
+  padding:14px;display:flex;
 }
 img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 p{margin:0}
 
-/* ── framed card ── */
+/* ── framed card ──────────────────────────────────────────────────────────
+   The white border is a constant-width gap to the viewport edge, not a
+   centered box with a max-width. `flex:1` on the frame plus `display:flex`
+   on body makes the frame fill whatever window it's opened in; the hero
+   below is `flex:1` too, so it fills whatever height is left after the
+   topbar rather than being locked to a fixed aspect ratio that leaves the
+   lavender page showing through above or below it. */
 .frame{
-  position:relative;max-width:1400px;margin-inline:auto;
-  background:#fff;border-radius:32px;padding:14px;
+  position:relative;flex:1;display:flex;flex-direction:column;
+  background:#fff;border-radius:28px;padding:12px;
   box-shadow:0 30px 80px rgba(30,20,50,.14);
 }
 
 /* ── topbar, floats over the photo ── */
-.topbar{position:absolute;top:14px;left:14px;right:14px;z-index:3;padding:16px 22px}
-.topbar__in{display:flex;align-items:center;justify-content:space-between;gap:16px}
-.wordmark{font-family:Fraunces,Georgia,serif;font-size:21px;font-weight:500;color:#fff}
-.navbox{display:flex;gap:26px}
-.navbox a{display:flex;align-items:center;gap:4px;font-size:14px;font-weight:500;color:#fff;transition:opacity .18s var(--ease)}
-.navbox a i{font-style:normal;font-size:9px;opacity:.85}
+.topbar{position:absolute;top:12px;left:12px;right:12px;z-index:3;padding:18px 26px}
+.topbar__in{display:grid;grid-template-columns:1fr auto 1fr;align-items:center;column-gap:16px}
+.wordmark{font-family:'Playfair Display',Georgia,serif;font-size:22px;font-weight:600;color:#fff;justify-self:start}
+.navbox{display:flex;gap:30px;justify-self:center}
+.navbox a{display:flex;align-items:center;gap:6px;font-size:14px;font-weight:500;color:#fff;transition:opacity .18s var(--ease)}
+.navbox a .chev{width:8px;height:5px;fill:none;stroke:#fff;stroke-width:1.6;stroke-linecap:round;stroke-linejoin:round;opacity:.85}
 .navbox a:hover{opacity:.7}
+.topbar__right{display:flex;align-items:center;gap:10px;justify-self:end}
 
 .btn{
-  display:inline-flex;align-items:center;gap:9px;border-radius:999px;
-  padding:6px 6px 6px 18px;min-height:44px;font-size:13.5px;font-weight:600;
+  display:inline-flex;align-items:center;justify-content:center;gap:9px;border-radius:999px;
+  padding:0 22px;min-height:44px;font-size:13.5px;font-weight:600;
   transition:transform .18s var(--ease),background .18s var(--ease);white-space:nowrap;
 }
 /* frosted glass, not solid white: the reference lets the lavender ground
@@ -50,10 +58,13 @@ p{margin:0}
   border:1px solid rgba(255,255,255,.5);
 }
 .btn--light:hover{background:#fff}
-.btn--pill{background:#fff;color:var(--ink);margin-top:30px}
+/* the pill button carries a leading icon, so it alone gets the asymmetric
+   padding that makes room for it — the plain topbar button stays centered */
+.btn--pill{background:#fff;color:var(--ink);margin-top:30px;padding:6px 22px 6px 6px}
 .btn__ic{
   display:inline-flex;align-items:center;justify-content:center;width:30px;height:30px;
   border-radius:50%;background:var(--green);color:#fff;font-size:15px;transition:transform .22s var(--ease);
+  flex:0 0 auto;
 }
 .btn:hover .btn__ic{transform:rotate(45deg)}
 .btn:active{transform:scale(.97)}
@@ -68,21 +79,23 @@ p{margin:0}
 .menu .btn{margin-top:22px;align-self:flex-start}
 
 /* ── hero ── */
-/* width:100% is load-bearing, same reason as the Northrow photo panel: with
-   width left auto, aspect-ratio plus a definite height (here, the mobile
-   min-height:80vh below) derives width FROM height instead of filling the
-   frame. At 390px this inflated the hero to 1226px wide. */
-.hero{position:relative;border-radius:22px;overflow:hidden;width:100%;aspect-ratio:16/9.4;min-height:0}
+/* flex:1 fills whatever height is left in the frame after the topbar's own
+   space, so the photo always reaches the frame's bottom edge regardless of
+   window size, instead of stopping at a fixed aspect ratio and leaving the
+   lavender page visible underneath. width:100% stays load-bearing for the
+   same reason noted before: aspect-ratio combined with any definite height
+   derives width FROM that height on an element with width left auto. */
+.hero{position:relative;border-radius:20px;overflow:hidden;width:100%;flex:1;min-height:0}
 .hero__bg{position:absolute;inset:0}
 .hero__bg img{width:100%;height:100%;object-fit:cover;object-position:50% 42%}
 .hero__bg::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,rgba(20,10,35,.35) 0%,rgba(20,10,35,.3) 26%,rgba(20,10,35,.3) 60%,rgba(20,10,35,.4) 100%)}
 .hero__copy{
   position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;
-  padding:96px 24px 70px;color:#fff;
+  justify-content:center;height:100%;padding:90px 24px 24px;color:#fff;
 }
 .hero__copy h1{
-  margin:0;font-family:Fraunces,Georgia,serif;font-weight:500;
-  font-size:clamp(30px,4.6vw,54px);line-height:1.12;letter-spacing:-.01em;
+  margin:0;font-family:'Playfair Display',Georgia,serif;font-weight:600;
+  font-size:clamp(30px,4.6vw,54px);line-height:1.14;letter-spacing:-.005em;
 }
 .hero__copy p{margin-top:18px;font-size:15px;line-height:1.6;color:var(--dim);max-width:46ch}
 
@@ -102,13 +115,14 @@ p{margin:0}
 @media(max-width:900px){
   .navbox{display:none}
   .burger{display:block}
+  .topbar__in{grid-template-columns:1fr auto}
 }
 @media(max-width:640px){
-  body{padding:12px}
-  .frame{padding:8px;border-radius:24px}
-  .topbar{top:8px;left:8px;right:8px;padding:12px 14px}
+  body{padding:10px}
+  .frame{padding:8px;border-radius:22px}
+  .topbar{top:8px;left:8px;right:8px;padding:14px 16px}
   .wordmark{font-size:18px}
-  .btn--light span{display:none}
-  .hero{border-radius:16px;aspect-ratio:4/5.2}
-  .hero__copy{padding:120px 18px 60px}
+  .btn--light{padding:0 16px;min-height:38px;font-size:12.5px}
+  .hero{border-radius:16px}
+  .hero__copy{padding:80px 18px 40px}
 }
