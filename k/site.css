@@ -22,7 +22,7 @@ img{max-width:100%;display:block}
 a{color:inherit;text-decoration:none}
 p{margin:0}
 h1,h2{margin:0;font-family:'Archivo Black',Inter,sans-serif;text-transform:uppercase;letter-spacing:-.01em}
-.shell{width:min(92vw,1160px);margin-inline:auto}
+.shell{width:min(94vw,1400px);margin-inline:auto}
 
 /* ── topbar ── */
 .topbar{padding:22px 0;border-bottom:1px solid var(--line)}
@@ -50,7 +50,14 @@ h1,h2{margin:0;font-family:'Archivo Black',Inter,sans-serif;text-transform:upper
 
 /* ── hero photo ── */
 .hero{padding:34px 0 0;position:relative}
-.hero__photo{margin:0;position:relative;border-radius:18px;overflow:hidden;aspect-ratio:16/11;max-height:560px}
+/* width:100% is load-bearing. With width left auto, aspect-ratio plus a
+   max-height constraint drives the "transferred size" algorithm: the UA
+   derives width FROM the capped height instead of filling the shell, which
+   silently shrank this panel to ~57% of the container. An explicit width
+   makes width the definite dimension, so height derives from it instead,
+   and max-height only clips a height that's already correct. */
+.hero__photo{margin:0;position:relative;border-radius:18px;overflow:hidden;
+  width:100%;aspect-ratio:16/9;max-height:620px}
 .hero__photo img{width:100%;height:100%;object-fit:cover;object-position:50% 24%}
 .hero__word{
   position:absolute;left:24px;bottom:22px;color:#fff;font-family:'Archivo Black',sans-serif;
