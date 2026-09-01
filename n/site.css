@@ -261,9 +261,13 @@ p{margin:0}
   grid-template-rows:minmax(0,0fr);transition:grid-template-rows .4s var(--ease);
 }
 .service.is-open .service__panel{grid-template-rows:minmax(0,1fr)}
+/* The row's own padding-bottom (26px) already puts air below the title;
+   stacking another 18px on top of that here was the actual too-much-gap
+   Michael flagged, separate from the grid bug fixed last round. Cut to 4px
+   — just enough to keep the description from touching the divider. */
 .service__desc{
   grid-column:2/4;margin:0;overflow:hidden;min-height:0;
-  padding-top:18px;padding-bottom:26px;
+  padding-top:4px;padding-bottom:26px;
   font-size:15px;line-height:1.65;color:rgba(255,255,255,.8);max-width:60ch;
 }
 
