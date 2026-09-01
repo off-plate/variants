@@ -1,0 +1,138 @@
+@charset "utf-8";
+/* CyberNest — 1:1 recreation. White, serif headline, isometric line-art rig. */
+
+:root{
+  --bg:#FFFFFF;
+  --ink:#121212;
+  --dim:#6B6B6C;
+  --line:#DEDEDC;
+  --grey:#EDEDEB;
+  --ease:cubic-bezier(.2,.8,.2,1);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%;overflow-x:hidden}
+body{
+  margin:0;background:var(--bg);color:var(--ink);
+  font-family:Inter,'Helvetica Neue',Helvetica,system-ui,sans-serif;
+  font-size:16px;line-height:1.5;-webkit-font-smoothing:antialiased;
+}
+img{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+p{margin:0}
+.shell{width:min(90vw,1320px);margin-inline:auto}
+
+/* ── topbar ── */
+.topbar{padding:26px 0}
+.topbar__in{display:flex;align-items:center;justify-content:space-between;gap:24px}
+.wordmark{display:flex;align-items:center;gap:9px;font-size:19px;font-weight:600;letter-spacing:-.01em}
+.wordmark__ic{width:22px;height:18px;fill:var(--ink)}
+.navbox{display:flex;gap:30px}
+.navbox a{display:flex;align-items:center;gap:4px;font-size:14px;font-weight:500;color:var(--ink);transition:opacity .18s var(--ease)}
+.navbox a i{font-style:normal;font-size:9px;color:var(--dim)}
+.navbox a:hover{opacity:.55}
+.btn{
+  display:inline-flex;align-items:center;gap:8px;border-radius:999px;
+  padding:0 22px;min-height:44px;font-size:13.5px;font-weight:600;
+  transition:transform .18s var(--ease),background .18s var(--ease),opacity .18s var(--ease);
+  white-space:nowrap;
+}
+.btn--dark{background:var(--ink);color:#fff}
+.btn--dark:hover{background:#2c2c2c}
+.btn--line{border:1.5px solid var(--ink);color:var(--ink)}
+.btn--line:hover{background:var(--grey)}
+.btn:active{transform:scale(.97)}
+
+.burger{display:none;width:40px;height:40px;border-radius:50%;border:1px solid var(--line);background:none;cursor:pointer}
+.burger i{display:block;width:16px;height:1.5px;background:var(--ink);margin:0 auto;position:relative}
+.burger i::before,.burger i::after{content:"";position:absolute;left:0;width:16px;height:1.5px;background:var(--ink)}
+.burger i::before{top:-5px}.burger i::after{top:5px}
+.menu{position:fixed;inset:0;z-index:50;background:var(--bg);padding:100px 7vw 40px;display:flex;flex-direction:column;gap:4px}
+.menu[hidden]{display:none}
+.menu a:not(.btn){font-size:26px;font-weight:600;padding:12px 0;border-bottom:1px solid var(--line)}
+.menu .btn{margin-top:22px;align-self:flex-start}
+
+/* ── hero ── */
+.hero{display:grid;grid-template-columns:.86fr 1fr;gap:24px;align-items:center;padding:50px 0 80px;min-height:64vh}
+.hero__copy{max-width:480px}
+.hero__copy h1{
+  margin:0;font-family:Fraunces,Georgia,serif;font-weight:500;
+  font-size:clamp(30px,3vw,42px);line-height:1.14;letter-spacing:-.01em;color:var(--ink);
+}
+.hero__copy h1 i{font-style:italic;font-weight:400;color:var(--dim)}
+.hero__copy p{margin-top:22px;font-size:15px;line-height:1.6;color:var(--dim);max-width:38ch}
+.hero__cta{display:flex;gap:12px;margin-top:30px}
+
+.hero__art{width:100%}
+.rig{width:100%;height:auto;overflow:visible}
+.floor{fill:url(#dots)}
+.wire path{fill:none;stroke:#C6C6C4;stroke-width:1.3;stroke-dasharray:3 4}
+.wire .node{fill:#fff;stroke:#B7B7B5;stroke-width:1.3}
+
+.server .face-top{fill:#F4F4F2}
+.server .face-l{fill:#E4E4E1}
+.server .face-r{fill:#D6D6D3}
+.server .edge,.server .rung{fill:none;stroke:var(--ink);stroke-width:1.4;stroke-linejoin:round}
+
+.mark path{fill:var(--ink)}
+.mark-hole{fill:#fff}
+.mark-chip{fill:none;stroke:var(--ink);stroke-width:1.6}
+
+.chip rect{fill:#fff;stroke:var(--ink);stroke-width:1.4}
+.chip circle{fill:none;stroke:var(--ink);stroke-width:1.4}
+.chip .thin{fill:none;stroke:#B7B7B5;stroke-width:1.3;stroke-linecap:round}
+
+.panel rect{fill:#fff;stroke:var(--ink);stroke-width:1.5}
+.panel .thin{fill:none;stroke:#C6C6C4;stroke-width:1.4;stroke-linecap:round}
+.panel .thin-box{fill:none;stroke:var(--ink);stroke-width:1.4}
+.dash-strip{fill:var(--ink)}
+.dash-pie{fill:#EFEFED;stroke:var(--ink);stroke-width:1.4}
+.dash-pie-cut{fill:var(--ink)}
+.dash-a{font-family:Fraunces,Georgia,serif;font-size:34px;font-weight:600;fill:var(--ink)}
+
+/* ── entrance ── */
+@media (prefers-reduced-motion: no-preference){
+  html.js [data-rise]{opacity:0;transform:translateY(20px);transition:opacity .7s var(--ease),transform .7s var(--ease)}
+  html.js [data-rise].is-in{opacity:1;transform:none}
+  html.js [data-rise][data-rise-d="1"]{transition-delay:.14s}
+
+  /* The rise animation lives on an INNER .rise group, never on the outer
+     positioned group. That outer group's translate(x,y) is an SVG attribute;
+     CSS transform on the same element overrides the attribute outright, so a
+     keyframe ending on `transform:none` would delete the real position and
+     collapse every part to the same spot. The inner wrapper starts at
+     identity, so it has nothing to clobber. */
+  .rise{opacity:0;transform-box:fill-box;transform-origin:center;
+    animation:partIn .6s var(--ease) both;animation-play-state:paused}
+  html.js .hero__art.is-in .server .rise{animation-delay:.15s}
+  html.js .hero__art.is-in .mark .rise{animation-delay:.28s}
+  html.js .hero__art.is-in .chip--a .rise{animation-delay:.4s}
+  html.js .hero__art.is-in .chip--b .rise{animation-delay:.46s}
+  html.js .hero__art.is-in .panel--doc .rise{animation-delay:.52s}
+  html.js .hero__art.is-in .panel--dash .rise{animation-delay:.58s}
+  html.js .hero__art.is-in .rise{animation-play-state:running}
+  @keyframes partIn{from{opacity:0;transform:translateY(14px) scale(.96)}to{opacity:1;transform:none}}
+
+  .wire path{stroke-dasharray:3 4;stroke-dashoffset:200;animation:wireIn 1.2s var(--ease) .8s both;animation-play-state:paused}
+  html.js .hero__art.is-in .wire path{animation-play-state:running}
+  @keyframes wireIn{to{stroke-dashoffset:0}}
+
+  .mark-hole{transform-box:fill-box;transform-origin:center;animation:hint 3.6s var(--ease) infinite}
+  @keyframes hint{0%,100%{opacity:1}50%{opacity:.4}}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.01ms!important;transition-duration:.01ms!important}
+  [data-rise],.rise{opacity:1!important;transform:none!important}
+}
+
+/* ── responsive ── */
+@media(max-width:1000px){
+  .navbox{display:none}
+  .burger{display:block}
+  .hero{grid-template-columns:1fr;padding-top:30px}
+  .hero__art{order:-1;max-width:520px;margin-inline:auto}
+}
+@media(max-width:520px){
+  .shell{width:92vw}
+  .hero__copy p{max-width:none}
+  .hero__cta{flex-wrap:wrap}
+}

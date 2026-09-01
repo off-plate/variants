@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Fiscal</title>
+<meta name="description" content="Take control of your finances online.">
+<meta name="theme-color" content="#F3F0EA">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="shell topbar__in">
+    <a class="wordmark" href="#">
+      <svg class="wordmark__ic" viewBox="0 0 24 16" aria-hidden="true">
+        <path d="M2 8c0-3.3 2-5.5 5.4-6.4L8 3.2C5.6 3.9 4.4 5.3 4.3 7H7v6H1V8Zm11 0c0-3.3 2-5.5 5.4-6.4l.6 1.6c-2.4.7-3.6 2.1-3.7 3.8H18v6h-6V8Z"/>
+      </svg>
+      Fiscal
+    </a>
+    <nav class="navbox" aria-label="Main">
+      <a href="#courses">Courses</a>
+      <a href="#mentors">Mentors</a>
+      <a href="#resources">Resources</a>
+    </nav>
+    <a class="btn btn--dark" href="#start">Get started <i class="arrow" aria-hidden="true">&#8594;</i></a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><i></i></button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <a href="#courses" data-close>Courses</a>
+  <a href="#mentors" data-close>Mentors</a>
+  <a href="#resources" data-close>Resources</a>
+  <a class="btn btn--dark" href="#start" data-close>Get started</a>
+</div>
+
+<main class="shell grid" id="top">
+
+  <section class="panel panel--main" data-rise>
+    <span class="badge">
+      <span class="badge__dot"><i></i></span>
+      Next group starts in 3 days!
+    </span>
+
+    <h1>Take control of your<br>finances online</h1>
+
+    <a class="btn btn--dark btn--lg" href="#start">Get started</a>
+
+    <svg class="rig" viewBox="0 0 360 260" aria-hidden="true">
+      <g class="rig__tiles">
+        <rect class="t t--shadow" x="86" y="70" width="94" height="94" rx="18" transform="rotate(-8 133 117)"/>
+        <rect class="t" x="150" y="46" width="88" height="88" rx="18" transform="rotate(-8 194 90)"/>
+        <path class="t__icon" d="M170 84a26 26 0 0 1 46 0" transform="rotate(-8 194 90)"/>
+        <circle class="t__icon-dot" cx="220" cy="70" r="3" transform="rotate(-8 194 90)"/>
+
+        <rect class="t" x="70" y="120" width="80" height="80" rx="16" transform="rotate(-8 110 160)"/>
+        <path class="t__icon" d="m94 145 22 22M116 145l-22 22" transform="rotate(-8 110 160)"/>
+
+        <rect class="t t--fill" x="150" y="128" width="84" height="84" rx="16" transform="rotate(-8 192 170)"/>
+        <path class="t__icon t__icon--light" d="M175 190h34M175 176h24" transform="rotate(-8 192 170)"/>
+
+        <rect class="t t--accent" x="216" y="86" width="70" height="70" rx="14" transform="rotate(-8 251 121)"/>
+        <path class="t__icon" d="M240 132 262 110M262 110h-16M262 110v16" transform="rotate(-8 251 121)"/>
+
+        <rect class="t" x="222" y="150" width="66" height="66" rx="14" transform="rotate(-8 255 183)"/>
+        <circle class="t__icon" cx="255" cy="183" r="15" transform="rotate(-8 255 183)"/>
+        <path class="t__icon" d="m246 192 18-18" transform="rotate(-8 255 183)"/>
+      </g>
+      <g class="rig__hand">
+        <path d="M244 258c-6-16-10-33-8-47 2-13 11-20 20-18 7 2 10 10 9 20l14-24c5-8 15-10 21-4s5 15-1 23l-18 27c10-3 20 0 24 8 5 9 1 19-9 24-14 7-33 8-45 3-10-4-22-11-27-27a92 92 0 0 1-3-15z"/>
+      </g>
+    </svg>
+  </section>
+
+  <div class="stack">
+    <section class="panel panel--seat" data-rise data-rise-d="1">
+      <span class="pill pill--stat">+46%</span>
+      <h2>Book your<br>offline seat</h2>
+      <svg class="chart" viewBox="0 0 220 74" preserveAspectRatio="none" aria-hidden="true">
+        <polyline points="4,52 44,30 84,58 128,14 168,34 216,6" />
+      </svg>
+      <svg class="cursor" viewBox="0 0 22 22" aria-hidden="true"><path d="M2 2 20 9 12 12 9 20Z"/></svg>
+    </section>
+
+    <section class="panel panel--session" data-rise data-rise-d="2">
+      <h2>Sign up for<br>a session</h2>
+      <div class="mentors">
+        <span class="faces">
+          <i style="background:#C9B79C"></i><i style="background:#9CA9B7"></i><i style="background:#B79CA5"></i>
+        </span>
+        <span class="pill pill--dark">+56 mentors</span>
+      </div>
+    </section>
+  </div>
+
+</main>
+
+<script src="site.js" defer></script>
+</body>
+</html>

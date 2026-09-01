@@ -1,0 +1,124 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>CyberNest</title>
+<meta name="description" content="Safeguard your business with intelligent and automated security.">
+<meta name="theme-color" content="#FFFFFF">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;0,9..144,600;1,9..144,400;1,9..144,500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="shell topbar__in">
+    <a class="wordmark" href="#">
+      <svg class="wordmark__ic" viewBox="0 0 30 24" aria-hidden="true">
+        <path d="M2 22 12 2l4 8-8 12Z"/>
+        <path d="M14 22 24 2l4 8-8 12Z" opacity=".55"/>
+      </svg>
+      CyberNest
+    </a>
+    <nav class="navbox" aria-label="Main">
+      <a href="#tech">Technology</a>
+      <a href="#reports">Threat Reports</a>
+      <a href="#industries">Industries <i>&#9662;</i></a>
+      <a href="#resources">Resources</a>
+      <a href="#about">About Us</a>
+    </nav>
+    <a class="btn btn--dark" href="#demo">Request demo</a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><i></i></button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <a href="#tech" data-close>Technology</a>
+  <a href="#reports" data-close>Threat Reports</a>
+  <a href="#industries" data-close>Industries</a>
+  <a href="#resources" data-close>Resources</a>
+  <a href="#about" data-close>About Us</a>
+  <a class="btn btn--dark" href="#demo" data-close>Request demo</a>
+</div>
+
+<main class="shell hero">
+  <div class="hero__copy" data-rise>
+    <h1>Safeguard your business with intelligent <i>and</i> automated security</h1>
+    <p>Automate infrastructure setup, deployments, and scaling without writing endless scripts.</p>
+    <div class="hero__cta">
+      <a class="btn btn--dark" href="#demo">Request demo</a>
+      <a class="btn btn--line" href="#more">Learn More</a>
+    </div>
+  </div>
+
+  <div class="hero__art" data-rise data-rise-d="1">
+    <svg class="rig" viewBox="0 0 640 620" aria-hidden="true">
+      <defs>
+        <pattern id="dots" width="34" height="34" patternUnits="userSpaceOnUse" patternTransform="skewY(-19) scale(1,.62)">
+          <circle cx="2" cy="2" r="1.6" fill="#D8D8D6"/>
+        </pattern>
+      </defs>
+      <ellipse class="floor" cx="330" cy="470" rx="290" ry="140"/>
+
+      <!-- connector lines -->
+      <g class="wire">
+        <path d="M150 300 L90 340"/><circle class="node" cx="90" cy="340" r="4"/>
+        <path d="M470 250 L560 270"/><circle class="node" cx="560" cy="270" r="4"/>
+        <path d="M470 330 L570 360"/><circle class="node" cx="570" cy="360" r="4"/>
+        <path d="M330 430 L200 470"/><circle class="node" cx="200" cy="470" r="4"/>
+      </g>
+
+      <!-- server stack, left -->
+      <g class="server" transform="translate(90,196)"><g class="rise">
+        <path class="face-top" d="M0 30 40 10 80 30 40 50Z"/>
+        <path class="face-l" d="M0 30 0 90 40 110 40 50Z"/>
+        <path class="face-r" d="M80 30 80 90 40 110 40 50Z"/>
+        <path class="edge" d="M0 30 40 10 80 30M0 30 0 90 40 110 80 90 80 30M40 50 40 110"/>
+        <path class="rung" d="M0 50 40 70 80 50M0 70 40 90 80 70"/>
+      </g></g>
+
+      <!-- the mark, centre -->
+      <g class="mark" transform="translate(230,150)"><g class="rise">
+        <path d="M40 0 130 0C150 0 165 12 165 34 165 56 148 65 130 65L100 65 165 130 130 150 60 80 60 150 20 150 20 34C20 12 22 0 40 0Z"/>
+        <circle class="mark-hole" cx="70" cy="34" r="16"/>
+        <rect class="mark-chip" x="20" y="95" width="34" height="34" rx="4"/>
+      </g></g>
+
+      <!-- floating doc chips -->
+      <g class="chip chip--a" transform="translate(66,258)"><g class="rise">
+        <rect width="82" height="58" rx="6"/>
+        <circle cx="20" cy="18" r="7"/>
+        <path d="M20 18 20 8M20 18 27 22" class="thin"/>
+        <path class="thin" d="M14 40h54M14 48h34"/>
+      </g></g>
+
+      <g class="chip chip--b" transform="translate(430,214)"><g class="rise">
+        <rect width="86" height="58" rx="6"/>
+        <path class="thin" d="M12 16h62M12 26h44M12 36h50"/>
+      </g></g>
+
+      <!-- lower panels -->
+      <g class="panel panel--doc" transform="translate(112,336)"><g class="rise">
+        <rect width="176" height="120" rx="10"/>
+        <path class="thin" d="M18 24h140M18 40h140M18 56h96"/>
+        <rect class="thin-box" x="18" y="76" width="46" height="30" rx="4"/>
+      </g></g>
+
+      <g class="panel panel--dash" transform="translate(300,368)"><g class="rise">
+        <rect width="216" height="150" rx="12"/>
+        <rect class="dash-strip" x="0" y="0" width="216" height="26" rx="12"/>
+        <circle class="dash-pie" cx="52" cy="96" r="30"/>
+        <path class="dash-pie-cut" d="M52 66a30 30 0 0 1 26 44Z"/>
+        <text class="dash-a" x="118" y="108">A</text>
+        <path class="thin" d="M150 66h48M150 78h48M150 132h48M150 122a5 5 0 1 0 10 0 5 5 0 1 0-10 0"/>
+      </g></g>
+    </svg>
+  </div>
+</main>
+
+<script src="site.js" defer></script>
+</body>
+</html>

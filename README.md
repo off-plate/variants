@@ -15,5 +15,10 @@ Live: https://off-plate.github.io/variants/
 - `y/` Plato, isometric city hero, live cars and pedestrians on CSS motion-path
 - `z/` JustDo, dark editorial hero, a real Met open-access marble bust with pointer parallax
 - `q/` Pixel Rise, warm 3D product hero, live Three.js scene with orbiting props
+- `m/` Fiscal, bento hero with a hand-drawn line-art rig, chart draws in on arrival
+- `i/` CyberNest, serif headline over an isometric security-stack line illustration
+- `j/` Voltage, black ground with a glowing multi-hue light-streak background
+- `k/` Northrow, cream editorial finance page, torn-tape stickers, dark-green testimonial
+- `n/` Bloom, framed white card, AI-generated dreamlike lavender landscape hero
 
-Images are CC0, credited in `img/CREDITS.txt`.
+Images are CC0 or AI-generated (gpt-image-2), credited in `img/CREDITS.txt`.

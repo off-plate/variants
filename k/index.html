@@ -1,0 +1,133 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Northrow</title>
+<meta name="description" content="Finance, with direction.">
+<meta name="theme-color" content="#F5E9D2">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="shell topbar__in">
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><i></i></button>
+    <p class="eyebrow">Fractional CFO &amp; Strategic Finance Consulting</p>
+    <a class="btn btn--ink" href="#advisor">Talk to an Advisor</a>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <a href="#work" data-close>Approach</a>
+  <a href="#say" data-close>What Founders Say</a>
+  <a href="#moves" data-close>Finance That Moves</a>
+  <a href="#brief" data-close>The Finance Brief</a>
+  <a class="btn btn--ink" href="#advisor" data-close>Talk to an Advisor</a>
+</div>
+
+<main class="shell hero">
+  <figure class="hero__photo" data-rise>
+    <picture>
+      <img src="art/hero.jpg" alt="" width="1024" height="1536">
+    </picture>
+    <span class="hero__word">KNOW YOUR<br>NUMBER</span>
+  </figure>
+  <p class="hero__mark" aria-hidden="true">NORTHROW</p>
+</main>
+
+<section class="shell finance" id="work">
+  <div class="finance__copy" data-rise>
+    <h1>FINANCE, WITH <i>DIRECTION</i></h1>
+    <p>Locked at $1M in revenue rarely works at $5M. Northrow helps founders understand the numbers behind their next stage — from cash and margins to pricing, hiring, forecasting, and capital — so important decisions are made with financial clarity.</p>
+  </div>
+  <div class="stickers" aria-hidden="true">
+    <span class="sticker sticker--a">Runway</span>
+    <span class="sticker sticker--b">Margin</span>
+    <span class="sticker sticker--c">Forecast</span>
+  </div>
+  <div class="stat-card" data-rise data-rise-d="1">
+    <p class="stat-card__label">Capital Decisions Supported</p>
+    <p class="stat-card__num">$125M+</p>
+  </div>
+</section>
+
+<section class="shell growth">
+  <div class="growth__copy" data-rise>
+    <h2>GROWTH GETS <span class="tag">EXPENSIVE</span></h2>
+    <p>Fast growth can hide weak margins and cash issues. We simplify finances into a clear plan for your team.</p>
+  </div>
+  <div class="growth__stat" data-rise data-rise-d="1">
+    <p class="growth__num" data-count="480">$0M+</p>
+    <p class="growth__label">Client revenue modeled</p>
+  </div>
+</section>
+
+<section class="dark" id="say">
+  <div class="shell">
+    <h2 class="dark__h">WHAT FOUNDERS SAY</h2>
+    <div class="quote" data-rise>
+      <span class="quote__tag">Clarity</span>
+      <button class="round" data-nav="-1" aria-label="Previous">&#8592;</button>
+      <button class="round" data-nav="1" aria-label="Next">&#8594;</button>
+      <p class="quote__text">"We had revenue and a strong team, but made decisions from spreadsheets. Northrow showed what we could afford and where to change."</p>
+      <div class="quote__by">
+        <span class="quote__face"></span>
+        <span><b>Marcus Reed</b><i>CEO, Fieldstone</i></span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="shell moves" id="moves">
+  <h2>FINANCE THAT MOVES</h2>
+  <div class="moves__row" data-rise>
+    <article class="mv">
+      <span class="mv__tag">Revenue growing, why is profit shrinking?</span>
+    </article>
+    <article class="mv mv--photo">
+      <img src="art/hero-sm.jpg" alt="" width="512" height="768">
+      <span class="mv__cap">THE CASH FLOW MISTAKES THAT GROW WITH YOUR BUSINESS</span>
+    </article>
+    <article class="mv">
+      <span class="mv__tag">Your forecast isn't a report, it's a decision tool.</span>
+    </article>
+  </div>
+  <a class="link-arrow" href="#insights">Explore all insights <i>&#8594;</i></a>
+</section>
+
+<section class="brief" id="brief">
+  <div class="shell brief__in">
+    <h2>THE FINANCE BRIEF</h2>
+    <nav class="brief__links">
+      <a href="#">Cash Flow Strategy</a>
+      <a href="#">About Northrow</a>
+      <a href="#">Financial Modeling</a>
+      <a href="#">Our Approach</a>
+      <a href="#">Profitability</a>
+      <a href="#">Our Team</a>
+      <a href="#">Pricing Strategy</a>
+      <a href="#">Contact</a>
+    </nav>
+    <form class="brief__form" onsubmit="return false">
+      <label>
+        <span>Your work email</span>
+        <input type="email" placeholder="you@company.com" required>
+      </label>
+      <button class="btn btn--org" type="submit">Get the Sheet</button>
+    </form>
+  </div>
+</section>
+
+<footer class="foot">
+  <p class="foot__legal">Privacy &middot; Terms &middot; &copy; 2026 Northrow. All rights reserved.</p>
+  <p class="foot__mark">NORTHROW</p>
+</footer>
+
+<script src="site.js" defer></script>
+</body>
+</html>

@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Voltage</title>
+<meta name="description" content="Your data. Your advantage.">
+<meta name="theme-color" content="#0A0A0B">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<div class="bg" aria-hidden="true">
+  <svg class="ribbons" viewBox="0 0 1600 1000" preserveAspectRatio="xMidYMid slice">
+    <defs>
+      <linearGradient id="rOrange" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#7A1710" stop-opacity="0"/>
+        <stop offset="38%" stop-color="#C9401E" stop-opacity=".9"/>
+        <stop offset="58%" stop-color="#F0812E" stop-opacity="1"/>
+        <stop offset="78%" stop-color="#F7B23C" stop-opacity=".85"/>
+        <stop offset="100%" stop-color="#F7B23C" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="rRed" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#4A0E12" stop-opacity="0"/>
+        <stop offset="45%" stop-color="#9C1F22" stop-opacity=".9"/>
+        <stop offset="70%" stop-color="#E8432B" stop-opacity="1"/>
+        <stop offset="100%" stop-color="#E8432B" stop-opacity="0"/>
+      </linearGradient>
+      <linearGradient id="rTeal" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0%" stop-color="#0E3B36" stop-opacity="0"/>
+        <stop offset="50%" stop-color="#1F8B78" stop-opacity=".7"/>
+        <stop offset="100%" stop-color="#1F8B78" stop-opacity="0"/>
+      </linearGradient>
+      <filter id="glowSoft" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="34"/>
+      </filter>
+      <filter id="glowCore" x="-60%" y="-60%" width="220%" height="220%">
+        <feGaussianBlur stdDeviation="7"/>
+      </filter>
+    </defs>
+    <g class="ribbon-set">
+      <g class="ribbon-glow" filter="url(#glowSoft)">
+        <path class="rb rb--1" d="M120 1080 C 480 800, 660 660, 900 440 S 1260 60 1560 -140" stroke="url(#rRed)"/>
+        <path class="rb rb--2" d="M80 1160 C 440 900, 680 720, 960 500 S 1320 110 1620 -80" stroke="url(#rOrange)"/>
+        <path class="rb rb--3" d="M200 1220 C 540 980, 720 800, 1020 560 S 1360 180 1640 50" stroke="url(#rOrange)"/>
+        <path class="rb rb--4" d="M300 1260 C 620 1040, 780 860, 1080 620 S 1400 240 1660 110" stroke="url(#rTeal)"/>
+      </g>
+      <g class="ribbon-core" filter="url(#glowCore)">
+        <path class="rb-core rb-core--1" d="M120 1080 C 480 800, 660 660, 900 440 S 1260 60 1560 -140" stroke="url(#rRed)"/>
+        <path class="rb-core rb-core--2" d="M80 1160 C 440 900, 680 720, 960 500 S 1320 110 1620 -80" stroke="url(#rOrange)"/>
+        <path class="rb-core rb-core--3" d="M200 1220 C 540 980, 720 800, 1020 560 S 1360 180 1640 50" stroke="url(#rOrange)"/>
+        <path class="rb-core rb-core--4" d="M300 1260 C 620 1040, 780 860, 1080 620 S 1400 240 1660 110" stroke="url(#rTeal)"/>
+      </g>
+    </g>
+  </svg>
+  <div class="floor"></div>
+  <div class="vign"></div>
+  <div class="scrim"></div>
+</div>
+
+<header class="topbar">
+  <div class="shell topbar__in">
+    <nav class="navbox" aria-label="Main">
+      <a href="#about">About</a>
+      <a href="#features">Features</a>
+      <a href="#updates">Updates</a>
+      <a href="#contact">Contact Us</a>
+    </nav>
+    <a class="btn btn--light" href="#login"><svg class="ic" viewBox="0 0 20 20" aria-hidden="true"><path d="M8 3h6a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8M13 10H2m0 0 3.5-3.5M2 10l3.5 3.5"/></svg>Log In</a>
+    <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><i></i></button>
+  </div>
+</header>
+
+<div class="menu" id="menu" hidden>
+  <a href="#about" data-close>About</a>
+  <a href="#features" data-close>Features</a>
+  <a href="#updates" data-close>Updates</a>
+  <a href="#contact" data-close>Contact Us</a>
+  <a class="btn btn--light" href="#login" data-close>Log In</a>
+</div>
+
+<main class="shell hero">
+  <div class="hero__copy" data-rise>
+    <span class="mark">
+      <svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1 9c3-1 4-7 6-7s2 9 5 9 2-9 5-9 3 6 6 7"/></svg>
+    </span>
+    <h1>Your data.<br>Your advantage</h1>
+    <p>Track performance across traffic, sales, and behavior — all in one dashboard</p>
+    <a class="btn btn--light btn--lg" href="#start">Get Started</a>
+  </div>
+
+  <div class="hero__cards" data-rise data-rise-d="1">
+    <div class="card card--pages">
+      <div class="card__head">
+        <span class="mark mark--sm"><svg viewBox="0 0 24 16" aria-hidden="true"><path d="M1 9c3-1 4-7 6-7s2 9 5 9 2-9 5-9 3 6 6 7"/></svg></span>
+        <span class="icbtn">%</span>
+        <span class="icbtn"><svg viewBox="0 0 16 16" aria-hidden="true"><path d="M8 1v2M8 13v2M1 8h2M13 8h2M3 3l1.4 1.4M11.6 11.6 13 13M13 3l-1.4 1.4M4.4 11.6 3 13"/><circle cx="8" cy="8" r="2.6"/></svg></span>
+      </div>
+      <span class="pill-tag">Pages: Active</span>
+      <div class="bars" aria-hidden="true">
+        <span style="--n:3"></span><span style="--n:5"></span><span style="--n:2"></span>
+        <span style="--n:7"></span><span style="--n:9"></span><span style="--n:6"></span>
+        <span style="--n:8"></span><span style="--n:4"></span><span style="--n:10"></span>
+      </div>
+    </div>
+
+    <div class="card card--stats">
+      <p class="stat__label"><svg class="ic-info" viewBox="0 0 16 16" aria-hidden="true"><circle cx="8" cy="8" r="6.5"/><path d="M8 7v4.2M8 5v.01"/></svg>User Growth Over Time</p>
+      <div class="stat__row">
+        <span class="bar bar--yellow"></span><span class="bar bar--green sm"></span>
+      </div>
+      <p class="stat__label">Total sales volume</p>
+      <div class="stat__row">
+        <span class="bar bar--purple"></span><span class="bar bar--orange sm"></span>
+      </div>
+    </div>
+  </div>
+</main>
+
+<script src="site.js" defer></script>
+</body>
+</html>

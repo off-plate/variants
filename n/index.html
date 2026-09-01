@@ -1,0 +1,58 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex,nofollow">
+<title>Bloom</title>
+<meta name="description" content="Grow through what you go through.">
+<meta name="theme-color" content="#E5E1EE">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="site.css">
+</head>
+<body>
+
+<div class="frame">
+  <header class="topbar">
+    <div class="topbar__in">
+      <a class="wordmark" href="#">Bloom</a>
+      <nav class="navbox" aria-label="Main">
+        <a href="#services">Services <i>&#9662;</i></a>
+        <a href="#resources">Resources <i>&#9662;</i></a>
+        <a href="#about">About us <i>&#9662;</i></a>
+        <a href="#faq">FAQ</a>
+        <a href="#contacts">Contacts</a>
+      </nav>
+      <a class="btn btn--light" href="#book">Book Consultation</a>
+      <button class="burger" id="burger" type="button" aria-expanded="false" aria-controls="menu" aria-label="Open menu"><i></i></button>
+    </div>
+  </header>
+
+  <div class="menu" id="menu" hidden>
+    <a href="#services" data-close>Services</a>
+    <a href="#resources" data-close>Resources</a>
+    <a href="#about" data-close>About us</a>
+    <a href="#faq" data-close>FAQ</a>
+    <a href="#contacts" data-close>Contacts</a>
+    <a class="btn btn--light" href="#book" data-close>Book Consultation</a>
+  </div>
+
+  <main class="hero">
+    <div class="hero__bg" aria-hidden="true">
+      <picture><img src="art/hero.jpg" alt="" width="1536" height="1024"></picture>
+    </div>
+    <div class="hero__copy" data-rise>
+      <h1>Grow through<br>what you go through</h1>
+      <p>A modern mental health clinic that focuses on helping individuals grow, heal, and thrive emotionally.</p>
+      <a class="btn btn--pill" href="#book">
+        <span class="btn__ic">&#8594;</span> Book Consultation
+      </a>
+    </div>
+  </main>
+</div>
+
+<script src="site.js" defer></script>
+</body>
+</html>
