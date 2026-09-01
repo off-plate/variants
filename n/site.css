@@ -119,7 +119,14 @@ p{margin:0}
    column. The reference's About content runs exactly the width of the
    hero above it; a separate max-width here left a dead margin on the
    right at any width past ~1280px, and never matched the hero at all. */
-.shell{padding-inline:12px}
+/* This was 12px flat, matching .frame's own photo inset exactly — correct
+   for aligning the LEFT EDGE with the hero, wrong for how much room text
+   needs. It only got a bigger number under the 640px mobile breakpoint, so
+   every real window width in between (a laptop browser that isn't
+   maximized, 700-1400px) still read as flush. One scaling value covers
+   every width instead of patching breakpoints one at a time: 20px on a
+   phone, growing to 64px on a very wide screen. */
+.shell{padding-inline:clamp(20px,4vw,64px)}
 
 .about__top{
   display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start;
@@ -355,12 +362,6 @@ p{margin:0}
   .btn--light{padding:0 16px;min-height:38px;font-size:12.5px}
   .hero{border-radius:16px}
   .hero__copy{padding:80px 18px 40px}
-
-  /* Text needs real margin, a photo doesn't: the 8px .frame uses is the
-     photo's own inset, matched to the hero on purpose. Applied to running
-     text at a 375px width it reads as flush against the glass. Text
-     sections get their own, more generous number. */
-  .shell{padding-inline:20px}
 
   .about{padding-top:32px}
   .about__top{grid-template-columns:1fr;gap:16px;padding-bottom:36px}
