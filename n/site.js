@@ -44,6 +44,22 @@
 })();
 
 (function(){
+  var services=document.querySelectorAll('[data-service]');
+  if(!services.length) return;
+  services.forEach(function(item){
+    var btn=item.querySelector('.service__row');
+    btn.addEventListener('click', function(){
+      var opening=!item.classList.contains('is-open');
+      services.forEach(function(s){
+        s.classList.remove('is-open');
+        s.querySelector('.service__row').setAttribute('aria-expanded','false');
+      });
+      if(opening){ item.classList.add('is-open'); btn.setAttribute('aria-expanded','true'); }
+    });
+  });
+})();
+
+(function(){
   var burger=document.getElementById('burger'), menu=document.getElementById('menu');
   if(!burger||!menu) return;
   function set(v){

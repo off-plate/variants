@@ -150,6 +150,88 @@ p{margin:0}
 .stat__label{margin-top:16px;font-size:15px;font-weight:600;color:var(--ink)}
 .stat__cap{margin-top:4px;font-size:13px;line-height:1.4;color:#8b8b92;max-width:26ch}
 
+/* ── services ───────────────────────────────────────────────────────────
+   A purple card, inset by the same 12px as the hero/frame rather than
+   full-bleed — this section is its own floating panel, not a continuation
+   of the page background the way About is. Eyebrow/headline still share
+   the one 3-column grid the rest of the page uses, so "Our Services" and
+   the headline land on the same two columns as "About us" did. */
+.services{padding:24px 0 24px}
+.services__card{
+  border-radius:28px;padding:56px 48px;color:#fff;
+  background:
+    radial-gradient(120% 140% at 12% 0%,rgba(255,255,255,.22) 0%,transparent 42%),
+    linear-gradient(135deg,#A98EF2 0%,#8B6DE8 55%,#8064E0 100%);
+}
+
+.services__top{display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:start}
+.services__eyebrow .label{font-family:'Playfair Display',Georgia,serif;font-size:16px;font-weight:500;color:#fff}
+.services__eyebrow .sub{margin-top:4px;font-size:11.5px;color:rgba(255,255,255,.6);font-variant-numeric:tabular-nums}
+.services__eyebrow .btn{margin-top:26px}
+
+.services__intro{grid-column:2/4}
+.services__intro h2{
+  margin:0;font-family:Poppins,Inter,sans-serif;font-weight:600;color:#fff;
+  font-size:clamp(26px,2.7vw,38px);line-height:1.28;letter-spacing:-.005em;max-width:22ch;
+}
+.tags{display:flex;flex-wrap:wrap;gap:10px;margin-top:28px}
+.tag{
+  background:rgba(255,255,255,.18);color:#fff;border-radius:999px;
+  padding:11px 20px;font-size:14px;font-weight:500;
+}
+.tag--more{background:none;padding:11px 4px;color:rgba(255,255,255,.85)}
+
+/* lime icon, everything else reuses .btn/.btn--pill/.btn__ic as-is */
+.btn--lime .btn__ic{background:#D3E24E;color:#2B2410}
+
+/* The divider belongs to the whole item (title + its own panel), not to
+   the row alone — putting it on .service__row drew an extra line between
+   an open item's title and its own description, which the reference
+   doesn't have. One divider per .service, full stop. */
+.services__list{margin-top:52px;border-top:1px solid rgba(255,255,255,.18)}
+.service{border-bottom:1px solid rgba(255,255,255,.18)}
+.service__row{
+  all:unset;box-sizing:border-box;cursor:pointer;width:100%;
+  display:grid;grid-template-columns:repeat(3,1fr);gap:24px;align-items:center;
+  padding:26px 0;
+}
+.service__spacer{grid-column:1}
+.service__title{
+  grid-column:2/4;justify-self:start;display:flex;align-items:center;gap:24px;width:100%;
+  font-family:Poppins,Inter,sans-serif;font-weight:600;color:#fff;
+  font-size:clamp(20px,1.9vw,28px);line-height:1.2;
+}
+/* the title sits in a fixed-width box so the description column starts at
+   a consistent x across every row, open or collapsed */
+.service__title::after{content:"";flex:1 1 auto}
+.round{
+  grid-column:3;justify-self:end;flex:0 0 auto;
+  display:inline-flex;align-items:center;justify-content:center;
+  width:44px;height:44px;border-radius:50%;background:#fff;color:#171518;font-size:16px;
+  transition:transform .22s var(--ease),background .18s var(--ease);
+}
+.service__row:hover .round{transform:rotate(45deg)}
+.service__row:hover .service__title{color:rgba(255,255,255,.82)}
+
+/* Accordion panel: grid-template-rows 0fr->1fr, never animate height
+   directly, so it stays compositor-only. The panel repeats the row's own
+   3-column grid so the description lands under the title without a second,
+   independently-tuned width. */
+/* grid-template-rows:0fr alone still has an implicit `auto` minimum from
+   the child's own content height — a bare 0fr track does NOT reach zero,
+   it floors at min-content, which is exactly why closed panels kept
+   showing a slice of their description. minmax(0,...) removes that floor. */
+.service__panel{
+  display:grid;grid-template-columns:repeat(3,1fr);column-gap:24px;overflow:hidden;
+  grid-template-rows:minmax(0,0fr);transition:grid-template-rows .4s var(--ease);
+}
+.service.is-open .service__panel{grid-template-rows:minmax(0,1fr)}
+.service__desc{
+  grid-column:2/4;margin:0;overflow:hidden;min-height:0;
+  padding-top:18px;padding-bottom:26px;
+  font-size:15px;line-height:1.65;color:rgba(255,255,255,.8);max-width:60ch;
+}
+
 /* ── entrance ── */
 @media (prefers-reduced-motion: no-preference){
   html.js [data-rise]{opacity:0;transform:translateY(18px);transition:opacity .8s var(--ease),transform .8s var(--ease)}
@@ -182,4 +264,16 @@ p{margin:0}
   .about__top{grid-template-columns:1fr;gap:16px;padding-bottom:36px}
   .about__top h2{grid-column:1}
   .stats{grid-template-columns:1fr;gap:28px;padding-bottom:56px}
+
+  .services{padding:8px 8px 8px}
+  .services__card{padding:32px 22px;border-radius:20px}
+  .services__top{grid-template-columns:1fr;gap:28px}
+  .services__intro{grid-column:1}
+  .services__eyebrow .btn{margin-top:20px}
+  .service__row{grid-template-columns:1fr auto;gap:16px;padding:20px 0}
+  .service__spacer{display:none}
+  .service__title{grid-column:1}
+  .round{grid-column:2}
+  .service__panel{grid-template-columns:1fr}
+  .service__desc{grid-column:1}
 }
