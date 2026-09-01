@@ -356,8 +356,13 @@ p{margin:0}
   .hero{border-radius:16px}
   .hero__copy{padding:80px 18px 40px}
 
+  /* Text needs real margin, a photo doesn't: the 8px .frame uses is the
+     photo's own inset, matched to the hero on purpose. Applied to running
+     text at a 375px width it reads as flush against the glass. Text
+     sections get their own, more generous number. */
+  .shell{padding-inline:20px}
+
   .about{padding-top:32px}
-  .shell{padding-inline:8px}
   .about__top{grid-template-columns:1fr;gap:16px;padding-bottom:36px}
   .about__top h2{grid-column:1}
   .stats{grid-template-columns:1fr;gap:28px;padding-bottom:56px}
